@@ -5,20 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phone Finder Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        .language-select-container {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-        }
-        .language-select {
-            padding: 4px 8px;
-            font-size: 16px;
-        }
-    </style>
 </head>
 <body>
 
+    <!-- Przycisk wyboru języka zawsze w prawym górnym rogu -->
     <div class="language-select-container">
         <select id="language-select" class="language-select">
             <option value="pl">Polski</option>
