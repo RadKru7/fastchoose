@@ -31,7 +31,11 @@ answers_db = {
     202: {'question_id': 2, 'next_question_id': 5, 'en': 'Photos & videos', 'es': 'Fotos y videos', 'pl': 'Robienie zdjęć i filmów'},
     203: {'question_id': 2, 'next_question_id': 7, 'en': 'Gaming', 'es': 'Juegos', 'pl': 'Granie w gry'},
     301: {'question_id': 3, 'next_question_id': 4, 'en': 'Very important', 'es': 'Muy importante', 'pl': 'Bardzo ważna'},
-    401: {'question_id': 4, 'next_question_id': None, 'en': 'Standard', 'es': 'Estándar', 'pl': 'Standardowy'},
+    302: {'question_id': 3, 'next_question_id': 5, 'en': 'Important, but not the most important', 'es': 'Importante, pero no lo más importante', 'pl': 'Ważna, ale nie najważniejsza'},
+    303: {'question_id': 3, 'next_question_id': 6, 'en': 'Of little importance', 'es': 'Poco importante', 'pl': 'Mało istotna'},
+    401: {'question_id': 4, 'next_question_id': None, 'en': 'As large a screen as possible', 'es': 'La pantalla más grande posible', 'pl': 'Jak największy ekran'},
+    402: {'question_id': 4, 'next_question_id': None, 'en': 'Standard', 'es': 'Estándar', 'pl': 'Standardowy'},
+    403: {'question_id': 4, 'next_question_id': None, 'en': 'Compact screen', 'es': 'Pantalla compacta', 'pl': 'Kompaktowy ekran'},
     501: {'question_id': 5, 'next_question_id': 6, 'en': 'Good photos during the day', 'es': 'Buenas fotos de día', 'pl': 'Dobre zdjęcia w dzień'},
     601: {'question_id': 6, 'next_question_id': None, 'en': '128 GB', 'es': '128 GB', 'pl': '128 GB'},
     701: {'question_id': 7, 'next_question_id': 8, 'en': 'High performance', 'es': 'Alto rendimiento', 'pl': 'Wysoka wydajność'},
@@ -130,13 +134,13 @@ def get_question():
     try:
         current_question_id = int(request.args.get('current_question_id', 1))
         language = request.args.get('language', 'en')
-        
+
         question_data = questions_db.get(current_question_id)
         if not question_data:
             return jsonify({'error': 'Invalid question ID.'}), 404
-            
+
         question_text = question_data.get(language, question_data['en'])
-        
+
         answers = []
         for ans_id, ans_data in answers_db.items():
             if ans_data['question_id'] == current_question_id:
@@ -178,17 +182,17 @@ def get_result():
             return jsonify({'error': 'No matching path found.'}), 404
 
         recommendations = []
-        
+
         # Pobieranie ID sklepów, które pasują do wybranego języka
         matching_store_ids = [store_id for store_id, store_data in stores_db.items() if store_data['language'] == language]
-        
+
         for product_id in product_ids:
             product_data = products_db.get(product_id)
             if not product_data:
                 continue
 
             product_name = product_data.get(language, product_data['en'])
-            
+
             # Pobieranie tylko tych linków, które pasują do wybranego języka/sklepów
             product_links = []
             for link_data in product_links_db.get(product_id, []):
