@@ -5,15 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phone Finder Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .language-select-container {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+        .language-select {
+            padding: 4px 8px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
 
+    <div class="language-select-container">
+        <select id="language-select" class="language-select">
+            <option value="pl">Polski</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+        </select>
+    </div>
+
     <div class="container">
-        <h1>Znajdź idealny telefon</h1>
-        <div id="quiz">
-            </div>
+        <h1 id="main-title">Znajdź idealny telefon</h1>
+        <div id="quiz"></div>
         <div id="results" class="hidden">
-            <h2>Rekomendowane telefony:</h2>
+            <h2 id="results-title">Rekomendowane telefony:</h2>
             <ul id="recommendations-list"></ul>
             <button id="restart-button">Rozpocznij od nowa</button>
         </div>
