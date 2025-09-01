@@ -17,19 +17,9 @@
                 <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
         </button>
-        <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Log in</a></li>
-        </ul>
+        <ul></ul> 
     </nav>
     
-    <ul id="main-menu" class="mobile-nav-list">
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Log in</a></li>
-    </ul>
-
     <div class="language-select-container">
         <select id="language-select" class="language-select">
             <option value="pl">Polski</option>
@@ -60,6 +50,16 @@
             <button id="restart-button">Rozpocznij od nowa</button>
         </div>
     </div>
+
+    <footer class="main-footer">
+        <ul class="footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="copyright">
+            &copy; 2025 fast choose.
+        </div>
+    </footer>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
