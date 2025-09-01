@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page_title or 'fast choose' }}</title>
+    <title>fast choose</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="landing">
 
     <nav class="main-nav">
-        <div class="logo">{{ logo_text or 'fast choose' }}</div>
+        <div class="logo">fast choose</div>
         <ul>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
@@ -17,7 +17,6 @@
         </ul>
     </nav>
 
-    <!-- Przycisk wyboru języka zawsze w prawym górnym rogu -->
     <div class="language-select-container">
         <select id="language-select" class="language-select">
             <option value="pl">Polski</option>
@@ -28,11 +27,11 @@
 
     <div class="hero-section">
         <div class="hero-left">
-            <h1 class="hero-title">{{ hero_title or "Make better<br>choices, faster." }}</h1>
+            <h1 class="hero-title">Make better<br>choices, faster.</h1>
             <p class="hero-desc">
-                {{ hero_desc or "Stop wasting time comparing options.<br>Our tool helps you compare and choose<br>the best option in seconds." }}
+                Stop wasting time comparing options.<br>Our tool helps you compare and choose<br>the best option in seconds.
             </p>
-            <a href="#quiz" class="get-started-btn">{{ hero_btn or "Get started" }}</a>
+            <a href="#quiz" class="get-started-btn">Get started</a>
         </div>
         <div class="hero-right">
             <img src="{{ url_for('static', filename='graphic/start_page.png') }}" alt="Phone" class="hero-phone-img">
