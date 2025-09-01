@@ -4,7 +4,6 @@ body.landing {
     font-family: 'Inter', Arial, sans-serif;
     color: #5E5B52;
     min-height: 100vh;
-    /* Dodajemy pozycjonowanie relatywne, aby element absolutny się do niego odnosił */
     position: relative;
 }
 .main-nav {
@@ -50,9 +49,9 @@ body.landing {
     margin: 0 auto;
     min-height: 80vh;
     padding: 20px 60px 0 60px;
-    background-color: #F1E9DA; /* Delikatne tło */
+    background-color: #F1E9DA;
     border-radius: 12px;
-    border: 1px solid #E1D9CD; /* Delikatna ramka */
+    border: 1px solid #E1D9CD;
 }
 .hero-left {
     flex: 1 1 55%;
@@ -129,13 +128,37 @@ body.landing {
     background-position: right 10px center;
 }
 
-.language-select:focus {
-    outline: none;
-    border-color: #8FBC8F;
-}
+/* Efekt najechania myszką dla przycisku języka */
 .language-select:hover {
     border-color: #8FBC8F;
     box-shadow: 0 0 8px rgba(143, 188, 143, 0.4);
+}
+
+/* Ukryj przycisk menu domyślnie na dużych ekranach */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #5E5B52;
+}
+
+/* Ukryj menu mobilne domyślnie */
+.mobile-nav-list {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #F9F7F3;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 999;
+}
+
+.mobile-nav-list.is-open {
+    display: flex;
 }
 
 @media (max-width: 900px) {
@@ -165,10 +188,15 @@ body.landing {
         font-size: 1rem;
         padding: 12px 24px;
     }
-    /* Pozycjonowanie na małych ekranach */
     .language-select-container {
         top: 10px;
         right: 10px;
+    }
+    .main-nav ul {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
     }
 }
 .container {
