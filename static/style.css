@@ -50,6 +50,9 @@ body.landing {
     margin: 0 auto;
     min-height: 80vh;
     padding: 20px 60px 0 60px;
+    /* Zmieniamy tło całej sekcji, aby było spójne */
+    background-color: #F1E9DA;
+    border-radius: 12px;
 }
 .hero-left {
     flex: 1 1 55%;
