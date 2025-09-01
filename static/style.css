@@ -4,6 +4,8 @@ body.landing {
     font-family: 'Inter', Arial, sans-serif;
     color: #5E5B52;
     min-height: 100vh;
+    /* Dodajemy pozycjonowanie relatywne, aby element absolutny się do niego odnosił */
+    position: relative;
 }
 .main-nav {
     display: flex;
@@ -99,6 +101,36 @@ body.landing {
     box-shadow: 0 6px 32px rgba(0,0,0,0.10);
     background: transparent;
 }
+
+/* Nowe reguły dla pozycjonowania i stylu przycisku języka */
+.language-select-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.language-select {
+    padding: 10px 15px;
+    border: 1px solid #D2B48C;
+    border-radius: 8px;
+    background-color: #F9F7F3;
+    color: #5E5B52;
+    font-size: 1rem;
+    cursor: pointer;
+    appearance: none; /* Ukrywa domyślną strzałkę */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%235E5B52" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14c-.33-.42-.647-.84-.96-.44-.313.4-.62.8-.934 1.2a.5.5 0 0 1-.84-.4c.594-.766 1.139-1.465 1.733-2.131z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.language-select:focus {
+    outline: none;
+    border-color: #8FBC8F;
+}
+
 @media (max-width: 900px) {
     .hero-section {
         flex-direction: column-reverse;
@@ -125,6 +157,11 @@ body.landing {
     .get-started-btn {
         font-size: 1rem;
         padding: 12px 24px;
+    }
+    /* Pozycjonowanie na małych ekranach */
+    .language-select-container {
+        top: 10px;
+        right: 10px;
     }
 }
 .container {
