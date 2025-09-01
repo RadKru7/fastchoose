@@ -18,7 +18,7 @@ let currentLanguage = languageSelect ? languageSelect.value : 'pl';
 const translations = {
     'pl': {
         // Teksty dla strony startowej
-        hero_title: "Dokonuj lepszych<br>wyborów, szybciej.",
+        hero_title: "Dokonuj lepszych<br>wyborów, szybko i sprawnie.",
         hero_desc: "Przestań tracić czas na porównywanie.<br>Nasze narzędzie pomoże Ci wybrać<br>najlepszą opcję w kilka sekund.",
         hero_btn: "Rozpocznij",
         // Teksty dla quizu i wyników
@@ -235,3 +235,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Rozpocznij quiz
     getQuestion(currentQuestionId);
 });
+
