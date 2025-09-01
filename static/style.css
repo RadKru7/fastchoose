@@ -50,9 +50,9 @@ body.landing {
     margin: 0 auto;
     min-height: 80vh;
     padding: 20px 60px 0 60px;
-    /* Zmieniamy tło całej sekcji, aby było spójne */
-    background-color: #F1E9DA;
+    background-color: #F1E9DA; /* Delikatne tło */
     border-radius: 12px;
+    border: 1px solid #E1D9CD; /* Delikatna ramka */
 }
 .hero-left {
     flex: 1 1 55%;
@@ -117,11 +117,11 @@ body.landing {
     padding: 10px 15px;
     border: 1px solid #D2B48C;
     border-radius: 8px;
-    background-color: #F9F7F3;
+    background-color: #F1E9DA; /* Zmienione tło na spójne z sekcją hero */
     color: #5E5B52;
     font-size: 1rem;
     cursor: pointer;
-    appearance: none; /* Ukrywa domyślną strzałkę */
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%235E5B52" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14c-.33-.42-.647-.84-.96-.44-.313.4-.62.8-.934 1.2a.5.5 0 0 1-.84-.4c.594-.766 1.139-1.465 1.733-2.131z"/></svg>');
@@ -132,6 +132,10 @@ body.landing {
 .language-select:focus {
     outline: none;
     border-color: #8FBC8F;
+}
+.language-select:hover {
+    border-color: #8FBC8F;
+    box-shadow: 0 0 8px rgba(143, 188, 143, 0.4);
 }
 
 @media (max-width: 900px) {
