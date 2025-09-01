@@ -3,11 +3,15 @@ const API_BASE_URL = '/api/quiz/';
 
 // Elementy DOM
 const quizContainer = document.getElementById('quiz');
-const quizContent = document.getElementById('quiz-content'); // Dodany element dla treści quizu
+const quizContent = document.getElementById('quiz-content');
 const resultsContainer = document.getElementById('results');
 const recommendationsList = document.getElementById('recommendations-list');
 const restartButton = document.getElementById('restart-button');
 const languageSelect = document.getElementById('language-select');
+
+// Nowe elementy DOM dla menu mobilnego
+const menuToggle = document.querySelector('.menu-toggle');
+const mainMenu = document.getElementById('main-menu');
 
 // Zmienne stanu quizu
 let currentQuestionId = 1;
@@ -96,143 +100,4 @@ async function getQuestion(questionId) {
         displayQuestion(data);
     } catch (error) {
         console.error('Fetch Error:', error);
-        quizContent.innerHTML = `<p class="error">${translations[currentLanguage].fetchError}</p>`;
-    }
-}
-
-// Funkcja do wyświetlania pytania
-function displayQuestion(questionData) {
-    quizContent.innerHTML = ''; // Wyczyść poprzednie pytanie
-    resultsContainer.classList.add('hidden');
-
-    const questionText = document.createElement('p');
-    questionText.className = 'question-text';
-    questionText.textContent = questionData.question_text;
-    quizContent.appendChild(questionText);
-
-    const answersDiv = document.createElement('div');
-    questionData.answers.forEach(answer => {
-        const button = document.createElement('button');
-        button.className = 'answer-button';
-        button.textContent = answer.answer_text;
-        button.onclick = () => handleAnswer(answer.answer_id, answer.next_question_id);
-        answersDiv.appendChild(button);
-    });
-    quizContent.appendChild(answersDiv);
-}
-
-// Funkcja do obsługi odpowiedzi
-async function handleAnswer(answerId, nextQuestionId) {
-    pathAnswers.push(answerId);
-
-    if (nextQuestionId === null) {
-        // Ostatnie pytanie, wyślij wyniki do API
-        await getResults();
-    } else {
-        // Przejdź do następnego pytania
-        currentQuestionId = nextQuestionId;
-        await getQuestion(currentQuestionId);
-    }
-}
-
-// Funkcja do pobierania rekomendacji z API
-async function getResults() {
-    try {
-        const response = await fetch(`${API_BASE_URL}result`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                pathAnswers: pathAnswers,
-                language: currentLanguage
-            })
-        });
-
-        const data = await response.json();
-
-        if (response.status !== 200) {
-            console.error('API Error:', data.error);
-            quizContent.innerHTML = `<p class="error">${translations[currentLanguage].error}: ${data.error}</p>`;
-            return;
-        }
-
-        displayResults(data.recommendations);
-    } catch (error) {
-        console.error('Fetch Error:', error);
-        quizContent.innerHTML = `<p class="error">${translations[currentLanguage].resultsFetchError}</p>`;
-    }
-}
-
-// Funkcja do wyświetlania wyników
-function displayResults(recommendations) {
-    quizContainer.classList.add('hidden');
-    resultsContainer.classList.remove('hidden');
-    recommendationsList.innerHTML = '';
-
-    if (recommendations.length === 0) {
-        recommendationsList.innerHTML = `<li>${translations[currentLanguage].noRecommendations}</li>`;
-        return;
-    }
-
-    recommendations.forEach(product => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${product.product_name}</strong>`;
-        
-        if (product.links && product.links.length > 0) {
-            const linksDiv = document.createElement('div');
-            linksDiv.style.marginTop = '10px';
-            product.links.forEach(link => {
-                const a = document.createElement('a');
-                a.href = link.link_url;
-                a.textContent = `${translations[currentLanguage].buy} ${link.store_name}`;
-                a.target = '_blank';
-                a.style.marginRight = '10px';
-                linksDiv.appendChild(a);
-            });
-            li.appendChild(linksDiv);
-        }
-        
-        recommendationsList.appendChild(li);
-    });
-}
-
-// Funkcja do resetowania quizu
-if (restartButton) {
-    restartButton.onclick = () => {
-        currentQuestionId = 1;
-        pathAnswers = [];
-        quizContainer.classList.remove('hidden');
-        resultsContainer.classList.add('hidden');
-        getQuestion(currentQuestionId);
-    };
-}
-
-// Obsługa zmiany języka
-if (languageSelect) {
-    languageSelect.addEventListener('change', () => {
-        currentLanguage = languageSelect.value;
-        updateUILanguage(currentLanguage);
-        currentQuestionId = 1;
-        pathAnswers = [];
-        quizContainer.classList.remove('hidden');
-        resultsContainer.classList.add('hidden');
-        getQuestion(currentQuestionId);
-    });
-}
-
-// Ustawienie domyślnego języka na podstawie przeglądarki
-document.addEventListener('DOMContentLoaded', () => {
-    if (languageSelect) {
-        const userLang = navigator.language.split('-')[0] || 'pl';
-        if (translations[userLang]) {
-            languageSelect.value = userLang;
-            currentLanguage = userLang;
-        }
-        updateUILanguage(currentLanguage);
-    }
-    
-    // Rozpocznij quiz
-    getQuestion(currentQuestionId);
-});
-
+        quizContent.innerHTML = `<p
