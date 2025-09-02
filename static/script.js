@@ -61,7 +61,7 @@ const translations = {
         resultsTitle: 'Teléfonos recomendados:',
         restart: 'Reiniciar',
         error: 'Ocurrió un error',
-        noRecommendations: 'No hay recomendaciones para las respuestas indicadas.',
+        noRecommendations: 'No hay recomendaciones para las respuestas indicane.',
         fetchError: 'No se pudo conectar al servidor. Inténtalo de nuevo más tarde.',
         resultsFetchError: 'No se pudieron obtener los resultados. Inténtalo de nuevo.',
         buy: 'Comprar en'
@@ -224,7 +224,6 @@ if (menuToggle) {
     menuToggle.addEventListener('click', toggleMobileMenu);
 }
 
-// *** Kluczowy kod dodany do przełączania widoków ***
 document.addEventListener('DOMContentLoaded', () => {
     // Ukryj quiz i wyniki na starcie
     if (quizContainer) {
@@ -238,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const getStartedBtn = document.querySelector('.get-started-btn');
     if (getStartedBtn) {
         getStartedBtn.addEventListener('click', function(e) {
-            e.preventDefault(); // Zapobieganie domyślnej akcji (przejściu do #)
+            e.preventDefault();
             if (heroSection) {
                 heroSection.style.display = 'none';
             }
