@@ -67,7 +67,7 @@ const translations = {
         buy: 'Comprar en'
     }
 };
-
+console.log('Kliknięto "Get started"!'); //test
 // Funkcja do aktualizacji tekstów na stronie (UI)
 function updateUILanguage(lang) {
     // Tłumaczenia dla strony startowej
@@ -251,3 +251,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Uruchomienie początkowej konfiguracji języka
     updateUILanguage(currentLanguage);
 });
+
