@@ -21,6 +21,7 @@ let currentLanguage = languageSelect ? languageSelect.value : 'pl';
 
 // Teksty tłumaczeń
 const translations = {
+    console.log('Kliknięto step1 "Get started"!'); //test
     'pl': {
         // Teksty dla strony startowej
         hero_title: "Dokonuj lepszych<br>wyborów, szybko i sprawnie.",
@@ -251,4 +252,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Uruchomienie początkowej konfiguracji języka
     updateUILanguage(currentLanguage);
 });
+
 
