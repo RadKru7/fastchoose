@@ -21,7 +21,6 @@ let currentLanguage = languageSelect ? languageSelect.value : 'pl';
 
 // Teksty tłumaczeń
 const translations = {
-
     'pl': {
         // Teksty dla strony startowej
         hero_title: "Dokonuj lepszych<br>wyborów, szybko i sprawnie.",
@@ -68,7 +67,7 @@ const translations = {
         buy: 'Comprar en'
     }
 };
-console.log('Kliknięto "Get started"!'); //test
+
 // Funkcja do aktualizacji tekstów na stronie (UI)
 function updateUILanguage(lang) {
     // Tłumaczenia dla strony startowej
@@ -239,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (getStartedBtn) {
         getStartedBtn.addEventListener('click', function(e) {
             e.preventDefault();
+            console.log('Kliknięto "Get started"!'); // Linia testowa jest teraz w odpowiednim miejscu
             if (heroSection) {
                 heroSection.style.display = 'none';
             }
@@ -252,6 +252,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Uruchomienie początkowej konfiguracji języka
     updateUILanguage(currentLanguage);
 });
-
-
-
