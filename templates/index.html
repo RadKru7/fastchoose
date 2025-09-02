@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fast choose</title>
+    <!-- Ładowanie stylów z pliku style.css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="landing">
@@ -28,6 +29,7 @@
         </select>
     </div>
 
+    <!-- Sekcja startowa -->
     <div class="hero-section">
         <div class="hero-left">
             <h1 class="hero-title">Make better<br>choices, faster.</h1>
@@ -41,6 +43,7 @@
         </div>
     </div>
 
+    <!-- Sekcja quizu (domyślnie ukryta) -->
     <div id="quiz" class="container" style="display:none;">
         <h1 id="main-title">Znajdź idealny telefon</h1>
         <div id="quiz-content"></div>
@@ -61,6 +64,7 @@
         </div>
     </footer>
 
+    <!-- Ładowanie skryptów -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
