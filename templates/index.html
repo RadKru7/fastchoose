@@ -382,7 +382,27 @@
     </footer>
 
     <!-- Skrypt JS -->
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const getStartedBtn = document.getElementById('get-started-btn');
+            const restartButton = document.getElementById('restart-button');
+            const heroSection = document.getElementById('hero');
+            const quizSection = document.getElementById('quiz');
+            const resultsSection = document.getElementById('results');
+
+            // Listeners for starting and restarting
+            getStartedBtn.addEventListener('click', () => {
+                heroSection.classList.add('hidden');
+                quizSection.classList.remove('hidden');
+                // You would typically start your quiz logic here
+            });
+
+            restartButton.addEventListener('click', () => {
+                resultsSection.classList.add('hidden');
+                heroSection.classList.remove('hidden');
+            });
+        });
+    </script>
 
 </body>
 </html>
