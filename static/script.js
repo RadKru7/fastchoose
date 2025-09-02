@@ -2,22 +2,24 @@
 const API_BASE_URL = '/api/quiz/';
 
 // Elementy DOM
-const quizContainer = document.getElementById('quiz');
-const quizContent = document.getElementById('quiz-content');
-const resultsContainer = document.getElementById('results');
-const recommendationsList = document.getElementById('recommendations-list');
-const restartButton = document.getElementById('restart-button');
-const languageSelect = document.getElementById('language-select');
-const heroSection = document.querySelector('.hero-section');
+// Zmienne te są inicjalizowane na górze, ale ich wartości będą ustawione
+// dopiero w bloku DOMContentLoaded, aby upewnić się, że elementy istnieją.
+let quizContainer;
+let quizContent;
+let resultsContainer;
+let recommendationsList;
+let restartButton;
+let languageSelect;
+let heroSection;
 
 // Nowe elementy DOM dla menu mobilnego
-const menuToggle = document.querySelector('.menu-toggle');
-const mainMenu = document.getElementById('main-menu');
+let menuToggle;
+let mainMenu;
 
 // Zmienne stanu quizu
 let currentQuestionId = 1;
 let pathAnswers = [];
-let currentLanguage = languageSelect ? languageSelect.value : 'pl';
+let currentLanguage = 'pl'; // Domyślny język, zostanie zaktualizowany po załadowaniu
 
 // Teksty tłumaczeń
 const translations = {
@@ -70,7 +72,6 @@ const translations = {
 
 // Funkcja do aktualizacji tekstów na stronie (UI)
 function updateUILanguage(lang) {
-    // Tłumaczenia dla strony startowej
     const heroTitle = document.querySelector('.hero-title');
     const heroDesc = document.querySelector('.hero-desc');
     const heroBtn = document.querySelector('.get-started-btn');
@@ -78,7 +79,6 @@ function updateUILanguage(lang) {
     if (heroDesc) heroDesc.innerHTML = translations[lang].hero_desc;
     if (heroBtn) heroBtn.textContent = translations[lang].hero_btn;
 
-    // Tłumaczenia dla sekcji quizu i wyników
     const mainTitle = document.getElementById('main-title');
     const resultsTitle = document.getElementById('results-title');
     if (mainTitle) mainTitle.textContent = translations[lang].mainTitle;
@@ -207,25 +207,21 @@ function toggleMobileMenu() {
     mainMenu.classList.toggle('is-open');
 }
 
-// Event Listeners
-if (restartButton) {
-    restartButton.addEventListener('click', restartQuiz);
-}
-
-if (languageSelect) {
-    languageSelect.addEventListener('change', (e) => {
-        currentLanguage = e.target.value;
-        updateUILanguage(currentLanguage);
-        restartQuiz();
-    });
-}
-
-if (menuToggle) {
-    menuToggle.addEventListener('click', toggleMobileMenu);
-}
-
+// Cała logika aplikacji, która wymaga załadowania DOM, jest tutaj
 document.addEventListener('DOMContentLoaded', () => {
-    // Ukryj quiz i wyniki na starcie
+    // Inicjalizacja elementów DOM po załadowaniu strony
+    heroSection = document.querySelector('.hero-section');
+    quizContainer = document.getElementById('quiz');
+    quizContent = document.getElementById('quiz-content');
+    resultsContainer = document.getElementById('results');
+    recommendationsList = document.getElementById('recommendations-list');
+    restartButton = document.getElementById('restart-button');
+    languageSelect = document.getElementById('language-select');
+    menuToggle = document.querySelector('.menu-toggle');
+    mainMenu = document.getElementById('main-menu');
+    const getStartedBtn = document.querySelector('.get-started-btn');
+    
+    // Upewnij się, że elementy istnieją przed dodaniem słuchaczy
     if (quizContainer) {
         quizContainer.style.display = 'none';
     }
@@ -233,12 +229,11 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsContainer.style.display = 'none';
     }
 
-    // Dodaj słuchacza do przycisku "Get started"
-    const getStartedBtn = document.querySelector('.get-started-btn');
+    // Dodanie słuchaczy zdarzeń po załadowaniu DOM
     if (getStartedBtn) {
         getStartedBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Kliknięto "Get started"!'); // Linia testowa jest teraz w odpowiednim miejscu
+            console.log('Kliknięto "Get started"!');
             if (heroSection) {
                 heroSection.style.display = 'none';
             }
@@ -247,6 +242,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             getQuestion(currentQuestionId);
         });
+    }
+
+    if (restartButton) {
+        restartButton.addEventListener('click', restartQuiz);
+    }
+
+    if (languageSelect) {
+        currentLanguage = languageSelect.value;
+        languageSelect.addEventListener('change', (e) => {
+            currentLanguage = e.target.value;
+            updateUILanguage(currentLanguage);
+            restartQuiz();
+        });
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMobileMenu);
     }
 
     // Uruchomienie początkowej konfiguracji języka
