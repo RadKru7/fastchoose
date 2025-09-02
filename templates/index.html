@@ -348,8 +348,8 @@
         <!-- Sekcja startowa -->
         <div id="hero" class="hero-section">
             <div class="hero-content">
-                <h1 class="hero-title">Dokonuj lepszych<br>wyborów, szybko i sprawnie.</h1>
-                <p class="hero-desc">Przestań tracić czas na porównywanie.<br>Nasze narzędzie pomoże Ci wybrać<br>najlepszą opcję w kilka sekund.</p>
+                <h1 id="hero-title" class="hero-title">Dokonuj lepszych<br>wyborów, szybko i sprawnie.</h1>
+                <p id="hero-desc" class="hero-desc">Przestań tracić czas na porównywanie.<br>Nasze narzędzie pomoże Ci wybrać<br>najlepszą opcję w kilka sekund.</p>
                 <button id="get-started-btn" class="get-started-btn">Rozpocznij</button>
             </div>
             <div class="hero-image-container">
@@ -384,25 +384,86 @@
     <!-- Skrypt JS -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Referencje do elementów
             const getStartedBtn = document.getElementById('get-started-btn');
             const restartButton = document.getElementById('restart-button');
             const heroSection = document.getElementById('hero');
             const quizSection = document.getElementById('quiz');
             const resultsSection = document.getElementById('results');
+            const languageSelect = document.getElementById('language-select');
+            
+            // Referencje do elementów tekstowych
+            const heroTitle = document.getElementById('hero-title');
+            const heroDesc = document.getElementById('hero-desc');
+            const quizTitle = document.getElementById('main-title');
+            const resultsTitle = document.getElementById('results-title');
 
-            // Listeners for starting and restarting
+            // Obiekt z tłumaczeniami
+            const translations = {
+                pl: {
+                    heroTitle: 'Dokonuj lepszych<br>wyborów, szybko i sprawnie.',
+                    heroDesc: 'Przestań tracić czas na porównywanie.<br>Nasze narzędzie pomoże Ci wybrać<br>najlepszą opcję w kilka sekund.',
+                    getStartedBtn: 'Rozpocznij',
+                    quizTitle: 'Znajdź idealny telefon',
+                    resultsTitle: 'Rekomendowane telefony:',
+                    restartButton: 'Rozpocznij od nowa',
+                    footer: '&copy; 2024 Phone Finder. All rights reserved.'
+                },
+                en: {
+                    heroTitle: 'Make better choices,<br>quickly and efficiently.',
+                    heroDesc: 'Stop wasting time comparing.<br>Our tool will help you choose<br>the best option in seconds.',
+                    getStartedBtn: 'Get Started',
+                    quizTitle: 'Find the perfect phone',
+                    resultsTitle: 'Recommended phones:',
+                    restartButton: 'Restart',
+                    footer: '&copy; 2024 Phone Finder. All rights reserved.'
+                },
+                es: {
+                    heroTitle: 'Toma mejores decisiones,<br>rápida y eficientemente.',
+                    heroDesc: 'Deja de perder tiempo comparando.<br>Nuestra herramienta te ayudará a elegir<br>la mejor opción en segundos.',
+                    getStartedBtn: 'Comenzar',
+                    quizTitle: 'Encuentra el teléfono ideal',
+                    resultsTitle: 'Teléfonos recomendados:',
+                    restartButton: 'Comenzar de nuevo',
+                    footer: '&copy; 2024 Phone Finder. All rights reserved.'
+                }
+            };
+
+            // Funkcja do aktualizacji języka
+            const updateLanguage = (lang) => {
+                const textElements = translations[lang];
+                if (textElements) {
+                    heroTitle.innerHTML = textElements.heroTitle;
+                    heroDesc.innerHTML = textElements.heroDesc;
+                    getStartedBtn.innerText = textElements.getStartedBtn;
+                    quizTitle.innerText = textElements.quizTitle;
+                    resultsTitle.innerText = textElements.resultsTitle;
+                    restartButton.innerText = textElements.restartButton;
+                    document.querySelector('.footer').innerHTML = textElements.footer;
+                }
+            };
+
+            // Nasłuchiwanie na przyciski nawigacji
             getStartedBtn.addEventListener('click', () => {
                 heroSection.classList.add('hidden');
                 quizSection.classList.remove('hidden');
-                // You would typically start your quiz logic here
+                // Tutaj będzie umieszczona logika quizu
             });
 
             restartButton.addEventListener('click', () => {
                 resultsSection.classList.add('hidden');
                 heroSection.classList.remove('hidden');
             });
+
+            // Nasłuchiwanie na zmianę języka
+            languageSelect.addEventListener('change', (event) => {
+                const selectedLang = event.target.value;
+                updateLanguage(selectedLang);
+            });
+
+            // Ustawienie początkowego języka
+            updateLanguage(languageSelect.value);
         });
     </script>
-
 </body>
 </html>
