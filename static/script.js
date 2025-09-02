@@ -92,7 +92,7 @@ async function getQuestion(questionId) {
         const response = await fetch(`${API_BASE_URL}question?current_question_id=${questionId}&language=${currentLanguage}`);
         const data = await response.json();
 
-        if (response.status !== 200 || !data || !data.options) { // Dodatkowe sprawdzenie
+        if (response.status !== 200 || !data || !data.answers) { // Dodatkowe sprawdzenie, zmienione na 'answers'
             console.error('API Error: Invalid data received or server error.', data);
             quizContent.innerHTML = `<p class="error">${translations[currentLanguage].error}: ${data?.error || 'Nieprawidłowe dane z serwera.'}</p>`;
             return;
@@ -111,7 +111,7 @@ function displayQuestion(question) {
         <div class="question-card">
             <h2 class="question-text">${question.question_text}</h2>
             <div class="options-container">
-                ${question.options.map(option => `
+                ${question.answers.map(option => ` // Zmieniono z question.options na question.answers
                     <button class="option-btn" data-next-id="${option.next_question_id}" data-answer-id="${option.option_id}">
                         ${option.option_text}
                     </button>
