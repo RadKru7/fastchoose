@@ -92,9 +92,9 @@ async function getQuestion(questionId) {
         const response = await fetch(`${API_BASE_URL}question?current_question_id=${questionId}&language=${currentLanguage}`);
         const data = await response.json();
 
-        if (response.status !== 200) {
-            console.error('API Error:', data.error);
-            quizContent.innerHTML = `<p class="error">${translations[currentLanguage].error}: ${data.error}</p>`;
+        if (response.status !== 200 || !data || !data.options) { // Dodatkowe sprawdzenie
+            console.error('API Error: Invalid data received or server error.', data);
+            quizContent.innerHTML = `<p class="error">${translations[currentLanguage].error}: ${data?.error || 'Nieprawidłowe dane z serwera.'}</p>`;
             return;
         }
 
