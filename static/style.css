@@ -111,7 +111,7 @@ body.landing {
     z-index: 1000;
 }
 .language-select {
-    padding: 10px 15px;
+    padding: 10px 30px 10px 15px; /* Dodatkowy padding po prawej, aby zrobić miejsce dla strzałki */
     border: 1px solid #D2B48C;
     border-radius: 8px;
     background-color: #F1E9DA;
@@ -121,13 +121,11 @@ body.landing {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    /* NOWY KOD SVG dla strzałki w dół w kształcie trójkąta */
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%235E5B52" viewBox="0 0 16 16"><path d="M7.247 11.14c-.33-.42-.647-.84-.96-.44-.313.4-.62.8-.934 1.2a.5.5 0 0 1-.84-.4c.594-.766 1.139-1.465 1.733-2.131z"/></svg>');
     background-repeat: no-repeat;
     background-position: right 10px center;
 }
-
-/* ... (pozostały kod CSS) ... */ Efekt najechania myszką dla przycisku języka */
+/* Efekt najechania myszką dla przycisku języka */
 .language-select:hover {
     border-color: #8FBC8F;
     box-shadow: 0 0 8px rgba(143, 188, 143, 0.4);
