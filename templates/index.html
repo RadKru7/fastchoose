@@ -391,13 +391,11 @@
             const quizSection = document.getElementById('quiz');
             const resultsSection = document.getElementById('results');
             const languageSelect = document.getElementById('language-select');
-            
-            // Referencje do elementów tekstowych
-            const heroTitle = document.getElementById('hero-title');
-            const heroDesc = document.getElementById('hero-desc');
-            const quizTitle = document.getElementById('main-title');
-            const resultsTitle = document.getElementById('results-title');
+            const quizContent = document.getElementById('quiz-content');
 
+            // Stan quizu
+            let currentQuestionIndex = 0;
+            
             // Obiekt z tłumaczeniami
             const translations = {
                 pl: {
@@ -407,7 +405,33 @@
                     quizTitle: 'Znajdź idealny telefon',
                     resultsTitle: 'Rekomendowane telefony:',
                     restartButton: 'Rozpocznij od nowa',
-                    footer: '&copy; 2024 Phone Finder. All rights reserved.'
+                    footer: '&copy; 2024 Phone Finder. All rights reserved.',
+                    questions: [
+                        {
+                            text: "Jaki masz budżet?",
+                            answers: [
+                                { text: "Do 1000 zł" },
+                                { text: "1000 zł - 2500 zł" },
+                                { text: "Powyżej 2500 zł" }
+                            ]
+                        },
+                        {
+                            text: "Jakie jest Twoje główne zastosowanie?",
+                            answers: [
+                                { text: "Przeglądanie internetu i media społecznościowe" },
+                                { text: "Gry i zaawansowane aplikacje" },
+                                { text: "Fotografia i nagrywanie wideo" }
+                            ]
+                        },
+                        {
+                            text: "Jaki rozmiar ekranu preferujesz?",
+                            answers: [
+                                { text: "Kompaktowy (do 6 cali)" },
+                                { text: "Standardowy (6 - 6.5 cala)" },
+                                { text: "Duży (powyżej 6.5 cala)" }
+                            ]
+                        }
+                    ]
                 },
                 en: {
                     heroTitle: 'Make better choices,<br>quickly and efficiently.',
@@ -416,7 +440,33 @@
                     quizTitle: 'Find the perfect phone',
                     resultsTitle: 'Recommended phones:',
                     restartButton: 'Restart',
-                    footer: '&copy; 2024 Phone Finder. All rights reserved.'
+                    footer: '&copy; 2024 Phone Finder. All rights reserved.',
+                    questions: [
+                        {
+                            text: "What is your budget?",
+                            answers: [
+                                { text: "Up to $250" },
+                                { text: "$250 - $600" },
+                                { text: "Above $600" }
+                            ]
+                        },
+                        {
+                            text: "What is your main use?",
+                            answers: [
+                                { text: "Web browsing and social media" },
+                                { text: "Gaming and advanced apps" },
+                                { text: "Photography and video recording" }
+                            ]
+                        },
+                        {
+                            text: "What screen size do you prefer?",
+                            answers: [
+                                { text: "Compact (up to 6 inches)" },
+                                { text: "Standard (6 - 6.5 inches)" },
+                                { text: "Large (above 6.5 inches)" }
+                            ]
+                        }
+                    ]
                 },
                 es: {
                     heroTitle: 'Toma mejores decisiones,<br>rápida y eficientemente.',
@@ -425,31 +475,103 @@
                     quizTitle: 'Encuentra el teléfono ideal',
                     resultsTitle: 'Teléfonos recomendados:',
                     restartButton: 'Comenzar de nuevo',
-                    footer: '&copy; 2024 Phone Finder. All rights reserved.'
+                    footer: '&copy; 2024 Phone Finder. All rights reserved.',
+                    questions: [
+                        {
+                            text: "¿Cuál es tu presupuesto?",
+                            answers: [
+                                { text: "Hasta $250" },
+                                { text: "$250 - $600" },
+                                { text: "Más de $600" }
+                            ]
+                        },
+                        {
+                            text: "¿Cuál es tu uso principal?",
+                            answers: [
+                                { text: "Navegación web y redes sociales" },
+                                { text: "Juegos y aplicaciones avanzadas" },
+                                { text: "Fotografía y grabación de video" }
+                            ]
+                        },
+                        {
+                            text: "¿Qué tamaño de pantalla prefieres?",
+                            answers: [
+                                { text: "Compacto (hasta 6 pulgadas)" },
+                                { text: "Estándar (6 - 6.5 pulgadas)" },
+                                { text: "Grande (más de 6.5 pulgadas)" }
+                            ]
+                        }
+                    ]
                 }
             };
-
+            
             // Funkcja do aktualizacji języka
             const updateLanguage = (lang) => {
                 const textElements = translations[lang];
                 if (textElements) {
-                    heroTitle.innerHTML = textElements.heroTitle;
-                    heroDesc.innerHTML = textElements.heroDesc;
-                    getStartedBtn.innerText = textElements.getStartedBtn;
-                    quizTitle.innerText = textElements.quizTitle;
-                    resultsTitle.innerText = textElements.resultsTitle;
-                    restartButton.innerText = textElements.restartButton;
+                    document.getElementById('hero-title').innerHTML = textElements.heroTitle;
+                    document.getElementById('hero-desc').innerHTML = textElements.heroDesc;
+                    document.getElementById('get-started-btn').innerText = textElements.getStartedBtn;
+                    document.getElementById('main-title').innerText = textElements.quizTitle;
+                    document.getElementById('results-title').innerText = textElements.resultsTitle;
+                    document.getElementById('restart-button').innerText = textElements.restartButton;
                     document.querySelector('.footer').innerHTML = textElements.footer;
                 }
             };
 
-            // Nasłuchiwanie na przyciski nawigacji
+            // Funkcja do wyświetlania pytania
+            const displayQuestion = () => {
+                const lang = languageSelect.value;
+                const currentQuizData = translations[lang].questions[currentQuestionIndex];
+                
+                // Tworzenie HTML dla pytania
+                const questionHtml = `
+                    <div class="question-card">
+                        <p class="question-text">${currentQuizData.text}</p>
+                        <div class="options-container">
+                            ${currentQuizData.answers.map(answer => `
+                                <button class="option-btn">${answer.text}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                quizContent.innerHTML = questionHtml;
+
+                // Dodawanie nasłuchiwania do przycisków odpowiedzi
+                const optionBtns = quizContent.querySelectorAll('.option-btn');
+                optionBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        handleAnswer();
+                    });
+                });
+            };
+
+            // Funkcja obsługująca odpowiedź
+            const handleAnswer = () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < translations[languageSelect.value].questions.length) {
+                    displayQuestion();
+                } else {
+                    showResults();
+                }
+            };
+
+            // Funkcja wyświetlająca wyniki
+            const showResults = () => {
+                quizSection.classList.add('hidden');
+                resultsSection.classList.remove('hidden');
+                // Tutaj będzie logika do generowania rekomendacji
+            };
+
+            // Nasłuchiwanie na przycisk "Rozpocznij"
             getStartedBtn.addEventListener('click', () => {
                 heroSection.classList.add('hidden');
                 quizSection.classList.remove('hidden');
-                // Tutaj będzie umieszczona logika quizu
+                currentQuestionIndex = 0; // Resetowanie quizu
+                displayQuestion(); // Wyświetlanie pierwszego pytania
             });
 
+            // Nasłuchiwanie na przycisk "Rozpocznij od nowa"
             restartButton.addEventListener('click', () => {
                 resultsSection.classList.add('hidden');
                 heroSection.classList.remove('hidden');
@@ -459,6 +581,10 @@
             languageSelect.addEventListener('change', (event) => {
                 const selectedLang = event.target.value;
                 updateLanguage(selectedLang);
+                if (!quizSection.classList.contains('hidden')) {
+                    currentQuestionIndex = 0;
+                    displayQuestion();
+                }
             });
 
             // Ustawienie początkowego języka
