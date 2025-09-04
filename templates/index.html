@@ -1,38 +1,172 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>FastChoose</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page_title or 'fast choose' }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f8fa;
+            color: #222;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 32px 8px 32px;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3c68f7;
+            letter-spacing: 1px;
+        }
+        .lang-select-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .lang-icon {
+            width: 22px;
+            height: 22px;
+            vertical-align: middle;
+        }
+        select.lang-select {
+            border: 1px solid #d9e2ec;
+            border-radius: 6px;
+            background: #f7f8fa;
+            padding: 6px 28px 6px 32px;
+            font-size: 1rem;
+            appearance: none;
+            cursor: pointer;
+            outline: none;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+        }
+        .hero-image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 44px;
+        }
+        .hero-image {
+            width: 340px;
+            max-width: 90vw;
+            animation: phone-move 2s infinite alternate ease-in-out;
+            box-shadow: 0 4px 24px rgba(60,104,247,0.08);
+        }
+        @keyframes phone-move {
+            0% { transform: translateX(-12px) rotate(-2deg);}
+            100% { transform: translateX(12px) rotate(2deg);}
+        }
+        .main-content {
+            text-align: center;
+            margin-top: 24px;
+            margin-bottom: 32px;
+        }
+        .big-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #3c68f7;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            color: #444;
+        }
+        .get-started-btn {
+            margin-top: 30px;
+            padding: 14px 48px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #3c68f7, #5be7a9);
+            color: #fff;
+            border: none;
+            border-radius: 32px;
+            cursor: pointer;
+            box-shadow: 0 2px 16px rgba(60,104,247,0.12);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .get-started-btn:hover {
+            background: linear-gradient(90deg, #5be7a9, #3c68f7);
+            box-shadow: 0 6px 24px rgba(60,104,247,0.24);
+        }
+        footer {
+            margin-top: auto;
+            background: #f1f2f4;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 1rem;
+            color: #888;
+            border-top: 1px solid #e3e4e8;
+        }
+        .footer-links {
+            margin-bottom: 8px;
+        }
+        .footer-links a {
+            color: #3c68f7;
+            margin: 0 14px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .footer-links a:hover {
+            color: #249687;
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .logo { font-size: 1.3rem; }
+            header { flex-direction: column; gap: 12px; padding: 16px 8px 2px 8px;}
+            .hero-image { width: 94vw; max-width: 330px;}
+            .big-title { font-size: 1.25rem;}
+        }
+    </style>
 </head>
-<body class="landing">
-
-    <nav class="main-nav">
-        <div class="logo">{{ logo_text or 'fast choose' }}</div>
-        <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Log in</a></li>
-        </ul>
-    </nav>
-
-    <div class="hero-section">
-        <div class="hero-center">
-            <img src="{{ url_for('static', filename='graphic/start_page.png') }}" alt="Start page graphic" class="start-page-animated">
+<body>
+    <header>
+        <div class="logo">FastChoose</div>
+        <div class="lang-select-container">
+            <!-- Globe SVG Icon -->
+            <svg class="lang-icon" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="#3c68f7" stroke-width="2"/>
+                <path d="M2 12h20M12 2a10 10 0 000 20" stroke="#3c68f7" stroke-width="1.5"/>
+                <ellipse cx="12" cy="12" rx="4.5" ry="10" stroke="#3c68f7" stroke-width="1.5"/>
+            </svg>
+            <select id="lang-select" class="lang-select" aria-label="Wybierz język">
+                <option value="pl">🇵🇱 Polski</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="es">🇪🇸 Español</option>
+            </select>
         </div>
+    </header>
+    <div class="hero-image-container">
+        <img src="/graphic/start_page.png" alt="Telefon prezentujący aplikację" class="hero-image start-page-animated">
     </div>
-
-    <div id="quiz" class="container" style="display:none;">
-        <h1 id="main-title">Znajdź idealny telefon</h1>
-        <div id="quiz-content"></div>
-        <div id="results" class="hidden">
-            <h2 id="results-title">Rekomendowane telefony:</h2>
-            <ul id="recommendations-list"></ul>
-            <button id="restart-button">Rozpocznij od nowa</button>
+    <main class="main-content">
+        <div class="big-title">Wybierz szybciej, żyj wygodniej!</div>
+        <div class="subtitle">
+            FastChoose pomaga podejmować decyzje, głosować i wybierać — łatwo, szybko, bez zbędnych pytań.<br>
+            Zmień język, by korzystać wygodniej.
         </div>
-    </div>
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <button class="get-started-btn">Get Started</button>
+    </main>
+    <footer>
+        <div class="footer-links">
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+        </div>
+        &copy; 2025 FastChoose. All rights reserved.
+    </footer>
+    <script src="/static/script.js"></script>
 </body>
 </html>
