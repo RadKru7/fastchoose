@@ -1,4 +1,38 @@
-<div class="hero-image-container">
-    <img src="/graphic/start_page.png" alt="Grafika startowa" class="hero-image start-page-animated">
-    <!-- Other elements remain unchanged -->
-</div>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title or 'fast choose' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="landing">
+
+    <nav class="main-nav">
+        <div class="logo">{{ logo_text or 'fast choose' }}</div>
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Log in</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-section">
+        <div class="hero-center">
+            <img src="{{ url_for('static', filename='graphic/start_page.png') }}" alt="Start page graphic" class="start-page-animated">
+        </div>
+    </div>
+
+    <div id="quiz" class="container" style="display:none;">
+        <h1 id="main-title">Znajdź idealny telefon</h1>
+        <div id="quiz-content"></div>
+        <div id="results" class="hidden">
+            <h2 id="results-title">Rekomendowane telefony:</h2>
+            <ul id="recommendations-list"></ul>
+            <button id="restart-button">Rozpocznij od nowa</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
