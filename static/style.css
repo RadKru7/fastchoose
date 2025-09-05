@@ -5,6 +5,7 @@ body.landing {
     color: #5E5B52;
     min-height: 100vh;
     position: relative;
+    font-size: 2.2rem;
 }
 .main-nav {
     display: flex;
@@ -12,11 +13,11 @@ body.landing {
     align-items: center;
     padding: 36px 60px 0 60px;
     background: none;
-    font-size: 1.1rem;
+    font-size: 2.2rem;
 }
 .logo {
     font-weight: 600;
-    font-size: 1.35rem;
+    font-size: 2.7rem;
     letter-spacing: -0.5px;
     color: #5E5B52;
 }
@@ -60,23 +61,23 @@ body.landing {
     justify-content: center;
 }
 .hero-title {
-    font-size: 3.1rem;
+    font-size: 6.2rem;
     line-height: 1.1;
     font-weight: 700;
     margin-bottom: 28px;
     color: #5E5B52;
 }
 .hero-desc {
-    font-size: 1.3rem;
+    font-size: 2.6rem;
     line-height: 1.55;
     margin-bottom: 38px;
     color: #5E5B52;
 }
 .get-started-btn {
     display: inline-block;
-    padding: 18px 38px;
-    font-size: 1.2rem;
-    border-radius: 9px;
+    padding: 36px 76px;
+    font-size: 2.4rem;
+    border-radius: 18px;
     background: #8FBC8F;
     color: #fff;
     text-decoration: none;
@@ -103,7 +104,6 @@ body.landing {
     box-shadow: 0 6px 32px rgba(0,0,0,0.10);
     background: transparent;
 }
-/* Nowe reguły dla pozycjonowania i stylu przycisku języka */
 .language-select-container {
     position: absolute;
     top: 20px;
@@ -111,12 +111,12 @@ body.landing {
     z-index: 1000;
 }
 .language-select {
-    padding: 10px 30px 10px 15px; /* Dodatkowy padding po prawej, aby zrobić miejsce dla strzałki */
+    padding: 20px 60px 20px 30px;
     border: 1px solid #D2B48C;
     border-radius: 8px;
     background-color: #F1E9DA;
     color: #5E5B52;
-    font-size: 1rem;
+    font-size: 2rem;
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
@@ -124,12 +124,10 @@ body.landing {
     background-repeat: no-repeat;
     background-position: right 10px center;
 }
-/* Efekt najechania myszką dla przycisku języka */
 .language-select:hover {
     border-color: #8FBC8F;
     box-shadow: 0 0 8px rgba(143, 188, 143, 0.4);
 }
-/* Ukryj przycisk menu domyślnie na dużych ekranach */
 .menu-toggle {
     display: none;
     background: none;
@@ -137,7 +135,6 @@ body.landing {
     cursor: pointer;
     color: #5E5B52;
 }
-/* Ukryj menu mobilne domyślnie */
 .mobile-nav-list {
     display: none;
     flex-direction: column;
@@ -153,15 +150,14 @@ body.landing {
 .mobile-nav-list.is-open {
     display: flex;
 }
-/* Nowa sekcja dla stopki */
 .main-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px;
+    padding: 80px 40px;
     background: #F9F7F3;
     color: #5E5B52;
-    font-size: 0.9rem;
+    font-size: 1.8rem;
     text-align: center;
 }
 .footer-links {
@@ -176,6 +172,7 @@ body.landing {
     color: #5E5B52;
     opacity: 0.8;
     transition: opacity 0.2s;
+    font-size: 2rem;
 }
 .footer-links li a:hover {
     opacity: 1;
@@ -201,14 +198,14 @@ body.landing {
         border-radius: 18px;
     }
     .hero-title {
-        font-size: 2.1rem;
+        font-size: 4.2rem;
     }
     .hero-desc {
-        font-size: 1rem;
+        font-size: 2rem;
     }
     .get-started-btn {
-        font-size: 1rem;
-        padding: 12px 24px;
+        font-size: 2rem;
+        padding: 24px 48px;
     }
     .language-select-container {
         top: 10px;
@@ -221,7 +218,7 @@ body.landing {
         display: block;
     }
     .main-footer {
-        padding: 20px;
+        padding: 40px;
     }
 }
 .container {
