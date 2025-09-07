@@ -29,7 +29,7 @@ const translations = {
         hero_desc: "Przestań tracić czas na porównywanie.<br>Nasze narzędzie pomoże Ci wybrać<br>najlepszą opcję w kilka sekund.",
         hero_btn: "Rozpocznij",
         bigTitle: "Znajdź najlepszy telefon",
-        subtitle: "Porównanie, które naprawdę ma sens",
+        subtitle: "W kilku prostych pytaniach podejmij szybką i trafną decyzję!",
         // Teksty dla quizu i wyników
         mainTitle: 'Znajdź idealny telefon',
         resultsTitle: 'Rekomendowane telefony:',
@@ -46,7 +46,7 @@ const translations = {
         hero_desc: "Stop wasting time comparing options.<br>Our tool helps you compare and choose<br>the best option in seconds.",
         hero_btn: "Get started",
         bigTitle: "Find the best phone",
-        subtitle: "Comparison that really makes sense",
+        subtitle: "Make a quick and accurate choice in just a few simple questions!",
         // Teksty dla quizu i wyników
         mainTitle: 'Find your perfect phone',
         resultsTitle: 'Recommended phones:',
@@ -63,7 +63,7 @@ const translations = {
         hero_desc: "Deja de perder tiempo comparando opciones.<br>Nuestra herramienta te ayuda a comparar y elegir<br>la mejor opción en segundos.",
         hero_btn: "Empezar",
         bigTitle: "Encuentra el mejor teléfono",
-        subtitle: "Comparación que realmente tiene sentido",
+        subtitle: "Decide rápido y bien en solo unas preguntas sencillas!",
         // Teksty dla quizu i wyników
         mainTitle: 'Encuentra tu teléfono ideal',
         resultsTitle: 'Teléfonos recomendados:',
