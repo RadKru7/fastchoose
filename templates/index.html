@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>FastChoose</title>
@@ -100,6 +100,43 @@
             background: linear-gradient(90deg, #5be7a9, #3c68f7);
             box-shadow: 0 6px 24px rgba(60,104,247,0.24);
         }
+        #quiz-container, #results-container {
+            display: none;
+            max-width: 480px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 18px;
+            padding: 26px 24px;
+            box-shadow: 0 2px 12px rgba(60,104,247,0.08);
+        }
+        .answer-btn {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 13px 0;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 9px;
+            background: #e9ecf9;
+            color: #3c68f7;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+        }
+        .answer-btn:hover {
+            background: #3c68f7;
+            color: #fff;
+        }
+        .restart-btn {
+            margin-top: 16px;
+            padding: 10px 30px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 11px;
+            background: #3c68f7;
+            color: #fff;
+            cursor: pointer;
+        }
         footer {
             margin-top: auto;
             background: #f1f2f4;
@@ -144,22 +181,33 @@
             <select id="lang-select" class="lang-select" aria-label="Wybierz język">
                 <option value="pl">Polski</option>
                 <option value="en">English</option>
-                <option value="de">Deutsch</option>
                 <option value="es">Español</option>
             </select>
         </div>
     </header>
-    <div class="hero-image-container">
-        <img src="/static/graphic/start_page.png" alt="Telefon prezentujący aplikację" class="hero-image start-page-animated">
+    <div class="hero-image-container" id="hero-section">
+        <img src="{{ url_for('static', filename='graphic/start_page.png') }}" alt="Telefon prezentujący aplikację" class="hero-image start-page-animated">
     </div>
-    <main class="main-content">
+    <main class="main-content" id="main-content">
         <div class="big-title">Wybierz szybciej, żyj wygodniej!</div>
         <div class="subtitle">
-            FastChoose pomaga podejmować decyzje, wybierać szybko i trafnie ! <br>
-                Aktywuj poniższy przycisk i rozpocznij serię pytań.
+            FastChoose pomaga podejmować decyzje, wybierać szybko i trafnie!<br>
+            Aktywuj poniższy przycisk i rozpocznij serię pytań.
         </div>
-        <button class="get-started-btn">Get Started</button>
+        <button class="get-started-btn" id="get-started-btn">Rozpocznij</button>
     </main>
+
+    <!-- Quiz -->
+    <div id="quiz-container">
+        <div id="quiz-content"></div>
+    </div>
+    <!-- Wyniki -->
+    <div id="results-container">
+        <div id="results-content"></div>
+        <ul id="recommendations-list"></ul>
+        <button class="restart-btn" id="restart-btn">Rozpocznij od nowa</button>
+    </div>
+
     <footer>
         <div class="footer-links">
             <a href="/about">About</a>
