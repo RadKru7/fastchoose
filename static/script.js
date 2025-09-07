@@ -95,25 +95,30 @@ function updateUILanguage(lang) {
 
 // Funkcja do pobierania pytania z API
 async function getQuestion(questionId) {
+    console.log(`[DEBUG] Wywołano getQuestion z ID: ${questionId}`);
     try {
         const response = await fetch(`${API_BASE_URL}question?current_question_id=${questionId}&language=${currentLanguage}`);
         const data = await response.json();
+        console.log('[DEBUG] Otrzymano dane z API:', data); // Zobaczmy, co dokładnie zwraca API
 
         if (response.status !== 200 || !data || !data.answers) {
-            console.error('API Error: Invalid data received or server error.', data);
+            console.error('[DEBUG] Błąd API lub nieprawidłowe dane:', data);
             quizContent.innerHTML = `<p class="error">${translations[currentLanguage].error}: ${data?.error || 'Nieprawidłowe dane z serwera.'}</p>`;
             return;
         }
 
         displayQuestion(data);
     } catch (error) {
-        console.error('Fetch Error:', error);
+        console.error('[DEBUG] Błąd w getQuestion (fetch):', error);
         quizContent.innerHTML = `<p class="error">${translations[currentLanguage].fetchError}</p>`;
     }
 }
 
 // Funkcja do wyświetlania pytania
 function displayQuestion(question) {
+    console.log('[DEBUG] Wywołano displayQuestion z danymi:', question);
+    console.log('[DEBUG] Element quizContent przed zmianą:', quizContent); // Sprawdźmy, czy element istnieje
+
     quizContent.innerHTML = `
         <div class="question-card">
             <h2 class="question-text">${question.question_text}</h2>
@@ -126,6 +131,7 @@ function displayQuestion(question) {
             </div>
         </div>
     `;
+    console.log('[DEBUG] quizContent.innerHTML został ustawiony.');
     addOptionListeners();
 }
 
@@ -247,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (getStartedBtn) {
         getStartedBtn.addEventListener('click', function(e) {
             e.preventDefault();
+            console.log('[DEBUG] Kliknięto "Rozpocznij"');
             if (heroSection) {
                 heroSection.style.display = 'none';
             }
@@ -255,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (quizContainer) {
                 quizContainer.style.display = 'block';
+                console.log('[DEBUG] Kontener quizu został wyświetlony.');
             }
             getQuestion(currentQuestionId);
         });
