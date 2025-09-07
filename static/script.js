@@ -11,6 +11,7 @@ let recommendationsList;
 let restartButton;
 let languageSelect;
 let heroSection;
+let mainContent; // Dodana zmienna dla głównej zawartości
 
 // Nowe elementy DOM dla menu mobilnego
 let menuToggle;
@@ -28,8 +29,8 @@ const translations = {
         hero_title: "Dokonuj lepszych<br>wyborów, szybko i sprawnie.",
         hero_desc: "Przestań tracić czas na porównywanie.<br>Nasze narzędzie pomoże Ci wybrać<br>najlepszą opcję w kilka sekund.",
         hero_btn: "Rozpocznij",
-        bigTitle: "Znajdź najlepszy telefon",
-        subtitle: "W kilku prostych pytaniach podejmij szybką i trafną decyzję!",
+        bigTitle: "Wybierz szybciej, żyj wygodniej!",
+        subtitle: "FastChoose pomaga podejmować decyzje, wybierać szybko i trafnie!<br>Aktywuj poniższy przycisk i rozpocznij serię pytań.",
         // Teksty dla quizu i wyników
         mainTitle: 'Znajdź idealny telefon',
         resultsTitle: 'Rekomendowane telefony:',
@@ -45,8 +46,8 @@ const translations = {
         hero_title: "Make better<br>choices, faster.",
         hero_desc: "Stop wasting time comparing options.<br>Our tool helps you compare and choose<br>the best option in seconds.",
         hero_btn: "Get started",
-        bigTitle: "Find the best phone",
-        subtitle: "Make a quick and accurate choice in just a few simple questions!",
+        bigTitle: "Choose faster, live better!",
+        subtitle: "FastChoose helps you make decisions, choose quickly and accurately!<br>Activate the button below and start a series of questions.",
         // Teksty dla quizu i wyników
         mainTitle: 'Find your perfect phone',
         resultsTitle: 'Recommended phones:',
@@ -62,8 +63,8 @@ const translations = {
         hero_title: "Toma mejores<br>decisiones, más rápido.",
         hero_desc: "Deja de perder tiempo comparando opciones.<br>Nuestra herramienta te ayuda a comparar y elegir<br>la mejor opción en segundos.",
         hero_btn: "Empezar",
-        bigTitle: "Encuentra el mejor teléfono",
-        subtitle: "Decide rápido y bien en solo unas preguntas sencillas!",
+        bigTitle: "¡Elige más rápido, vive mejor!",
+        subtitle: "¡FastChoose te ayuda a tomar decisiones, a elegir de forma rápida y precisa!<br>Activa el botón de abajo y comienza una serie de preguntas.",
         // Teksty dla quizu i wyników
         mainTitle: 'Encuentra tu teléfono ideal',
         resultsTitle: 'Teléfonos recomendados:',
@@ -78,22 +79,16 @@ const translations = {
 
 // Funkcja do aktualizacji tekstów na stronie (UI)
 function updateUILanguage(lang) {
-    const heroTitle = document.querySelector('.hero-title');
-    const heroDesc = document.querySelector('.hero-desc');
-    const heroBtn = document.querySelector('.get-started-btn');
-    if (heroTitle) heroTitle.innerHTML = translations[lang].hero_title;
-    if (heroDesc) heroDesc.innerHTML = translations[lang].hero_desc;
+    const heroBtn = document.getElementById('get-started-btn');
     if (heroBtn) heroBtn.textContent = translations[lang].hero_btn;
 
     // Aktualizacja tekstów .big-title i .subtitle
     const bigTitle = document.querySelector('.big-title');
     const subtitle = document.querySelector('.subtitle');
-    if (bigTitle) bigTitle.textContent = translations[lang].bigTitle;
-    if (subtitle) subtitle.textContent = translations[lang].subtitle;
+    if (bigTitle) bigTitle.innerHTML = translations[lang].bigTitle;
+    if (subtitle) subtitle.innerHTML = translations[lang].subtitle;
 
-    const mainTitle = document.getElementById('main-title');
     const resultsTitle = document.getElementById('results-title');
-    if (mainTitle) mainTitle.textContent = translations[lang].mainTitle;
     if (resultsTitle) resultsTitle.textContent = translations[lang].resultsTitle;
     if (restartButton) restartButton.textContent = translations[lang].restart;
 }
@@ -104,7 +99,7 @@ async function getQuestion(questionId) {
         const response = await fetch(`${API_BASE_URL}question?current_question_id=${questionId}&language=${currentLanguage}`);
         const data = await response.json();
 
-        if (response.status !== 200 || !data || !data.answers) { // Dodatkowe sprawdzenie, zmienione na 'answers'
+        if (response.status !== 200 || !data || !data.answers) {
             console.error('API Error: Invalid data received or server error.', data);
             quizContent.innerHTML = `<p class="error">${translations[currentLanguage].error}: ${data?.error || 'Nieprawidłowe dane z serwera.'}</p>`;
             return;
@@ -123,9 +118,9 @@ function displayQuestion(question) {
         <div class="question-card">
             <h2 class="question-text">${question.question_text}</h2>
             <div class="options-container">
-                ${question.answers.map(option => ` // Zmieniono z question.options na question.answers
-                    <button class="option-btn" data-next-id="${option.next_question_id}" data-answer-id="${option.option_id}">
-                        ${option.option_text}
+                ${question.answers.map(option => `
+                    <button class="answer-btn" data-next-id="${option.next_question_id}" data-answer-id="${option.answer_id}">
+                        ${option.answer_text}
                     </button>
                 `).join('')}
             </div>
@@ -137,7 +132,16 @@ function displayQuestion(question) {
 // Funkcja do pobierania wyników z API
 async function getResults() {
     try {
-        const response = await fetch(`${API_BASE_URL}recommend?answers=${pathAnswers.join(',')}&language=${currentLanguage}`);
+        const response = await fetch(`${API_BASE_URL}result`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                pathAnswers: pathAnswers,
+                language: currentLanguage
+            })
+        });
         const data = await response.json();
 
         if (response.status !== 200) {
@@ -157,9 +161,13 @@ async function getResults() {
 function displayResults(recommendations) {
     quizContainer.style.display = 'none';
     resultsContainer.style.display = 'block';
+    
+    const resultsContent = document.getElementById('results-content');
+    resultsContent.innerHTML = `<h2 id="results-title">${translations[currentLanguage].resultsTitle}</h2>`;
+
     recommendationsList.innerHTML = '';
 
-    if (recommendations.length === 0) {
+    if (!recommendations || recommendations.length === 0) {
         recommendationsList.innerHTML = `<li class="no-recommendations">${translations[currentLanguage].noRecommendations}</li>`;
         return;
     }
@@ -168,13 +176,11 @@ function displayResults(recommendations) {
         const li = document.createElement('li');
         li.classList.add('phone-card');
         li.innerHTML = `
-            <img src="${phone.image_url}" alt="${phone.name}" class="phone-image">
             <div class="phone-details">
-                <h3 class="phone-name">${phone.name}</h3>
-                <p class="phone-price">${phone.price}</p>
+                <h3 class="phone-name">${phone.product_name}</h3>
                 <div class="phone-buy-links">
-                    ${phone.buy_links.map(link => `
-                        <a href="${link.url}" target="_blank" class="buy-link">${translations[currentLanguage].buy} ${link.store}</a>
+                    ${phone.links.map(link => `
+                        <a href="${link.link_url}" target="_blank" class="buy-link">${translations[currentLanguage].buy} ${link.store_name}</a>
                     `).join('')}
                 </div>
             </div>
@@ -185,8 +191,8 @@ function displayResults(recommendations) {
 
 // Funkcja do obsługi kliknięcia odpowiedzi
 function handleAnswer(nextQuestionId, answerId) {
-    pathAnswers.push(answerId);
-    if (nextQuestionId) {
+    pathAnswers.push(parseInt(answerId, 10)); // Upewnij się, że ID jest liczbą
+    if (nextQuestionId && nextQuestionId !== "None") {
         currentQuestionId = nextQuestionId;
         getQuestion(currentQuestionId);
     } else {
@@ -196,7 +202,7 @@ function handleAnswer(nextQuestionId, answerId) {
 
 // Funkcja do dodawania słuchaczy zdarzeń do przycisków odpowiedzi
 function addOptionListeners() {
-    document.querySelectorAll('.option-btn').forEach(button => {
+    document.querySelectorAll('.answer-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const nextId = e.target.dataset.nextId;
             const answerId = e.target.dataset.answerId;
@@ -210,28 +216,24 @@ function restartQuiz() {
     currentQuestionId = 1;
     pathAnswers = [];
     resultsContainer.style.display = 'none';
-    quizContainer.style.display = 'block';
+    heroSection.style.display = 'flex';
+    mainContent.style.display = 'block';
+    quizContainer.style.display = 'none';
     getQuestion(currentQuestionId);
-}
-
-// Funkcja do przełączania widoczności menu mobilnego
-function toggleMobileMenu() {
-    mainMenu.classList.toggle('is-open');
 }
 
 // Cała logika aplikacji, która wymaga załadowania DOM, jest tutaj
 document.addEventListener('DOMContentLoaded', () => {
     // Inicjalizacja elementów DOM po załadowaniu strony
-    heroSection = document.querySelector('.hero-section');
-    quizContainer = document.getElementById('quiz');
+    heroSection = document.getElementById('hero-section');
+    mainContent = document.getElementById('main-content');
+    quizContainer = document.getElementById('quiz-container');
     quizContent = document.getElementById('quiz-content');
-    resultsContainer = document.getElementById('results');
+    resultsContainer = document.getElementById('results-container');
     recommendationsList = document.getElementById('recommendations-list');
-    restartButton = document.getElementById('restart-button');
-    languageSelect = document.getElementById('language-select');
-    menuToggle = document.querySelector('.menu-toggle');
-    mainMenu = document.getElementById('main-menu');
-    const getStartedBtn = document.querySelector('.get-started-btn');
+    restartButton = document.getElementById('restart-btn');
+    languageSelect = document.getElementById('lang-select');
+    const getStartedBtn = document.getElementById('get-started-btn');
     
     // Upewnij się, że elementy istnieją przed dodaniem słuchaczy
     if (quizContainer) {
@@ -245,9 +247,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (getStartedBtn) {
         getStartedBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Kliknięto "Get started"!');
             if (heroSection) {
                 heroSection.style.display = 'none';
+            }
+            if (mainContent) {
+                mainContent.style.display = 'none';
             }
             if (quizContainer) {
                 quizContainer.style.display = 'block';
@@ -265,12 +269,8 @@ document.addEventListener('DOMContentLoaded', () => {
         languageSelect.addEventListener('change', (e) => {
             currentLanguage = e.target.value;
             updateUILanguage(currentLanguage);
-            restartQuiz();
+            // Nie restartujemy quizu przy zmianie języka, tylko aktualizujemy teksty
         });
-    }
-
-    if (menuToggle) {
-        menuToggle.addEventListener('click', toggleMobileMenu);
     }
 
     // Uruchomienie początkowej konfiguracji języka
