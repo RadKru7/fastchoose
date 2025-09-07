@@ -28,6 +28,8 @@ const translations = {
         hero_title: "Dokonuj lepszych<br>wyborów, szybko i sprawnie.",
         hero_desc: "Przestań tracić czas na porównywanie.<br>Nasze narzędzie pomoże Ci wybrać<br>najlepszą opcję w kilka sekund.",
         hero_btn: "Rozpocznij",
+        bigTitle: "Znajdź najlepszy telefon",
+        subtitle: "Porównanie, które naprawdę ma sens",
         // Teksty dla quizu i wyników
         mainTitle: 'Znajdź idealny telefon',
         resultsTitle: 'Rekomendowane telefony:',
@@ -43,6 +45,8 @@ const translations = {
         hero_title: "Make better<br>choices, faster.",
         hero_desc: "Stop wasting time comparing options.<br>Our tool helps you compare and choose<br>the best option in seconds.",
         hero_btn: "Get started",
+        bigTitle: "Find the best phone",
+        subtitle: "Comparison that really makes sense",
         // Teksty dla quizu i wyników
         mainTitle: 'Find your perfect phone',
         resultsTitle: 'Recommended phones:',
@@ -58,6 +62,8 @@ const translations = {
         hero_title: "Toma mejores<br>decisiones, más rápido.",
         hero_desc: "Deja de perder tiempo comparando opciones.<br>Nuestra herramienta te ayuda a comparar y elegir<br>la mejor opción en segundos.",
         hero_btn: "Empezar",
+        bigTitle: "Encuentra el mejor teléfono",
+        subtitle: "Comparación que realmente tiene sentido",
         // Teksty dla quizu i wyników
         mainTitle: 'Encuentra tu teléfono ideal',
         resultsTitle: 'Teléfonos recomendados:',
@@ -78,6 +84,12 @@ function updateUILanguage(lang) {
     if (heroTitle) heroTitle.innerHTML = translations[lang].hero_title;
     if (heroDesc) heroDesc.innerHTML = translations[lang].hero_desc;
     if (heroBtn) heroBtn.textContent = translations[lang].hero_btn;
+
+    // Aktualizacja tekstów .big-title i .subtitle
+    const bigTitle = document.querySelector('.big-title');
+    const subtitle = document.querySelector('.subtitle');
+    if (bigTitle) bigTitle.textContent = translations[lang].bigTitle;
+    if (subtitle) subtitle.textContent = translations[lang].subtitle;
 
     const mainTitle = document.getElementById('main-title');
     const resultsTitle = document.getElementById('results-title');
