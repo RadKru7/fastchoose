@@ -185,10 +185,12 @@
             </select>
         </div>
     </header>
-    <div class="hero-image-container" id="hero-section">
-        <img src="{{ url_for('static', filename='graphic/start_page.png') }}" alt="Telefon prezentujący aplikację" class="hero-image start-page-animated">
-    </div>
+    
+    <!-- === POCZĄTEK ZMIANY === -->
     <main class="main-content" id="main-content">
+        <div class="hero-image-container" id="hero-section">
+            <img src="{{ url_for('static', filename='graphic/start_page.png') }}" alt="Telefon prezentujący aplikację" class="hero-image start-page-animated">
+        </div>
         <div class="big-title">Wybierz szybciej, żyj wygodniej!</div>
         <div class="subtitle">
             FastChoose pomaga podejmować decyzje, wybierać szybko i trafnie!<br>
@@ -196,6 +198,7 @@
         </div>
         <button class="get-started-btn" id="get-started-btn">Rozpocznij</button>
     </main>
+    <!-- === KONIEC ZMIANY === -->
 
     <!-- Quiz -->
     <div id="quiz-container">
