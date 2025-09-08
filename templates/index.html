@@ -21,6 +21,7 @@
             padding: 24px 32px 8px 32px;
             background: #fff;
             box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            flex-shrink: 0; /* Zapobiega kurczeniu się nagłówka */
         }
         .logo {
             font-size: 2rem;
@@ -51,12 +52,16 @@
             background-repeat: no-repeat;
             background-position: right 8px center;
         }
+        .main-content {
+            text-align: center;
+            padding: 24px 0 32px 0;
+        }
         .hero-image-container {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 44px;
+            margin-bottom: 20px;
         }
         .hero-image {
             width: 340px;
@@ -67,11 +72,6 @@
         @keyframes phone-move {
             0% { transform: translateX(-12px) rotate(-2deg);}
             100% { transform: translateX(12px) rotate(2deg);}
-        }
-        .main-content {
-            text-align: center;
-            margin-top: 24px;
-            margin-bottom: 32px;
         }
         .big-title {
             font-size: 2.2rem;
@@ -100,22 +100,35 @@
             background: linear-gradient(90deg, #5be7a9, #3c68f7);
             box-shadow: 0 6px 24px rgba(60,104,247,0.24);
         }
+        
+        /* === KLUCZOWA ZMIANA DLA QUIZU === */
         #quiz-container, #results-container {
-            display: none; /* Zmienione z display: none na flex dla centrowania */
+            display: none;
+            flex-grow: 1; /* Nakazuje zająć całą wolną przestrzeń */
+            display: flex; /* Używamy flex do centrowania */
             flex-direction: column;
-            justify-content: center; /* Centruje zawartość (biały box) w pionie */
-            align-items: center; /* Centruje zawartość w poziomie */
-            flex-grow: 1; /* Pozwala temu elementowi zająć całą dostępną przestrzeń */
-            width: 100%;
+            justify-content: center; /* Centruje w pionie */
+            align-items: center; /* Centruje w poziomie */
         }
-        #quiz-content-wrapper, #results-content-wrapper {
+        
+        #quiz-content, #results-content-wrapper {
              max-width: 480px;
-             width: 90%; /* Zapewnia responsywność na mniejszych ekranach */
+             width: 90%;
              background: #fff;
              border-radius: 18px;
-             padding: 26px 24px;
+             padding: 30px 26px;
              box-shadow: 0 2px 12px rgba(60,104,247,0.08);
+             text-align: center;
         }
+        
+        #quiz-content h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+        
         .answer-btn {
             display: block;
             width: 100%;
@@ -152,6 +165,7 @@
             font-size: 1rem;
             color: #888;
             border-top: 1px solid #e3e4e8;
+            flex-shrink: 0; /* Zapobiega kurczeniu się stopki */
         }
         .footer-links {
             margin-bottom: 8px;
@@ -173,17 +187,6 @@
             .hero-image { width: 94vw; max-width: 330px;}
             .big-title { font-size: 1.25rem;}
         }
-
-        /* === POCZĄTEK ZMIAN DLA QUIZU === */
-        #quiz-content h3 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #333;
-            margin-top: 0; /* Usunięcie domyślnego marginesu h3 */
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        /* === KONIEC ZMIAN DLA QUIZU === */
     </style>
 </head>
 <body>
@@ -204,7 +207,7 @@
     </header>
     
     <main class="main-content" id="main-content">
-        <div class="hero-image-container" id="hero-section">
+        <div class="hero-image-container">
             <img src="{{ url_for('static', filename='graphic/start_page.png') }}" alt="Telefon prezentujący aplikację" class="hero-image start-page-animated">
         </div>
         <div class="big-title">Wybierz szybciej, żyj wygodniej!</div>
@@ -217,8 +220,8 @@
 
     <!-- Quiz -->
     <div id="quiz-container">
-        <div id="quiz-content-wrapper">
-             <div id="quiz-content"></div>
+        <div id="quiz-content">
+            <!-- Zawartość quizu (pytanie i przyciski) będzie wstawiana tutaj przez JS -->
         </div>
     </div>
     <!-- Wyniki -->
