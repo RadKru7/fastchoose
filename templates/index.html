@@ -101,13 +101,20 @@
             box-shadow: 0 6px 24px rgba(60,104,247,0.24);
         }
         #quiz-container, #results-container {
-            display: none;
-            max-width: 480px;
-            margin: 30px auto;
-            background: #fff;
-            border-radius: 18px;
-            padding: 26px 24px;
-            box-shadow: 0 2px 12px rgba(60,104,247,0.08);
+            display: none; /* Zmienione z display: none na flex dla centrowania */
+            flex-direction: column;
+            justify-content: center; /* Centruje zawartość (biały box) w pionie */
+            align-items: center; /* Centruje zawartość w poziomie */
+            flex-grow: 1; /* Pozwala temu elementowi zająć całą dostępną przestrzeń */
+            width: 100%;
+        }
+        #quiz-content-wrapper, #results-content-wrapper {
+             max-width: 480px;
+             width: 90%; /* Zapewnia responsywność na mniejszych ekranach */
+             background: #fff;
+             border-radius: 18px;
+             padding: 26px 24px;
+             box-shadow: 0 2px 12px rgba(60,104,247,0.08);
         }
         .answer-btn {
             display: block;
@@ -168,21 +175,14 @@
         }
 
         /* === POCZĄTEK ZMIAN DLA QUIZU === */
-
-        /* Styl dla pytania w quizie */
         #quiz-content h3 {
-            font-size: 1.8rem; /* Zwiększenie czcionki pytania */
+            font-size: 1.8rem;
             font-weight: 600;
             color: #333;
-            margin-bottom: 25px; /* Dodatkowy odstęp pod pytaniem */
+            margin-top: 0; /* Usunięcie domyślnego marginesu h3 */
+            margin-bottom: 25px;
+            text-align: center;
         }
-
-        /* Poprawka wyśrodkowania kontenera quizu */
-        #quiz-container, #results-container {
-            margin-top: 5vh; /* Ustawienie marginesu od góry na 5% wysokości ekranu */
-            margin-bottom: 5vh;
-        }
-
         /* === KONIEC ZMIAN DLA QUIZU === */
     </style>
 </head>
@@ -190,7 +190,6 @@
     <header>
         <a href="/" class="logo" style="text-decoration: none;">FastChoose</a>
         <div class="lang-select-container">
-            <!-- Globe SVG Icon -->
             <svg class="lang-icon" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="10" stroke="#3c68f7" stroke-width="2"/>
                 <path d="M2 12h20M12 2a10 10 0 000 20" stroke="#3c68f7" stroke-width="1.5"/>
@@ -204,7 +203,6 @@
         </div>
     </header>
     
-    <!-- === POCZĄTEK ZMIANY === -->
     <main class="main-content" id="main-content">
         <div class="hero-image-container" id="hero-section">
             <img src="{{ url_for('static', filename='graphic/start_page.png') }}" alt="Telefon prezentujący aplikację" class="hero-image start-page-animated">
@@ -216,17 +214,20 @@
         </div>
         <button class="get-started-btn" id="get-started-btn">Rozpocznij</button>
     </main>
-    <!-- === KONIEC ZMIANY === -->
 
     <!-- Quiz -->
     <div id="quiz-container">
-        <div id="quiz-content"></div>
+        <div id="quiz-content-wrapper">
+             <div id="quiz-content"></div>
+        </div>
     </div>
     <!-- Wyniki -->
     <div id="results-container">
-        <div id="results-content"></div>
-        <ul id="recommendations-list"></ul>
-        <button class="restart-btn" id="restart-btn">Rozpocznij od nowa</button>
+        <div id="results-content-wrapper">
+            <div id="results-content"></div>
+            <ul id="recommendations-list"></ul>
+            <button class="restart-btn" id="restart-btn">Rozpocznij od nowa</button>
+        </div>
     </div>
 
     <footer>
