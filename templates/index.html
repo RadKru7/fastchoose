@@ -21,7 +21,7 @@
             padding: 24px 32px 8px 32px;
             background: #fff;
             box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-            flex-shrink: 0; /* Zapobiega kurczeniu się nagłówka */
+            flex-shrink: 0;
         }
         .logo {
             font-size: 2rem;
@@ -53,6 +53,11 @@
             background-position: right 8px center;
         }
         .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             padding: 24px 0 32px 0;
         }
@@ -101,14 +106,12 @@
             box-shadow: 0 6px 24px rgba(60,104,247,0.24);
         }
         
-        /* === KLUCZOWA ZMIANA DLA QUIZU === */
         #quiz-container, #results-container {
             display: none;
-            flex-grow: 1; /* Nakazuje zająć całą wolną przestrzeń */
-            display: flex; /* Używamy flex do centrowania */
+            flex-grow: 1;
             flex-direction: column;
-            justify-content: center; /* Centruje w pionie */
-            align-items: center; /* Centruje w poziomie */
+            justify-content: center;
+            align-items: center;
         }
         
         #quiz-content, #results-content-wrapper {
@@ -121,7 +124,8 @@
              text-align: center;
         }
         
-        #quiz-content h3 {
+        /* Zmiana z h2 na h3, aby pasowało do JS */
+        #quiz-content .question-text, #quiz-content h3 {
             font-size: 1.8rem;
             font-weight: 600;
             color: #333;
@@ -165,7 +169,7 @@
             font-size: 1rem;
             color: #888;
             border-top: 1px solid #e3e4e8;
-            flex-shrink: 0; /* Zapobiega kurczeniu się stopki */
+            flex-shrink: 0;
         }
         .footer-links {
             margin-bottom: 8px;
@@ -218,13 +222,11 @@
         <button class="get-started-btn" id="get-started-btn">Rozpocznij</button>
     </main>
 
-    <!-- Quiz -->
     <div id="quiz-container">
         <div id="quiz-content">
-            <!-- Zawartość quizu (pytanie i przyciski) będzie wstawiana tutaj przez JS -->
         </div>
     </div>
-    <!-- Wyniki -->
+
     <div id="results-container">
         <div id="results-content-wrapper">
             <div id="results-content"></div>
