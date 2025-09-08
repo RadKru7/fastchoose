@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mainContent.style.display = 'none';
             }
             if (quizContainer) {
-                quizContainer.style.display = 'block';
+                quizContainer.style.display = 'flex';
                 console.log('[DEBUG] Kontener quizu został wyświetlony.');
             }
             getQuestion(currentQuestionId);
