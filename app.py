@@ -59,9 +59,9 @@ answers_db = {
 
 # Ścieżki decyzyjne
 paths_db = {
-    (101,201,301,401,1011): [201, 202, 203],
-    (101,202,301,401,1101): [304, 305, 306],
-    (101,201,302,401,1101): [407, 408, 409],
+    (101,201,301,401,1001): [201, 202, 203],
+    (101,202,301,401,1001): [304, 305, 306],
+    (101,201,302,401,1001): [407, 408, 409],
 }
 
 # Produkty
@@ -156,16 +156,13 @@ def get_question():
         answers = []
         for ans_id, ans_data in answers_db.items():
             if ans_data['question_id'] == current_question_id:
-                # === POCZĄTEK KLUCZOWEJ ZMIANY ===
                 next_id = ans_data.get('next_question_id')
-                # Jeśli next_id to None, zamień je na pusty string. W przeciwnym razie zostaw jak jest.
                 next_id_for_frontend = next_id if next_id is not None else ''
-                # === KONIEC KLUCZOWEJ ZMIANY ===
 
                 answers.append({
                     'answer_id': ans_id,
                     'answer_text': ans_data.get(language, ans_data['en']),
-                    'next_question_id': next_id_for_frontend # Używamy nowej, bezpiecznej wartości
+                    'next_question_id': next_id_for_frontend
                 })
 
         return jsonify({
@@ -190,14 +187,17 @@ def get_result():
         if not path_answers or not isinstance(path_answers, list):
             return jsonify({'error': 'Invalid or missing "pathAnswers" parameter.'}), 400
 
-        # Tworzenie klucza ścieżki z listy odpowiedzi
-        path_key = ','.join([str(ans) for ans in path_answers])
+        # === POCZĄTEK KLUCZOWEJ ZMIANY ===
+        # Tworzenie posortowanej krotki (tuple) z listy odpowiedzi
+        path_key = tuple(sorted(path_answers))
+        # === KONIEC KLUCZOWEJ ZMIANY ===
 
         # Wyszukiwanie listy ID produktów na podstawie ścieżki
         product_ids = paths_db.get(path_key)
 
         if not product_ids:
-            return jsonify({'error': 'No matching path found.'}), 404
+            # Zwracamy pustą listę, a nie 404, aby frontend mógł to obsłużyć
+            return jsonify({'recommendations': [], 'message': 'No specific recommendations found for this path.'})
 
         recommendations = []
 
@@ -230,7 +230,8 @@ def get_result():
         return jsonify({'recommendations': recommendations})
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        # Zwracamy błąd 500 w przypadku nieoczekiwanego problemu po stronie serwera
+        return jsonify({'error': 'An internal server error occurred', 'details': str(e)}), 500
 
 @app.route('/api/languages', methods=['GET'])
 def get_languages():
