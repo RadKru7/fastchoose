@@ -156,10 +156,16 @@ def get_question():
         answers = []
         for ans_id, ans_data in answers_db.items():
             if ans_data['question_id'] == current_question_id:
+                # === POCZĄTEK KLUCZOWEJ ZMIANY ===
+                next_id = ans_data.get('next_question_id')
+                # Jeśli next_id to None, zamień je na pusty string. W przeciwnym razie zostaw jak jest.
+                next_id_for_frontend = next_id if next_id is not None else ''
+                # === KONIEC KLUCZOWEJ ZMIANY ===
+
                 answers.append({
                     'answer_id': ans_id,
                     'answer_text': ans_data.get(language, ans_data['en']),
-                    'next_question_id': ans_data.get('next_question_id')
+                    'next_question_id': next_id_for_frontend # Używamy nowej, bezpiecznej wartości
                 })
 
         return jsonify({
