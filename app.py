@@ -37,6 +37,8 @@ answers_db = {
     402: {'question_id': 4, 'next_question_id': None, 'en': 'Standard', 'es': 'Estándar', 'pl': 'Standardowy'},
     403: {'question_id': 4, 'next_question_id': None, 'en': 'Compact screen', 'es': 'Pantalla compacta', 'pl': 'Kompaktowy ekran'},
     501: {'question_id': 5, 'next_question_id': 6, 'en': 'Good photos during the day', 'es': 'Buenas fotos de día', 'pl': 'Dobre zdjęcia w dzień'},
+    502: {'question_id': 5, 'next_question_id': 6, 'en': 'A good front camera for selfies', es': 'Una buena cámara frontal para selfies', 'pl': 'Dobry przedni aparat do selfie'},
+    503: {'question_id': 5, 'next_question_id': 6, 'en': 'Versatile rear camera (e.g., for landscapes, portraits)', es': 'Cámara trasera versátil (p. ej., para paisajes, retratos)', 'pl': 'Wszechstronny tylny aparat (np. do zdjęć krajobrazów, portretów)'},
     601: {'question_id': 6, 'next_question_id': None, 'en': '128 GB', 'es': '128 GB', 'pl': '128 GB'},
     701: {'question_id': 7, 'next_question_id': 8, 'en': 'High performance', 'es': 'Alto rendimiento', 'pl': 'Wysoka wydajność'},
     801: {'question_id': 8, 'next_question_id': 9, 'en': 'Android', 'es': 'Android', 'pl': 'Android'},
