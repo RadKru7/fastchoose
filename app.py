@@ -33,15 +33,15 @@ answers_db = {
     301: {'question_id': 3, 'next_question_id': 4, 'en': 'Very important', 'es': 'Muy importante', 'pl': 'Bardzo ważna'},
     302: {'question_id': 3, 'next_question_id': 5, 'en': 'Important, but not the most important', 'es': 'Importante, pero no lo más importante', 'pl': 'Ważna, ale nie najważniejsza'},
     303: {'question_id': 3, 'next_question_id': 6, 'en': 'Of little importance', 'es': 'Poco importante', 'pl': 'Mało istotna'},
-    401: {'question_id': 4, 'next_question_id': None, 'en': 'As large a screen as possible', 'es': 'La pantalla más grande posible', 'pl': 'Jak największy ekran'},
-    402: {'question_id': 4, 'next_question_id': None, 'en': 'Standard', 'es': 'Estándar', 'pl': 'Standardowy'},
-    403: {'question_id': 4, 'next_question_id': None, 'en': 'Compact screen', 'es': 'Pantalla compacta', 'pl': 'Kompaktowy ekran'},
+    401: {'question_id': 4, 'next_question_id': 11, 'en': 'As large a screen as possible', 'es': 'La pantalla más grande posible', 'pl': 'Jak największy ekran'},
+    402: {'question_id': 4, 'next_question_id': 11, 'en': 'Standard', 'es': 'Estándar', 'pl': 'Standardowy'},
+    403: {'question_id': 4, 'next_question_id': 11, 'en': 'Compact screen', 'es': 'Pantalla compacta', 'pl': 'Kompaktowy ekran'},
     501: {'question_id': 5, 'next_question_id': 9, 'en': 'Good photos during the day', 'es': 'Buenas fotos de día', 'pl': 'Dobre zdjęcia w dzień'},
     502: {'question_id': 5, 'next_question_id': 6, 'en': 'A good front camera for selfies', 'es': 'Una buena cámara frontal para selfies', 'pl': 'Dobry przedni aparat do selfie'},
     503: {'question_id': 5, 'next_question_id': 6, 'en': 'Versatile rear camera (e.g., for landscapes, portraits)', 'es': 'Cámara trasera versátil (p. ej., para paisajes, retratos)', 'pl': 'Wszechstronny tylny aparat (np. do zdjęć krajobrazów, portretów)'},
-    601: {'question_id': 6, 'next_question_id': None, 'en': '128 GB', 'es': '128 GB', 'pl': '128 GB'},
-    602: {'question_id': 6, 'next_question_id': None, 'en': '256 GB', 'es': '256 GB', 'pl': '256 GB'},
-    603: {'question_id': 6, 'next_question_id': None, 'en': '512 GB or more', 'es': '512 GB o más', 'pl': '512 GB lub więcej'},
+    601: {'question_id': 6, 'next_question_id': 11, 'en': '128 GB', 'es': '128 GB', 'pl': '128 GB'},
+    602: {'question_id': 6, 'next_question_id': 11, 'en': '256 GB', 'es': '256 GB', 'pl': '256 GB'},
+    603: {'question_id': 6, 'next_question_id': 11, 'en': '512 GB or more', 'es': '512 GB o más', 'pl': '512 GB lub więcej'},
     701: {'question_id': 7, 'next_question_id': 8, 'en': 'High performance', 'es': 'Alto rendimiento', 'pl': 'Wysoka wydajność'},
     801: {'question_id': 8, 'next_question_id': 9, 'en': 'Android', 'es': 'Android', 'pl': 'Android'},
     802: {'question_id': 8, 'next_question_id': 9, 'en': 'iOS', 'es': 'iOS', 'pl': 'iOS'},
@@ -59,9 +59,9 @@ answers_db = {
 
 # Ścieżki decyzyjne
 paths_db = {
-    '101,201,301,401': [201, 202, 203],
-    '102,202,501,601': [304, 305, 306],
-    '103,203,701,801,901,1001,1101': [407, 408, 409],
+    '101,201,301,401,1001': [201, 202, 203],
+    '102,202,501,601,1001': [304, 305, 306],
+    '103,203,701,801,901,1001': [407, 408, 409],
 }
 
 # Produkty
