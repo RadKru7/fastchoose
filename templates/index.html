@@ -106,7 +106,7 @@
             box-shadow: 0 6px 24px rgba(60,104,247,0.24);
         }
         
-        #quiz-container, #results-container {
+        #quiz-container {
             display: none;
             flex-grow: 1;
             flex-direction: column;
@@ -114,7 +114,7 @@
             align-items: center;
         }
         
-        #quiz-content, #results-content-wrapper {
+        #quiz-content {
              max-width: 480px;
              width: 90%;
              background: #fff;
@@ -124,7 +124,6 @@
              text-align: center;
         }
         
-        /* Zmiana z h2 na h3, aby pasowało do JS */
         #quiz-content .question-text, #quiz-content h3 {
             font-size: 1.8rem;
             font-weight: 600;
@@ -151,16 +150,98 @@
             background: #3c68f7;
             color: #fff;
         }
+
+        /* === STYLE DLA WYNIKÓW === */
+        #results-container {
+            display: none; /* Ukryte na początku */
+            flex-grow: 1;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 32px 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #results-content-wrapper {
+            width: 100%;
+            max-width: 960px;
+            text-align: center;
+        }
+        .results-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3c68f7;
+            margin-bottom: 24px;
+        }
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            width: 100%;
+        }
+        .recommendation-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(60,104,247,0.1);
+        }
+        .recommendation-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 16px;
+        }
+        .recommendation-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        .store-links-container {
+            margin-top: auto; /* Wypycha linki na dół karty */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .store-link {
+            display: block;
+            padding: 10px 15px;
+            background-color: #f0f4ff;
+            color: #3c68f7;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .store-link:hover {
+            background-color: #3c68f7;
+            color: #fff;
+        }
         .restart-btn {
-            margin-top: 16px;
-            padding: 10px 30px;
-            font-size: 1rem;
+            margin-top: 32px;
+            padding: 12px 32px;
+            font-size: 1.1rem;
             border: none;
-            border-radius: 11px;
+            border-radius: 24px;
             background: #3c68f7;
             color: #fff;
             cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
         }
+        .restart-btn:hover {
+            background-color: #2a4ac8;
+        }
+        /* === KONIEC STYLI DLA WYNIKÓW === */
+
         footer {
             margin-top: auto;
             background: #f1f2f4;
@@ -229,9 +310,7 @@
 
     <div id="results-container">
         <div id="results-content-wrapper">
-            <div id="results-content"></div>
-            <ul id="recommendations-list"></ul>
-            <button class="restart-btn" id="restart-btn">Rozpocznij od nowa</button>
+            <!-- Zawartość wyników będzie generowana przez JavaScript -->
         </div>
     </div>
 
@@ -242,6 +321,6 @@
         </div>
         &copy; 2025 FastChoose. All rights reserved.
     </footer>
-    <script src="/static/script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
