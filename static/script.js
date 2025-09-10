@@ -14,15 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const translations = {
         pl: {
-            // Twoje istniejące tłumaczenia
             welcomeTitle: "Wybierz szybciej, żyj wygodniej!",
             welcomeSubtitle: "FastChoose pomaga podejmować decyzje, wybierać szybko i trafnie!<br>Aktywuj poniższy przycisk i rozpocznij serię pytań.",
             startButton: "Rozpocznij",
             aboutLink: "O nas",
             contactLink: "Kontakt",
             footerText: "&copy; 2025 FastChoose. Wszelkie prawa zastrzeżone.",
-            
-            // Nowe tłumaczenia dla wyników
             resultsTitle: "Oto Twoje rekomendacje:",
             restartButton: "Rozpocznij od nowa",
             noResults: "Niestety, nie znaleziono pasujących rekomendacji. Spróbuj ponownie z innymi odpowiedziami.",
@@ -30,15 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
             buyButton: "Kup w"
         },
         en: {
-            // Twoje istniejące tłumaczenia
             welcomeTitle: "Choose faster, live more comfortably!",
             welcomeSubtitle: "FastChoose helps you make decisions, choose quickly and accurately!<br>Activate the button below and start a series of questions.",
             startButton: "Get Started",
             aboutLink: "About",
             contactLink: "Contact",
             footerText: "&copy; 2025 FastChoose. All rights reserved.",
-
-            // Nowe tłumaczenia dla wyników
             resultsTitle: "Here are your recommendations:",
             restartButton: "Start over",
             noResults: "Unfortunately, no matching recommendations were found. Please try again with different answers.",
@@ -46,15 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
             buyButton: "Buy at"
         },
         es: {
-            // Twoje istniejące tłumaczenia
             welcomeTitle: "¡Elige más rápido, vive más cómodamente!",
             welcomeSubtitle: "¡FastChoose te ayuda a tomar decisiones, a elegir de forma rápida y precisa!<br>Activa el botón de abajo y comienza una serie de preguntas.",
             startButton: "Empezar",
             aboutLink: "Sobre nosotros",
             contactLink: "Contacto",
             footerText: "&copy; 2025 FastChoose. Todos los derechos reservados.",
-
-            // Nowe tłumaczenia dla wyników
             resultsTitle: "Aquí están tus recomendaciones:",
             restartButton: "Empezar de nuevo",
             noResults: "Lamentablemente, no se encontraron recomendaciones. Por favor, inténtalo de nuevo con otras respuestas.",
@@ -69,7 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('get-started-btn').textContent = translations[lang].startButton;
         document.querySelector('.footer-links a[href="/about"]').textContent = translations[lang].aboutLink;
         document.querySelector('.footer-links a[href="/contact"]').textContent = translations[lang].contactLink;
-        document.querySelector('footer').innerHTML = `<div class="footer-links">${document.querySelector('.footer-links').innerHTML}</div>${translations[lang].footerText}`;
+        const footer = document.querySelector('footer');
+        const footerLinks = footer.querySelector('.footer-links').outerHTML;
+        footer.innerHTML = footerLinks + translations[lang].footerText;
     }
 
     langSelect.addEventListener('change', (e) => {
@@ -93,15 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         fetch(`/api/quiz/question?current_question_id=${questionId}&language=${language}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 if (data.error) {
-                    console.error('API Error:', data.error);
                     quizContent.innerHTML = `<p>${translations[language].fetchError}</p>`;
                 } else {
                     displayQuestion(data);
@@ -113,24 +100,56 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
+    // === ZAKTUALIZOWANA FUNKCJA WYŚWIETLANIA PYTAŃ Z IKONAMI ===
     function displayQuestion(data) {
         quizContent.innerHTML = '';
+        
+        const questionHeader = document.createElement('div');
+        questionHeader.className = 'question-header';
+
+        if (data.question_icon_url) {
+            const icon = document.createElement('img');
+            icon.src = data.question_icon_url;
+            icon.className = 'question-icon';
+            icon.alt = 'Question Icon';
+            questionHeader.appendChild(icon);
+        }
+
         const questionText = document.createElement('h3');
         questionText.className = 'question-text';
         questionText.textContent = data.question_text;
-        quizContent.appendChild(questionText);
+        questionHeader.appendChild(questionText);
+        
+        quizContent.appendChild(questionHeader);
 
         data.answers.forEach(answer => {
             const button = document.createElement('button');
             button.className = 'answer-btn';
-            button.textContent = answer.answer_text;
             button.dataset.answerId = answer.answer_id;
             button.dataset.nextId = answer.next_question_id;
+
+            const answerContent = document.createElement('div');
+            answerContent.className = 'answer-content';
+
+            if (answer.icon_url) {
+                const icon = document.createElement('img');
+                icon.src = answer.icon_url;
+                icon.className = 'answer-icon';
+                icon.alt = 'Answer Icon';
+                answerContent.appendChild(icon);
+_
+            }
+            
+            const text = document.createElement('span');
+            text.className = 'answer-text';
+            text.textContent = answer.answer_text;
+            answerContent.appendChild(text);
+
+            button.appendChild(answerContent);
             quizContent.appendChild(button);
         });
     }
     
-    // === ZAKTUALIZOWANA FUNKCJA DO POBIERANIA WYNIKÓW ===
     function getResults() {
         fetch('/api/quiz/result', {
             method: 'POST',
@@ -141,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             quizContainer.style.display = 'none';
             resultsContainer.style.display = 'flex';
-            displayResults(data); // Wywołanie nowej funkcji
+            displayResults(data);
         })
         .catch(error => {
             console.error('Fetch Error:', error);
@@ -149,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === NOWA FUNKCJA DO WYŚWIETLANIA KART WYNIKÓW ===
     function displayResults(data) {
         resultsContentWrapper.innerHTML = '';
 
@@ -203,14 +221,15 @@ document.addEventListener('DOMContentLoaded', () => {
         restartButton.className = 'restart-btn';
         restartButton.textContent = translations[language].restartButton;
         restartButton.addEventListener('click', () => {
-            location.reload(); // Najprostszy sposób na restart
+            location.reload();
         });
         resultsContentWrapper.appendChild(restartButton);
     }
     
     quizContent.addEventListener('click', (e) => {
-        if (e.target && e.target.classList.contains('answer-btn')) {
-            handleAnswer(e.target);
+        const button = e.target.closest('.answer-btn');
+        if (button) {
+            handleAnswer(button);
         }
     });
 
@@ -228,6 +247,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Inicjalizacja tekstu na stronie
     updateUIText(language);
 });
