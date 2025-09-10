@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, url_for
 from flask_cors import CORS
 import json
 
@@ -59,25 +59,31 @@ answers_db = {
 
 # Ścieżki decyzyjne
 paths_db = {
-    (101,201,301,401,1101): [201, 202, 203],
-    (101,202,301,401,1101): [304, 305, 306],
-    (101,201,302,401,1101): [407, 408, 409],
+    (101,201,301,401,1001,1101): [201, 202, 203],
+    (101,202,301,401,1001,1101): [304, 305, 306],
+    (101,201,302,401,1001,1101): [407, 408, 409],
+    (102,201,301,401,1001,1101): [201, 202, 203],
+    (102,202,301,401,1001,1101): [304, 305, 306],
+    (102,201,302,401,1001,1101): [407, 408, 409],
+    (103,201,301,401,1001,1101): [201, 202, 203],
+    (103,202,301,401,1001,1101): [304, 305, 306],
+    (103,201,302,401,1001,1101): [407, 408, 409],
 }
 
 # Produkty
 products_db = {
-    201: {'pl': 'Xiaomi Redmi Note 13', 'en': 'Xiaomi Redmi Note 13', 'es': 'Xiaomi Redmi Note 13'},
-    202: {'pl': 'Motorola Moto G54 Power', 'en': 'Motorola Moto G54 Power', 'es': 'Motorola Moto G54 Power'},
-    203: {'pl': 'Samsung Galaxy A15', 'en': 'Samsung Galaxy A15', 'es': 'Samsung Galaxy A15'},
-    304: {'pl': 'Samsung Galaxy S23 FE', 'en': 'Samsung Galaxy S23 FE', 'es': 'Samsung Galaxy S23 FE'},
-    305: {'pl': 'Google Pixel 7a', 'en': 'Google Pixel 7a', 'es': 'Google Pixel 7a'},
-    306: {'pl': 'Xiaomi 13T', 'en': 'Xiaomi 13T', 'es': 'Xiaomi 13T'},
-    407: {'pl': 'OnePlus 12', 'en': 'OnePlus 12', 'es': 'OnePlus 12'},
-    408: {'pl': 'ASUS ROG Phone 8', 'en': 'ASUS ROG Phone 8', 'es': 'ASUS ROG Phone 8'},
-    409: {'pl': 'Samsung Galaxy S24 Ultra', 'en': 'Samsung Galaxy S24 Ultra', 'es': 'Samsung Galaxy S24 Ultra'},
+    201: {'pl': 'Xiaomi Redmi Note 13', 'en': 'Xiaomi Redmi Note 13', 'es': 'Xiaomi Redmi Note 13', 'image_path': 'graphic/xiaomi_redmi_note_13.png'},
+    202: {'pl': 'Motorola Moto G54 Power', 'en': 'Motorola Moto G54 Power', 'es': 'Motorola Moto G54 Power', 'image_path': 'graphic/motorola_moto_g54.png'},
+    203: {'pl': 'Samsung Galaxy A15', 'en': 'Samsung Galaxy A15', 'es': 'Samsung Galaxy A15', 'image_path': 'graphic/samsung_galaxy_a15.png'},
+    304: {'pl': 'Samsung Galaxy S23 FE', 'en': 'Samsung Galaxy S23 FE', 'es': 'Samsung Galaxy S23 FE', 'image_path': 'graphic/samsung_galaxy_s23_fe.png'},
+    305: {'pl': 'Google Pixel 7a', 'en': 'Google Pixel 7a', 'es': 'Google Pixel 7a', 'image_path': 'graphic/google_pixel_7a.png'},
+    306: {'pl': 'Xiaomi 13T', 'en': 'Xiaomi 13T', 'es': 'Xiaomi 13T', 'image_path': 'graphic/xiaomi_13t.png'},
+    407: {'pl': 'OnePlus 12', 'en': 'OnePlus 12', 'es': 'OnePlus 12', 'image_path': 'graphic/oneplus_12.png'},
+    408: {'pl': 'ASUS ROG Phone 8', 'en': 'ASUS ROG Phone 8', 'es': 'ASUS ROG Phone 8', 'image_path': 'graphic/asus_rog_phone_8.png'},
+    409: {'pl': 'Samsung Galaxy S24 Ultra', 'en': 'Samsung Galaxy S24 Ultra', 'es': 'Samsung Galaxy S24 Ultra', 'image_path': 'graphic/samsung_galaxy_s24_ultra.png'},
 }
 
-# Sklepy (połączone z językiem)
+# Sklepy
 stores_db = {
     1: {'name': 'Amazon US', 'language': 'en'},
     2: {'name': 'Best Buy', 'language': 'en'},
@@ -87,52 +93,17 @@ stores_db = {
     6: {'name': 'El Corte Inglés', 'language': 'es'},
 }
 
-# Linki produktów (połączone z ID produktu i ID sklepu)
+# Linki produktów
 product_links_db = {
-    201: [
-        {'store_id': 3, 'url': 'http://allegro.pl/pl/xiaomi-note-13'},
-        {'store_id': 4, 'url': 'http://mediaexpert.pl/pl/xiaomi-note-13'},
-        {'store_id': 1, 'url': 'http://amazon.com/en/xiaomi-note-13'}
-    ],
-    202: [
-        {'store_id': 3, 'url': 'http://allegro.pl/pl/motorola-moto-g54'},
-        {'store_id': 1, 'url': 'http://amazon.com/en/motorola-moto-g54'},
-        {'store_id': 5, 'url': 'http://amazon.es/es/motorola-moto-g54'}
-    ],
-    203: [
-        {'store_id': 3, 'url': 'http://allegro.pl/pl/samsung-a15'},
-        {'store_id': 1, 'url': 'http://amazon.com/en/samsung-a15'}
-    ],
-    304: [
-        {'store_id': 1, 'url': 'http://amazon.com/en/samsung-s23fe'},
-        {'store_id': 2, 'url': 'http://bestbuy.com/en/samsung-s23fe'},
-        {'store_id': 3, 'url': 'http://allegro.pl/pl/samsung-s23fe'}
-    ],
-    305: [
-        {'store_id': 1, 'url': 'http://amazon.com/en/google-pixel-7a'},
-        {'store_id': 2, 'url': 'http://bestbuy.com/en/google-pixel-7a'},
-        {'store_id': 3, 'url': 'http://allegro.pl/pl/google-pixel-7a'}
-    ],
-    306: [
-        {'store_id': 1, 'url': 'http://amazon.com/en/xiaomi-13t'},
-        {'store_id': 2, 'url': 'http://bestbuy.com/en/xiaomi-13t'},
-        {'store_id': 3, 'url': 'http://allegro.pl/pl/xiaomi-13t'}
-    ],
-    407: [
-        {'store_id': 1, 'url': 'http://amazon.com/en/oneplus-12'},
-        {'store_id': 2, 'url': 'http://bestbuy.com/en/oneplus-12'},
-        {'store_id': 3, 'url': 'http://allegro.pl/pl/oneplus-12'}
-    ],
-    408: [
-        {'store_id': 1, 'url': 'http://amazon.com/en/asus-rog-phone-8'},
-        {'store_id': 2, 'url': 'http://bestbuy.com/en/asus-rog-phone-8'},
-        {'store_id': 3, 'url': 'http://allegro.pl/pl/asus-rog-phone-8'}
-    ],
-    409: [
-        {'store_id': 1, 'url': 'http://amazon.com/en/samsung-s24-ultra'},
-        {'store_id': 2, 'url': 'http://bestbuy.com/en/samsung-s24-ultra'},
-        {'store_id': 3, 'url': 'http://allegro.pl/pl/samsung-s24-ultra'}
-    ],
+    201: [{'store_id': 3, 'url': '#'}, {'store_id': 4, 'url': '#'}, {'store_id': 1, 'url': '#'}],
+    202: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
+    203: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}],
+    304: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}],
+    305: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}],
+    306: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}],
+    407: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}],
+    408: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}],
+    409: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}],
 }
 
 # --- Punkty końcowe API ---
@@ -187,21 +158,13 @@ def get_result():
         if not path_answers or not isinstance(path_answers, list):
             return jsonify({'error': 'Invalid or missing "pathAnswers" parameter.'}), 400
 
-        # === POCZĄTEK KLUCZOWEJ ZMIANY ===
-        # Tworzenie posortowanej krotki (tuple) z listy odpowiedzi
         path_key = tuple(sorted(path_answers))
-        # === KONIEC KLUCZOWEJ ZMIANY ===
-
-        # Wyszukiwanie listy ID produktów na podstawie ścieżki
         product_ids = paths_db.get(path_key)
 
         if not product_ids:
-            # Zwracamy pustą listę, a nie 404, aby frontend mógł to obsłużyć
             return jsonify({'recommendations': [], 'message': 'No specific recommendations found for this path.'})
 
         recommendations = []
-
-        # Pobieranie ID sklepów, które pasują do wybranego języka
         matching_store_ids = [store_id for store_id, store_data in stores_db.items() if store_data['language'] == language]
 
         for product_id in product_ids:
@@ -210,8 +173,7 @@ def get_result():
                 continue
 
             product_name = product_data.get(language, product_data['en'])
-
-            # Pobieranie tylko tych linków, które pasują do wybranego języka/sklepów
+            
             product_links = []
             for link_data in product_links_db.get(product_id, []):
                 if link_data['store_id'] in matching_store_ids:
@@ -220,17 +182,21 @@ def get_result():
                         'store_name': store_name,
                         'link_url': link_data['url']
                     })
+            
+            image_url = ''
+            if product_data.get('image_path'):
+                image_url = url_for('static', filename=product_data['image_path'])
 
             recommendations.append({
                 'product_id': product_id,
                 'product_name': product_name,
+                'image_url': image_url,
                 'links': product_links
             })
 
         return jsonify({'recommendations': recommendations})
 
     except Exception as e:
-        # Zwracamy błąd 500 w przypadku nieoczekiwanego problemu po stronie serwera
         return jsonify({'error': 'An internal server error occurred', 'details': str(e)}), 500
 
 @app.route('/api/languages', methods=['GET'])
