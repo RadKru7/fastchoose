@@ -123,20 +123,30 @@
              box-shadow: 0 2px 12px rgba(60,104,247,0.08);
              text-align: center;
         }
-        
+
+        /* === NOWE STYLE DLA IKON W QUIZIE === */
+        .question-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .question-icon {
+            width: 32px;
+            height: 32px;
+        }
         #quiz-content .question-text, #quiz-content h3 {
             font-size: 1.8rem;
             font-weight: 600;
             color: #333;
-            margin-top: 0;
-            margin-bottom: 25px;
+            margin: 0;
         }
-        
         .answer-btn {
             display: block;
             width: 100%;
             margin: 12px 0;
-            padding: 13px 0;
+            padding: 10px 15px; /* Dopasowanie paddingu */
             font-size: 1.1rem;
             border: none;
             border-radius: 9px;
@@ -145,15 +155,31 @@
             cursor: pointer;
             font-weight: 600;
             transition: background 0.2s, color 0.2s;
+            box-sizing: border-box;
+        }
+        .answer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .answer-icon {
+            width: 24px;
+            height: 24px;
+        }
+        .answer-text {
+            flex-grow: 1;
+            text-align: left;
         }
         .answer-btn:hover {
             background: #3c68f7;
             color: #fff;
         }
+        /* === KONIEC STYLI DLA IKON === */
 
-        /* === STYLE DLA WYNIKÓW === */
+        /* Style dla wyników */
         #results-container {
-            display: none; /* Ukryte na początku */
+            display: none;
             flex-grow: 1;
             flex-direction: column;
             justify-content: center;
@@ -206,7 +232,7 @@
             margin-bottom: 16px;
         }
         .store-links-container {
-            margin-top: auto; /* Wypycha linki na dół karty */
+            margin-top: auto;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -240,7 +266,6 @@
         .restart-btn:hover {
             background-color: #2a4ac8;
         }
-        /* === KONIEC STYLI DLA WYNIKÓW === */
 
         footer {
             margin-top: auto;
@@ -310,7 +335,6 @@
 
     <div id="results-container">
         <div id="results-content-wrapper">
-            <!-- Zawartość wyników będzie generowana przez JavaScript -->
         </div>
     </div>
 
