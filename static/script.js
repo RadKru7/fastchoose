@@ -100,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // === ZAKTUALIZOWANA FUNKCJA WYŚWIETLANIA PYTAŃ Z IKONAMI ===
     function displayQuestion(data) {
         quizContent.innerHTML = '';
         
@@ -137,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon.className = 'answer-icon';
                 icon.alt = 'Answer Icon';
                 answerContent.appendChild(icon);
-_
+                // Usunięto błędny znak '_' z tego miejsca
             }
             
             const text = document.createElement('span');
