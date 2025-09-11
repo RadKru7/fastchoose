@@ -23,45 +23,38 @@ document.addEventListener('DOMContentLoaded', function () {
   let backBtnEl = null;
 
   function renderQuizShell() {
-    // Wstrzykujemy strukturę, na którą masz już style w index.html
     quizContent.innerHTML = `
       <div class="question-header">
         <img id="question-icon" class="question-icon" alt="" style="display:none;">
         <div id="question-text" class="question-text"></div>
       </div>
-      <div id="answers-container"></div>
+      <div id="answers-container" class="answers-grid"></div>
       <button id="back-btn" style="display:none;">${currentLang === 'pl' ? 'Wstecz' : (currentLang === 'es' ? 'Atrás' : 'Back')}</button>
     `;
 
-    // Odświeżamy referencje
     questionTextEl = document.getElementById('question-text');
     questionIconEl = document.getElementById('question-icon');
     answersContainerEl = document.getElementById('answers-container');
     backBtnEl = document.getElementById('back-btn');
 
-    if (backBtnEl) {
-      backBtnEl.addEventListener('click', goBack);
-    }
+    if (backBtnEl) backBtnEl.addEventListener('click', goBack);
   }
 
   function startQuiz() {
-    // Pokazujemy quiz na TEJ SAMEJ stronie — bez żadnego /quiz
     mainContent.style.display = 'none';
     resultsContainer.style.display = 'none';
     quizContainer.style.display = 'flex';
 
-    // Reset stanu
     currentQuestionId = 1;
     pathAnswers = [];
     history = [];
 
     renderQuizShell();
-    fetchQuestion(currentQuestionId, true); // true: bez dodawania do historii
+    fetchQuestion(currentQuestionId, true);
   }
 
   function handleLanguageChange() {
     currentLang = this.value;
-    // Jeśli jesteśmy w quizie, odśwież bieżące pytanie (bez zmiany historii)
     if (quizContainer && quizContainer.style.display !== 'none' && questionTextEl) {
       fetchQuestion(currentQuestionId, true);
     }
@@ -95,58 +88,49 @@ document.addEventListener('DOMContentLoaded', function () {
       questionIconEl.style.display = 'none';
     }
 
-    // Odpowiedzi
+    // Odpowiedzi w postaci kart
     answersContainerEl.innerHTML = '';
+
     (data.answers || []).forEach(ans => {
-      const btn = document.createElement('button');
-      btn.className = 'answer-btn';
+      const card = document.createElement('button');
+      card.className = 'answer-card';
+      card.type = 'button';
+      card.setAttribute('aria-label', ans.answer_text || 'answer');
 
-      const content = document.createElement('div');
-      content.className = 'answer-content';
-
-      const text = document.createElement('span');
-      text.className = 'answer-text';
-      text.textContent = ans.answer_text || '';
-      content.appendChild(text);
-
+      // Ikona
       if (ans.icon_url) {
-        const iconWrap = document.createElement('div');
-        iconWrap.className = 'icon-container';
-
         const img = document.createElement('img');
-        img.className = 'answer-icon icon-default';
+        img.className = 'answer-icon';
         img.src = ans.icon_url;
         img.alt = '';
-        iconWrap.appendChild(img);
-
-        content.appendChild(iconWrap);
+        card.appendChild(img);
       }
 
-      btn.appendChild(content);
-      btn.addEventListener('click', () => handleAnswer(ans));
-      answersContainerEl.appendChild(btn);
+      // Tekst
+      const title = document.createElement('div');
+      title.className = 'answer-title';
+      title.textContent = ans.answer_text || '';
+      card.appendChild(title);
+
+      card.addEventListener('click', () => handleAnswer(ans));
+      answersContainerEl.appendChild(card);
     });
 
-    // Back widoczny jeśli mamy do czego cofać
     if (backBtnEl) backBtnEl.style.display = history.length > 0 ? 'block' : 'none';
 
-    // Widoczność
     resultsContainer.style.display = 'none';
     quizContainer.style.display = 'flex';
   }
 
   function handleAnswer(answer) {
-    // Zbieramy ścieżkę odpowiedzi tak jak oczekuje backend
     if (typeof answer.answer_id !== 'undefined') {
       pathAnswers.push(answer.answer_id);
     }
 
     const nextId = answer.next_question_id;
     if (nextId === '' || nextId === null || typeof nextId === 'undefined') {
-      // Koniec — pobierz wyniki
       getResults();
     } else {
-      // Kolejne pytanie
       currentQuestionId = parseInt(nextId, 10);
       fetchQuestion(currentQuestionId, false);
     }
@@ -155,9 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function goBack() {
     if (history.length > 0) {
       const prevId = history.pop();
-      // Cofamy też ostatnią odpowiedź
       if (pathAnswers.length > 0) pathAnswers.pop();
-
       currentQuestionId = prevId;
       fetchQuestion(currentQuestionId, true);
     }
@@ -178,11 +160,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function displayResults(recommendations) {
-    // Ukryj quiz, pokaż wyniki
     quizContainer.style.display = 'none';
     resultsContainer.style.display = 'flex';
 
-    // Zbuduj widok wyników zgodnie ze stylami z index.html
     resultsWrapper.innerHTML = '';
 
     const title = document.createElement('div');
@@ -245,7 +225,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function resetApp() {
-    // Wróć do strony startowej i wyczyść stan
     currentQuestionId = 1;
     pathAnswers = [];
     history = [];
@@ -259,11 +238,6 @@ document.addEventListener('DOMContentLoaded', function () {
     alert(msg);
   }
 
-  // Zdarzenia
-  if (startBtn) {
-    startBtn.addEventListener('click', startQuiz);
-  }
-  if (langSelect) {
-    langSelect.addEventListener('change', handleLanguageChange);
-  }
+  if (startBtn) startBtn.addEventListener('click', startQuiz);
+  if (langSelect) langSelect.addEventListener('change', handleLanguageChange);
 });
