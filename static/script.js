@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // --- Elementy strony ---
     const startBtn = document.getElementById('get-started-btn');
     const langSelect = document.getElementById('lang-select');
     const startPage = document.getElementById('start-page');
@@ -8,38 +9,53 @@ document.addEventListener('DOMContentLoaded', function () {
     const answersContainer = document.getElementById('answers-container');
     const resultsContainer = document.getElementById('results-container');
     const backBtn = document.getElementById('back-btn');
+    const quizContent = document.getElementById('quiz-content');
 
+    // --- Stan aplikacji ---
     let currentQuestionId = 1;
     let userAnswers = {};
     let history = [];
     let currentLang = 'pl';
 
-    if (startBtn) {
-        startBtn.addEventListener('click', function() {
-            startPage.style.display = 'none';
-            quizContainer.style.display = 'block';
-            loadLanguage(currentLang, () => fetchQuestion(currentQuestionId));
-        });
+    // --- Inicjalizacja ---
+    function init() {
+        if (startBtn) {
+            startBtn.addEventListener('click', startQuiz);
+        }
+        if (langSelect) {
+            langSelect.addEventListener('change', handleLangChange);
+        }
+        if (backBtn) {
+            backBtn.addEventListener('click', goBack);
+        }
+        // Wstępne załadowanie języka dla strony startowej
+        if (startPage) {
+            loadLanguage(currentLang);
+        }
     }
 
-    if (langSelect) {
-        langSelect.addEventListener('change', function() {
-            currentLang = this.value;
-            if (quizContainer.style.display === 'block') {
-                loadLanguage(currentLang, () => fetchQuestion(currentQuestionId));
-            }
-        });
+    // --- Logika biznesowa ---
+    function startQuiz() {
+        startPage.style.display = 'none';
+        quizContainer.style.display = 'block';
+        loadLanguage(currentLang, () => fetchQuestion(currentQuestionId));
     }
 
-    if (backBtn) {
-        backBtn.addEventListener('click', function() {
-            if (history.length > 0) {
-                const lastState = history.pop();
-                currentQuestionId = lastState.questionId;
-                userAnswers = lastState.answers;
-                fetchQuestion(currentQuestionId, true);
-            }
-        });
+    function handleLangChange() {
+        currentLang = this.value;
+        // Jeśli quiz jest w toku, przeładuj aktualne pytanie w nowym języku
+        if (quizContainer.style.display === 'block' && !resultsContainer.style.display || resultsContainer.style.display === 'none') {
+            loadLanguage(currentLang, () => fetchQuestion(currentQuestionId, true)); // true, by nie zapisywać w historii
+        }
+    }
+
+    function goBack() {
+        if (history.length > 0) {
+            const lastState = history.pop();
+            currentQuestionId = lastState.questionId;
+            userAnswers = lastState.answers;
+            fetchQuestion(currentQuestionId, true); // true, by nie zapisywać w historii
+        }
     }
 
     function loadLanguage(lang, callback) {
@@ -52,34 +68,69 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error loading language file:', error));
     }
 
-    function fetchQuestion(questionId, isBack = false) {
-        if (!isBack) {
+    function fetchQuestion(questionId, isNavigating = false) {
+        if (!isNavigating) {
+            // Zapisz stan tylko wtedy, gdy przechodzimy do przodu
             history.push({ questionId: currentQuestionId, answers: { ...userAnswers } });
         }
 
-        fetch(`/question/${questionId}?lang=${currentLang}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.error) {
-                    console.error('Error fetching question:', data.error);
-                    if (data.error === "Question not found") {
-                        getResults();
+        quizContent.classList.add('fade-out');
+
+        setTimeout(() => {
+            fetch(`/question/${questionId}?lang=${currentLang}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-                } else {
-                    displayQuestion(data);
-                }
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-                getResults();
-            });
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error fetching question:', data.error);
+                        // Jeśli nie ma więcej pytań, pokaż wyniki
+                        if (data.error === "Question not found") {
+                            getResults();
+                        }
+                    } else {
+                        displayQuestion(data);
+                    }
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                    // Jeśli wystąpił błąd (np. 404), prawdopodobnie to koniec quizu
+                    getResults();
+                });
+        }, 300); // Czas musi pasować do czasu trwania animacji w CSS
     }
 
+    function selectAnswer(answerId, questionId, nextQuestionId) {
+        userAnswers[questionId] = answerId;
+        
+        if (nextQuestionId && nextQuestionId !== 'null' && nextQuestionId !== '') {
+            currentQuestionId = parseInt(nextQuestionId, 10);
+            fetchQuestion(currentQuestionId);
+        } else {
+            getResults();
+        }
+    }
+
+    function getResults() {
+        quizContent.classList.add('fade-out');
+        setTimeout(() => {
+            fetch('/results', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ answers: userAnswers, lang: currentLang })
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayResults(data.recommendations);
+            })
+            .catch(error => console.error('Error getting results:', error));
+        }, 300);
+    }
+
+    // --- Renderowanie widoków ---
     function displayQuestion(data) {
         questionText.textContent = data.question_text;
         
@@ -103,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
             answerText.textContent = answer.answer_text;
             answerContent.appendChild(answerText);
 
+            // Logika dla ikon SVG
             if (answer.icon_url) {
                 const iconContainer = document.createElement('div');
                 iconContainer.className = 'icon-container';
@@ -127,37 +179,17 @@ document.addEventListener('DOMContentLoaded', function () {
         backBtn.style.display = history.length > 1 ? 'block' : 'none';
         quizContainer.style.display = 'block';
         resultsContainer.style.display = 'none';
-    }
 
-    function selectAnswer(answerId, questionId, nextQuestionId) {
-        userAnswers[questionId] = answerId;
-        
-        if (nextQuestionId && nextQuestionId !== 'null' && nextQuestionId !== '') {
-            currentQuestionId = parseInt(nextQuestionId, 10);
-            fetchQuestion(currentQuestionId);
-        } else {
-            getResults();
-        }
-    }
-
-    function getResults() {
-        fetch('/results', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ answers: userAnswers, lang: currentLang })
-        })
-        .then(response => response.json())
-        .then(data => {
-            displayResults(data.recommendations);
-        })
-        .catch(error => console.error('Error getting results:', error));
+        quizContent.classList.remove('fade-out');
     }
 
     function displayResults(recommendations) {
         quizContainer.style.display = 'none';
-        resultsContainer.innerHTML = `<h2>${window.translations.recommendations_title || 'Our Recommendations For You'}:</h2>`;
+        resultsContainer.innerHTML = ''; // Wyczyść poprzednie wyniki
+
+        const title = document.createElement('h2');
+        title.textContent = window.translations.recommendations_title || 'Our Recommendations For You';
+        resultsContainer.appendChild(title);
         
         if (recommendations && recommendations.length > 0) {
             const resultsList = document.createElement('ul');
@@ -167,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 let linksHTML = '';
                 if (rec.links) {
                     for (const [store, url] of Object.entries(rec.links)) {
-                        linksHTML += `<a href="${url}" target="_blank">${store}</a>`;
+                        linksHTML += `<a href="${url}" target="_blank" class="product-link">${store}</a>`;
                     }
                 }
 
@@ -182,13 +214,15 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             resultsContainer.appendChild(resultsList);
         } else {
-            resultsContainer.innerHTML += `<p>${window.translations.no_recommendations || 'No specific recommendations found based on your answers.'}</p>`;
+            const noResultsText = document.createElement('p');
+            noResultsText.textContent = window.translations.no_recommendations || 'No specific recommendations found based on your answers.';
+            resultsContainer.appendChild(noResultsText);
         }
 
         resultsContainer.style.display = 'block';
+        resultsContainer.classList.remove('fade-out'); // Zapewnij widoczność
     }
 
-    if (startPage) {
-        loadLanguage(currentLang);
-    }
+    // --- Uruchomienie aplikacji ---
+    init();
 });
