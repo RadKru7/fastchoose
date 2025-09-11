@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- Elementy strony ---
     const startBtn = document.getElementById('get-started-btn');
     const langSelect = document.getElementById('lang-select');
-    const startPage = document.getElementById('start-page');
+    
+    // Elementy specyficzne dla strony quizu - mogą być null na stronie startowej
     const quizContainer = document.getElementById('quiz-container');
     const questionText = document.getElementById('question-text');
     const questionIcon = document.getElementById('question-icon');
@@ -19,39 +20,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Inicjalizacja ---
     function init() {
+        // Logika dla przycisku "Rozpocznij" - jeśli istnieje, przekierowuje do quizu
         if (startBtn) {
-            startBtn.addEventListener('click', startQuiz);
+            startBtn.addEventListener('click', function() {
+                window.location.href = '/quiz'; // Kluczowa zmiana: po prostu przekieruj
+            });
         }
-        if (langSelect) {
-            langSelect.addEventListener('change', handleLangChange);
+
+        // Logika dla strony quizu - jeśli na niej jesteśmy
+        if (quizContainer) {
+            if (langSelect) {
+                langSelect.addEventListener('change', handleLangChange);
+            }
+            if (backBtn) {
+                backBtn.addEventListener('click', goBack);
+            }
+            // Rozpocznij wczytywanie pierwszego pytania
+            loadLanguage(currentLang, () => fetchQuestion(currentQuestionId));
         }
-        if (backBtn) {
-            backBtn.addEventListener('click', goBack);
-        }
-        // Wstępne załadowanie języka dla strony startowej
-        if (startPage) {
-            loadLanguage(currentLang);
+        
+        // Logika dla strony startowej - jeśli na niej jesteśmy
+        if (!quizContainer && langSelect) {
+             loadLanguage(currentLang);
         }
     }
 
     // --- Logika biznesowa ---
-
-    // ============== POPRAWIONA FUNKCJA ===============
-    function startQuiz() {
-        // Sprawdź, czy elementy istnieją, zanim ich użyjesz
-        if (startPage && quizContainer) {
-            startPage.style.display = 'none';
-            quizContainer.style.display = 'block';
-            loadLanguage(currentLang, () => fetchQuestion(currentQuestionId));
-        } else {
-            console.error("Could not find startPage or quizContainer element.");
-        }
-    }
-    // =================================================
-
     function handleLangChange() {
         currentLang = this.value;
-        if (quizContainer.style.display === 'block' && !resultsContainer.style.display || resultsContainer.style.display === 'none') {
+        if (quizContainer.style.display !== 'none') {
             loadLanguage(currentLang, () => fetchQuestion(currentQuestionId, true));
         }
     }
@@ -80,32 +77,20 @@ document.addEventListener('DOMContentLoaded', function () {
             history.push({ questionId: currentQuestionId, answers: { ...userAnswers } });
         }
 
-        if (quizContent) {
-            quizContent.classList.add('fade-out');
-        }
+        if (quizContent) quizContent.classList.add('fade-out');
 
         setTimeout(() => {
             fetch(`/question/${questionId}?lang=${currentLang}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
+                .then(response => response.ok ? response.json() : Promise.reject(response))
                 .then(data => {
                     if (data.error) {
                         console.error('Error fetching question:', data.error);
-                        if (data.error === "Question not found") {
-                            getResults();
-                        }
+                        if (data.error === "Question not found") getResults();
                     } else {
                         displayQuestion(data);
                     }
                 })
-                .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
-                    getResults();
-                });
+                .catch(() => getResults());
         }, 300);
     }
 
@@ -121,9 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function getResults() {
-        if (quizContent) {
-            quizContent.classList.add('fade-out');
-        }
+        if (quizContent) quizContent.classList.add('fade-out');
         setTimeout(() => {
             fetch('/results', {
                 method: 'POST',
@@ -131,21 +114,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify({ answers: userAnswers, lang: currentLang })
             })
             .then(response => response.json())
-            .then(data => {
-                displayResults(data.recommendations);
-            })
+            .then(data => displayResults(data.recommendations))
             .catch(error => console.error('Error getting results:', error));
         }, 300);
     }
 
     // --- Renderowanie widoków ---
     function displayQuestion(data) {
+        if (!questionText || !answersContainer) return;
+
         questionText.textContent = data.question_text;
         
-        if (data.icon_url) {
+        if (data.icon_url && questionIcon) {
             questionIcon.src = data.icon_url;
             questionIcon.style.display = 'inline';
-        } else {
+        } else if (questionIcon) {
             questionIcon.style.display = 'none';
         }
 
@@ -162,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
             answerText.textContent = answer.answer_text;
             answerContent.appendChild(answerText);
 
-            if (answer.icon_url) {
+            if (answer.icon_url && answer.icon_url.endsWith('.svg')) {
                 const iconContainer = document.createElement('div');
                 iconContainer.className = 'icon-container';
 
@@ -170,9 +153,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(response => response.text())
                     .then(svgText => {
                         iconContainer.innerHTML = svgText;
-                        if (iconContainer.querySelector('svg')) {
-                            iconContainer.querySelector('svg').classList.add('answer-icon');
-                        }
+                        const svgElement = iconContainer.querySelector('svg');
+                        if (svgElement) svgElement.classList.add('answer-icon');
                     });
                 
                 answerContent.appendChild(iconContainer);
@@ -183,13 +165,10 @@ document.addEventListener('DOMContentLoaded', function () {
             answersContainer.appendChild(answerBtn);
         });
 
-        backBtn.style.display = history.length > 1 ? 'block' : 'none';
-        quizContainer.style.display = 'block';
-        resultsContainer.style.display = 'none';
-
-        if (quizContent) {
-            quizContent.classList.remove('fade-out');
-        }
+        if(backBtn) backBtn.style.display = history.length > 1 ? 'block' : 'none';
+        if(quizContainer) quizContainer.style.display = 'block';
+        if(resultsContainer) resultsContainer.style.display = 'none';
+        if(quizContent) quizContent.classList.remove('fade-out');
     }
 
     function displayResults(recommendations) {
@@ -198,41 +177,34 @@ document.addEventListener('DOMContentLoaded', function () {
         resultsContainer.innerHTML = '';
 
         const title = document.createElement('h2');
-        title.textContent = window.translations.recommendations_title || 'Our Recommendations For You';
+        title.textContent = window.translations?.recommendations_title || 'Our Recommendations';
         resultsContainer.appendChild(title);
         
         if (recommendations && recommendations.length > 0) {
             const resultsList = document.createElement('ul');
             recommendations.forEach(rec => {
                 const listItem = document.createElement('li');
-                
-                let linksHTML = '';
-                if (rec.links) {
-                    for (const [store, url] of Object.entries(rec.links)) {
-                        linksHTML += `<a href="${url}" target="_blank" class="product-link">${store}</a>`;
-                    }
-                }
+                let linksHTML = Object.entries(rec.links || {}).map(([store, url]) => 
+                    `<a href="${url}" target="_blank" class="product-link">${store}</a>`
+                ).join('');
 
                 listItem.innerHTML = `
                     <img src="${rec.image_url || 'static/images/default.jpg'}" alt="${rec.product_name}" class="product-image">
                     <div class="product-details">
                         <h3>${rec.product_name}</h3>
                         <div class="product-links">${linksHTML}</div>
-                    </div>
-                `;
+                    </div>`;
                 resultsList.appendChild(listItem);
             });
             resultsContainer.appendChild(resultsList);
         } else {
             const noResultsText = document.createElement('p');
-            noResultsText.textContent = window.translations.no_recommendations || 'No specific recommendations found based on your answers.';
+            noResultsText.textContent = window.translations?.no_recommendations || 'No recommendations found.';
             resultsContainer.appendChild(noResultsText);
         }
 
         resultsContainer.style.display = 'block';
-        if (resultsContainer.classList.contains('fade-out')) {
-            resultsContainer.classList.remove('fade-out');
-        }
+        resultsContainer.classList.remove('fade-out');
     }
 
     // --- Uruchomienie aplikacji ---
