@@ -124,17 +124,17 @@
              text-align: center;
         }
 
-        /* === OSTATECZNE, POPRAWIONE STYLE DLA QUIZU === */
+        /* === OSTATECZNE POPRAWKI STYLÓW QUIZU === */
         .question-header {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 15px; /* Większy odstęp */
             margin-bottom: 30px;
         }
         .question-icon {
-            width: 36px;
-            height: 36px;
+            width: 40px;  /* Znacznie większa ikona pytania */
+            height: 40px;
         }
         #quiz-content .question-text {
             font-size: 1.9rem;
@@ -160,27 +160,27 @@
         .answer-content {
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* Ułożenie od lewej */
-            gap: 16px; /* Odstęp między tekstem a ikoną */
+            justify-content: flex-start;
+            gap: 20px; /* Zwiększony odstęp między tekstem a ikoną */
         }
         .answer-text {
-             flex-grow: 1; /* Tekst zajmuje dostępną przestrzeń */
+             flex-grow: 1;
              text-align: left;
         }
         .answer-icon {
-            width: 32px;
-            height: 32px;
-            transition: filter 0.2s; /* Płynna zmiana filtra */
+            width: 40px;  /* ZNACZNIE WIĘKSZA IKONA ODPOWIEDZI */
+            height: 40px;
+            transition: filter 0.2s ease-in-out;
         }
         .answer-btn:hover {
             background-color: #3c68f7;
             color: #fff;
         }
-        /* Po najechaniu, zmieniamy ikonę na białą za pomocą filtra */
+        /* POPRAWIONY FILTR: Zawsze zamienia ikonę na białą */
         .answer-btn:hover .answer-icon {
-            filter: brightness(0) invert(1);
+            filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
         }
-        /* === KONIEC OSTATECZNYCH STYLI === */
+        /* === KONIEC OSTATECZNYCH POPRAWEK === */
 
         /* Style dla wyników */
         #results-container {
