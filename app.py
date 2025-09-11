@@ -35,7 +35,7 @@ answers_db = {
     403: {'question_id': 4, 'next_question_id': 11, 'en': 'Compact screen', 'es': 'Pantalla compacta', 'pl': 'Kompaktowy ekran', 'icon_path': 'icons/screen_small.png'},
     501: {'question_id': 5, 'next_question_id': 9, 'en': 'Good photos during the day', 'es': 'Buenas fotos de día', 'pl': 'Dobre zdjęcia w dzień', 'icon_path': 'icons/sun.png'},
     502: {'question_id': 5, 'next_question_id': 6, 'en': 'A good front camera for selfies', 'es': 'Una buena cámara frontal para selfies', 'pl': 'Dobry przedni aparat do selfie', 'icon_path': 'icons/selfie.png'},
-    503: {'question_id': 5, 'next_question_id': 6, 'en': 'Versatile rear camera (e.g., for landscapes, portraits)', 'es': 'Cámara trasera versátil (p. ej., para paisajes, retratos)', 'pl': 'Wszechstronny tylny aparat', 'icon_path': 'icons/camera_versatile.png'},
+    503: {'question_id': 5, 'next_question_id': 6, 'en': 'Versatile rear camera (e.g., for landscapes, portraits)', 'es': 'Cámara trasera versátil (p. ej., para paisajes, retratos)', 'pl': 'Wszechstronny tylny aparat', 'icon_path': 'icons/camera_rear.png'},
     601: {'question_id': 6, 'next_question_id': 11, 'en': '128 GB', 'es': '128 GB', 'pl': '128 GB', 'icon_path': 'icons/memory.png'},
     602: {'question_id': 6, 'next_question_id': 11, 'en': '256 GB', 'es': '256 GB', 'pl': '256 GB', 'icon_path': 'icons/memory.png'},
     603: {'question_id': 6, 'next_question_id': 11, 'en': '512 GB or more', 'es': '512 GB o más', 'pl': '512 GB lub więcej', 'icon_path': 'icons/memory.png'},
@@ -71,14 +71,20 @@ products_db = {
     408: {'pl': 'ASUS ROG Phone 8', 'en': 'ASUS ROG Phone 8', 'es': 'ASUS ROG Phone 8', 'image_path': 'graphic/asus_rog_phone_8.png'},
     409: {'pl': 'Samsung Galaxy S24 Ultra', 'en': 'Samsung Galaxy S24 Ultra', 'es': 'Samsung Galaxy S24 Ultra', 'image_path': 'graphic/samsung_galaxy_s24_ultra.png'},
 }
-stores_db = {1: {'name': 'Amazon US', 'language': 'en'}, 2: {'name': 'Best Buy', 'language': 'en'}, 3: {'name': 'Allegro', 'language': 'pl'}, 4: {'name': 'Media Expert', 'language': 'pl'}, 5: {'name': 'Amazon ES', 'language': 'es'}, 6: {'name': 'El Corte Inglés', 'language': 'es'},}
-product_links_db = {201: [{'store_id': 3, 'url': '#'}, {'store_id': 4, 'url': '#'}, {'store_id': 1, 'url': '#'}], 202: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}], 203: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}], 304: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}], 305: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}], 306: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}], 407: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}], 408: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}], 409: [{'store_id': 1, 'url': '#'}, {'store_id': 2, 'url': '#'}, {'store_id': 3, 'url': '#'}],}
+stores_db = {1: {'name': 'Amazon US', 'language': 'en'}, 2: {'name': 'Best Buy', 'language': 'en'}, 3: {'name': 'Allegro', 'language': 'pl'}, 4: {'name': 'Media Expert', 'language': 'pl'}, 5: {'name': 'Amazon ES', 'language': 'es'}}
+product_links_db = {201: [{'store_id': 3, 'url': '#'}, {'store_id': 4, 'url': '#'}, {'store_id': 1, 'url': '#'}], 202: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}]}
 
 # --- Punkty końcowe API ---
 
 @app.route('/')
 def home():
     return render_template('index.html')
+
+# ============== JEDYNA DODANA ZMIANA ===============
+@app.route('/quiz')
+def quiz():
+    return render_template('quiz.html')
+# ===================================================
 
 @app.route('/api/quiz/question', methods=['GET'])
 def get_question():
