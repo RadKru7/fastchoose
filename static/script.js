@@ -129,20 +129,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const answerContent = document.createElement('div');
             answerContent.className = 'answer-content';
-
-            if (answer.icon_url) {
-                const icon = document.createElement('img');
-                icon.src = answer.icon_url;
-                icon.className = 'answer-icon';
-                icon.alt = 'Answer Icon';
-                answerContent.appendChild(icon);
-                // Usunięto błędny znak '_' z tego miejsca
-            }
             
+            // 1. Dodaj tekst jako pierwszy
             const text = document.createElement('span');
             text.className = 'answer-text';
             text.textContent = answer.answer_text;
             answerContent.appendChild(text);
+
+            // 2. Dodaj ikonę jako drugą (będzie po prawej)
+            if (answer.icon_url) {
+                const iconWrapper = document.createElement('div');
+                iconWrapper.className = 'answer-icon-wrapper';
+                // Ustawienie ścieżki do obrazka jako stylu dla maski
+                iconWrapper.style.webkitMaskImage = `url(${answer.icon_url})`;
+                iconWrapper.style.maskImage = `url(${answer.icon_url})`;
+                answerContent.appendChild(iconWrapper);
+            }
 
             button.appendChild(answerContent);
             quizContent.appendChild(button);
