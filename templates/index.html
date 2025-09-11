@@ -124,7 +124,7 @@
              text-align: center;
         }
 
-        /* === NOWE, POPRAWIONE STYLE DLA QUIZU === */
+        /* === OSTATECZNE, POPRAWIONE STYLE DLA QUIZU === */
         .question-header {
             display: flex;
             align-items: center;
@@ -133,7 +133,7 @@
             margin-bottom: 30px;
         }
         .question-icon {
-            width: 36px; /* Większa ikona pytania */
+            width: 36px;
             height: 36px;
         }
         #quiz-content .question-text {
@@ -146,7 +146,7 @@
             display: block;
             width: 100%;
             margin: 16px 0;
-            padding: 18px 22px; /* Więcej przestrzeni w pionie */
+            padding: 18px 22px;
             font-size: 1.2rem;
             border: none;
             border-radius: 12px;
@@ -160,34 +160,27 @@
         .answer-content {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Tekst po lewej, ikona po prawej */
+            justify-content: flex-start; /* Ułożenie od lewej */
+            gap: 16px; /* Odstęp między tekstem a ikoną */
         }
         .answer-text {
-            /* Tekst zajmuje dostępną przestrzeń */
+             flex-grow: 1; /* Tekst zajmuje dostępną przestrzeń */
+             text-align: left;
         }
-        .answer-icon-wrapper {
-            width: 32px;  /* Większy rozmiar ikony */
-            height: 32px; /* Większy rozmiar ikony */
-            background-color: #3c68f7; /* Kolor ikony w stanie spoczynku */
-            transition: background-color 0.2s;
-            
-            /* Magia dzieje się tutaj - używamy PNG jako maski */
-            -webkit-mask-size: contain;
-            -webkit-mask-position: center;
-            -webkit-mask-repeat: no-repeat;
-            mask-size: contain;
-            mask-position: center;
-            mask-repeat: no-repeat;
+        .answer-icon {
+            width: 32px;
+            height: 32px;
+            transition: filter 0.2s; /* Płynna zmiana filtra */
         }
         .answer-btn:hover {
             background-color: #3c68f7;
             color: #fff;
         }
-        /* Po najechaniu, zmieniamy kolor tła maski na biały */
-        .answer-btn:hover .answer-icon-wrapper {
-            background-color: #fff;
+        /* Po najechaniu, zmieniamy ikonę na białą za pomocą filtra */
+        .answer-btn:hover .answer-icon {
+            filter: brightness(0) invert(1);
         }
-        /* === KONIEC NOWYCH STYLI === */
+        /* === KONIEC OSTATECZNYCH STYLI === */
 
         /* Style dla wyników */
         #results-container {
