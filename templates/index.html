@@ -124,7 +124,7 @@
              text-align: center;
         }
 
-        /* === OSTATECZNE, NAJPROSTSZE STYLE DLA QUIZU === */
+        /* === OSTATECZNE, NIEZAWODNE STYLE === */
         .question-header {
             display: flex;
             align-items: center;
@@ -167,19 +167,34 @@
              flex-grow: 1;
              text-align: left;
         }
-        .answer-icon {
-            width: 40px;  /* Duża, wyraźna ikona */
+        .icon-container {
+            position: relative;
+            width: 40px;
             height: 40px;
+            flex-shrink: 0; /* Zapobiega kurczeniu się kontenera */
+        }
+        .answer-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.2s;
+        }
+        .answer-icon.icon-white {
+            opacity: 0;
+            /* Ten filtr GWARANTUJE kolor biały */
+            filter: brightness(0) invert(1);
         }
         .answer-btn:hover {
             background-color: #3c68f7;
             color: #fff;
         }
-        
-        /* Po najechaniu, ikona zamienia się na białą */
-        .answer-btn:hover .answer-icon {
-            /* Ten filtr niezawodnie zamienia KAŻDY obraz na BIAŁY */
-            filter: brightness(0) invert(1);
+        .answer-btn:hover .icon-default {
+            opacity: 0;
+        }
+        .answer-btn:hover .icon-white {
+            opacity: 1;
         }
         /* === KONIEC OSTATECZNYCH STYLI === */
 
