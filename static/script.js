@@ -136,14 +136,13 @@ document.addEventListener('DOMContentLoaded', () => {
             text.textContent = answer.answer_text;
             answerContent.appendChild(text);
 
-            // 2. Dodaj ikonę jako drugą (będzie po prawej)
+            // 2. Dodaj ikonę jako drugą (teraz jako <img>)
             if (answer.icon_url) {
-                const iconWrapper = document.createElement('div');
-                iconWrapper.className = 'answer-icon-wrapper';
-                // Ustawienie ścieżki do obrazka jako stylu dla maski
-                iconWrapper.style.webkitMaskImage = `url(${answer.icon_url})`;
-                iconWrapper.style.maskImage = `url(${answer.icon_url})`;
-                answerContent.appendChild(iconWrapper);
+                const icon = document.createElement('img');
+                icon.src = answer.icon_url;
+                icon.className = 'answer-icon';
+                icon.alt = ''; // Alt text jest pusty, bo ikona jest dekoracyjna
+                answerContent.appendChild(icon);
             }
 
             button.appendChild(answerContent);
