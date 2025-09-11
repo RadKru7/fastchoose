@@ -130,19 +130,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const answerContent = document.createElement('div');
             answerContent.className = 'answer-content';
             
-            // 1. Dodaj tekst jako pierwszy
             const text = document.createElement('span');
             text.className = 'answer-text';
             text.textContent = answer.answer_text;
             answerContent.appendChild(text);
 
-            // 2. Dodaj ikonę jako drugą (teraz jako <img>)
             if (answer.icon_url) {
-                const icon = document.createElement('img');
-                icon.src = answer.icon_url;
-                icon.className = 'answer-icon';
-                icon.alt = ''; // Alt text jest pusty, bo ikona jest dekoracyjna
-                answerContent.appendChild(icon);
+                const iconContainer = document.createElement('div');
+                iconContainer.className = 'icon-container';
+
+                // Ikona domyślna
+                const iconDefault = document.createElement('img');
+                iconDefault.src = answer.icon_url;
+                iconDefault.className = 'answer-icon icon-default';
+                iconContainer.appendChild(iconDefault);
+
+                // Ikona biała (do pokazywania po najechaniu)
+                const iconWhite = document.createElement('img');
+                iconWhite.src = answer.icon_url;
+                iconWhite.className = 'answer-icon icon-white';
+                iconContainer.appendChild(iconWhite);
+                
+                answerContent.appendChild(iconContainer);
             }
 
             button.appendChild(answerContent);
