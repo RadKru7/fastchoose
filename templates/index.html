@@ -124,20 +124,20 @@
              text-align: center;
         }
 
-        /* === ZAKTUALIZOWANE STYLE DLA QUIZU === */
+        /* === NOWE, POPRAWIONE STYLE DLA QUIZU === */
         .question-header {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         .question-icon {
-            width: 32px;
-            height: 32px;
+            width: 36px; /* Większa ikona pytania */
+            height: 36px;
         }
-        #quiz-content .question-text, #quiz-content h3 {
-            font-size: 1.8rem;
+        #quiz-content .question-text {
+            font-size: 1.9rem;
             font-weight: 600;
             color: #333;
             margin: 0;
@@ -145,42 +145,49 @@
         .answer-btn {
             display: block;
             width: 100%;
-            margin: 14px 0; /* Zwiększony margines */
-            padding: 16px 20px; /* Zwiększony padding dla większych przycisków */
-            font-size: 1.15rem; /* Delikatnie większa czcionka */
+            margin: 16px 0;
+            padding: 18px 22px; /* Więcej przestrzeni w pionie */
+            font-size: 1.2rem;
             border: none;
-            border-radius: 12px; /* Bardziej zaokrąglone rogi */
-            background: #e9ecf9;
+            border-radius: 12px;
+            background: #eef2f9;
             color: #3c68f7;
             cursor: pointer;
             font-weight: 600;
-            transition: background 0.2s, color 0.2s;
+            transition: background-color 0.2s, color 0.2s;
             box-sizing: border-box;
         }
         .answer-content {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Kluczowe dla ułożenia */
-        }
-        .answer-icon {
-            width: 28px; /* Zwiększony rozmiar ikony */
-            height: 28px; /* Zwiększony rozmiar ikony */
-            transition: filter 0.2s; /* Płynne przejście koloru ikony */
+            justify-content: space-between; /* Tekst po lewej, ikona po prawej */
         }
         .answer-text {
-            flex-grow: 1;
-            text-align: left;
-            padding-right: 15px; /* Odstęp od ikony */
+            /* Tekst zajmuje dostępną przestrzeń */
+        }
+        .answer-icon-wrapper {
+            width: 32px;  /* Większy rozmiar ikony */
+            height: 32px; /* Większy rozmiar ikony */
+            background-color: #3c68f7; /* Kolor ikony w stanie spoczynku */
+            transition: background-color 0.2s;
+            
+            /* Magia dzieje się tutaj - używamy PNG jako maski */
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
         }
         .answer-btn:hover {
-            background: #3c68f7;
+            background-color: #3c68f7;
             color: #fff;
         }
-        /* Nowy efekt hover dla ikony */
-        .answer-btn:hover .answer-icon {
-            filter: brightness(0) invert(1); /* Zmienia kolor ikony na biały */
+        /* Po najechaniu, zmieniamy kolor tła maski na biały */
+        .answer-btn:hover .answer-icon-wrapper {
+            background-color: #fff;
         }
-        /* === KONIEC ZAKTUALIZOWANYCH STYLI === */
+        /* === KONIEC NOWYCH STYLI === */
 
         /* Style dla wyników */
         #results-container {
