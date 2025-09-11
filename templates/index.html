@@ -105,32 +105,32 @@
             background: linear-gradient(90deg, #5be7a9, #3c68f7);
             box-shadow: 0 6px 24px rgba(60,104,247,0.24);
         }
-        
+
+        /* Kontener quizu */
         #quiz-container {
             display: none;
             flex-grow: 1;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 24px 12px 32px;
         }
-        
         #quiz-content {
-             max-width: 480px;
-             width: 90%;
-             background: #fff;
-             border-radius: 18px;
-             padding: 30px 26px;
-             box-shadow: 0 2px 12px rgba(60,104,247,0.08);
-             text-align: center;
+            width: 100%;
+            max-width: 960px; /* większa szerokość, aby karty mieściły się jak na referencji */
+            background: #fff;
+            border-radius: 18px;
+            padding: 26px 24px;
+            box-shadow: 0 2px 12px rgba(60,104,247,0.08);
+            text-align: center;
         }
 
-        /* === OSTATECZNE, NIEZAWODNE STYLE === */
         .question-header {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 26px;
         }
         .question-icon {
             width: 40px;
@@ -142,63 +142,72 @@
             color: #333;
             margin: 0;
         }
-        .answer-btn {
-            display: block;
+
+        /* NOWY LAYOUT ODPOWIEDZI: siatka kart */
+        .answers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
             width: 100%;
-            margin: 16px 0;
-            padding: 18px 22px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 12px;
-            background: #eef2f9;
-            color: #3c68f7;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.2s, color 0.2s;
-            box-sizing: border-box;
+            margin-top: 10px;
         }
-        .answer-content {
+        .answer-card {
             display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 20px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            background: #fff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 18px;
+            cursor: pointer;
+            transition: border-color .2s, box-shadow .2s, transform .06s ease-out, background-color .2s;
+            text-align: left;
         }
-        .answer-text {
-             flex-grow: 1;
-             text-align: left;
+        .answer-card:hover {
+            border-color: #22c55e; /* zielony jak w referencji */
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            background-color: #f8fff9;
         }
-        .icon-container {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            flex-shrink: 0; /* Zapobiega kurczeniu się kontenera */
+        .answer-card:active {
+            transform: translateY(1px);
         }
         .answer-icon {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transition: opacity 0.2s;
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            opacity: 0.9;
+            /* Zmiana koloru ikon na czarny; na hover zrobimy "white" przez invert */
+            filter: brightness(0);
+            transition: opacity .2s, filter .2s;
         }
-        .answer-icon.icon-white {
-            opacity: 0;
-            /* Ten filtr GWARANTUJE kolor biały */
+        .answer-card:hover .answer-icon {
+            /* na hover ikona staje się biała (jeśli PNG/SVG zadziała invert) */
             filter: brightness(0) invert(1);
-        }
-        .answer-btn:hover {
-            background-color: #3c68f7;
-            color: #fff;
-        }
-        .answer-btn:hover .icon-default {
-            opacity: 0;
-        }
-        .answer-btn:hover .icon-white {
             opacity: 1;
         }
-        /* === KONIEC OSTATECZNYCH STYLI === */
+        .answer-title {
+            font-size: 1.05rem;
+            line-height: 1.35;
+            color: #111;
+            font-weight: 600;
+        }
 
-        /* Style dla wyników */
+        /* Back */
+        #back-btn {
+            margin-top: 16px;
+            padding: 10px 16px;
+            border: 1px solid #d9e2ec;
+            border-radius: 12px;
+            background: #f7f8fa;
+            color: #333;
+            cursor: pointer;
+        }
+        #back-btn:hover {
+            background: #eef2f9;
+        }
+
+        /* Wyniki */
         #results-container {
             display: none;
             flex-grow: 1;
@@ -351,6 +360,7 @@
 
     <div id="quiz-container">
         <div id="quiz-content">
+            <!-- Wypełniane dynamicznie przez JS -->
         </div>
     </div>
 
