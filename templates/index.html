@@ -124,16 +124,16 @@
              text-align: center;
         }
 
-        /* === OSTATECZNE POPRAWKI STYLÓW QUIZU === */
+        /* === OSTATECZNE, NAJPROSTSZE STYLE DLA QUIZU === */
         .question-header {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px; /* Większy odstęp */
+            gap: 15px;
             margin-bottom: 30px;
         }
         .question-icon {
-            width: 40px;  /* Znacznie większa ikona pytania */
+            width: 40px;
             height: 40px;
         }
         #quiz-content .question-text {
@@ -161,26 +161,27 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            gap: 20px; /* Zwiększony odstęp między tekstem a ikoną */
+            gap: 20px;
         }
         .answer-text {
              flex-grow: 1;
              text-align: left;
         }
         .answer-icon {
-            width: 40px;  /* ZNACZNIE WIĘKSZA IKONA ODPOWIEDZI */
+            width: 40px;  /* Duża, wyraźna ikona */
             height: 40px;
-            transition: filter 0.2s ease-in-out;
         }
         .answer-btn:hover {
             background-color: #3c68f7;
             color: #fff;
         }
-        /* POPRAWIONY FILTR: Zawsze zamienia ikonę na białą */
+        
+        /* Po najechaniu, ikona zamienia się na białą */
         .answer-btn:hover .answer-icon {
-            filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+            /* Ten filtr niezawodnie zamienia KAŻDY obraz na BIAŁY */
+            filter: brightness(0) invert(1);
         }
-        /* === KONIEC OSTATECZNYCH POPRAWEK === */
+        /* === KONIEC OSTATECZNYCH STYLI === */
 
         /* Style dla wyników */
         #results-container {
