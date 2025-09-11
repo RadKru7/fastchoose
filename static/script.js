@@ -35,17 +35,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // --- Logika biznesowa ---
+
+    // ============== POPRAWIONA FUNKCJA ===============
     function startQuiz() {
-        startPage.style.display = 'none';
-        quizContainer.style.display = 'block';
-        loadLanguage(currentLang, () => fetchQuestion(currentQuestionId));
+        // Sprawdź, czy elementy istnieją, zanim ich użyjesz
+        if (startPage && quizContainer) {
+            startPage.style.display = 'none';
+            quizContainer.style.display = 'block';
+            loadLanguage(currentLang, () => fetchQuestion(currentQuestionId));
+        } else {
+            console.error("Could not find startPage or quizContainer element.");
+        }
     }
+    // =================================================
 
     function handleLangChange() {
         currentLang = this.value;
-        // Jeśli quiz jest w toku, przeładuj aktualne pytanie w nowym języku
         if (quizContainer.style.display === 'block' && !resultsContainer.style.display || resultsContainer.style.display === 'none') {
-            loadLanguage(currentLang, () => fetchQuestion(currentQuestionId, true)); // true, by nie zapisywać w historii
+            loadLanguage(currentLang, () => fetchQuestion(currentQuestionId, true));
         }
     }
 
@@ -54,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const lastState = history.pop();
             currentQuestionId = lastState.questionId;
             userAnswers = lastState.answers;
-            fetchQuestion(currentQuestionId, true); // true, by nie zapisywać w historii
+            fetchQuestion(currentQuestionId, true);
         }
     }
 
@@ -70,11 +77,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function fetchQuestion(questionId, isNavigating = false) {
         if (!isNavigating) {
-            // Zapisz stan tylko wtedy, gdy przechodzimy do przodu
             history.push({ questionId: currentQuestionId, answers: { ...userAnswers } });
         }
 
-        quizContent.classList.add('fade-out');
+        if (quizContent) {
+            quizContent.classList.add('fade-out');
+        }
 
         setTimeout(() => {
             fetch(`/question/${questionId}?lang=${currentLang}`)
@@ -87,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     if (data.error) {
                         console.error('Error fetching question:', data.error);
-                        // Jeśli nie ma więcej pytań, pokaż wyniki
                         if (data.error === "Question not found") {
                             getResults();
                         }
@@ -97,10 +104,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);
-                    // Jeśli wystąpił błąd (np. 404), prawdopodobnie to koniec quizu
                     getResults();
                 });
-        }, 300); // Czas musi pasować do czasu trwania animacji w CSS
+        }, 300);
     }
 
     function selectAnswer(answerId, questionId, nextQuestionId) {
@@ -115,7 +121,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function getResults() {
-        quizContent.classList.add('fade-out');
+        if (quizContent) {
+            quizContent.classList.add('fade-out');
+        }
         setTimeout(() => {
             fetch('/results', {
                 method: 'POST',
@@ -154,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function () {
             answerText.textContent = answer.answer_text;
             answerContent.appendChild(answerText);
 
-            // Logika dla ikon SVG
             if (answer.icon_url) {
                 const iconContainer = document.createElement('div');
                 iconContainer.className = 'icon-container';
@@ -180,12 +187,15 @@ document.addEventListener('DOMContentLoaded', function () {
         quizContainer.style.display = 'block';
         resultsContainer.style.display = 'none';
 
-        quizContent.classList.remove('fade-out');
+        if (quizContent) {
+            quizContent.classList.remove('fade-out');
+        }
     }
 
     function displayResults(recommendations) {
+        if (!quizContainer || !resultsContainer) return;
         quizContainer.style.display = 'none';
-        resultsContainer.innerHTML = ''; // Wyczyść poprzednie wyniki
+        resultsContainer.innerHTML = '';
 
         const title = document.createElement('h2');
         title.textContent = window.translations.recommendations_title || 'Our Recommendations For You';
@@ -220,7 +230,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         resultsContainer.style.display = 'block';
-        resultsContainer.classList.remove('fade-out'); // Zapewnij widoczność
+        if (resultsContainer.classList.contains('fade-out')) {
+            resultsContainer.classList.remove('fade-out');
+        }
     }
 
     // --- Uruchomienie aplikacji ---
