@@ -1,260 +1,194 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const mainContent = document.getElementById('main-content');
-    const quizContainer = document.getElementById('quiz-container');
-    const resultsContainer = document.getElementById('results-container');
-    const quizContent = document.getElementById('quiz-content');
-    const resultsContentWrapper = document.getElementById('results-content-wrapper');
-
+document.addEventListener('DOMContentLoaded', function () {
     const startBtn = document.getElementById('get-started-btn');
     const langSelect = document.getElementById('lang-select');
+    const startPage = document.getElementById('start-page');
+    const quizContainer = document.getElementById('quiz-container');
+    const questionText = document.getElementById('question-text');
+    const questionIcon = document.getElementById('question-icon');
+    const answersContainer = document.getElementById('answers-container');
+    const resultsContainer = document.getElementById('results-container');
+    const backBtn = document.getElementById('back-btn');
 
     let currentQuestionId = 1;
-    let pathAnswers = [];
-    let language = langSelect.value || 'pl';
+    let userAnswers = {};
+    let history = [];
+    let currentLang = 'pl';
 
-    const translations = {
-        pl: {
-            welcomeTitle: "Wybierz szybciej, żyj wygodniej!",
-            welcomeSubtitle: "FastChoose pomaga podejmować decyzje, wybierać szybko i trafnie!<br>Aktywuj poniższy przycisk i rozpocznij serię pytań.",
-            startButton: "Rozpocznij",
-            aboutLink: "O nas",
-            contactLink: "Kontakt",
-            footerText: "&copy; 2025 FastChoose. Wszelkie prawa zastrzeżone.",
-            resultsTitle: "Oto Twoje rekomendacje:",
-            restartButton: "Rozpocznij od nowa",
-            noResults: "Niestety, nie znaleziono pasujących rekomendacji. Spróbuj ponownie z innymi odpowiedziami.",
-            fetchError: "Wystąpił błąd podczas pobierania danych. Spróbuj ponownie później.",
-            buyButton: "Kup w"
-        },
-        en: {
-            welcomeTitle: "Choose faster, live more comfortably!",
-            welcomeSubtitle: "FastChoose helps you make decisions, choose quickly and accurately!<br>Activate the button below and start a series of questions.",
-            startButton: "Get Started",
-            aboutLink: "About",
-            contactLink: "Contact",
-            footerText: "&copy; 2025 FastChoose. All rights reserved.",
-            resultsTitle: "Here are your recommendations:",
-            restartButton: "Start over",
-            noResults: "Unfortunately, no matching recommendations were found. Please try again with different answers.",
-            fetchError: "An error occurred while fetching data. Please try again later.",
-            buyButton: "Buy at"
-        },
-        es: {
-            welcomeTitle: "¡Elige más rápido, vive más cómodamente!",
-            welcomeSubtitle: "¡FastChoose te ayuda a tomar decisiones, a elegir de forma rápida y precisa!<br>Activa el botón de abajo y comienza una serie de preguntas.",
-            startButton: "Empezar",
-            aboutLink: "Sobre nosotros",
-            contactLink: "Contacto",
-            footerText: "&copy; 2025 FastChoose. Todos los derechos reservados.",
-            resultsTitle: "Aquí están tus recomendaciones:",
-            restartButton: "Empezar de nuevo",
-            noResults: "Lamentablemente, no se encontraron recomendaciones. Por favor, inténtalo de nuevo con otras respuestas.",
-            fetchError: "Ocurrió un error al obtener los datos. Por favor, inténtalo de nuevo más tarde.",
-            buyButton: "Comprar en"
-        }
-    };
-    
-    function updateUIText(lang) {
-        document.querySelector('.big-title').innerHTML = translations[lang].welcomeTitle;
-        document.querySelector('.subtitle').innerHTML = translations[lang].welcomeSubtitle;
-        document.getElementById('get-started-btn').textContent = translations[lang].startButton;
-        document.querySelector('.footer-links a[href="/about"]').textContent = translations[lang].aboutLink;
-        document.querySelector('.footer-links a[href="/contact"]').textContent = translations[lang].contactLink;
-        const footer = document.querySelector('footer');
-        const footerLinks = footer.querySelector('.footer-links').outerHTML;
-        footer.innerHTML = footerLinks + translations[lang].footerText;
+    if (startBtn) {
+        startBtn.addEventListener('click', function() {
+            startPage.style.display = 'none';
+            quizContainer.style.display = 'block';
+            loadLanguage(currentLang, () => fetchQuestion(currentQuestionId));
+        });
     }
 
-    langSelect.addEventListener('change', (e) => {
-        language = e.target.value;
-        updateUIText(language);
-    });
-    
-    startBtn.addEventListener('click', () => {
-        mainContent.style.display = 'none';
-        quizContainer.style.display = 'flex';
-        resultsContainer.style.display = 'none';
-        pathAnswers = [];
-        currentQuestionId = 1;
-        fetchQuestion(currentQuestionId);
-    });
+    if (langSelect) {
+        langSelect.addEventListener('change', function() {
+            currentLang = this.value;
+            if (quizContainer.style.display === 'block') {
+                loadLanguage(currentLang, () => fetchQuestion(currentQuestionId));
+            }
+        });
+    }
 
-    function fetchQuestion(questionId) {
-        if (!questionId) {
-            console.error('Invalid question ID:', questionId);
-            return;
-        }
+    if (backBtn) {
+        backBtn.addEventListener('click', function() {
+            if (history.length > 0) {
+                const lastState = history.pop();
+                currentQuestionId = lastState.questionId;
+                userAnswers = lastState.answers;
+                fetchQuestion(currentQuestionId, true);
+            }
+        });
+    }
 
-        fetch(`/api/quiz/question?current_question_id=${questionId}&language=${language}`)
+    function loadLanguage(lang, callback) {
+        fetch(`/lang/${lang}`)
             .then(response => response.json())
             .then(data => {
+                window.translations = data;
+                if (callback) callback();
+            })
+            .catch(error => console.error('Error loading language file:', error));
+    }
+
+    function fetchQuestion(questionId, isBack = false) {
+        if (!isBack) {
+            history.push({ questionId: currentQuestionId, answers: { ...userAnswers } });
+        }
+
+        fetch(`/question/${questionId}?lang=${currentLang}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
                 if (data.error) {
-                    quizContent.innerHTML = `<p>${translations[language].fetchError}</p>`;
+                    console.error('Error fetching question:', data.error);
+                    if (data.error === "Question not found") {
+                        getResults();
+                    }
                 } else {
                     displayQuestion(data);
                 }
             })
             .catch(error => {
-                console.error('Fetch Error:', error);
-                quizContent.innerHTML = `<p>${translations[language].fetchError}</p>`;
+                console.error('There has been a problem with your fetch operation:', error);
+                getResults();
             });
     }
 
     function displayQuestion(data) {
-        quizContent.innerHTML = '';
+        questionText.textContent = data.question_text;
         
-        const questionHeader = document.createElement('div');
-        questionHeader.className = 'question-header';
-
-        if (data.question_icon_url) {
-            const icon = document.createElement('img');
-            icon.src = data.question_icon_url;
-            icon.className = 'question-icon';
-            icon.alt = 'Question Icon';
-            questionHeader.appendChild(icon);
+        if (data.icon_url) {
+            questionIcon.src = data.icon_url;
+            questionIcon.style.display = 'inline';
+        } else {
+            questionIcon.style.display = 'none';
         }
 
-        const questionText = document.createElement('h3');
-        questionText.className = 'question-text';
-        questionText.textContent = data.question_text;
-        questionHeader.appendChild(questionText);
-        
-        quizContent.appendChild(questionHeader);
-
+        answersContainer.innerHTML = '';
         data.answers.forEach(answer => {
-            const button = document.createElement('button');
-            button.className = 'answer-btn';
-            button.dataset.answerId = answer.answer_id;
-            button.dataset.nextId = answer.next_question_id;
-
+            const answerBtn = document.createElement('button');
+            answerBtn.className = 'answer-btn';
+            
             const answerContent = document.createElement('div');
             answerContent.className = 'answer-content';
-            
-            const text = document.createElement('span');
-            text.className = 'answer-text';
-            text.textContent = answer.answer_text;
-            answerContent.appendChild(text);
+
+            const answerText = document.createElement('span');
+            answerText.className = 'answer-text';
+            answerText.textContent = answer.answer_text;
+            answerContent.appendChild(answerText);
 
             if (answer.icon_url) {
                 const iconContainer = document.createElement('div');
                 iconContainer.className = 'icon-container';
 
-                // Ikona domyślna
-                const iconDefault = document.createElement('img');
-                iconDefault.src = answer.icon_url;
-                iconDefault.className = 'answer-icon icon-default';
-                iconContainer.appendChild(iconDefault);
-
-                // Ikona biała (do pokazywania po najechaniu)
-                const iconWhite = document.createElement('img');
-                iconWhite.src = answer.icon_url;
-                iconWhite.className = 'answer-icon icon-white';
-                iconContainer.appendChild(iconWhite);
+                fetch(answer.icon_url)
+                    .then(response => response.text())
+                    .then(svgText => {
+                        iconContainer.innerHTML = svgText;
+                        if (iconContainer.querySelector('svg')) {
+                            iconContainer.querySelector('svg').classList.add('answer-icon');
+                        }
+                    });
                 
                 answerContent.appendChild(iconContainer);
             }
 
-            button.appendChild(answerContent);
-            quizContent.appendChild(button);
+            answerBtn.appendChild(answerContent);
+            answerBtn.addEventListener('click', () => selectAnswer(answer.answer_id, data.question_id, answer.next_question_id));
+            answersContainer.appendChild(answerBtn);
         });
-    }
-    
-    function getResults() {
-        fetch('/api/quiz/result', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ pathAnswers: pathAnswers, language: language }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            quizContainer.style.display = 'none';
-            resultsContainer.style.display = 'flex';
-            displayResults(data);
-        })
-        .catch(error => {
-            console.error('Fetch Error:', error);
-            resultsContentWrapper.innerHTML = `<p>${translations[language].fetchError}</p>`;
-        });
+
+        backBtn.style.display = history.length > 1 ? 'block' : 'none';
+        quizContainer.style.display = 'block';
+        resultsContainer.style.display = 'none';
     }
 
-    function displayResults(data) {
-        resultsContentWrapper.innerHTML = '';
-
-        const title = document.createElement('h2');
-        title.className = 'results-title';
-        title.textContent = translations[language].resultsTitle;
-        resultsContentWrapper.appendChild(title);
-
-        if (data.recommendations && data.recommendations.length > 0) {
-            const grid = document.createElement('div');
-            grid.className = 'recommendations-grid';
-
-            data.recommendations.forEach(rec => {
-                const card = document.createElement('div');
-                card.className = 'recommendation-card';
-
-                const image = document.createElement('img');
-                image.src = rec.image_url;
-                image.alt = rec.product_name;
-                image.className = 'recommendation-image';
-
-                const name = document.createElement('h3');
-                name.className = 'recommendation-name';
-                name.textContent = rec.product_name;
-                
-                const linksContainer = document.createElement('div');
-                linksContainer.className = 'store-links-container';
-
-                rec.links.forEach(link => {
-                    const storeLink = document.createElement('a');
-                    storeLink.href = link.link_url;
-                    storeLink.textContent = `${translations[language].buyButton} ${link.store_name}`;
-                    storeLink.className = 'store-link';
-                    storeLink.target = '_blank';
-                    linksContainer.appendChild(storeLink);
-                });
-
-                card.appendChild(image);
-                card.appendChild(name);
-                card.appendChild(linksContainer);
-                grid.appendChild(card);
-            });
-            resultsContentWrapper.appendChild(grid);
-        } else {
-            const noResultsText = document.createElement('p');
-            noResultsText.textContent = translations[language].noResults;
-            resultsContentWrapper.appendChild(noResultsText);
-        }
-
-        const restartButton = document.createElement('button');
-        restartButton.className = 'restart-btn';
-        restartButton.textContent = translations[language].restartButton;
-        restartButton.addEventListener('click', () => {
-            location.reload();
-        });
-        resultsContentWrapper.appendChild(restartButton);
-    }
-    
-    quizContent.addEventListener('click', (e) => {
-        const button = e.target.closest('.answer-btn');
-        if (button) {
-            handleAnswer(button);
-        }
-    });
-
-    function handleAnswer(button) {
-        const answerId = parseInt(button.dataset.answerId, 10);
-        const nextQuestionId = button.dataset.nextId;
-
-        pathAnswers.push(answerId);
-
-        if (nextQuestionId && nextQuestionId !== '') {
+    function selectAnswer(answerId, questionId, nextQuestionId) {
+        userAnswers[questionId] = answerId;
+        
+        if (nextQuestionId && nextQuestionId !== 'null' && nextQuestionId !== '') {
             currentQuestionId = parseInt(nextQuestionId, 10);
             fetchQuestion(currentQuestionId);
         } else {
             getResults();
         }
     }
-    
-    updateUIText(language);
+
+    function getResults() {
+        fetch('/results', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ answers: userAnswers, lang: currentLang })
+        })
+        .then(response => response.json())
+        .then(data => {
+            displayResults(data.recommendations);
+        })
+        .catch(error => console.error('Error getting results:', error));
+    }
+
+    function displayResults(recommendations) {
+        quizContainer.style.display = 'none';
+        resultsContainer.innerHTML = `<h2>${window.translations.recommendations_title || 'Our Recommendations For You'}:</h2>`;
+        
+        if (recommendations && recommendations.length > 0) {
+            const resultsList = document.createElement('ul');
+            recommendations.forEach(rec => {
+                const listItem = document.createElement('li');
+                
+                let linksHTML = '';
+                if (rec.links) {
+                    for (const [store, url] of Object.entries(rec.links)) {
+                        linksHTML += `<a href="${url}" target="_blank">${store}</a>`;
+                    }
+                }
+
+                listItem.innerHTML = `
+                    <img src="${rec.image_url || 'static/images/default.jpg'}" alt="${rec.product_name}" class="product-image">
+                    <div class="product-details">
+                        <h3>${rec.product_name}</h3>
+                        <div class="product-links">${linksHTML}</div>
+                    </div>
+                `;
+                resultsList.appendChild(listItem);
+            });
+            resultsContainer.appendChild(resultsList);
+        } else {
+            resultsContainer.innerHTML += `<p>${window.translations.no_recommendations || 'No specific recommendations found based on your answers.'}</p>`;
+        }
+
+        resultsContainer.style.display = 'block';
+    }
+
+    if (startPage) {
+        loadLanguage(currentLang);
+    }
 });
