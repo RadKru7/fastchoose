@@ -255,14 +255,6 @@ body.landing {
    STYLE DLA QUIZU
    ================================= */
 
-/* Kontener na quiz */
-#quiz-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
 #quiz-content {
     background-color: #fff;
     padding: 30px;
@@ -273,7 +265,6 @@ body.landing {
     text-align: center;
 }
 
-/* Nagłówek pytania */
 .question-header {
     display: flex;
     align-items: center;
@@ -293,7 +284,6 @@ body.landing {
     color: #333;
 }
 
-/* Przyciski odpowiedzi */
 .answer-btn {
     display: flex;
     align-items: center;
@@ -308,11 +298,12 @@ body.landing {
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     text-align: left;
     font-size: 1rem;
+    color: #333; /* Domyślny kolor tekstu i ikony */
 }
 
 .answer-btn:hover {
     background-color: #3c68f7;
-    color: #fff;
+    color: #fff; /* Kolor tekstu i ikony po najechaniu */
     border-color: #3c68f7;
 }
 
@@ -327,38 +318,20 @@ body.landing {
     flex-grow: 1;
 }
 
-/* Ikony w przyciskach */
+/* =================================
+   STYLE DLA IKON SVG
+   ================================= */
+
 .icon-container {
-    position: relative;
     width: 24px;
     height: 24px;
     margin-left: 15px;
-    flex-shrink: 0; /* Zapobiega kurczeniu się ikony */
+    flex-shrink: 0;
+    color: inherit; /* Dziedziczy kolor z .answer-btn */
 }
 
 .answer-icon {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    transition: opacity 0.3s ease;
-}
-
-.icon-default {
-    opacity: 1;
-}
-
-.icon-white {
-    opacity: 0;
-    filter: brightness(0) invert(1); /* Zmienia kolor ikony na biały */
-}
-
-/* Efekt :hover na ikonach */
-.answer-btn:hover .icon-default {
-    opacity: 0;
-}
-
-.answer-btn:hover .icon-white {
-    opacity: 1;
+    fill: currentColor; /* Wypełnienie SVG przyjmuje kolor z .icon-container */
 }
