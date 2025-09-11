@@ -124,7 +124,7 @@
              text-align: center;
         }
 
-        /* === NOWE STYLE DLA IKON W QUIZIE === */
+        /* === ZAKTUALIZOWANE STYLE DLA QUIZU === */
         .question-header {
             display: flex;
             align-items: center;
@@ -145,11 +145,11 @@
         .answer-btn {
             display: block;
             width: 100%;
-            margin: 12px 0;
-            padding: 10px 15px; /* Dopasowanie paddingu */
-            font-size: 1.1rem;
+            margin: 14px 0; /* Zwiększony margines */
+            padding: 16px 20px; /* Zwiększony padding dla większych przycisków */
+            font-size: 1.15rem; /* Delikatnie większa czcionka */
             border: none;
-            border-radius: 9px;
+            border-radius: 12px; /* Bardziej zaokrąglone rogi */
             background: #e9ecf9;
             color: #3c68f7;
             cursor: pointer;
@@ -160,22 +160,27 @@
         .answer-content {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
+            justify-content: space-between; /* Kluczowe dla ułożenia */
         }
         .answer-icon {
-            width: 24px;
-            height: 24px;
+            width: 28px; /* Zwiększony rozmiar ikony */
+            height: 28px; /* Zwiększony rozmiar ikony */
+            transition: filter 0.2s; /* Płynne przejście koloru ikony */
         }
         .answer-text {
             flex-grow: 1;
             text-align: left;
+            padding-right: 15px; /* Odstęp od ikony */
         }
         .answer-btn:hover {
             background: #3c68f7;
             color: #fff;
         }
-        /* === KONIEC STYLI DLA IKON === */
+        /* Nowy efekt hover dla ikony */
+        .answer-btn:hover .answer-icon {
+            filter: brightness(0) invert(1); /* Zmienia kolor ikony na biały */
+        }
+        /* === KONIEC ZAKTUALIZOWANYCH STYLI === */
 
         /* Style dla wyników */
         #results-container {
