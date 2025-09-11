@@ -1,212 +1,269 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // --- Elementy strony ---
-    const startBtn = document.getElementById('get-started-btn');
-    const langSelect = document.getElementById('lang-select');
-    
-    // Elementy specyficzne dla strony quizu - mogą być null na stronie startowej
-    const quizContainer = document.getElementById('quiz-container');
-    const questionText = document.getElementById('question-text');
-    const questionIcon = document.getElementById('question-icon');
-    const answersContainer = document.getElementById('answers-container');
-    const resultsContainer = document.getElementById('results-container');
-    const backBtn = document.getElementById('back-btn');
-    const quizContent = document.getElementById('quiz-content');
+  // Elementy z index.html
+  const startBtn = document.getElementById('get-started-btn');
+  const langSelect = document.getElementById('lang-select');
 
-    // --- Stan aplikacji ---
-    let currentQuestionId = 1;
-    let userAnswers = {};
-    let history = [];
-    let currentLang = 'pl';
+  const mainContent = document.getElementById('main-content');
+  const quizContainer = document.getElementById('quiz-container');
+  const quizContent = document.getElementById('quiz-content');
 
-    // --- Inicjalizacja ---
-    function init() {
-        // Logika dla przycisku "Rozpocznij" - jeśli istnieje, przekierowuje do quizu
-        if (startBtn) {
-            startBtn.addEventListener('click', function() {
-                window.location.href = '/quiz'; // Kluczowa zmiana: po prostu przekieruj
-            });
-        }
+  const resultsContainer = document.getElementById('results-container');
+  const resultsWrapper = document.getElementById('results-content-wrapper');
 
-        // Logika dla strony quizu - jeśli na niej jesteśmy
-        if (quizContainer) {
-            if (langSelect) {
-                langSelect.addEventListener('change', handleLangChange);
-            }
-            if (backBtn) {
-                backBtn.addEventListener('click', goBack);
-            }
-            // Rozpocznij wczytywanie pierwszego pytania
-            loadLanguage(currentLang, () => fetchQuestion(currentQuestionId));
-        }
-        
-        // Logika dla strony startowej - jeśli na niej jesteśmy
-        if (!quizContainer && langSelect) {
-             loadLanguage(currentLang);
-        }
+  // Stan
+  let currentQuestionId = 1;
+  let pathAnswers = [];
+  let history = [];
+  let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'pl';
+
+  // Referencje do dynamicznie wstrzykiwanych elementów quizu
+  let questionTextEl = null;
+  let questionIconEl = null;
+  let answersContainerEl = null;
+  let backBtnEl = null;
+
+  function renderQuizShell() {
+    // Wstrzykujemy strukturę, na którą masz już style w index.html
+    quizContent.innerHTML = `
+      <div class="question-header">
+        <img id="question-icon" class="question-icon" alt="" style="display:none;">
+        <div id="question-text" class="question-text"></div>
+      </div>
+      <div id="answers-container"></div>
+      <button id="back-btn" style="display:none;">${currentLang === 'pl' ? 'Wstecz' : (currentLang === 'es' ? 'Atrás' : 'Back')}</button>
+    `;
+
+    // Odświeżamy referencje
+    questionTextEl = document.getElementById('question-text');
+    questionIconEl = document.getElementById('question-icon');
+    answersContainerEl = document.getElementById('answers-container');
+    backBtnEl = document.getElementById('back-btn');
+
+    if (backBtnEl) {
+      backBtnEl.addEventListener('click', goBack);
+    }
+  }
+
+  function startQuiz() {
+    // Pokazujemy quiz na TEJ SAMEJ stronie — bez żadnego /quiz
+    mainContent.style.display = 'none';
+    resultsContainer.style.display = 'none';
+    quizContainer.style.display = 'flex';
+
+    // Reset stanu
+    currentQuestionId = 1;
+    pathAnswers = [];
+    history = [];
+
+    renderQuizShell();
+    fetchQuestion(currentQuestionId, true); // true: bez dodawania do historii
+  }
+
+  function handleLanguageChange() {
+    currentLang = this.value;
+    // Jeśli jesteśmy w quizie, odśwież bieżące pytanie (bez zmiany historii)
+    if (quizContainer && quizContainer.style.display !== 'none' && questionTextEl) {
+      fetchQuestion(currentQuestionId, true);
+    }
+  }
+
+  function fetchQuestion(questionId, noHistoryPush = false) {
+    if (!noHistoryPush) {
+      history.push(currentQuestionId);
     }
 
-    // --- Logika biznesowa ---
-    function handleLangChange() {
-        currentLang = this.value;
-        if (quizContainer.style.display !== 'none') {
-            loadLanguage(currentLang, () => fetchQuestion(currentQuestionId, true));
-        }
+    fetch(`/api/quiz/question?current_question_id=${encodeURIComponent(questionId)}&language=${encodeURIComponent(currentLang)}`)
+      .then(res => res.ok ? res.json() : Promise.reject(res))
+      .then(data => displayQuestion(data))
+      .catch(err => {
+        console.error('Error fetching question:', err);
+        showError(currentLang === 'pl' ? 'Nie udało się pobrać pytania.' : 'Failed to load question.');
+      });
+  }
+
+  function displayQuestion(data) {
+    if (!questionTextEl || !answersContainerEl) return;
+
+    // Tekst pytania
+    questionTextEl.textContent = data.question_text || '';
+
+    // Ikona pytania
+    if (data.question_icon_url) {
+      questionIconEl.src = data.question_icon_url;
+      questionIconEl.style.display = 'inline';
+    } else {
+      questionIconEl.style.display = 'none';
     }
 
-    function goBack() {
-        if (history.length > 0) {
-            const lastState = history.pop();
-            currentQuestionId = lastState.questionId;
-            userAnswers = lastState.answers;
-            fetchQuestion(currentQuestionId, true);
-        }
+    // Odpowiedzi
+    answersContainerEl.innerHTML = '';
+    (data.answers || []).forEach(ans => {
+      const btn = document.createElement('button');
+      btn.className = 'answer-btn';
+
+      const content = document.createElement('div');
+      content.className = 'answer-content';
+
+      const text = document.createElement('span');
+      text.className = 'answer-text';
+      text.textContent = ans.answer_text || '';
+      content.appendChild(text);
+
+      if (ans.icon_url) {
+        const iconWrap = document.createElement('div');
+        iconWrap.className = 'icon-container';
+
+        const img = document.createElement('img');
+        img.className = 'answer-icon icon-default';
+        img.src = ans.icon_url;
+        img.alt = '';
+        iconWrap.appendChild(img);
+
+        content.appendChild(iconWrap);
+      }
+
+      btn.appendChild(content);
+      btn.addEventListener('click', () => handleAnswer(ans));
+      answersContainerEl.appendChild(btn);
+    });
+
+    // Back widoczny jeśli mamy do czego cofać
+    if (backBtnEl) backBtnEl.style.display = history.length > 0 ? 'block' : 'none';
+
+    // Widoczność
+    resultsContainer.style.display = 'none';
+    quizContainer.style.display = 'flex';
+  }
+
+  function handleAnswer(answer) {
+    // Zbieramy ścieżkę odpowiedzi tak jak oczekuje backend
+    if (typeof answer.answer_id !== 'undefined') {
+      pathAnswers.push(answer.answer_id);
     }
 
-    function loadLanguage(lang, callback) {
-        fetch(`/lang/${lang}`)
-            .then(response => response.json())
-            .then(data => {
-                window.translations = data;
-                if (callback) callback();
-            })
-            .catch(error => console.error('Error loading language file:', error));
+    const nextId = answer.next_question_id;
+    if (nextId === '' || nextId === null || typeof nextId === 'undefined') {
+      // Koniec — pobierz wyniki
+      getResults();
+    } else {
+      // Kolejne pytanie
+      currentQuestionId = parseInt(nextId, 10);
+      fetchQuestion(currentQuestionId, false);
     }
+  }
 
-    function fetchQuestion(questionId, isNavigating = false) {
-        if (!isNavigating) {
-            history.push({ questionId: currentQuestionId, answers: { ...userAnswers } });
-        }
+  function goBack() {
+    if (history.length > 0) {
+      const prevId = history.pop();
+      // Cofamy też ostatnią odpowiedź
+      if (pathAnswers.length > 0) pathAnswers.pop();
 
-        if (quizContent) quizContent.classList.add('fade-out');
-
-        setTimeout(() => {
-            fetch(`/question/${questionId}?lang=${currentLang}`)
-                .then(response => response.ok ? response.json() : Promise.reject(response))
-                .then(data => {
-                    if (data.error) {
-                        console.error('Error fetching question:', data.error);
-                        if (data.error === "Question not found") getResults();
-                    } else {
-                        displayQuestion(data);
-                    }
-                })
-                .catch(() => getResults());
-        }, 300);
+      currentQuestionId = prevId;
+      fetchQuestion(currentQuestionId, true);
     }
+  }
 
-    function selectAnswer(answerId, questionId, nextQuestionId) {
-        userAnswers[questionId] = answerId;
-        
-        if (nextQuestionId && nextQuestionId !== 'null' && nextQuestionId !== '') {
-            currentQuestionId = parseInt(nextQuestionId, 10);
-            fetchQuestion(currentQuestionId);
-        } else {
-            getResults();
-        }
-    }
+  function getResults() {
+    fetch('/api/quiz/result', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pathAnswers, language: currentLang })
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(res))
+      .then(data => displayResults(data.recommendations || []))
+      .catch(err => {
+        console.error('Error getting results:', err);
+        showError(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' : 'Failed to load results.');
+      });
+  }
 
-    function getResults() {
-        if (quizContent) quizContent.classList.add('fade-out');
-        setTimeout(() => {
-            fetch('/results', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ answers: userAnswers, lang: currentLang })
-            })
-            .then(response => response.json())
-            .then(data => displayResults(data.recommendations))
-            .catch(error => console.error('Error getting results:', error));
-        }, 300);
-    }
+  function displayResults(recommendations) {
+    // Ukryj quiz, pokaż wyniki
+    quizContainer.style.display = 'none';
+    resultsContainer.style.display = 'flex';
 
-    // --- Renderowanie widoków ---
-    function displayQuestion(data) {
-        if (!questionText || !answersContainer) return;
+    // Zbuduj widok wyników zgodnie ze stylami z index.html
+    resultsWrapper.innerHTML = '';
 
-        questionText.textContent = data.question_text;
-        
-        if (data.icon_url && questionIcon) {
-            questionIcon.src = data.icon_url;
-            questionIcon.style.display = 'inline';
-        } else if (questionIcon) {
-            questionIcon.style.display = 'none';
-        }
+    const title = document.createElement('div');
+    title.className = 'results-title';
+    title.textContent = currentLang === 'pl'
+      ? 'Nasze rekomendacje'
+      : (currentLang === 'es' ? 'Nuestras recomendaciones' : 'Our Recommendations');
+    resultsWrapper.appendChild(title);
 
-        answersContainer.innerHTML = '';
-        data.answers.forEach(answer => {
-            const answerBtn = document.createElement('button');
-            answerBtn.className = 'answer-btn';
-            
-            const answerContent = document.createElement('div');
-            answerContent.className = 'answer-content';
+    if (!recommendations.length) {
+      const p = document.createElement('p');
+      p.textContent = currentLang === 'pl'
+        ? 'Brak rekomendacji dla wybranej ścieżki.'
+        : 'No recommendations for the selected path.';
+      resultsWrapper.appendChild(p);
+    } else {
+      const grid = document.createElement('div');
+      grid.className = 'recommendations-grid';
 
-            const answerText = document.createElement('span');
-            answerText.className = 'answer-text';
-            answerText.textContent = answer.answer_text;
-            answerContent.appendChild(answerText);
+      recommendations.forEach(rec => {
+        const card = document.createElement('div');
+        card.className = 'recommendation-card';
 
-            if (answer.icon_url && answer.icon_url.endsWith('.svg')) {
-                const iconContainer = document.createElement('div');
-                iconContainer.className = 'icon-container';
+        const img = document.createElement('img');
+        img.className = 'recommendation-image';
+        img.src = rec.image_url || '';
+        img.alt = rec.product_name || '';
+        card.appendChild(img);
 
-                fetch(answer.icon_url)
-                    .then(response => response.text())
-                    .then(svgText => {
-                        iconContainer.innerHTML = svgText;
-                        const svgElement = iconContainer.querySelector('svg');
-                        if (svgElement) svgElement.classList.add('answer-icon');
-                    });
-                
-                answerContent.appendChild(iconContainer);
-            }
+        const name = document.createElement('div');
+        name.className = 'recommendation-name';
+        name.textContent = rec.product_name || '';
+        card.appendChild(name);
 
-            answerBtn.appendChild(answerContent);
-            answerBtn.addEventListener('click', () => selectAnswer(answer.answer_id, data.question_id, answer.next_question_id));
-            answersContainer.appendChild(answerBtn);
+        const linksWrap = document.createElement('div');
+        linksWrap.className = 'store-links-container';
+
+        (rec.links || []).forEach(link => {
+          const a = document.createElement('a');
+          a.className = 'store-link';
+          a.href = link.link_url || '#';
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = link.store_name || 'Store';
+          linksWrap.appendChild(a);
         });
 
-        if(backBtn) backBtn.style.display = history.length > 1 ? 'block' : 'none';
-        if(quizContainer) quizContainer.style.display = 'block';
-        if(resultsContainer) resultsContainer.style.display = 'none';
-        if(quizContent) quizContent.classList.remove('fade-out');
+        card.appendChild(linksWrap);
+        grid.appendChild(card);
+      });
+
+      resultsWrapper.appendChild(grid);
     }
 
-    function displayResults(recommendations) {
-        if (!quizContainer || !resultsContainer) return;
-        quizContainer.style.display = 'none';
-        resultsContainer.innerHTML = '';
+    const restart = document.createElement('button');
+    restart.className = 'restart-btn';
+    restart.textContent = currentLang === 'pl' ? 'Zacznij od nowa' : (currentLang === 'es' ? 'Empezar de nuevo' : 'Restart');
+    restart.addEventListener('click', resetApp);
+    resultsWrapper.appendChild(restart);
+  }
 
-        const title = document.createElement('h2');
-        title.textContent = window.translations?.recommendations_title || 'Our Recommendations';
-        resultsContainer.appendChild(title);
-        
-        if (recommendations && recommendations.length > 0) {
-            const resultsList = document.createElement('ul');
-            recommendations.forEach(rec => {
-                const listItem = document.createElement('li');
-                let linksHTML = Object.entries(rec.links || {}).map(([store, url]) => 
-                    `<a href="${url}" target="_blank" class="product-link">${store}</a>`
-                ).join('');
+  function resetApp() {
+    // Wróć do strony startowej i wyczyść stan
+    currentQuestionId = 1;
+    pathAnswers = [];
+    history = [];
 
-                listItem.innerHTML = `
-                    <img src="${rec.image_url || 'static/images/default.jpg'}" alt="${rec.product_name}" class="product-image">
-                    <div class="product-details">
-                        <h3>${rec.product_name}</h3>
-                        <div class="product-links">${linksHTML}</div>
-                    </div>`;
-                resultsList.appendChild(listItem);
-            });
-            resultsContainer.appendChild(resultsList);
-        } else {
-            const noResultsText = document.createElement('p');
-            noResultsText.textContent = window.translations?.no_recommendations || 'No recommendations found.';
-            resultsContainer.appendChild(noResultsText);
-        }
+    resultsContainer.style.display = 'none';
+    quizContainer.style.display = 'none';
+    mainContent.style.display = 'flex';
+  }
 
-        resultsContainer.style.display = 'block';
-        resultsContainer.classList.remove('fade-out');
-    }
+  function showError(msg) {
+    alert(msg);
+  }
 
-    // --- Uruchomienie aplikacji ---
-    init();
+  // Zdarzenia
+  if (startBtn) {
+    startBtn.addEventListener('click', startQuiz);
+  }
+  if (langSelect) {
+    langSelect.addEventListener('change', handleLanguageChange);
+  }
 });
