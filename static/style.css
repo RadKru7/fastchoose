@@ -250,3 +250,115 @@ body.landing {
 #start-page-image {
     background-color: #f4f4f4;
 }
+
+/* =================================
+   STYLE DLA QUIZU
+   ================================= */
+
+/* Kontener na quiz */
+#quiz-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#quiz-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Nagłówek pytania */
+.question-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.question-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 15px;
+}
+
+.question-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Przyciski odpowiedzi */
+.answer-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    border: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.answer-btn:hover {
+    background-color: #3c68f7;
+    color: #fff;
+    border-color: #3c68f7;
+}
+
+.answer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.answer-text {
+    flex-grow: 1;
+}
+
+/* Ikony w przyciskach */
+.icon-container {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    margin-left: 15px;
+    flex-shrink: 0; /* Zapobiega kurczeniu się ikony */
+}
+
+.answer-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+}
+
+.icon-default {
+    opacity: 1;
+}
+
+.icon-white {
+    opacity: 0;
+    filter: brightness(0) invert(1); /* Zmienia kolor ikony na biały */
+}
+
+/* Efekt :hover na ikonach */
+.answer-btn:hover .icon-default {
+    opacity: 0;
+}
+
+.answer-btn:hover .icon-white {
+    opacity: 1;
+}
