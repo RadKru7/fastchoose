@@ -1,4 +1,4 @@
-// FastChoose — SVG inline, pełna kontrola rozmiarów/kolorów w CSS
+// FastChoose — SVG inline, wszystko sterowane CSS-em (bez width/height w JS)
 document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('get-started-btn');
   const langSelect = document.getElementById('lang-select');
@@ -10,22 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const resultsContainer = document.getElementById('results-container');
   const resultsWrapper = document.getElementById('results-content-wrapper');
 
-  // State
   let currentQuestionId = 1;
   let pathAnswers = [];
   let history = [];
   let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'pl';
 
-  // Cache for fetched SVGs
   const svgCache = new Map();
 
-  // Refs populated per-screen
   let questionTextEl = null;
   let questionIconWrap = null;
   let answersContainerEl = null;
   let backBtnEl = null;
 
-  // Fetch SVG as inline element (cache-enabled)
   async function fetchInlineSvg(url) {
     if (!url || !url.endsWith('.svg')) return null;
     try {
@@ -35,33 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const text = await res.text();
         svgCache.set(url, text);
       }
-      const wrapper = document.createElement('div');
-      wrapper.innerHTML = svgCache.get(url);
-      const svg = wrapper.querySelector('svg');
-      return svg || null;
+      const wrap = document.createElement('div');
+      wrap.innerHTML = svgCache.get(url);
+      return wrap.querySelector('svg');
     } catch (e) {
       console.warn('SVG inline error:', url, e);
       return null;
     }
   }
 
-  // Make SVG follow currentColor and CSS sizing
   function normalizeSvg(svgEl) {
     if (!svgEl) return;
+    // usuń narzucone width/height, pozwól CSS rządzić
+    svgEl.removeAttribute('width');
+    svgEl.removeAttribute('height');
+    svgEl.style.color = 'inherit';
 
-    // Remove inline styles for fill/stroke
     const nodes = svgEl.querySelectorAll('*');
     nodes.forEach(n => {
-      // Clean style attribute
       const style = n.getAttribute('style') || '';
       if (style) {
-        const cleaned = style
-          .replace(/fill\s*:\s*[^;]+;?/gi, '')
-          .replace(/stroke\s*:\s*[^;]+;?/gi, '');
+        const cleaned = style.replace(/fill\s*:\s*[^;]+;?/gi, '').replace(/stroke\s*:\s*[^;]+;?/gi, '');
         if (cleaned.trim()) n.setAttribute('style', cleaned);
         else n.removeAttribute('style');
       }
-      // Normalize attributes (preserve fill='none')
       if (n.hasAttribute('fill')) {
         const v = (n.getAttribute('fill') || '').toLowerCase();
         if (v !== 'none') n.setAttribute('fill', 'currentColor');
@@ -70,15 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const v = (n.getAttribute('stroke') || '').toLowerCase();
         if (v !== 'none') n.setAttribute('stroke', 'currentColor');
       }
-      // Optional: cleanup color attributes not needed
       if (n.hasAttribute('color')) n.removeAttribute('color');
     });
-
-    // Remove hard width/height to allow CSS control
-    svgEl.removeAttribute('width');
-    svgEl.removeAttribute('height');
-    // Inherit color from parent
-    svgEl.style.color = 'inherit';
   }
 
   function setBackButtonLabel() {
@@ -146,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(d => displayResults(d.recommendations || []))
     .catch(err => {
       console.error('Error getting results:', err);
-      showError(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' : 'Failed to load results.');
+      alert(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' : 'Failed to load results.');
     });
   }
 
@@ -158,27 +144,23 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(d => displayQuestion(d))
       .catch(err => {
         console.error('Error fetching question:', err);
-        showError(currentLang === 'pl' ? 'Nie udało się pobrać pytania.' : 'Failed to load question.');
+        alert(currentLang === 'pl' ? 'Nie udało się pobrać pytania.' : 'Failed to load question.');
       });
   }
 
   async function displayQuestion(data) {
     if (!questionTextEl || !answersContainerEl || !questionIconWrap) return;
 
-    // Question text
+    // Tekst pytania
     questionTextEl.textContent = data.question_text || '';
 
-    // Question icon (inline SVG, CSS-sized)
+    // Ikona pytania — dodajemy bez dodatkowego wrappera, CSS steruje rozmiarem
     questionIconWrap.innerHTML = '';
     if (data.question_icon_url && data.question_icon_url.endsWith('.svg')) {
       const svgQ = await fetchInlineSvg(data.question_icon_url);
       if (svgQ) {
         normalizeSvg(svgQ);
-        // Wrap in a container that has size via CSS
-        const holder = document.createElement('div');
-        holder.className = 'answer-icon'; // reuse sizing; or you can style .question-icon svg via CSS
-        holder.appendChild(svgQ);
-        questionIconWrap.appendChild(holder);
+        questionIconWrap.appendChild(svgQ);
         questionIconWrap.style.display = 'inline-flex';
       } else {
         questionIconWrap.style.display = 'none';
@@ -187,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
       questionIconWrap.style.display = 'none';
     }
 
-    // Answers: icon + visible label
+    // Odpowiedzi
     answersContainerEl.innerHTML = '';
     const answers = Array.isArray(data.answers) ? data.answers : [];
     for (const ans of answers) {
@@ -198,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
       card.setAttribute('aria-label', label);
       card.setAttribute('title', label);
 
-      // Icon (inline SVG)
       const iconWrap = document.createElement('div');
       iconWrap.className = 'answer-icon';
 
@@ -211,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       card.appendChild(iconWrap);
 
-      // Label
       const title = document.createElement('div');
       title.className = 'answer-title';
       title.textContent = label;
@@ -242,7 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function displayResults(recommendations) {
     quizContainer.style.display = 'none';
     resultsContainer.style.display = 'flex';
-
     resultsWrapper.innerHTML = '';
 
     const title = document.createElement('div');
@@ -254,9 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!recommendations.length) {
       const p = document.createElement('p');
-      p.textContent =
-        currentLang === 'pl' ? 'Brak rekomendacji dla wybranej ścieżki.' :
-        'No recommendations for the selected path.';
+      p.textContent = currentLang === 'pl' ? 'Brak rekomendacji dla wybranej ścieżki.' : 'No recommendations for the selected path.';
       resultsWrapper.appendChild(p);
     } else {
       const grid = document.createElement('div');
@@ -314,8 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
     quizContainer.style.display = 'none';
     mainContent.style.display = 'flex';
   }
-
-  function showError(msg) { alert(msg); }
 
   if (startBtn) startBtn.addEventListener('click', startQuiz);
   if (langSelect) langSelect.addEventListener('change', handleLanguageChange);
