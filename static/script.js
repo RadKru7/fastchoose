@@ -1,6 +1,5 @@
-// FastChoose — frontend (SVG inline + widoczne etykiety, brandowe kolory)
-document.addEventListener('DOMContentLoaded', function () {
-  // Elementy z index.html
+// FastChoose — SVG inline, pełna kontrola rozmiarów/kolorów w CSS
+document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('get-started-btn');
   const langSelect = document.getElementById('lang-select');
 
@@ -11,71 +10,74 @@ document.addEventListener('DOMContentLoaded', function () {
   const resultsContainer = document.getElementById('results-container');
   const resultsWrapper = document.getElementById('results-content-wrapper');
 
-  // Stan
+  // State
   let currentQuestionId = 1;
   let pathAnswers = [];
   let history = [];
   let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'pl';
 
-  // Cache na pobrane SVG (url -> string SVG)
+  // Cache for fetched SVGs
   const svgCache = new Map();
 
-  // Referencje do dynamicznie wstrzykiwanych elementów quizu
+  // Refs populated per-screen
   let questionTextEl = null;
   let questionIconWrap = null;
   let answersContainerEl = null;
   let backBtnEl = null;
 
-  // Pobierz i zwróć element SVG (inline) z cache
+  // Fetch SVG as inline element (cache-enabled)
   async function fetchInlineSvg(url) {
     if (!url || !url.endsWith('.svg')) return null;
     try {
       if (!svgCache.has(url)) {
         const res = await fetch(url, { cache: 'force-cache' });
-        if (!res.ok) throw new Error('SVG fetch failed');
-        const svgText = await res.text();
-        svgCache.set(url, svgText);
+        if (!res.ok) throw new Error(`Failed to fetch ${url}`);
+        const text = await res.text();
+        svgCache.set(url, text);
       }
       const wrapper = document.createElement('div');
       wrapper.innerHTML = svgCache.get(url);
-      const svgEl = wrapper.querySelector('svg');
-      if (!svgEl) return null;
-      return svgEl;
+      const svg = wrapper.querySelector('svg');
+      return svg || null;
     } catch (e) {
-      console.warn('Failed to inline SVG:', url, e);
+      console.warn('SVG inline error:', url, e);
       return null;
     }
   }
 
-  // Ustaw wszystkie fill/stroke w SVG na currentColor (zachowaj fill="none")
-  function normalizeSvgColors(svgEl) {
+  // Make SVG follow currentColor and CSS sizing
+  function normalizeSvg(svgEl) {
     if (!svgEl) return;
-    const elems = svgEl.querySelectorAll('*');
-    elems.forEach(el => {
-      // Usuń style zawierające fill/stroke (żeby CSS mógł rządzić)
-      const style = el.getAttribute('style') || '';
+
+    // Remove inline styles for fill/stroke
+    const nodes = svgEl.querySelectorAll('*');
+    nodes.forEach(n => {
+      // Clean style attribute
+      const style = n.getAttribute('style') || '';
       if (style) {
         const cleaned = style
-          .replace(/fill\s*:\s*#[0-9a-fA-F]{3,8}\s*;?/g, '')
-          .replace(/stroke\s*:\s*#[0-9a-fA-F]{3,8}\s*;?/g, '')
-          .replace(/fill\s*:\s*(?:rgb|hsl)\([^)]+\)\s*;?/g, '')
-          .replace(/stroke\s*:\s*(?:rgb|hsl)\([^)]+\)\s*;?/g, '')
-          .replace(/fill\s*:\s*[^;]+;?/g, '')
-          .replace(/stroke\s*:\s*[^;]+;?/g, '');
-        if (cleaned.trim().length) el.setAttribute('style', cleaned);
-        else el.removeAttribute('style');
+          .replace(/fill\s*:\s*[^;]+;?/gi, '')
+          .replace(/stroke\s*:\s*[^;]+;?/gi, '');
+        if (cleaned.trim()) n.setAttribute('style', cleaned);
+        else n.removeAttribute('style');
       }
-      // Atrybuty
-      if (el.hasAttribute('fill')) {
-        const v = el.getAttribute('fill');
-        if (v && v.toLowerCase() !== 'none') el.setAttribute('fill', 'currentColor');
+      // Normalize attributes (preserve fill='none')
+      if (n.hasAttribute('fill')) {
+        const v = (n.getAttribute('fill') || '').toLowerCase();
+        if (v !== 'none') n.setAttribute('fill', 'currentColor');
       }
-      if (el.hasAttribute('stroke')) {
-        const v = el.getAttribute('stroke');
-        if (v && v.toLowerCase() !== 'none') el.setAttribute('stroke', 'currentColor');
+      if (n.hasAttribute('stroke')) {
+        const v = (n.getAttribute('stroke') || '').toLowerCase();
+        if (v !== 'none') n.setAttribute('stroke', 'currentColor');
       }
+      // Optional: cleanup color attributes not needed
+      if (n.hasAttribute('color')) n.removeAttribute('color');
     });
-    // Upewnij się, że SVG dziedziczy color
+
+    // Remove hard width/height to allow CSS control
+    svgEl.removeAttribute('width');
+    svgEl.removeAttribute('height');
+    // Inherit color from parent
     svgEl.style.color = 'inherit';
   }
 
@@ -95,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
       <div id="answers-container" class="answers-grid"></div>
       <button id="back-btn" style="display:none;"></button>
     `;
-
     questionTextEl = document.getElementById('question-text');
     questionIconWrap = document.getElementById('question-icon');
     answersContainerEl = document.getElementById('answers-container');
@@ -141,22 +142,20 @@ document.addEventListener('DOMContentLoaded', function () {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ pathAnswers, language: currentLang })
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res))
-      .then(data => displayResults(data.recommendations || []))
-      .catch(err => {
-        console.error('Error getting results:', err);
-        showError(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' : 'Failed to load results.');
-      });
+    .then(r => r.ok ? r.json() : Promise.reject(r))
+    .then(d => displayResults(d.recommendations || []))
+    .catch(err => {
+      console.error('Error getting results:', err);
+      showError(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' : 'Failed to load results.');
+    });
   }
 
   function fetchQuestion(questionId, noHistoryPush = false) {
-    if (!noHistoryPush) {
-      history.push(currentQuestionId);
-    }
+    if (!noHistoryPush) history.push(currentQuestionId);
 
     fetch(`/api/quiz/question?current_question_id=${encodeURIComponent(questionId)}&language=${encodeURIComponent(currentLang)}`)
-      .then(res => res.ok ? res.json() : Promise.reject(res))
-      .then(data => displayQuestion(data))
+      .then(r => r.ok ? r.json() : Promise.reject(r))
+      .then(d => displayQuestion(d))
       .catch(err => {
         console.error('Error fetching question:', err);
         showError(currentLang === 'pl' ? 'Nie udało się pobrać pytania.' : 'Failed to load question.');
@@ -166,20 +165,20 @@ document.addEventListener('DOMContentLoaded', function () {
   async function displayQuestion(data) {
     if (!questionTextEl || !answersContainerEl || !questionIconWrap) return;
 
-    // Tekst pytania
+    // Question text
     questionTextEl.textContent = data.question_text || '';
 
-    // Ikona pytania (inline SVG)
+    // Question icon (inline SVG, CSS-sized)
     questionIconWrap.innerHTML = '';
     if (data.question_icon_url && data.question_icon_url.endsWith('.svg')) {
       const svgQ = await fetchInlineSvg(data.question_icon_url);
       if (svgQ) {
-        normalizeSvgColors(svgQ);
-        svgQ.classList.add('answer-icon');
-        svgQ.setAttribute('width', '40');
-        svgQ.setAttribute('height', '40');
-        svgQ.setAttribute('aria-hidden', 'true');
-        questionIconWrap.appendChild(svgQ);
+        normalizeSvg(svgQ);
+        // Wrap in a container that has size via CSS
+        const holder = document.createElement('div');
+        holder.className = 'answer-icon'; // reuse sizing; or you can style .question-icon svg via CSS
+        holder.appendChild(svgQ);
+        questionIconWrap.appendChild(holder);
         questionIconWrap.style.display = 'inline-flex';
       } else {
         questionIconWrap.style.display = 'none';
@@ -188,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
       questionIconWrap.style.display = 'none';
     }
 
-    // Odpowiedzi: ikona + widoczna etykieta
+    // Answers: icon + visible label
     answersContainerEl.innerHTML = '';
     const answers = Array.isArray(data.answers) ? data.answers : [];
     for (const ans of answers) {
@@ -199,19 +198,20 @@ document.addEventListener('DOMContentLoaded', function () {
       card.setAttribute('aria-label', label);
       card.setAttribute('title', label);
 
-      // Ikona
+      // Icon (inline SVG)
+      const iconWrap = document.createElement('div');
+      iconWrap.className = 'answer-icon';
+
       if (ans.icon_url && ans.icon_url.endsWith('.svg')) {
-        const svgEl = await fetchInlineSvg(ans.icon_url);
-        if (svgEl) {
-          normalizeSvgColors(svgEl);
-          svgEl.classList.add('answer-icon');
-          svgEl.setAttribute('width', '28');
-          svgEl.setAttribute('height', '28');
-          card.appendChild(svgEl);
+        const svg = await fetchInlineSvg(ans.icon_url);
+        if (svg) {
+          normalizeSvg(svg);
+          iconWrap.appendChild(svg);
         }
       }
+      card.appendChild(iconWrap);
 
-      // Tekst widoczny
+      // Label
       const title = document.createElement('div');
       title.className = 'answer-title';
       title.textContent = label;
@@ -228,9 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function handleAnswer(answer) {
-    if (typeof answer.answer_id !== 'undefined') {
-      pathAnswers.push(answer.answer_id);
-    }
+    if (typeof answer.answer_id !== 'undefined') pathAnswers.push(answer.answer_id);
 
     const nextId = answer.next_question_id;
     if (nextId === '' || nextId === null || typeof nextId === 'undefined') {
@@ -312,15 +310,12 @@ document.addEventListener('DOMContentLoaded', function () {
     currentQuestionId = 1;
     pathAnswers = [];
     history = [];
-
     resultsContainer.style.display = 'none';
     quizContainer.style.display = 'none';
     mainContent.style.display = 'flex';
   }
 
-  function showError(msg) {
-    alert(msg);
-  }
+  function showError(msg) { alert(msg); }
 
   if (startBtn) startBtn.addEventListener('click', startQuiz);
   if (langSelect) langSelect.addEventListener('change', handleLanguageChange);
