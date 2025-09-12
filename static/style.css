@@ -14,7 +14,7 @@
   /* Rozmiary ikon i grubość konturu (zwiększone) */
   --icon-size-question: 60px;
   --icon-size-answer: 60px;
-  --icon-stroke-width: 2.0;
+  --icon-stroke-width: 1.7;
 }
 
 /* Reset i baza */
