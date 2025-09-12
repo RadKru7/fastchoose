@@ -1,3 +1,4 @@
+// FastChoose — frontend (tylko SVG, ikony inline, odpowiedzi jako same ikony)
 document.addEventListener('DOMContentLoaded', function () {
   // Elementy z index.html
   const startBtn = document.getElementById('get-started-btn');
@@ -16,27 +17,59 @@ document.addEventListener('DOMContentLoaded', function () {
   let history = [];
   let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'pl';
 
+  // Cache na pobrane SVG (url -> string SVG)
+  const svgCache = new Map();
+
   // Referencje do dynamicznie wstrzykiwanych elementów quizu
   let questionTextEl = null;
-  let questionIconEl = null;
+  let questionIconWrap = null;
   let answersContainerEl = null;
   let backBtnEl = null;
+
+  // Pomocnicze: pobierz i zwróć element SVG (inline) z cache
+  async function fetchInlineSvg(url) {
+    if (!url || !url.endsWith('.svg')) return null;
+    try {
+      if (!svgCache.has(url)) {
+        const res = await fetch(url, { cache: 'force-cache' });
+        if (!res.ok) throw new Error('SVG fetch failed');
+        const svgText = await res.text();
+        svgCache.set(url, svgText);
+      }
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = svgCache.get(url);
+      const svgEl = wrapper.querySelector('svg');
+      if (!svgEl) return null;
+      return svgEl;
+    } catch (e) {
+      console.warn('Failed to inline SVG:', url, e);
+      return null;
+    }
+  }
+
+  function setBackButtonLabel() {
+    if (!backBtnEl) return;
+    backBtnEl.textContent =
+      currentLang === 'pl' ? 'Wstecz' :
+      currentLang === 'es' ? 'Atrás' : 'Back';
+  }
 
   function renderQuizShell() {
     quizContent.innerHTML = `
       <div class="question-header">
-        <img id="question-icon" class="question-icon" alt="" style="display:none;">
+        <div id="question-icon" class="question-icon" aria-hidden="true"></div>
         <div id="question-text" class="question-text"></div>
       </div>
       <div id="answers-container" class="answers-grid"></div>
-      <button id="back-btn" style="display:none;">${currentLang === 'pl' ? 'Wstecz' : (currentLang === 'es' ? 'Atrás' : 'Back')}</button>
+      <button id="back-btn" style="display:none;"></button>
     `;
 
     questionTextEl = document.getElementById('question-text');
-    questionIconEl = document.getElementById('question-icon');
+    questionIconWrap = document.getElementById('question-icon');
     answersContainerEl = document.getElementById('answers-container');
     backBtnEl = document.getElementById('back-btn');
 
+    setBackButtonLabel();
     if (backBtnEl) backBtnEl.addEventListener('click', goBack);
   }
 
@@ -55,9 +88,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function handleLanguageChange() {
     currentLang = this.value;
-    if (quizContainer && quizContainer.style.display !== 'none' && questionTextEl) {
+    // Jeśli jesteśmy w quizie, odśwież skorupę (dla etykiety "Wstecz") i pytanie
+    if (quizContainer && quizContainer.style.display !== 'none') {
+      renderQuizShell();
       fetchQuestion(currentQuestionId, true);
     }
+  }
+
+  function goBack() {
+    if (history.length > 0) {
+      const prevId = history.pop();
+      if (pathAnswers.length > 0) pathAnswers.pop();
+      currentQuestionId = prevId;
+      fetchQuestion(currentQuestionId, true);
+    }
+  }
+
+  function getResults() {
+    fetch('/api/quiz/result', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pathAnswers, language: currentLang })
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(res))
+    .then(data => displayResults(data.recommendations || []))
+    .catch(err => {
+      console.error('Error getting results:', err);
+      showError(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' : 'Failed to load results.');
+    });
   }
 
   function fetchQuestion(questionId, noHistoryPush = false) {
@@ -74,47 +132,60 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 
-  function displayQuestion(data) {
-    if (!questionTextEl || !answersContainerEl) return;
+  async function displayQuestion(data) {
+    if (!questionTextEl || !answersContainerEl || !questionIconWrap) return;
 
     // Tekst pytania
     questionTextEl.textContent = data.question_text || '';
 
-    // Ikona pytania
-    if (data.question_icon_url) {
-      questionIconEl.src = data.question_icon_url;
-      questionIconEl.style.display = 'inline';
+    // Ikona pytania (tylko SVG inline)
+    questionIconWrap.innerHTML = '';
+    if (data.question_icon_url && data.question_icon_url.endsWith('.svg')) {
+      const svgEl = await fetchInlineSvg(data.question_icon_url);
+      if (svgEl) {
+        svgEl.classList.add('answer-icon'); // wykorzystaj istniejące reguły (rozmiar), jeśli masz
+        // Dopasowanie do kontenera 40x40 — jeśli potrzebujesz, możesz dodać style bezpośrednio:
+        svgEl.setAttribute('width', '40');
+        svgEl.setAttribute('height', '40');
+        svgEl.setAttribute('aria-hidden', 'true');
+        questionIconWrap.appendChild(svgEl);
+        questionIconWrap.style.display = 'inline-flex';
+      } else {
+        questionIconWrap.style.display = 'none';
+      }
     } else {
-      questionIconEl.style.display = 'none';
+      questionIconWrap.style.display = 'none';
     }
 
-    // Odpowiedzi w postaci kart
+    // Odpowiedzi: wyłącznie ikony SVG (bez tekstu widocznego)
     answersContainerEl.innerHTML = '';
 
-    (data.answers || []).forEach(ans => {
+    // Tworzymy karty jako button, z aria-label i title = ans.answer_text
+    // aby zachować dostępność i podpowiedź hover
+    const answers = Array.isArray(data.answers) ? data.answers : [];
+    for (const ans of answers) {
       const card = document.createElement('button');
       card.className = 'answer-card';
       card.type = 'button';
-      card.setAttribute('aria-label', ans.answer_text || 'answer');
+      const label = ans.answer_text || 'answer';
+      card.setAttribute('aria-label', label);
+      card.setAttribute('title', label);
 
-      // Ikona
-      if (ans.icon_url) {
-        const img = document.createElement('img');
-        img.className = 'answer-icon';
-        img.src = ans.icon_url;
-        img.alt = '';
-        card.appendChild(img);
+      if (ans.icon_url && ans.icon_url.endsWith('.svg')) {
+        const svgEl = await fetchInlineSvg(ans.icon_url);
+        if (svgEl) {
+          svgEl.classList.add('answer-icon');
+          // Ustal spójny rozmiar ikon odpowiedzi (możesz dopasować do swojego CSS)
+          svgEl.setAttribute('width', '28');
+          svgEl.setAttribute('height', '28');
+          card.appendChild(svgEl);
+        }
       }
-
-      // Tekst
-      const title = document.createElement('div');
-      title.className = 'answer-title';
-      title.textContent = ans.answer_text || '';
-      card.appendChild(title);
+      // Brak tekstu widocznego — tylko ikona
 
       card.addEventListener('click', () => handleAnswer(ans));
       answersContainerEl.appendChild(card);
-    });
+    }
 
     if (backBtnEl) backBtnEl.style.display = history.length > 0 ? 'block' : 'none';
 
@@ -136,29 +207,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  function goBack() {
-    if (history.length > 0) {
-      const prevId = history.pop();
-      if (pathAnswers.length > 0) pathAnswers.pop();
-      currentQuestionId = prevId;
-      fetchQuestion(currentQuestionId, true);
-    }
-  }
-
-  function getResults() {
-    fetch('/api/quiz/result', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pathAnswers, language: currentLang })
-    })
-      .then(res => res.ok ? res.json() : Promise.reject(res))
-      .then(data => displayResults(data.recommendations || []))
-      .catch(err => {
-        console.error('Error getting results:', err);
-        showError(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' : 'Failed to load results.');
-      });
-  }
-
   function displayResults(recommendations) {
     quizContainer.style.display = 'none';
     resultsContainer.style.display = 'flex';
@@ -167,16 +215,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const title = document.createElement('div');
     title.className = 'results-title';
-    title.textContent = currentLang === 'pl'
-      ? 'Nasze rekomendacje'
-      : (currentLang === 'es' ? 'Nuestras recomendaciones' : 'Our Recommendations');
+    title.textContent =
+      currentLang === 'pl' ? 'Nasze rekomendacje' :
+      currentLang === 'es' ? 'Nuestras recomendaciones' : 'Our Recommendations';
     resultsWrapper.appendChild(title);
 
     if (!recommendations.length) {
       const p = document.createElement('p');
-      p.textContent = currentLang === 'pl'
-        ? 'Brak rekomendacji dla wybranej ścieżki.'
-        : 'No recommendations for the selected path.';
+      p.textContent =
+        currentLang === 'pl' ? 'Brak rekomendacji dla wybranej ścieżki.' :
+        'No recommendations for the selected path.';
       resultsWrapper.appendChild(p);
     } else {
       const grid = document.createElement('div');
@@ -219,7 +267,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const restart = document.createElement('button');
     restart.className = 'restart-btn';
-    restart.textContent = currentLang === 'pl' ? 'Zacznij od nowa' : (currentLang === 'es' ? 'Empezar de nuevo' : 'Restart');
+    restart.textContent =
+      currentLang === 'pl' ? 'Zacznij od nowa' :
+      currentLang === 'es' ? 'Empezar de nuevo' : 'Restart';
     restart.addEventListener('click', resetApp);
     resultsWrapper.appendChild(restart);
   }
