@@ -1,4 +1,4 @@
-// FastChoose — frontend (tylko SVG, ikony inline, odpowiedzi jako same ikony)
+// FastChoose — frontend (SVG inline + widoczne etykiety, brandowe kolory)
 document.addEventListener('DOMContentLoaded', function () {
   // Elementy z index.html
   const startBtn = document.getElementById('get-started-btn');
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let answersContainerEl = null;
   let backBtnEl = null;
 
-  // Pomocnicze: pobierz i zwróć element SVG (inline) z cache
+  // Pobierz i zwróć element SVG (inline) z cache
   async function fetchInlineSvg(url) {
     if (!url || !url.endsWith('.svg')) return null;
     try {
@@ -45,6 +45,38 @@ document.addEventListener('DOMContentLoaded', function () {
       console.warn('Failed to inline SVG:', url, e);
       return null;
     }
+  }
+
+  // Ustaw wszystkie fill/stroke w SVG na currentColor (zachowaj fill="none")
+  function normalizeSvgColors(svgEl) {
+    if (!svgEl) return;
+    const elems = svgEl.querySelectorAll('*');
+    elems.forEach(el => {
+      // Usuń style zawierające fill/stroke (żeby CSS mógł rządzić)
+      const style = el.getAttribute('style') || '';
+      if (style) {
+        const cleaned = style
+          .replace(/fill\s*:\s*#[0-9a-fA-F]{3,8}\s*;?/g, '')
+          .replace(/stroke\s*:\s*#[0-9a-fA-F]{3,8}\s*;?/g, '')
+          .replace(/fill\s*:\s*(?:rgb|hsl)\([^)]+\)\s*;?/g, '')
+          .replace(/stroke\s*:\s*(?:rgb|hsl)\([^)]+\)\s*;?/g, '')
+          .replace(/fill\s*:\s*[^;]+;?/g, '')
+          .replace(/stroke\s*:\s*[^;]+;?/g, '');
+        if (cleaned.trim().length) el.setAttribute('style', cleaned);
+        else el.removeAttribute('style');
+      }
+      // Atrybuty
+      if (el.hasAttribute('fill')) {
+        const v = el.getAttribute('fill');
+        if (v && v.toLowerCase() !== 'none') el.setAttribute('fill', 'currentColor');
+      }
+      if (el.hasAttribute('stroke')) {
+        const v = el.getAttribute('stroke');
+        if (v && v.toLowerCase() !== 'none') el.setAttribute('stroke', 'currentColor');
+      }
+    });
+    // Upewnij się, że SVG dziedziczy color
+    svgEl.style.color = 'inherit';
   }
 
   function setBackButtonLabel() {
@@ -88,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function handleLanguageChange() {
     currentLang = this.value;
-    // Jeśli jesteśmy w quizie, odśwież skorupę (dla etykiety "Wstecz") i pytanie
     if (quizContainer && quizContainer.style.display !== 'none') {
       renderQuizShell();
       fetchQuestion(currentQuestionId, true);
@@ -110,12 +141,12 @@ document.addEventListener('DOMContentLoaded', function () {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ pathAnswers, language: currentLang })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(res))
-    .then(data => displayResults(data.recommendations || []))
-    .catch(err => {
-      console.error('Error getting results:', err);
-      showError(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' : 'Failed to load results.');
-    });
+      .then(res => res.ok ? res.json() : Promise.reject(res))
+      .then(data => displayResults(data.recommendations || []))
+      .catch(err => {
+        console.error('Error getting results:', err);
+        showError(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' : 'Failed to load results.');
+      });
   }
 
   function fetchQuestion(questionId, noHistoryPush = false) {
@@ -138,17 +169,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Tekst pytania
     questionTextEl.textContent = data.question_text || '';
 
-    // Ikona pytania (tylko SVG inline)
+    // Ikona pytania (inline SVG)
     questionIconWrap.innerHTML = '';
     if (data.question_icon_url && data.question_icon_url.endsWith('.svg')) {
-      const svgEl = await fetchInlineSvg(data.question_icon_url);
-      if (svgEl) {
-        svgEl.classList.add('answer-icon'); // wykorzystaj istniejące reguły (rozmiar), jeśli masz
-        // Dopasowanie do kontenera 40x40 — jeśli potrzebujesz, możesz dodać style bezpośrednio:
-        svgEl.setAttribute('width', '40');
-        svgEl.setAttribute('height', '40');
-        svgEl.setAttribute('aria-hidden', 'true');
-        questionIconWrap.appendChild(svgEl);
+      const svgQ = await fetchInlineSvg(data.question_icon_url);
+      if (svgQ) {
+        normalizeSvgColors(svgQ);
+        svgQ.classList.add('answer-icon');
+        svgQ.setAttribute('width', '40');
+        svgQ.setAttribute('height', '40');
+        svgQ.setAttribute('aria-hidden', 'true');
+        questionIconWrap.appendChild(svgQ);
         questionIconWrap.style.display = 'inline-flex';
       } else {
         questionIconWrap.style.display = 'none';
@@ -157,11 +188,8 @@ document.addEventListener('DOMContentLoaded', function () {
       questionIconWrap.style.display = 'none';
     }
 
-    // Odpowiedzi: wyłącznie ikony SVG (bez tekstu widocznego)
+    // Odpowiedzi: ikona + widoczna etykieta
     answersContainerEl.innerHTML = '';
-
-    // Tworzymy karty jako button, z aria-label i title = ans.answer_text
-    // aby zachować dostępność i podpowiedź hover
     const answers = Array.isArray(data.answers) ? data.answers : [];
     for (const ans of answers) {
       const card = document.createElement('button');
@@ -171,17 +199,23 @@ document.addEventListener('DOMContentLoaded', function () {
       card.setAttribute('aria-label', label);
       card.setAttribute('title', label);
 
+      // Ikona
       if (ans.icon_url && ans.icon_url.endsWith('.svg')) {
         const svgEl = await fetchInlineSvg(ans.icon_url);
         if (svgEl) {
+          normalizeSvgColors(svgEl);
           svgEl.classList.add('answer-icon');
-          // Ustal spójny rozmiar ikon odpowiedzi (możesz dopasować do swojego CSS)
           svgEl.setAttribute('width', '28');
           svgEl.setAttribute('height', '28');
           card.appendChild(svgEl);
         }
       }
-      // Brak tekstu widocznego — tylko ikona
+
+      // Tekst widoczny
+      const title = document.createElement('div');
+      title.className = 'answer-title';
+      title.textContent = label;
+      card.appendChild(title);
 
       card.addEventListener('click', () => handleAnswer(ans));
       answersContainerEl.appendChild(card);
