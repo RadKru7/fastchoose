@@ -12,9 +12,9 @@
   --shadow-hover: 0 6px 18px rgba(60, 104, 247, 0.18);
 
   /* Rozmiary ikon i grubość konturu (zwiększone) */
-  --icon-size-question: 52px;
-  --icon-size-answer: 52px;
-  --icon-stroke-width: 2.4;
+  --icon-size-question: 60px;
+  --icon-size-answer: 60px;
+  --icon-stroke-width: 2.0;
 }
 
 /* Reset i baza */
