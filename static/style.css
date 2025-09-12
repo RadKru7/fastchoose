@@ -1,6 +1,5 @@
-/* FastChoose — global styles (CSS control only) */
+/* FastChoose — CSS-only control (wymuszone nadpisania i większe ikony) */
 
-/* Brand variables */
 :root {
   --brand: #3c68f7;
   --brand-accent: #5be7a9;
@@ -12,13 +11,13 @@
   --shadow-soft: 0 2px 12px rgba(60, 104, 247, 0.08);
   --shadow-hover: 0 6px 18px rgba(60, 104, 247, 0.18);
 
-  /* Icon sizes (change here) */
+  /* Rozmiary ikon kontrolowane wyłącznie CSS-em */
   --icon-size-question: 48px;
-  --icon-size-answer: 40px;
-  --icon-stroke-width: 1.8; /* for outline icons */
+  --icon-size-answer: 44px;
+  --icon-stroke-width: 1.8;
 }
 
-/* Reset & base */
+/* Reset i baza */
 *,
 *::before,
 *::after { box-sizing: border-box; }
@@ -67,59 +66,66 @@ select.lang-select {
 }
 .get-started-btn:hover { background: linear-gradient(90deg, var(--brand-accent), var(--brand)); box-shadow: 0 6px 24px rgba(60,104,247,0.24); }
 
-/* Quiz container */
+/* Quiz */
 #quiz-container { display: none; flex-grow: 1; flex-direction: column; justify-content: center; align-items: center; padding: 24px 12px 32px; }
 #quiz-content {
   width: 100%; max-width: 960px; background: var(--card-bg); border-radius: 18px; padding: 26px 24px;
   box-shadow: var(--shadow-soft); text-align: center;
 }
 
-/* Question header */
+/* Pytanie */
 .question-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 26px; }
 .question-icon { display: inline-flex; width: var(--icon-size-question); height: var(--icon-size-question); }
-.question-icon svg { width: 100%; height: 100%; color: var(--brand); }
+.question-icon svg { width: 100% !important; height: 100% !important; color: var(--brand); }
 #quiz-content .question-text { font-size: 1.9rem; font-weight: 700; color: var(--brand); margin: 0; }
 
-/* Answers */
+/* Odpowiedzi */
 .answers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; width: 100%; margin-top: 10px; }
 
-.answer-card {
+#quiz-content .answers-grid .answer-card {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
   background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 18px;
   cursor: pointer; text-align: center; color: var(--brand);
   transition: border-color .2s, box-shadow .2s, transform .06s ease-out, background-color .2s, color .2s;
 }
-.answer-card:hover { border-color: var(--brand); background-color: var(--brand); color: #fff; box-shadow: var(--shadow-hover); }
-.answer-card:focus-visible { outline: 3px solid rgba(60,104,247,0.35); outline-offset: 3px; }
-.answer-card:active { transform: translateY(1px); }
+#quiz-content .answers-grid .answer-card:hover {
+  border-color: var(--brand) !important;
+  background-color: var(--brand) !important;
+  color: #fff !important;
+  box-shadow: var(--shadow-hover);
+}
+#quiz-content .answers-grid .answer-card:focus-visible { outline: 3px solid rgba(60,104,247,0.35); outline-offset: 3px; }
+#quiz-content .answers-grid .answer-card:active { transform: translateY(1px); }
 
+/* Ikony w odpowiedziach — pełna kontrola z CSS */
 .answer-icon { width: var(--icon-size-answer); height: var(--icon-size-answer); display: inline-block; color: inherit; }
-.answer-icon svg { width: 100%; height: 100%; color: inherit; }
+.answer-icon svg { width: 100% !important; height: 100% !important; color: inherit; }
 
-/* Force SVG shapes to follow currentColor. If your icons are outline-only, keep both fill and stroke. */
-.answer-card .answer-icon path,
-.answer-card .answer-icon rect,
-.answer-card .answer-icon circle,
-.answer-card .answer-icon line,
-.answer-card .answer-icon polyline,
-.answer-card .answer-icon polygon,
-.answer-card .answer-icon g {
+/* Wymuszenie koloru dla kształtów i <use> */
+#quiz-content .answers-grid .answer-card .answer-icon svg path,
+#quiz-content .answers-grid .answer-card .answer-icon svg rect,
+#quiz-content .answers-grid .answer-card .answer-icon svg circle,
+#quiz-content .answers-grid .answer-card .answer-icon svg line,
+#quiz-content .answers-grid .answer-card .answer-icon svg polyline,
+#quiz-content .answers-grid .answer-card .answer-icon svg polygon,
+#quiz-content .answers-grid .answer-card .answer-icon svg g,
+#quiz-content .answers-grid .answer-card .answer-icon svg use {
   fill: currentColor !important;
   stroke: currentColor !important;
   stroke-width: var(--icon-stroke-width);
 }
 
-/* Answer label */
+/* Etykieta odpowiedzi */
 .answer-title { font-size: 1.1rem; line-height: 1.35; font-weight: 600; }
 
-/* Back */
+/* Wstecz */
 #back-btn {
   margin-top: 16px; padding: 10px 16px; border: 1px solid #d9e2ec; border-radius: 12px;
   background: var(--bg); color: #333; cursor: pointer; transition: background-color 0.2s, border-color 0.2s;
 }
 #back-btn:hover { background: #eef2f9; border-color: var(--brand); }
 
-/* Results */
+/* Wyniki */
 #results-container { display: none; flex-grow: 1; flex-direction: column; justify-content: center; align-items: center; padding: 32px 16px; width: 100%; box-sizing: border-box; }
 #results-content-wrapper { width: 100%; max-width: 960px; text-align: center; }
 .results-title { font-size: 2rem; font-weight: 700; color: var(--brand); margin-bottom: 24px; }
