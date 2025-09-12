@@ -1,4 +1,4 @@
-/* FastChoose — CSS-only control (wymuszone nadpisania i większe ikony) */
+/* FastChoose — CSS-only control (wyraźniejsze ikony) */
 
 :root {
   --brand: #3c68f7;
@@ -11,10 +11,10 @@
   --shadow-soft: 0 2px 12px rgba(60, 104, 247, 0.08);
   --shadow-hover: 0 6px 18px rgba(60, 104, 247, 0.18);
 
-  /* Rozmiary ikon kontrolowane wyłącznie CSS-em */
-  --icon-size-question: 48px;
-  --icon-size-answer: 44px;
-  --icon-stroke-width: 1.8;
+  /* Rozmiary ikon i grubość konturu (zwiększone) */
+  --icon-size-question: 52px;
+  --icon-size-answer: 52px;
+  --icon-stroke-width: 2.4;
 }
 
 /* Reset i baza */
@@ -77,14 +77,33 @@ select.lang-select {
 .question-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 26px; }
 .question-icon { display: inline-flex; width: var(--icon-size-question); height: var(--icon-size-question); }
 .question-icon svg { width: 100% !important; height: 100% !important; color: var(--brand); }
+
+/* Kontury i wypełnienia dla ikony pytania (wyraźniejsze) */
+.question-icon svg path,
+.question-icon svg rect,
+.question-icon svg circle,
+.question-icon svg line,
+.question-icon svg polyline,
+.question-icon svg polygon,
+.question-icon svg g,
+.question-icon svg use {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  stroke-width: var(--icon-stroke-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  paint-order: stroke fill;
+}
+
 #quiz-content .question-text { font-size: 1.9rem; font-weight: 700; color: var(--brand); margin: 0; }
 
 /* Odpowiedzi */
 .answers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; width: 100%; margin-top: 10px; }
 
 #quiz-content .answers-grid .answer-card {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-  background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 18px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 20px 18px;
   cursor: pointer; text-align: center; color: var(--brand);
   transition: border-color .2s, box-shadow .2s, transform .06s ease-out, background-color .2s, color .2s;
 }
@@ -97,11 +116,11 @@ select.lang-select {
 #quiz-content .answers-grid .answer-card:focus-visible { outline: 3px solid rgba(60,104,247,0.35); outline-offset: 3px; }
 #quiz-content .answers-grid .answer-card:active { transform: translateY(1px); }
 
-/* Ikony w odpowiedziach — pełna kontrola z CSS */
+/* Ikony w odpowiedziach — większe i z grubszym konturem */
 .answer-icon { width: var(--icon-size-answer); height: var(--icon-size-answer); display: inline-block; color: inherit; }
 .answer-icon svg { width: 100% !important; height: 100% !important; color: inherit; }
 
-/* Wymuszenie koloru dla kształtów i <use> */
+/* Silne wymuszenie koloru i konturu dla wszystkich kształtów */
 #quiz-content .answers-grid .answer-card .answer-icon svg path,
 #quiz-content .answers-grid .answer-card .answer-icon svg rect,
 #quiz-content .answers-grid .answer-card .answer-icon svg circle,
@@ -110,13 +129,17 @@ select.lang-select {
 #quiz-content .answers-grid .answer-card .answer-icon svg polygon,
 #quiz-content .answers-grid .answer-card .answer-icon svg g,
 #quiz-content .answers-grid .answer-card .answer-icon svg use {
-  fill: currentColor !important;
+  fill: currentColor !important;   /* jeśli ikony są outline-only, nadal będą czytelne dzięki grubemu stroke */
   stroke: currentColor !important;
   stroke-width: var(--icon-stroke-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  paint-order: stroke fill;
 }
 
 /* Etykieta odpowiedzi */
-.answer-title { font-size: 1.1rem; line-height: 1.35; font-weight: 600; }
+.answer-title { font-size: 1.12rem; line-height: 1.35; font-weight: 700; }
 
 /* Wstecz */
 #back-btn {
