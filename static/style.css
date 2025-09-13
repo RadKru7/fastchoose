@@ -19,9 +19,9 @@
   --answer-border: #c9f2ea;
 
   /* Ikony */
-  --icon-size-question: 52px;
-  --icon-size-answer: 52px;
-  --icon-stroke-width: 2.4;
+  --icon-size-question: 60px;
+  --icon-size-answer: 60px;
+  --icon-stroke-width: 1.8;
 
   /* Mono-kolor ikon: domyślnie taki sam jak tekst (currentColor).
      Jeśli chcesz pastelowe ikony, ustaw na color-mix, np.:
