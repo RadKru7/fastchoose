@@ -1,4 +1,4 @@
-// FastChoose — SVG inline; NIE nadpisujemy fill/stroke atrybutów w SVG (żeby nie „zalewać” ikon)
+// FastChoose — inline SVG z MONO-kolorem: fill/stroke ustawiane rozsądnie
 document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('get-started-btn');
   const langSelect = document.getElementById('lang-select');
@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // UWAGA: nie dotykamy fill/stroke atrybutów — tylko zdejmujemy width/height i style wypełnienia, aby CSS mógł sterować stroke kolorem
+  // MONO-kolor: zachowujemy "fill='none'" tam gdzie był; elementy z wypełnieniem dostają fill=currentColor.
+  // Kontury (stroke) ustawiamy na currentColor TYLKO jeśli oryginał miał stroke.
   function normalizeSvg(svgEl) {
     if (!svgEl) return;
     svgEl.removeAttribute('width');
@@ -49,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const nodes = svgEl.querySelectorAll('*');
     nodes.forEach(n => {
-      // usuń ewentualne inline style fill/stroke, ale NIE zmieniaj atrybutów fill/stroke
+      const tag = n.tagName.toLowerCase();
+
+      // oczyść inline style fill/stroke/color
       const style = n.getAttribute('style') || '';
       if (style) {
         const cleaned = style
@@ -59,8 +62,33 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cleaned.trim()) n.setAttribute('style', cleaned);
         else n.removeAttribute('style');
       }
-      // usuń przestarzałe atrybuty prezentacyjne koloru, jeśli występują
       if (n.hasAttribute('color')) n.removeAttribute('color');
+
+      const hadStroke = n.hasAttribute('stroke');
+      const hadFill = n.hasAttribute('fill');
+      const fillVal = (n.getAttribute('fill') || '').trim().toLowerCase();
+
+      // Tekst wewnątrz SVG (np. $$) malujemy wprost w jednym kolorze
+      if (tag === 'text') {
+        n.setAttribute('fill', 'currentColor');
+        n.removeAttribute('stroke');
+        return;
+      }
+
+      // Kontur: tylko jeśli oryginał miał stroke
+      if (hadStroke) n.setAttribute('stroke', 'currentColor');
+
+      // Wypełnienie:
+      // - jeśli autor ustawił fill="none" → zostawiamy "none"
+      // - jeśli ustawił jakikolwiek kolor → ustawiamy na currentColor (np. paski baterii)
+      // - jeśli brak fill, ale jest stroke → wymuś fill="none" (żeby nie wypełniać zarysów)
+      if (hadFill) {
+        if (fillVal !== 'none') {
+          n.setAttribute('fill', 'currentColor');
+        } // else zostaw "none"
+      } else if (hadStroke) {
+        n.setAttribute('fill', 'none');
+      }
     });
   }
 
@@ -85,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     answersContainerEl = document.getElementById('answers-container');
     backBtnEl = document.getElementById('back-btn');
 
-    // Ikona strzałki w przycisku Wstecz
     if (backBtnEl) {
       backBtnEl.innerHTML = `
         <svg viewBox="0 0 24 24" aria-hidden="true">
