@@ -1,61 +1,62 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" data-theme="teal">
 <head>
-    <meta charset="UTF-8">
-    <title>FastChoose</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Przeniesiono style do zewnętrznego pliku -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=svg3">
+  <meta charset="UTF-8">
+  <title>FastChoose</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Zewnętrzny arkusz stylów (cache-busting) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=theme1">
 </head>
 <body>
-    <header>
-        <a href="/" class="logo" style="text-decoration: none;">FastChoose</a>
-        <div class="lang-select-container">
-            <svg class="lang-icon" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="10" stroke="#3c68f7" stroke-width="2"/>
-                <path d="M2 12h20M12 2a10 10 0 000 20" stroke="#3c68f7" stroke-width="1.5"/>
-                <ellipse cx="12" cy="12" rx="4.5" ry="10" stroke="#3c68f7" stroke-width="1.5"/>
-            </svg>
-            <select id="lang-select" class="lang-select" aria-label="Wybierz język">
-                <option value="pl">Polski</option>
-                <option value="en">English</option>
-                <option value="es">Español</option>
-            </select>
-        </div>
-    </header>
-    
-    <main class="main-content" id="main-content">
-        <div class="hero-image-container">
-            <img src="{{ url_for('static', filename='graphic/start_page.png') }}" alt="Telefon prezentujący aplikację" class="hero-image start-page-animated">
-        </div>
-        <div class="big-title">Wybierz szybciej, żyj wygodniej!</div>
-        <div class="subtitle">
-            FastChoose pomaga podejmować decyzje, wybierać szybko i trafnie!<br>
-            Aktywuj poniższy przycisk i rozpocznij serię pytań.
-        </div>
-        <button class="get-started-btn" id="get-started-btn">Rozpocznij</button>
-    </main>
-
-    <div id="quiz-container">
-        <div id="quiz-content">
-            <!-- Wypełniane dynamicznie przez JS -->
-        </div>
+  <header>
+    <a href="/" class="logo">FastChoose</a>
+    <div class="lang-select-container">
+      <svg class="lang-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" stroke="#3c68f7" stroke-width="2"/>
+        <path d="M2 12h20M12 2a10 10 0 000 20" stroke="#3c68f7" stroke-width="1.5"/>
+        <ellipse cx="12" cy="12" rx="4.5" ry="10" stroke="#3c68f7" stroke-width="1.5"/>
+      </svg>
+      <select id="lang-select" class="lang-select" aria-label="Wybierz język">
+        <option value="pl">Polski</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
     </div>
+  </header>
 
-    <div id="results-container">
-        <div id="results-content-wrapper">
-        </div>
+  <main class="main-content" id="main-content">
+    <div class="hero-image-container">
+      <img src="{{ url_for('static', filename='graphic/start_page.png') }}"
+           alt="Telefon prezentujący aplikację"
+           class="hero-image start-page-animated">
     </div>
+    <div class="big-title">Wybierz szybciej, żyj wygodniej!</div>
+    <div class="subtitle">
+      FastChoose pomaga podejmować decyzje, wybierać szybko i trafnie!<br>
+      Aktywuj poniższy przycisk i rozpocznij serię pytań.
+    </div>
+    <button class="get-started-btn" id="get-started-btn">Rozpocznij</button>
+  </main>
 
-    <footer>
-        <div class="footer-links">
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-        </div>
-        &copy; 2025 FastChoose. All rights reserved.
-    </footer>
+  <div id="quiz-container">
+    <div id="quiz-content">
+      <!-- Wypełniane dynamicznie przez JS -->
+    </div>
+  </div>
 
-    <!-- Cache-busting dla JS -->
-    <script src="{{ url_for('static', filename='script.js') }}?v=svg3" defer></script>
+  <div id="results-container">
+    <div id="results-content-wrapper"></div>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </div>
+    &copy; 2025 FastChoose. All rights reserved.
+  </footer>
+
+  <!-- Skrypt aplikacji (cache-busting) -->
+  <script src="{{ url_for('static', filename='script.js') }}?v=theme1" defer></script>
 </body>
 </html>
