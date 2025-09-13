@@ -26,7 +26,7 @@
   /* Mono-kolor ikon: domyślnie taki sam jak tekst (currentColor).
      Jeśli chcesz pastelowe ikony, ustaw na color-mix, np.:
      --icon-initial-color: color-mix(in oklab, var(--brand) 55%, white); */
-  --icon-initial-color: currentColor;
+  --icon-initial-color: color-mix(in oklab, var(--brand) 55%, white);
 }
 
 /* Alternatywne motywy */
