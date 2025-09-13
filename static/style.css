@@ -1,7 +1,7 @@
-/* FastChoose — motywy + wyraźne ikony bez wymuszania fill + jasne tło kafelków + okrągły Back */
+/* FastChoose — jednokolorowe ikony (mono), większe napisy, spójny Back */
 
 :root {
-  /* Domyślny motyw (teal). Możesz nadpisać w <html data-theme="..."> */
+  /* Motyw (teal domyślnie) */
   --brand: #0ea5a6;
   --brand-accent: #34d399;
 
@@ -14,37 +14,29 @@
   --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
   --shadow-hover: 0 6px 18px rgba(0,0,0,0.14);
 
-  /* Tło i obramowanie dla kafelków odpowiedzi (delikatne, widoczne od razu) */
-  --answer-bg: #f1fbf8;     /* delikatny teal */
+  /* Kafelki odpowiedzi — delikatne tło widoczne od razu */
+  --answer-bg: #f1fbf8;
   --answer-border: #c9f2ea;
 
   /* Ikony */
   --icon-size-question: 52px;
   --icon-size-answer: 52px;
   --icon-stroke-width: 2.4;
+
+  /* Mono-kolor ikon: domyślnie taki sam jak tekst (currentColor).
+     Jeśli chcesz pastelowe ikony, ustaw na color-mix, np.:
+     --icon-initial-color: color-mix(in oklab, var(--brand) 55%, white); */
+  --icon-initial-color: currentColor;
 }
 
-/* Motywy do wyboru */
-:root[data-theme="teal"] {
-  --brand: #0ea5a6;
-  --brand-accent: #34d399;
-  --answer-bg: #f1fbf8;
-  --answer-border: #c9f2ea;
-}
+/* Alternatywne motywy */
 :root[data-theme="blue"] {
-  --brand: #3c68f7;
-  --brand-accent: #5be7a9;
-  --answer-bg: #f5f8ff;
-  --answer-border: #dfe6ff;
+  --brand: #3c68f7; --brand-accent: #5be7a9; --answer-bg: #f5f8ff; --answer-border: #dfe6ff;
 }
 :root[data-theme="violet"] {
-  --brand: #7c3aed;
-  --brand-accent: #a78bfa;
-  --answer-bg: #f7f5ff;
-  --answer-border: #e2d9ff;
+  --brand: #7c3aed; --brand-accent: #a78bfa; --answer-bg: #f7f5ff; --answer-border: #e2d9ff;
 }
 
-/* Reset i baza */
 *,
 *::before,
 *::after { box-sizing: border-box; }
@@ -102,23 +94,14 @@ select.lang-select {
 
 /* Pytanie */
 .question-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 26px; }
-.question-icon { display: inline-flex; width: var(--icon-size-question); height: var(--icon-size-question); }
-.question-icon svg { width: 100% !important; height: 100% !important; color: var(--brand); }
-/* Kontury ikony pytania — nie wymuszamy fill, tylko stroke (=brand) */
-.question-icon svg path,
-.question-icon svg rect,
-.question-icon svg circle,
-.question-icon svg line,
-.question-icon svg polyline,
-.question-icon svg polygon,
-.question-icon svg g,
-.question-icon svg use {
-  stroke: currentColor !important;
+.question-icon { display: inline-flex; width: var(--icon-size-question); height: var(--icon-size-question); color: var(--brand); }
+.question-icon svg { width: 100% !important; height: 100% !important; }
+.question-icon svg * {
+  stroke: currentColor;
   stroke-width: var(--icon-stroke-width);
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  paint-order: stroke fill;
 }
 #quiz-content .question-text { font-size: 1.9rem; font-weight: 700; color: var(--brand); margin: 0; }
 
@@ -127,92 +110,67 @@ select.lang-select {
 
 #quiz-content .answers-grid .answer-card {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-  background: var(--answer-bg);               /* tło widoczne od razu */
-  border: 1.5px solid var(--answer-border);   /* delikatne obramowanie */
+  background: var(--answer-bg);
+  border: 1.5px solid var(--answer-border);
   border-radius: 16px; padding: 20px 18px;
-  cursor: pointer; text-align: center; color: var(--brand);
+  cursor: pointer; text-align: center;
+  color: var(--brand); /* Ustala kolor tekstu i bazowy kolor ikon (currentColor) */
   transition: border-color .2s, box-shadow .2s, transform .06s ease-out, background-color .2s, color .2s;
 }
 #quiz-content .answers-grid .answer-card:hover {
   border-color: var(--brand) !important;
   background-color: var(--brand) !important;
-  color: #fff !important;
+  color: #fff !important; /* Tekst i ikona stają się białe */
   box-shadow: var(--shadow-hover);
 }
 #quiz-content .answers-grid .answer-card:focus-visible { outline: 3px solid rgba(14,165,166,0.35); outline-offset: 3px; }
 #quiz-content .answers-grid .answer-card:active { transform: translateY(1px); }
 
-/* Ikony w odpowiedziach — nie wymuszamy fill, tylko stroke */
-.answer-icon { width: var(--icon-size-answer); height: var(--icon-size-answer); display: inline-block; color: inherit; }
-.answer-icon svg { width: 100% !important; height: 100% !important; color: inherit; }
-#quiz-content .answers-grid .answer-card .answer-icon svg path,
-#quiz-content .answers-grid .answer-card .answer-icon svg rect,
-#quiz-content .answers-grid .answer-card .answer-icon svg circle,
-#quiz-content .answers-grid .answer-card .answer-icon svg line,
-#quiz-content .answers-grid .answer-card .answer-icon svg polyline,
-#quiz-content .answers-grid .answer-card .answer-icon svg polygon,
-#quiz-content .answers-grid .answer-card .answer-icon svg g,
-#quiz-content .answers-grid .answer-card .answer-icon svg use {
-  stroke: currentColor !important;
+/* Ikony odpowiedzi — MONO: kolor = currentColor (czyli taki sam jak napis) */
+.answer-icon { width: var(--icon-size-answer); height: var(--icon-size-answer); display: inline-block; color: var(--icon-initial-color); }
+.answer-icon svg { width: 100% !important; height: 100% !important; }
+/* Ujednolicamy tylko kontury przez CSS; wypełnienia ustawi JS zależnie od oryginału */
+.answer-icon svg * {
+  stroke: currentColor;
   stroke-width: var(--icon-stroke-width);
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  paint-order: stroke fill;
 }
+/* Na hover ikona przejmuje kolor tekstu (tu stanie się biała) */
+#quiz-content .answers-grid .answer-card:hover .answer-icon { color: currentColor; }
 
-/* Etykieta odpowiedzi — większa */
+/* Napisy odpowiedzi — większe */
 .answer-title {
-  font-size: 1.2rem;
-  line-height: 1.4;
+  font-size: 1.28rem;
+  line-height: 1.45;
   font-weight: 700;
+  color: currentColor;
 }
 
 /* Wiersz z przyciskiem wstecz wyrównany do lewej */
-.back-row {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 16px;
-}
+.back-row { display: flex; justify-content: flex-start; margin-top: 16px; }
 
 /* Przycisk wstecz — okrągły, w kolorze motywu */
 .back-icon-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   border: 1.5px solid var(--brand);
   background: var(--answer-bg);
   color: var(--brand);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-flex; align-items: center; justify-content: center;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   transition: background-color .2s, transform .06s ease-out, box-shadow .2s;
 }
-.back-icon-btn:hover {
-  background: #e7f5f1;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
-}
+.back-icon-btn:hover { background: #e7f5f1; box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
 .back-icon-btn:active { transform: translateY(1px); }
 .back-icon-btn svg {
-  width: 26px;
-  height: 26px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  width: 22px; height: 22px; stroke: currentColor; fill: none;
+  stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
 }
 
-/* Klasa dostępności */
-.sr-only {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0,0,0,0);
-  white-space: nowrap; border: 0;
-}
+/* Dostępność */
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
 /* Wyniki */
 #results-container { display: none; flex-grow: 1; flex-direction: column; justify-content: center; align-items: center; padding: 32px 16px; width: 100%; box-sizing: border-box; }
@@ -231,12 +189,6 @@ select.lang-select {
 .restart-btn { margin-top: 32px; padding: 12px 32px; font-size: 1.1rem; border: none; border-radius: 24px; background: var(--brand); color: #fff; cursor: pointer; font-weight: 600; transition: background-color 0.2s; }
 .restart-btn:hover { background-color: #0c8b8c; }
 
-/* Footer */
-footer { margin-top: auto; background: #f1f2f4; padding: 20px 0; text-align: center; font-size: 1rem; color: #888; border-top: 1px solid #e3e4e8; flex-shrink: 0; }
-.footer-links { margin-bottom: 8px; }
-.footer-links a { color: var(--brand); margin: 0 14px; text-decoration: none; font-weight: 500; transition: color 0.15s; }
-.footer-links a:hover { color: #249687; text-decoration: underline; }
-
 /* Responsive */
 @media (max-width: 900px) { .answers-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); } }
 @media (max-width: 600px) {
@@ -245,5 +197,5 @@ footer { margin-top: auto; background: #f1f2f4; padding: 20px 0; text-align: cen
   .hero-image { width: 94vw; max-width: 330px; }
   .big-title { font-size: 1.25rem; }
   .answers-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-  .answer-title { font-size: 1.12rem; }
+  .answer-title { font-size: 1.18rem; }
 }
