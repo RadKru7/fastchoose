@@ -1,4 +1,4 @@
-/* FastChoose — motywy + wyraźne ikony + jasne tło kafelków + okrągły Back */
+/* FastChoose — motywy + wyraźne ikony bez wymuszania fill + jasne tło kafelków + okrągły Back */
 
 :root {
   /* Domyślny motyw (teal). Możesz nadpisać w <html data-theme="..."> */
@@ -104,6 +104,7 @@ select.lang-select {
 .question-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 26px; }
 .question-icon { display: inline-flex; width: var(--icon-size-question); height: var(--icon-size-question); }
 .question-icon svg { width: 100% !important; height: 100% !important; color: var(--brand); }
+/* Kontury ikony pytania — nie wymuszamy fill, tylko stroke (=brand) */
 .question-icon svg path,
 .question-icon svg rect,
 .question-icon svg circle,
@@ -112,7 +113,6 @@ select.lang-select {
 .question-icon svg polygon,
 .question-icon svg g,
 .question-icon svg use {
-  fill: currentColor !important;
   stroke: currentColor !important;
   stroke-width: var(--icon-stroke-width);
   stroke-linecap: round;
@@ -139,10 +139,10 @@ select.lang-select {
   color: #fff !important;
   box-shadow: var(--shadow-hover);
 }
-#quiz-content .answers-grid .answer-card:focus-visible { outline: 3px solid rgba(60,104,247,0.35); outline-offset: 3px; }
+#quiz-content .answers-grid .answer-card:focus-visible { outline: 3px solid rgba(14,165,166,0.35); outline-offset: 3px; }
 #quiz-content .answers-grid .answer-card:active { transform: translateY(1px); }
 
-/* Ikony w odpowiedziach */
+/* Ikony w odpowiedziach — nie wymuszamy fill, tylko stroke */
 .answer-icon { width: var(--icon-size-answer); height: var(--icon-size-answer); display: inline-block; color: inherit; }
 .answer-icon svg { width: 100% !important; height: 100% !important; color: inherit; }
 #quiz-content .answers-grid .answer-card .answer-icon svg path,
@@ -153,13 +153,19 @@ select.lang-select {
 #quiz-content .answers-grid .answer-card .answer-icon svg polygon,
 #quiz-content .answers-grid .answer-card .answer-icon svg g,
 #quiz-content .answers-grid .answer-card .answer-icon svg use {
-  fill: currentColor !important;
   stroke: currentColor !important;
   stroke-width: var(--icon-stroke-width);
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
   paint-order: stroke fill;
+}
+
+/* Etykieta odpowiedzi — większa */
+.answer-title {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  font-weight: 700;
 }
 
 /* Wiersz z przyciskiem wstecz wyrównany do lewej */
@@ -169,14 +175,14 @@ select.lang-select {
   margin-top: 16px;
 }
 
-/* Przycisk wstecz — okrągły z ikoną */
+/* Przycisk wstecz — okrągły, w kolorze motywu */
 .back-icon-btn {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1.5px solid #1f2937;          /* ciemny obrys */
-  background: var(--answer-bg);         /* spójne z kafelkami */
-  color: #1f2937;                       /* kolor ikony */
+  border: 1.5px solid var(--brand);
+  background: var(--answer-bg);
+  color: var(--brand);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -185,16 +191,16 @@ select.lang-select {
   transition: background-color .2s, transform .06s ease-out, box-shadow .2s;
 }
 .back-icon-btn:hover {
-  background: #e7f5f1;                  /* odrobinę ciemniejsze tło */
+  background: #e7f5f1;
   box-shadow: 0 6px 18px rgba(0,0,0,0.10);
 }
 .back-icon-btn:active { transform: translateY(1px); }
 .back-icon-btn svg {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   stroke: currentColor;
   fill: none;
-  stroke-width: 2.2;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -239,4 +245,5 @@ footer { margin-top: auto; background: #f1f2f4; padding: 20px 0; text-align: cen
   .hero-image { width: 94vw; max-width: 330px; }
   .big-title { font-size: 1.25rem; }
   .answers-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+  .answer-title { font-size: 1.12rem; }
 }
