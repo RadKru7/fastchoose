@@ -1,4 +1,4 @@
-// FastChoose — SVG inline, kontrola ikon w CSS + okrągły Back wyrównany do lewej
+// FastChoose — SVG inline; NIE nadpisujemy fill/stroke atrybutów w SVG (żeby nie „zalewać” ikon)
 document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('get-started-btn');
   const langSelect = document.getElementById('lang-select');
@@ -40,27 +40,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // UWAGA: nie dotykamy fill/stroke atrybutów — tylko zdejmujemy width/height i style wypełnienia, aby CSS mógł sterować stroke kolorem
   function normalizeSvg(svgEl) {
     if (!svgEl) return;
     svgEl.removeAttribute('width');
     svgEl.removeAttribute('height');
     svgEl.style.color = 'inherit';
+
     const nodes = svgEl.querySelectorAll('*');
     nodes.forEach(n => {
+      // usuń ewentualne inline style fill/stroke, ale NIE zmieniaj atrybutów fill/stroke
       const style = n.getAttribute('style') || '';
       if (style) {
-        const cleaned = style.replace(/fill\s*:\s*[^;]+;?/gi, '').replace(/stroke\s*:\s*[^;]+;?/gi, '');
+        const cleaned = style
+          .replace(/fill\s*:\s*[^;]+;?/gi, '')
+          .replace(/stroke\s*:\s*[^;]+;?/gi, '')
+          .replace(/color\s*:\s*[^;]+;?/gi, '');
         if (cleaned.trim()) n.setAttribute('style', cleaned);
         else n.removeAttribute('style');
       }
-      if (n.hasAttribute('fill')) {
-        const v = (n.getAttribute('fill') || '').toLowerCase();
-        if (v !== 'none') n.setAttribute('fill', 'currentColor');
-      }
-      if (n.hasAttribute('stroke')) {
-        const v = (n.getAttribute('stroke') || '').toLowerCase();
-        if (v !== 'none') n.setAttribute('stroke', 'currentColor');
-      }
+      // usuń przestarzałe atrybuty prezentacyjne koloru, jeśli występują
       if (n.hasAttribute('color')) n.removeAttribute('color');
     });
   }
@@ -86,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     answersContainerEl = document.getElementById('answers-container');
     backBtnEl = document.getElementById('back-btn');
 
-    // Ikona strzałki w przycisku Wstecz (SVG inline sterowany CSS-em)
+    // Ikona strzałki w przycisku Wstecz
     if (backBtnEl) {
       backBtnEl.innerHTML = `
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -208,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
       answersContainerEl.appendChild(card);
     }
 
-    // Pokaż/ukryj przycisk Wstecz (ikonowy)
+    // Pokaż/ukryj przycisk Wstecz
     backBtnEl.style.display = history.length > 0 ? 'inline-flex' : 'none';
     backBtnEl.setAttribute('aria-label', backAriaLabel());
 
