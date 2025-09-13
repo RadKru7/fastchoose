@@ -1,20 +1,47 @@
-/* FastChoose — CSS-only control (wyraźniejsze ikony) */
+/* FastChoose — motywy + wyraźne ikony + jasne tło kafelków */
 
 :root {
-  --brand: #3c68f7;
-  --brand-accent: #5be7a9;
+  /* Domyślny motyw (teal) — możesz nadpisać przez data-theme na <html> */
+  --brand: #0ea5a6;
+  --brand-accent: #34d399;
+
   --bg: #f7f8fa;
   --text: #222;
   --muted: #444;
   --border: #e5e7eb;
   --card-bg: #ffffff;
-  --shadow-soft: 0 2px 12px rgba(60, 104, 247, 0.08);
-  --shadow-hover: 0 6px 18px rgba(60, 104, 247, 0.18);
 
-  /* Rozmiary ikon i grubość konturu (zwiększone) */
-  --icon-size-question: 60px;
-  --icon-size-answer: 60px;
-  --icon-stroke-width: 1.7;
+  --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-hover: 0 6px 18px rgba(0,0,0,0.14);
+
+  /* Tła i obramowania dla kafelków odpowiedzi (jasne, dopasowane do motywu) */
+  --answer-bg: #f4fffd;     /* delikatna zieleń/teal */
+  --answer-border: #c9f2ea;
+
+  /* Ikony */
+  --icon-size-question: 52px;
+  --icon-size-answer: 52px;
+  --icon-stroke-width: 2.4;
+}
+
+/* Motywy do wyboru (zmień data-theme na <html>) */
+:root[data-theme="teal"] {
+  --brand: #0ea5a6;
+  --brand-accent: #34d399;
+  --answer-bg: #f4fffd;
+  --answer-border: #c9f2ea;
+}
+:root[data-theme="blue"] {
+  --brand: #3c68f7;
+  --brand-accent: #5be7a9;
+  --answer-bg: #f5f8ff;
+  --answer-border: #dfe6ff;
+}
+:root[data-theme="violet"] {
+  --brand: #7c3aed;
+  --brand-accent: #a78bfa;
+  --answer-bg: #f7f5ff;
+  --answer-border: #e2d9ff;
 }
 
 /* Reset i baza */
@@ -54,17 +81,17 @@ select.lang-select {
   padding: 24px 0 32px 0;
 }
 .hero-image-container { width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
-.hero-image { width: 340px; max-width: 90vw; animation: phone-move 2s infinite alternate ease-in-out; box-shadow: 0 4px 24px rgba(60,104,247,0.08); }
+.hero-image { width: 340px; max-width: 90vw; animation: phone-move 2s infinite alternate ease-in-out; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 @keyframes phone-move { 0% { transform: translateX(-12px) rotate(-2deg);} 100% { transform: translateX(12px) rotate(2deg);} }
 .big-title { font-size: 2.2rem; font-weight: 700; color: var(--brand); }
 .subtitle { font-size: 1.1rem; margin-top: 10px; color: var(--muted); }
 .get-started-btn {
   margin-top: 30px; padding: 14px 48px; font-size: 1.2rem; font-weight: 600;
   background: linear-gradient(90deg, var(--brand), var(--brand-accent)); color: #fff;
-  border: none; border-radius: 32px; cursor: pointer; box-shadow: 0 2px 16px rgba(60,104,247,0.12);
+  border: none; border-radius: 32px; cursor: pointer; box-shadow: 0 2px 16px rgba(0,0,0,0.12);
   transition: background 0.2s, box-shadow 0.2s;
 }
-.get-started-btn:hover { background: linear-gradient(90deg, var(--brand-accent), var(--brand)); box-shadow: 0 6px 24px rgba(60,104,247,0.24); }
+.get-started-btn:hover { background: linear-gradient(90deg, var(--brand-accent), var(--brand)); box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
 
 /* Quiz */
 #quiz-container { display: none; flex-grow: 1; flex-direction: column; justify-content: center; align-items: center; padding: 24px 12px 32px; }
@@ -77,8 +104,6 @@ select.lang-select {
 .question-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 26px; }
 .question-icon { display: inline-flex; width: var(--icon-size-question); height: var(--icon-size-question); }
 .question-icon svg { width: 100% !important; height: 100% !important; color: var(--brand); }
-
-/* Kontury i wypełnienia dla ikony pytania (wyraźniejsze) */
 .question-icon svg path,
 .question-icon svg rect,
 .question-icon svg circle,
@@ -95,7 +120,6 @@ select.lang-select {
   vector-effect: non-scaling-stroke;
   paint-order: stroke fill;
 }
-
 #quiz-content .question-text { font-size: 1.9rem; font-weight: 700; color: var(--brand); margin: 0; }
 
 /* Odpowiedzi */
@@ -103,7 +127,9 @@ select.lang-select {
 
 #quiz-content .answers-grid .answer-card {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-  background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 20px 18px;
+  background: var(--answer-bg);               /* delikatne tło pasujące do motywu */
+  border: 1.5px solid var(--answer-border);   /* delikatne obramowanie */
+  border-radius: 16px; padding: 20px 18px;
   cursor: pointer; text-align: center; color: var(--brand);
   transition: border-color .2s, box-shadow .2s, transform .06s ease-out, background-color .2s, color .2s;
 }
@@ -119,8 +145,6 @@ select.lang-select {
 /* Ikony w odpowiedziach — większe i z grubszym konturem */
 .answer-icon { width: var(--icon-size-answer); height: var(--icon-size-answer); display: inline-block; color: inherit; }
 .answer-icon svg { width: 100% !important; height: 100% !important; color: inherit; }
-
-/* Silne wymuszenie koloru i konturu dla wszystkich kształtów */
 #quiz-content .answers-grid .answer-card .answer-icon svg path,
 #quiz-content .answers-grid .answer-card .answer-icon svg rect,
 #quiz-content .answers-grid .answer-card .answer-icon svg circle,
@@ -129,7 +153,7 @@ select.lang-select {
 #quiz-content .answers-grid .answer-card .answer-icon svg polygon,
 #quiz-content .answers-grid .answer-card .answer-icon svg g,
 #quiz-content .answers-grid .answer-card .answer-icon svg use {
-  fill: currentColor !important;   /* jeśli ikony są outline-only, nadal będą czytelne dzięki grubemu stroke */
+  fill: currentColor !important;
   stroke: currentColor !important;
   stroke-width: var(--icon-stroke-width);
   stroke-linecap: round;
@@ -154,7 +178,7 @@ select.lang-select {
 .results-title { font-size: 2rem; font-weight: 700; color: var(--brand); margin-bottom: 24px; }
 .recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; width: 100%; }
 .recommendation-card { background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); padding: 20px; text-align: center; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
-.recommendation-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(60,104,247,0.1); }
+.recommendation-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
 .recommendation-image { width: 100%; height: 200px; object-fit: contain; margin-bottom: 16px; }
 .recommendation-name { font-size: 1.25rem; font-weight: 600; color: #333; margin-bottom: 16px; }
 .store-links-container { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
@@ -163,7 +187,7 @@ select.lang-select {
 
 /* Restart */
 .restart-btn { margin-top: 32px; padding: 12px 32px; font-size: 1.1rem; border: none; border-radius: 24px; background: var(--brand); color: #fff; cursor: pointer; font-weight: 600; transition: background-color 0.2s; }
-.restart-btn:hover { background-color: #2a4ac8; }
+.restart-btn:hover { background-color: #0c8b8c; }
 
 /* Footer */
 footer { margin-top: auto; background: #f1f2f4; padding: 20px 0; text-align: center; font-size: 1rem; color: #888; border-top: 1px solid #e3e4e8; flex-shrink: 0; }
