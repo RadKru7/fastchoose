@@ -1,4 +1,4 @@
-// FastChoose — SVG inline, wszystko sterowane CSS-em (bez width/height w JS)
+// FastChoose — SVG inline, kontrola ikon w CSS + okrągły Back wyrównany do lewej
 document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('get-started-btn');
   const langSelect = document.getElementById('lang-select');
@@ -42,11 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function normalizeSvg(svgEl) {
     if (!svgEl) return;
-    // usuń narzucone width/height, pozwól CSS rządzić
     svgEl.removeAttribute('width');
     svgEl.removeAttribute('height');
     svgEl.style.color = 'inherit';
-
     const nodes = svgEl.querySelectorAll('*');
     nodes.forEach(n => {
       const style = n.getAttribute('style') || '';
@@ -67,11 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function setBackButtonLabel() {
-    if (!backBtnEl) return;
-    backBtnEl.textContent =
-      currentLang === 'pl' ? 'Wstecz' :
-      currentLang === 'es' ? 'Atrás' : 'Back';
+  function backAriaLabel() {
+    return currentLang === 'pl' ? 'Wstecz' :
+           currentLang === 'es' ? 'Atrás' : 'Back';
   }
 
   function renderQuizShell() {
@@ -81,15 +77,26 @@ document.addEventListener('DOMContentLoaded', () => {
         <div id="question-text" class="question-text"></div>
       </div>
       <div id="answers-container" class="answers-grid"></div>
-      <button id="back-btn" style="display:none;"></button>
+      <div class="back-row">
+        <button id="back-btn" class="back-icon-btn" style="display:none;" aria-label=""></button>
+      </div>
     `;
     questionTextEl = document.getElementById('question-text');
     questionIconWrap = document.getElementById('question-icon');
     answersContainerEl = document.getElementById('answers-container');
     backBtnEl = document.getElementById('back-btn');
 
-    setBackButtonLabel();
-    if (backBtnEl) backBtnEl.addEventListener('click', goBack);
+    // Ikona strzałki w przycisku Wstecz (SVG inline sterowany CSS-em)
+    if (backBtnEl) {
+      backBtnEl.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        <span class="sr-only">${backAriaLabel()}</span>
+      `;
+      backBtnEl.setAttribute('aria-label', backAriaLabel());
+      backBtnEl.addEventListener('click', goBack);
+    }
   }
 
   function startQuiz() {
@@ -149,12 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function displayQuestion(data) {
-    if (!questionTextEl || !answersContainerEl || !questionIconWrap) return;
+    if (!questionTextEl || !answersContainerEl || !questionIconWrap || !backBtnEl) return;
 
     // Tekst pytania
     questionTextEl.textContent = data.question_text || '';
 
-    // Ikona pytania — dodajemy bez dodatkowego wrappera, CSS steruje rozmiarem
+    // Ikona pytania
     questionIconWrap.innerHTML = '';
     if (data.question_icon_url && data.question_icon_url.endsWith('.svg')) {
       const svgQ = await fetchInlineSvg(data.question_icon_url);
@@ -201,7 +208,9 @@ document.addEventListener('DOMContentLoaded', () => {
       answersContainerEl.appendChild(card);
     }
 
-    if (backBtnEl) backBtnEl.style.display = history.length > 0 ? 'block' : 'none';
+    // Pokaż/ukryj przycisk Wstecz (ikonowy)
+    backBtnEl.style.display = history.length > 0 ? 'inline-flex' : 'none';
+    backBtnEl.setAttribute('aria-label', backAriaLabel());
 
     resultsContainer.style.display = 'none';
     quizContainer.style.display = 'flex';
