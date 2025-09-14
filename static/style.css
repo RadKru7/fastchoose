@@ -23,20 +23,31 @@
   --icon-size-answer: 60px;
   --icon-stroke-width: 1.8;
 
-  /* Mono-kolor ikon: pastelowy start (fallback do koloru tekstu, gdy color-mix niedostępny) */
+  /* Mono-kolor ikon: pastelowy start */
   --icon-initial-color: color-mix(in oklab, var(--brand) 55%, white);
 
   /* Ramka dla obrazów telefonów (wyniki) */
-  --image-frame-bg: #f8fafc;
   --image-frame-border: #e5e7eb;
+
+  /* Trzeci kolor — subtelne tło pod zdjęciami telefonów
+     (lekko odróżnia się od głównego tła strony) */
+  --phones-bg: color-mix(in oklab, var(--brand) 9%, white);
 }
 
 /* Alternatywne motywy */
 :root[data-theme="blue"] {
-  --brand: #3c68f7; --brand-accent: #5be7a9; --answer-bg: #f5f8ff; --answer-border: #dfe6ff;
+  --brand: #3c68f7;
+  --brand-accent: #5be7a9;
+  --answer-bg: #f5f8ff;
+  --answer-border: #dfe6ff;
+  --phones-bg: color-mix(in oklab, #3c68f7 9%, white); /* delikatny błękit */
 }
 :root[data-theme="violet"] {
-  --brand: #7c3aed; --brand-accent: #a78bfa; --answer-bg: #f7f5ff; --answer-border: #e2d9ff;
+  --brand: #7c3aed;
+  --brand-accent: #a78bfa;
+  --answer-bg: #f7f5ff;
+  --answer-border: #e2d9ff;
+  --phones-bg: color-mix(in oklab, #7c3aed 9%, white); /* delikatny fiolet */
 }
 
 *,
@@ -184,15 +195,15 @@ select.lang-select {
   display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Ramka i powiększenie obrazów telefonów */
+/* Ramka i powiększenie obrazów telefonów + trzeci kolor tła */
 .recommendation-image {
   width: 100%;
   height: 300px; /* +50% */
   object-fit: contain;
   margin-bottom: 16px;
 
-  /* ramka i tło widoczne przy przezroczystych obrazach */
-  background: var(--image-frame-bg);
+  /* nowe tło (trzeci kolor) + ramka */
+  background: var(--phones-bg);
   border: 1px solid var(--image-frame-border);
   border-radius: 12px;
   padding: 10px;
@@ -217,7 +228,7 @@ select.lang-select {
 }
 .restart-btn:hover { background-color: #0c8b8c; }
 
-/* Footer (opcjonalnie: przywrócone stylowanie) */
+/* Footer (przywrócone stylowanie) */
 footer {
   margin-top: auto;
   width: 100%;
