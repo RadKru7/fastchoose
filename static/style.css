@@ -23,10 +23,12 @@
   --icon-size-answer: 60px;
   --icon-stroke-width: 1.8;
 
-  /* Mono-kolor ikon: domyślnie taki sam jak tekst (currentColor).
-     Jeśli chcesz pastelowe ikony, ustaw na color-mix, np.:
-     --icon-initial-color: color-mix(in oklab, var(--brand) 55%, white); */
-  --icon-initial-color: currentColor;
+  /* Mono-kolor ikon: pastelowy start (fallback do koloru tekstu, gdy color-mix niedostępny) */
+  --icon-initial-color: color-mix(in oklab, var(--brand) 55%, white);
+
+  /* Ramka dla obrazów telefonów (wyniki) */
+  --image-frame-bg: #f8fafc;
+  --image-frame-border: #e5e7eb;
 }
 
 /* Alternatywne motywy */
@@ -126,7 +128,7 @@ select.lang-select {
 #quiz-content .answers-grid .answer-card:focus-visible { outline: 3px solid rgba(14,165,166,0.35); outline-offset: 3px; }
 #quiz-content .answers-grid .answer-card:active { transform: translateY(1px); }
 
-/* Ikony odpowiedzi — MONO: kolor = currentColor (czyli taki sam jak napis) */
+/* Ikony odpowiedzi — MONO: pastelowy kolor startowy */
 .answer-icon { width: var(--icon-size-answer); height: var(--icon-size-answer); display: inline-block; color: var(--icon-initial-color); }
 .answer-icon svg { width: 100% !important; height: 100% !important; }
 /* Ujednolicamy tylko kontury przez CSS; wypełnienia ustawi JS zależnie od oryginału */
@@ -177,20 +179,65 @@ select.lang-select {
 #results-content-wrapper { width: 100%; max-width: 960px; text-align: center; }
 .results-title { font-size: 2rem; font-weight: 700; color: var(--brand); margin-bottom: 24px; }
 .recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; width: 100%; }
-.recommendation-card { background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); padding: 20px; text-align: center; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+.recommendation-card {
+  background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); padding: 20px; text-align: center;
+  display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Ramka i powiększenie obrazów telefonów */
+.recommendation-image {
+  width: 100%;
+  height: 300px; /* +50% */
+  object-fit: contain;
+  margin-bottom: 16px;
+
+  /* ramka i tło widoczne przy przezroczystych obrazach */
+  background: var(--image-frame-bg);
+  border: 1px solid var(--image-frame-border);
+  border-radius: 12px;
+  padding: 10px;
+
+  display: block;
+  box-sizing: border-box;
+}
+
 .recommendation-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-.recommendation-image { width: 100%; height: 200px; object-fit: contain; margin-bottom: 16px; }
 .recommendation-name { font-size: 1.25rem; font-weight: 600; color: #333; margin-bottom: 16px; }
 .store-links-container { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
-.store-link { display: block; padding: 10px 15px; background-color: #f0f4ff; color: var(--brand); text-decoration: none; border-radius: 8px; font-weight: 600; transition: background-color 0.2s, color 0.2s; }
+.store-link {
+  display: block; padding: 10px 15px; background-color: #f0f4ff; color: var(--brand); text-decoration: none; border-radius: 8px; font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+}
 .store-link:hover { background-color: var(--brand); color: #fff; }
 
 /* Restart */
-.restart-btn { margin-top: 32px; padding: 12px 32px; font-size: 1.1rem; border: none; border-radius: 24px; background: var(--brand); color: #fff; cursor: pointer; font-weight: 600; transition: background-color 0.2s; }
+.restart-btn {
+  margin-top: 32px; padding: 12px 32px; font-size: 1.1rem; border: none; border-radius: 24px; background: var(--brand); color: #fff; cursor: pointer; font-weight: 600;
+  transition: background-color 0.2s;
+}
 .restart-btn:hover { background-color: #0c8b8c; }
 
+/* Footer (opcjonalnie: przywrócone stylowanie) */
+footer {
+  margin-top: auto;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-links { display: flex; gap: 16px; }
+.footer-links a { color: var(--brand); text-decoration: none; font-weight: 600; }
+.footer-links a:hover { text-decoration: underline; }
+
 /* Responsive */
-@media (max-width: 900px) { .answers-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); } }
+@media (max-width: 900px) {
+  .answers-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+}
+
 @media (max-width: 600px) {
   .logo { font-size: 1.3rem; }
   header { flex-direction: column; gap: 12px; padding: 16px 8px 2px 8px; }
@@ -198,4 +245,11 @@ select.lang-select {
   .big-title { font-size: 1.25rem; }
   .answers-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
   .answer-title { font-size: 1.18rem; }
+
+  /* mniejsza wysokość obrazów telefonów i delikatnie mniejszy padding */
+  .recommendation-image { height: 240px; padding: 8px; }
+
+  /* stopka wyrównana na środku na mobile */
+  footer { align-items: center; text-align: center; }
+  .footer-links { justify-content: center; flex-wrap: wrap; }
 }
