@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const langSelect = document.getElementById('lang-select');
 
   const mainContent = document.getElementById('main-content');
-  const quizContainer = document.getElementById('quiz-container');
+  const quizSectionBg = document.getElementById('quiz-section-bg');
   const quizContent = document.getElementById('quiz-content');
 
   const resultsContainer = document.getElementById('results-container');
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let pathAnswers = [];
   let history = [];
   let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'pl';
+  let totalQuestions = 5; // Domyślnie, można nadpisać dynamicznie!
 
   const svgCache = new Map();
 
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let questionIconWrap = null;
   let answersContainerEl = null;
   let backBtnEl = null;
+  let quizProgressCounter = null;
 
   async function fetchInlineSvg(url) {
     if (!url || !url.endsWith('.svg')) return null;
@@ -41,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // MONO-kolor: zachowujemy "fill='none'" tam gdzie był; elementy z wypełnieniem dostają fill=currentColor.
-  // Kontury (stroke) ustawiamy na currentColor TYLKO jeśli oryginał miał stroke.
+  // Kontury (stroke) ustawiamy na currentColor TYLKO jeżeli oryginał miał stroke.
   function normalizeSvg(svgEl) {
     if (!svgEl) return;
     svgEl.removeAttribute('width');
@@ -75,13 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Kontur: tylko jeśli oryginał miał stroke
+      // Kontur: tylko jeżeli oryginał miał stroke
       if (hadStroke) n.setAttribute('stroke', 'currentColor');
 
       // Wypełnienie:
-      // - jeśli autor ustawił fill="none" → zostawiamy "none"
-      // - jeśli ustawił jakikolwiek kolor → ustawiamy na currentColor (np. paski baterii)
-      // - jeśli brak fill, ale jest stroke → wymuś fill="none" (żeby nie wypełniać zarysów)
+      // - jeżeli autor ustawił fill="none" → zostawiamy "none"
+      // - jeżeli ustawił jakikolwiek kolor → ustawiamy na currentColor (np. paski baterii)
+      // - jeżeli brak fill, ale jest stroke → wymuś fill="none" (żeby nie wypełniać zarysów)
       if (hadFill) {
         if (fillVal !== 'none') {
           n.setAttribute('fill', 'currentColor');
@@ -99,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderQuizShell() {
     quizContent.innerHTML = `
+      <div class="quiz-progress-counter" id="quiz-progress-counter" style="display:none;">1/5</div>
       <div class="question-header">
         <div id="question-icon" class="question-icon" aria-hidden="true"></div>
         <div id="question-text" class="question-text"></div>
@@ -112,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     questionIconWrap = document.getElementById('question-icon');
     answersContainerEl = document.getElementById('answers-container');
     backBtnEl = document.getElementById('back-btn');
+    quizProgressCounter = document.getElementById('quiz-progress-counter');
 
     if (backBtnEl) {
       backBtnEl.innerHTML = `
@@ -128,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function startQuiz() {
     mainContent.style.display = 'none';
     resultsContainer.style.display = 'none';
-    quizContainer.style.display = 'flex';
+    if (quizSectionBg) quizSectionBg.style.display = 'flex';
 
     currentQuestionId = 1;
     pathAnswers = [];
@@ -140,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleLanguageChange() {
     currentLang = this.value;
-    if (quizContainer && quizContainer.style.display !== 'none') {
+    if (quizSectionBg && quizSectionBg.style.display !== 'none') {
       renderQuizShell();
       fetchQuestion(currentQuestionId, true);
     }
@@ -183,6 +187,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function displayQuestion(data) {
     if (!questionTextEl || !answersContainerEl || !questionIconWrap || !backBtnEl) return;
+
+    // Licznik pytań (dynamiczny, wyciągaj total z serwera jeśli jest)
+    let qIndex = data.question_number || (history.length + 1);
+    let qTotal = data.total_questions || totalQuestions;
+    totalQuestions = qTotal;
+
+    if (quizProgressCounter) {
+      quizProgressCounter.textContent = `${qIndex}/${qTotal}`;
+      quizProgressCounter.style.display = "block";
+    }
 
     // Tekst pytania
     questionTextEl.textContent = data.question_text || '';
@@ -239,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     backBtnEl.setAttribute('aria-label', backAriaLabel());
 
     resultsContainer.style.display = 'none';
-    quizContainer.style.display = 'flex';
+    if (quizSectionBg) quizSectionBg.style.display = 'flex';
   }
 
   function handleAnswer(answer) {
@@ -255,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function displayResults(recommendations) {
-    quizContainer.style.display = 'none';
+    if (quizSectionBg) quizSectionBg.style.display = 'none';
     resultsContainer.style.display = 'flex';
     resultsWrapper.innerHTML = '';
 
@@ -323,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pathAnswers = [];
     history = [];
     resultsContainer.style.display = 'none';
-    quizContainer.style.display = 'none';
+    if (quizSectionBg) quizSectionBg.style.display = 'none';
     mainContent.style.display = 'flex';
   }
 
