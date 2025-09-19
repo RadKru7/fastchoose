@@ -12,9 +12,9 @@
     <a href="/" class="logo">FastChoose</a>
     <div class="lang-select-container">
       <svg class="lang-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <circle cx="12" cy="12" r="10" stroke="#3c68f7" stroke-width="2"/>
-        <path d="M2 12h20M12 2a10 10 0 000 20" stroke="#3c68f7" stroke-width="1.5"/>
-        <ellipse cx="12" cy="12" rx="4.5" ry="10" stroke="#3c68f7" stroke-width="1.5"/>
+        <circle cx="12" cy="12" r="10" stroke-width="2"/>
+        <path d="M2 12h20M12 2a10 10 0 000 20" stroke-width="1.5"/>
+        <ellipse cx="12" cy="12" rx="4.5" ry="10" stroke-width="1.5"/>
       </svg>
       <select id="lang-select" class="lang-select" aria-label="Wybierz język">
         <option value="pl">Polski</option>
@@ -49,9 +49,8 @@
   </div>
 
   <footer>
-    <div class="footer-links">
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
+    <div class="footer-links" id="footer-links">
+      <!-- Linki About/Contact generowane przez JS zgodnie z językiem -->
     </div>
     &copy; 2025 FastChoose. All rights reserved.
   </footer>
