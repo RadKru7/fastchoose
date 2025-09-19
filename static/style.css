@@ -14,13 +14,11 @@
   --shadow-soft: 0 4px 24px rgba(77,125,128,0.07);
   --shadow-hover: 0 8px 24px rgba(77,125,128,0.14);
 
-  /* Ikony */
   --icon-size-question: 60px;
   --icon-size-answer: 60px;
   --icon-stroke-width: 1.8;
   --icon-initial-color: color-mix(in oklab, var(--brand-dark) 30%, white);
 
-  /* Ramka dla obrazów telefonów */
   --phones-bg: #E3F2EF;
   --image-frame-border: #d0dedb;
 }
@@ -32,13 +30,14 @@ header {
   background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.03);
   flex-shrink: 0;
 }
-.logo { font-size: 2rem; font-weight: bold; color: var(--brand); letter-spacing: 1px; text-decoration: none; }
+.logo { font-size: 2rem; font-weight: bold; color: var(--brand-dark); letter-spacing: 1px; text-decoration: none; transition: color 0.2s;}
 .lang-select-container { display: flex; align-items: center; gap: 8px; }
-.lang-icon { width: 22px; height: 22px; vertical-align: middle; }
+.lang-icon { width: 22px; height: 22px; vertical-align: middle;}
+.lang-icon * { stroke: var(--brand-dark) !important; transition: stroke .2s;}
 select.lang-select {
   border: 1px solid #d9e2ec; border-radius: 6px; background: var(--bg);
   padding: 6px 28px 6px 32px; font-size: 1rem; appearance: none; cursor: pointer; outline: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='%234D7D80' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5' stroke-width='2'/></svg>");
   background-repeat: no-repeat; background-position: right 8px center;
 }
 
@@ -70,41 +69,44 @@ body {
 }
 .get-started-btn:hover { background: linear-gradient(90deg, var(--brand-dark), var(--brand)); box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
 
-/* QUIZ SECTION FULL-WIDTH */
+/* QUIZ SECTION FULL-WIDTH, CENTERED VERTICALLY */
 .quiz-section-bg {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   background: var(--brand);
-  padding: 60px 0 80px 0;
-  min-height: 400px;
+  min-height: 100vh;
   position: relative;
   box-shadow: 0 6px 48px rgba(140,192,195,0.07);
   transition: background .3s;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
 }
 
 /* QUIZ CONTENT BOX */
 #quiz-content {
   width: 100%;
   max-width: 700px;
-  margin: 0 auto;
   background: var(--card-bg);
   border-radius: 24px;
   box-shadow: var(--shadow-soft);
-  padding: 40px 36px 44px 36px;
+  padding: 65px 36px 44px 36px; /* zwiększony padding-top na licznik */
   text-align: center;
   position: relative;
   transition: box-shadow .2s;
   min-height: 320px;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* LICZNIK PYTAŃ */
 .quiz-progress-counter {
   position: absolute;
-  top: 24px;
+  top: 16px;
   right: 32px;
   z-index: 10;
   background: var(--brand-dark);
@@ -119,9 +121,12 @@ body {
   text-align: center;
   border: 3px solid var(--card-bg);
   transition: background .2s;
+  margin-bottom: 0;
 }
 @media (max-width: 900px) {
-  .quiz-progress-counter { top: 14px; right: 14px; font-size: 1rem; padding: 6px 16px; }
+  .quiz-section-bg { min-height: 70vh; }
+  .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px;}
+  #quiz-content { padding: 55px 2vw 24px 2vw; }
 }
 
 /* Nowoczesny nagłówek pytania */
@@ -131,6 +136,8 @@ body {
   color: var(--brand-dark);
   margin: 0 0 24px 0;
   letter-spacing: -1px;
+  word-break: break-word;
+  width: 100%;
 }
 
 /* Odpowiedzi w siatce */
@@ -187,8 +194,15 @@ body {
   color: currentColor;
 }
 
-/* Przycisk wstecz */
-.back-row { display: flex; justify-content: flex-start; margin-top: 16px; }
+/* Przycisk wstecz - padding od lewej */
+.back-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 16px;
+  width: 100%;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
 .back-icon-btn {
   width: 44px; height: 44px; border-radius: 50%;
   border: 2px solid var(--brand-dark);
@@ -198,6 +212,7 @@ body {
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.07);
   transition: background-color .2s, transform .06s ease-out, box-shadow .2s;
+  font-size: 0.97rem;
 }
 .back-icon-btn:hover { background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
 .back-icon-btn:active { transform: translateY(1px); }
@@ -205,6 +220,7 @@ body {
   width: 22px; height: 22px; stroke: currentColor; fill: none;
   stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
 }
+.back-icon-btn .sr-only { font-size: 1.03rem; }
 
 /* WYNIKI I REKOMENDACJE */
 #results-container { display: none; flex-grow: 1; flex-direction: column; justify-content: center; align-items: center; padding: 32px 16px; width: 100%; box-sizing: border-box; }
@@ -252,20 +268,31 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: center;
+  text-align: center;
 }
-.footer-links { display: flex; gap: 16px; }
-.footer-links a { color: var(--brand-dark); text-decoration: none; font-weight: 600; }
-.footer-links a:hover { text-decoration: underline; }
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  #quiz-content { padding: 18px 2vw 24px 2vw; }
-  .quiz-section-bg { padding: 32px 0 48px 0; }
+.footer-links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.footer-links a {
+  color: var(--brand-dark);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+  font-size: 1.08rem;
+}
+.footer-links a:hover { text-decoration: underline; color: var(--brand);}
+@media (max-width: 700px) {
+  #quiz-content { padding: 55px 2vw 24px 2vw; }
+  .quiz-section-bg { min-height: 70vh; }
   .recommendation-image { height: 200px; }
   .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px; }
   .main-content { padding: 16px 0 18px 0; }
 }
-
 @media (max-width: 600px) {
   .logo { font-size: 1.3rem; }
   header { flex-direction: column; gap: 12px; padding: 16px 8px 2px 8px; }
@@ -275,5 +302,5 @@ footer {
   .answer-title { font-size: 1.06rem; }
   .recommendation-image { height: 170px; }
   footer { align-items: center; text-align: center; }
-  .footer-links { justify-content: center; flex-wrap: wrap; }
+  .footer-links { justify-content: center; flex-wrap: wrap; gap: 14px;}
 }
