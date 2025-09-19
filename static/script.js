@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const resultsContainer = document.getElementById('results-container');
   const resultsWrapper = document.getElementById('results-content-wrapper');
+  const footerLinks = document.getElementById('footer-links');
+  const logo = document.querySelector('.logo');
+  const langIcon = document.querySelector('.lang-icon');
 
   let currentQuestionId = 1;
   let pathAnswers = [];
@@ -23,6 +26,34 @@ document.addEventListener('DOMContentLoaded', () => {
   let answersContainerEl = null;
   let backBtnEl = null;
   let quizProgressCounter = null;
+
+  // --- Stopka About/Contact tłumaczenia ---
+  function renderFooterLinks() {
+    const dict = {
+      pl: { about: "O nas", contact: "Kontakt" },
+      en: { about: "About", contact: "Contact" },
+      es: { about: "Acerca de", contact: "Contacto" }
+    };
+    const lang = currentLang in dict ? currentLang : "pl";
+    if (!footerLinks) return;
+    footerLinks.innerHTML = `
+      <a href="/about">${dict[lang].about}</a>
+      <a href="/contact">${dict[lang].contact}</a>
+    `;
+  }
+
+  // --- Logo kolor jak pytanie ---
+  function updateLogoColor() {
+    if (logo) logo.style.color = "var(--brand-dark)";
+  }
+
+  // --- Ikona języka kolor brand-dark ---
+  function updateLangIconColor() {
+    if (!langIcon) return;
+    langIcon.querySelectorAll('*').forEach(el => {
+      el.setAttribute('stroke', getComputedStyle(document.documentElement).getPropertyValue('--brand-dark').trim() || "#4D7D80");
+    });
+  }
 
   async function fetchInlineSvg(url) {
     if (!url || !url.endsWith('.svg')) return null;
@@ -42,8 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // MONO-kolor: zachowujemy "fill='none'" tam gdzie był; elementy z wypełnieniem dostają fill=currentColor.
-  // Kontury (stroke) ustawiamy na currentColor TYLKO jeżeli oryginał miał stroke.
   function normalizeSvg(svgEl) {
     if (!svgEl) return;
     svgEl.removeAttribute('width');
@@ -54,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
     nodes.forEach(n => {
       const tag = n.tagName.toLowerCase();
 
-      // oczyść inline style fill/stroke/color
       const style = n.getAttribute('style') || '';
       if (style) {
         const cleaned = style
@@ -70,24 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const hadFill = n.hasAttribute('fill');
       const fillVal = (n.getAttribute('fill') || '').trim().toLowerCase();
 
-      // Tekst wewnątrz SVG (np. $$) malujemy wprost w jednym kolorze
       if (tag === 'text') {
         n.setAttribute('fill', 'currentColor');
         n.removeAttribute('stroke');
         return;
       }
 
-      // Kontur: tylko jeżeli oryginał miał stroke
       if (hadStroke) n.setAttribute('stroke', 'currentColor');
-
-      // Wypełnienie:
-      // - jeżeli autor ustawił fill="none" → zostawiamy "none"
-      // - jeżeli ustawił jakikolwiek kolor → ustawiamy na currentColor (np. paski baterii)
-      // - jeżeli brak fill, ale jest stroke → wymuś fill="none" (żeby nie wypełniać zarysów)
       if (hadFill) {
         if (fillVal !== 'none') {
           n.setAttribute('fill', 'currentColor');
-        } // else zostaw "none"
+        }
       } else if (hadStroke) {
         n.setAttribute('fill', 'none');
       }
@@ -144,6 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleLanguageChange() {
     currentLang = this.value;
+    renderFooterLinks();
+    updateLogoColor();
+    updateLangIconColor();
     if (quizSectionBg && quizSectionBg.style.display !== 'none') {
       renderQuizShell();
       fetchQuestion(currentQuestionId, true);
@@ -273,11 +297,14 @@ document.addEventListener('DOMContentLoaded', () => {
     resultsContainer.style.display = 'flex';
     resultsWrapper.innerHTML = '';
 
+    const dict = {
+      pl: 'Nasze rekomendacje',
+      en: 'Our Recommendations',
+      es: 'Nuestras recomendaciones'
+    };
     const title = document.createElement('div');
     title.className = 'results-title';
-    title.textContent =
-      currentLang === 'pl' ? 'Nasze rekomendacje' :
-      currentLang === 'es' ? 'Nuestras recomendaciones' : 'Our Recommendations';
+    title.textContent = dict[currentLang] || dict.pl;
     resultsWrapper.appendChild(title);
 
     if (!recommendations.length) {
@@ -323,11 +350,14 @@ document.addEventListener('DOMContentLoaded', () => {
       resultsWrapper.appendChild(grid);
     }
 
+    const dictBtn = {
+      pl: 'Zacznij od nowa',
+      en: 'Restart',
+      es: 'Empezar de nuevo'
+    };
     const restart = document.createElement('button');
     restart.className = 'restart-btn';
-    restart.textContent =
-      currentLang === 'pl' ? 'Zacznij od nowa' :
-      currentLang === 'es' ? 'Empezar de nuevo' : 'Restart';
+    restart.textContent = dictBtn[currentLang] || dictBtn.pl;
     restart.addEventListener('click', resetApp);
     resultsWrapper.appendChild(restart);
   }
@@ -341,6 +371,12 @@ document.addEventListener('DOMContentLoaded', () => {
     mainContent.style.display = 'flex';
   }
 
+  // --- INIT ---
   if (startBtn) startBtn.addEventListener('click', startQuiz);
   if (langSelect) langSelect.addEventListener('change', handleLanguageChange);
+
+  // --- Inicjalizacja na starcie ---
+  renderFooterLinks();
+  updateLogoColor();
+  updateLangIconColor();
 });
