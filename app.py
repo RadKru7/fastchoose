@@ -313,11 +313,21 @@ def get_result():
         if not path_answers or not isinstance(path_answers, list):
             return jsonify({'error': 'Invalid or missing "pathAnswers" parameter.'}), 400
 
-        path_key = tuple(sorted(path_answers))
-        product_ids = paths_db.get(path_key)
+        # NOWY ALGORYTM SCORINGOWY (answers_x_products)
+        product_scores = {pid: 0 for pid in products_db.keys()}
+        for answer_id in path_answers:
+            ranking = answers_x_products.get(answer_id, [])
+            n = len(ranking)
+            for idx, phone_id in enumerate(ranking):
+                if phone_id in product_scores:
+                    product_scores[phone_id] += n - idx
+
+        # Sortuj produkty po punktach malejąco, wybierz tylko te z punktami
+        top_products = sorted(product_scores.items(), key=lambda x: x[1], reverse=True)
+        product_ids = [pid for pid, score in top_products if score > 0][:3]
 
         if not product_ids:
-            return jsonify({'recommendations': [], 'message': 'No specific recommendations found for this path.'})
+            return jsonify({'recommendations': [], 'message': 'No specific recommendations found for your answers.'})
 
         recommendations = []
         matching_store_ids = [store_id for store_id, store_data in stores_db.items() if store_data['language'] == language]
@@ -328,7 +338,7 @@ def get_result():
                 continue
 
             product_name = product_data.get(language, product_data['en'])
-            
+
             product_links = []
             for link_data in product_links_db.get(product_id, []):
                 if link_data['store_id'] in matching_store_ids:
@@ -337,10 +347,9 @@ def get_result():
                         'store_name': store_name,
                         'link_url': link_data['url']
                     })
-            
+
             image_url = ''
             if product_data.get('image_path'):
-                # Tutaj też można dodać sprawdzanie, czy plik istnieje, dla pełnej kuloodporności
                 if os.path.exists(os.path.join(app.static_folder, product_data['image_path'])):
                     image_url = url_for('static', filename=product_data['image_path'])
 
