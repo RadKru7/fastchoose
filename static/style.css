@@ -37,7 +37,7 @@ header {
 select.lang-select {
   border: 1px solid #d9e2ec; border-radius: 6px; background: var(--bg);
   padding: 6px 28px 6px 32px; font-size: 1rem; appearance: none; cursor: pointer; outline: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='%234D7D80' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5' stroke-width='2'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='%234D7D80' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat: no-repeat; background-position: right 8px center;
 }
 
@@ -56,8 +56,28 @@ body {
   flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
   padding: 24px 0 32px 0;
 }
-.hero-image-container { width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
-.hero-image { width: 340px; max-width: 90vw; animation: phone-move 2s infinite alternate ease-in-out; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+
+/* --- POPRAWKA: dopasuj tło i usuń cień pod telefonem --- */
+.hero-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  background: var(--bg);      /* Tło jak strona */
+  box-shadow: none !important;/* Usuwa ewentualny cień */
+  border-radius: 0;
+}
+.hero-image {
+  width: 340px;
+  max-width: 90vw;
+  animation: phone-move 2s infinite alternate ease-in-out;
+  background: var(--bg);      /* Tło jak strona */
+  box-shadow: none !important;/* Usuwa cień za grafiką telefonu */
+  border-radius: 0;
+}
+/* --- KONIEC POPRAWKI --- */
+
 @keyframes phone-move { 0% { transform: translateX(-12px) rotate(-2deg);} 100% { transform: translateX(12px) rotate(2deg);} }
 .big-title { font-size: 2.2rem; font-weight: 700; color: var(--brand); }
 .subtitle { font-size: 1.1rem; margin-top: 10px; color: var(--muted); }
