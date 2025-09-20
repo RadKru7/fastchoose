@@ -220,7 +220,7 @@ products_db = {
 236: {'pl': 'Vivo Y16', 'en': 'Vivo Y16', 'es': 'Vivo Y16', 'image_path': 'graphic/vivo_y16.png'},
 237: {'pl': 'Honor 90', 'en': 'Honor 90', 'es': 'Honor 90', 'image_path': 'graphic/honor_90.png'},
 238: {'pl': 'Honor X7b', 'en': 'Honor X7b', 'es': 'Honor X7b', 'image_path': 'graphic/honor_x7b.png'},
-239: {'pl': 'Motorola Moto G54 Power', 'en': 'Motorola Moto G54 Power', 'es': 'Motorola Moto G54 Power', 'image_path': 'graphic/motorola_moto_g54.png'},
+239: {'pl': 'Motorola Moto G54 Power', 'en': 'Motorola Moto G54 Power', 'es': 'Motorola Moto G54 Power', 'image_path': 'graphic/motorola_moto_g54_power.png'},
 240: {'pl': 'Motorola Moto G84', 'en': 'Motorola Moto G84', 'es': 'Motorola Moto G84', 'image_path': 'graphic/motorola_moto_g84.png'},
 241: {'pl': 'Motorola Edge 40 Neo', 'en': 'Motorola Edge 40 Neo', 'es': 'Motorola Edge 40 Neo', 'image_path': 'graphic/motorola_edge_40_neo.png'},
 242: {'pl': 'Google Pixel 8', 'en': 'Google Pixel 8', 'es': 'Google Pixel 8', 'image_path': 'graphic/google_pixel_8.png'},
