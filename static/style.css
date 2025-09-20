@@ -262,13 +262,13 @@ body {
 #results-content-wrapper { width: 100%; max-width: 960px; text-align: center; }
 .results-title { font-size: 2rem; font-weight: 700; color: var(--brand-dark); margin-bottom: 24px; }
 
-/* --- KLUCZOWA ZMIANA: zawsze 3 w linii --- */
+/* --- KLUCZOWA ZMIANA: zawsze 3 w linii, wyśrodkowane --- */
 .recommendations-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  width: 100%;
-  justify-items: center;
+  justify-content: center;
+  width: auto;
 }
 .recommendation-card {
   width: 280px;
@@ -334,7 +334,11 @@ footer {
   #quiz-content { padding: 55px 2vw 24px 2vw; }
   #results-container { padding: 55px 2vw 24px 2vw;}
   .quiz-section-bg { min-height: 70vh; }
-  .recommendations-grid { grid-template-columns: 1fr !important; }
+  .recommendations-grid {
+    grid-template-columns: 1fr !important;
+    justify-content: center;
+    width: auto;
+  }
   .recommendation-image { height: 200px; }
   .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px; }
   .main-content { padding: 16px 0 18px 0; }
