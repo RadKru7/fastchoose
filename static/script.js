@@ -276,8 +276,9 @@ document.addEventListener('DOMContentLoaded', () => {
     backBtnEl.style.display = history.length > 0 ? 'inline-flex' : 'none';
     backBtnEl.setAttribute('aria-label', backAriaLabel());
 
+    // Pokazuj quiz, chowaj wyniki (ale nie chowaj quiz-section-bg!)
     resultsContainer.style.display = 'none';
-    if (quizSectionBg) quizSectionBg.style.display = 'flex';
+    quizContent.style.display = 'block';
   }
 
   function handleAnswer(answer) {
@@ -293,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function displayResults(recommendations) {
-    if (quizSectionBg) quizSectionBg.style.display = 'none';
+    quizContent.style.display = 'none';
     resultsContainer.style.display = 'flex';
     resultsWrapper.innerHTML = '';
 
@@ -367,6 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pathAnswers = [];
     history = [];
     resultsContainer.style.display = 'none';
+    quizContent.style.display = 'none';
     if (quizSectionBg) quizSectionBg.style.display = 'none';
     mainContent.style.display = 'flex';
   }
