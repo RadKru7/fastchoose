@@ -261,8 +261,17 @@ body {
 /* WYNIKI I REKOMENDACJE */
 #results-content-wrapper { width: 100%; max-width: 960px; text-align: center; }
 .results-title { font-size: 2rem; font-weight: 700; color: var(--brand-dark); margin-bottom: 24px; }
-.recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; width: 100%; }
+
+/* --- KLUCZOWA ZMIANA: zawsze 3 w linii --- */
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  justify-items: center;
+}
 .recommendation-card {
+  width: 280px;
   background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); padding: 20px; text-align: center;
   display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -325,6 +334,7 @@ footer {
   #quiz-content { padding: 55px 2vw 24px 2vw; }
   #results-container { padding: 55px 2vw 24px 2vw;}
   .quiz-section-bg { min-height: 70vh; }
+  .recommendations-grid { grid-template-columns: 1fr !important; }
   .recommendation-image { height: 200px; }
   .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px; }
   .main-content { padding: 16px 0 18px 0; }
