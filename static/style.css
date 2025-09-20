@@ -56,28 +56,24 @@ body {
   flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
   padding: 24px 0 32px 0;
 }
-
-/* --- POPRAWKA: dopasuj tło i usuń cień pod telefonem --- */
 .hero-image-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  background: var(--bg);      /* Tło jak strona */
-  box-shadow: none !important;/* Usuwa ewentualny cień */
+  background: var(--bg);
+  box-shadow: none !important;
   border-radius: 0;
 }
 .hero-image {
   width: 340px;
   max-width: 90vw;
   animation: phone-move 2s infinite alternate ease-in-out;
-  background: var(--bg);      /* Tło jak strona */
-  box-shadow: none !important;/* Usuwa cień za grafiką telefonu */
+  background: var(--bg);
+  box-shadow: none !important;
   border-radius: 0;
 }
-/* --- KONIEC POPRAWKI --- */
-
 @keyframes phone-move { 0% { transform: translateX(-12px) rotate(-2deg);} 100% { transform: translateX(12px) rotate(2deg);} }
 .big-title { font-size: 2.2rem; font-weight: 700; color: var(--brand); }
 .subtitle { font-size: 1.1rem; margin-top: 10px; color: var(--muted); }
@@ -93,7 +89,7 @@ body {
 .quiz-section-bg {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  background: var(--brand);
+  background: var(--brand) !important;
   min-height: 100vh;
   position: relative;
   box-shadow: 0 6px 48px rgba(140,192,195,0.07);
@@ -105,14 +101,33 @@ body {
   padding: 0;
 }
 
-/* QUIZ CONTENT BOX */
-#quiz-content {
+/* Quiz i wyniki wyśrodkowane */
+#quiz-content, #results-container {
   width: 100%;
   max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Wyniki na tej samej szerokości i paddingu co quiz */
+#results-container {
+  display: none;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 65px 36px 44px 36px;
+  min-height: 320px;
+  box-sizing: border-box;
+  background: transparent;
+  z-index: 2;
+}
+
+/* QUIZ CONTENT BOX */
+#quiz-content {
   background: var(--card-bg);
   border-radius: 24px;
   box-shadow: var(--shadow-soft);
-  padding: 65px 36px 44px 36px; /* zwiększony padding-top na licznik */
+  padding: 65px 36px 44px 36px;
   text-align: center;
   position: relative;
   transition: box-shadow .2s;
@@ -147,6 +162,7 @@ body {
   .quiz-section-bg { min-height: 70vh; }
   .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px;}
   #quiz-content { padding: 55px 2vw 24px 2vw; }
+  #results-container { padding: 55px 2vw 24px 2vw;}
 }
 
 /* Nowoczesny nagłówek pytania */
@@ -243,7 +259,6 @@ body {
 .back-icon-btn .sr-only { font-size: 1.03rem; }
 
 /* WYNIKI I REKOMENDACJE */
-#results-container { display: none; flex-grow: 1; flex-direction: column; justify-content: center; align-items: center; padding: 32px 16px; width: 100%; box-sizing: border-box; }
 #results-content-wrapper { width: 100%; max-width: 960px; text-align: center; }
 .results-title { font-size: 2rem; font-weight: 700; color: var(--brand-dark); margin-bottom: 24px; }
 .recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; width: 100%; }
@@ -308,6 +323,7 @@ footer {
 .footer-links a:hover { text-decoration: underline; color: var(--brand);}
 @media (max-width: 700px) {
   #quiz-content { padding: 55px 2vw 24px 2vw; }
+  #results-container { padding: 55px 2vw 24px 2vw;}
   .quiz-section-bg { min-height: 70vh; }
   .recommendation-image { height: 200px; }
   .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px; }
