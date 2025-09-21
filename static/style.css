@@ -24,7 +24,7 @@
   --icon-stroke-width: 1.8;
 
   /* Mono-kolor ikon: pastelowy start */
-  --icon-initial-color: color-mix(in oklab, var(--brand) 55%, white);
+  --icon-initial-color: #8E7D90; /* domyślny kolor ikon odpowiedzi */
 
   /* Ramka dla obrazów telefonów (wyniki) */
   --image-frame-border: #e5e7eb;
@@ -73,7 +73,7 @@ header {
 .logo {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--brand);
+  color: #1C191F; /* zmieniony kolor */
   letter-spacing: 1px;
   text-decoration: none;
   transition: color 0.2s;
@@ -221,7 +221,16 @@ select.lang-select {
 #quiz-content .answers-grid .answer-card:active { transform: translateY(1px); }
 
 /* Ikony odpowiedzi — MONO: pastelowy kolor startowy */
-.answer-icon { width: var(--icon-size-answer); height: var(--icon-size-answer); display: inline-block; color: var(--icon-initial-color); }
+.answer-icon {
+  width: var(--icon-size-answer);
+  height: var(--icon-size-answer);
+  display: inline-block;
+  color: #8E7D90; /* domyślny kolor */
+  transition: color 0.18s;
+}
+#quiz-content .answers-grid .answer-card:hover .answer-icon {
+  color: #1C191F !important; /* kolor na hover */
+}
 .answer-icon svg { width: 100% !important; height: 100% !important; }
 .answer-icon svg * {
   stroke: currentColor;
@@ -230,7 +239,7 @@ select.lang-select {
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
-#quiz-content .answers-grid .answer-card:hover .answer-icon { color: currentColor; }
+#quiz-content .answers-grid .answer-card:hover .answer-icon { color: #1C191F !important; }
 
 .answer-title {
   font-size: 1.28rem;
@@ -322,7 +331,7 @@ select.lang-select {
 }
 .restart-btn:hover { background-color: #0c8b8c; }
 
-/* Footer (przywrócone stylowanie) */
+/* Footer (wyśrodkowany na wszystkich szerokościach) */
 footer {
   margin-top: auto;
   width: 100%;
@@ -333,9 +342,20 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: center;      /* wyśrodkowanie */
+  text-align: center;       /* wyśrodkowanie tekstu */
 }
-.footer-links { display: flex; gap: 16px; }
-.footer-links a { color: var(--brand); text-decoration: none; font-weight: 600; }
+.footer-links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;  /* wyśrodkuj linki */
+  flex-wrap: wrap;
+}
+.footer-links a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 600;
+}
 .footer-links a:hover { text-decoration: underline; }
 
 /* Responsive */
