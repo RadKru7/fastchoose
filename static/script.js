@@ -116,8 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function backAriaLabel() {
-    return currentLang === 'pl' ? 'Wstecz' :
-           currentLang === 'es' ? 'Atrás' : 'Back';
+    return currentLang === 'pl' ? '<' :
+           currentLang === 'es' ? '<' : '<';
   }
 
   function renderQuizShell() {
