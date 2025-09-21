@@ -23,7 +23,7 @@
   --icon-initial-color: #8E7D90;
 
   --image-frame-border: #e5e7eb;
-  --phones-bg: #e6f3f1;
+  --phones-bg: #CFCBE1; /* pastelowy fiolet dla zdjęć telefonów */
 }
 
 :root[data-theme="blue"] {
@@ -38,7 +38,7 @@
   --brand-accent: #a78bfa;
   --answer-bg: #f7f5ff;
   --answer-border: #e2d9ff;
-  --phones-bg: color-mix(in oklab, #7c3aed 9%, white);
+  --phones-bg: #CFCBE1;
 }
 
 *,
@@ -63,7 +63,7 @@ header {
 .logo {
   font-size: 2rem;
   font-weight: bold;
-  color: #1C191F;
+  color: #8E7D90; /* pastelowy fiolet, spójny z ikonami */
   letter-spacing: 1px;
   text-decoration: none;
   transition: color 0.2s;
@@ -289,10 +289,10 @@ select.lang-select {
   object-fit: contain;
   margin-bottom: 16px;
 
-  background: var(--phones-bg); /* pastelowe tło, nie białe! */
+  background: #CFCBE1; /* pastelowy fiolet, NIE białe! */
   border: 1px solid var(--image-frame-border);
   border-radius: 12px;
-  padding: 16px 10px; /* większy padding pionowy */
+  padding: 16px 10px;
 
   display: block;
   box-sizing: border-box;
