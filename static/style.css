@@ -17,7 +17,8 @@
   --icon-size-question: 60px;
   --icon-size-answer: 60px;
   --icon-stroke-width: 1.8;
-  --icon-initial-color: color-mix(in oklab, var(--brand-dark) 30%, white);
+  --icon-initial-color: #8E7D90;
+  --icon-hover-color: #1C191F;
 
   --phones-bg: #E3F2EF;
   --image-frame-border: #d0dedb;
@@ -37,7 +38,7 @@ header {
 select.lang-select {
   border: 1px solid #d9e2ec; border-radius: 6px; background: var(--bg);
   padding: 6px 28px 6px 32px; font-size: 1rem; appearance: none; cursor: pointer; outline: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='%234D7D80' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='%234D7D80' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5' stroke-wi[...]
   background-repeat: no-repeat; background-position: right 8px center;
 }
 
@@ -220,7 +221,7 @@ body {
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
-#quiz-content .answers-grid .answer-card:hover .answer-icon { color: var(--brand-dark); }
+#quiz-content .answers-grid .answer-card:hover .answer-icon { color: var(--icon-hover-color); }
 
 /* Napisy odpowiedzi */
 .answer-title {
