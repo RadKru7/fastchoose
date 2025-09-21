@@ -1,7 +1,6 @@
 /* FastChoose — jednokolorowe ikony (mono), większe napisy, spójny Back */
 
 :root {
-  /* Motyw (teal domyślnie) */
   --brand: #0ea5a6;
   --brand-accent: #34d399;
 
@@ -14,40 +13,32 @@
   --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
   --shadow-hover: 0 6px 18px rgba(0,0,0,0.14);
 
-  /* Kafelki odpowiedzi — delikatne tło widoczne od razu */
   --answer-bg: #f1fbf8;
   --answer-border: #c9f2ea;
 
-  /* Ikony */
   --icon-size-question: 60px;
   --icon-size-answer: 60px;
   --icon-stroke-width: 1.8;
 
-  /* Mono-kolor ikon: pastelowy start */
-  --icon-initial-color: #8E7D90; /* domyślny kolor ikon odpowiedzi */
+  --icon-initial-color: #8E7D90;
 
-  /* Ramka dla obrazów telefonów (wyniki) */
   --image-frame-border: #e5e7eb;
-
-  /* Trzeci kolor — subtelne tło pod zdjęciami telefonów
-     (lekko odróżnia się od głównego tła strony) */
-  --phones-bg: color-mix(in oklab, var(--brand) 9%, white);
+  --phones-bg: #e6f3f1;
 }
 
-/* Alternatywne motywy */
 :root[data-theme="blue"] {
   --brand: #3c68f7;
   --brand-accent: #5be7a9;
   --answer-bg: #f5f8ff;
   --answer-border: #dfe6ff;
-  --phones-bg: color-mix(in oklab, #3c68f7 9%, white); /* delikatny błękit */
+  --phones-bg: color-mix(in oklab, #3c68f7 9%, white);
 }
 :root[data-theme="violet"] {
   --brand: #7c3aed;
   --brand-accent: #a78bfa;
   --answer-bg: #f7f5ff;
   --answer-border: #e2d9ff;
-  --phones-bg: color-mix(in oklab, #7c3aed 9%, white); /* delikatny fiolet */
+  --phones-bg: color-mix(in oklab, #7c3aed 9%, white);
 }
 
 *,
@@ -63,7 +54,6 @@ body {
   min-height: 100vh;
 }
 
-/* Header */
 header {
   display: flex; justify-content: space-between; align-items: center;
   padding: 24px 32px 8px 32px;
@@ -73,7 +63,7 @@ header {
 .logo {
   font-size: 2rem;
   font-weight: bold;
-  color: #1C191F; /* zmieniony kolor */
+  color: #1C191F;
   letter-spacing: 1px;
   text-decoration: none;
   transition: color 0.2s;
@@ -87,7 +77,6 @@ select.lang-select {
   background-repeat: no-repeat; background-position: right 8px center;
 }
 
-/* Landing */
 .main-content {
   flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
   padding: 24px 0 32px 0;
@@ -122,7 +111,6 @@ select.lang-select {
 }
 .get-started-btn:hover { background: linear-gradient(90deg, var(--brand-accent), var(--brand)); box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
 
-/* Quiz section background (full width color under quiz/results) */
 .quiz-section-bg {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
@@ -138,7 +126,6 @@ select.lang-select {
   padding: 0;
 }
 
-/* Quiz */
 #quiz-container {
   display: none;
   flex-grow: 1;
@@ -165,7 +152,6 @@ select.lang-select {
   align-items: center;
 }
 
-/* Quiz progress counter */
 .quiz-progress-counter {
   position: absolute;
   top: 16px;
@@ -186,7 +172,6 @@ select.lang-select {
   margin-bottom: 0;
 }
 
-/* Pytanie */
 .question-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 26px; }
 .question-icon { display: inline-flex; width: var(--icon-size-question); height: var(--icon-size-question); color: var(--brand); }
 .question-icon svg { width: 100% !important; height: 100% !important; }
@@ -199,7 +184,6 @@ select.lang-select {
 }
 #quiz-content .question-text { font-size: 1.9rem; font-weight: 700; color: var(--brand); margin: 0; }
 
-/* Odpowiedzi */
 .answers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; width: 100%; margin-top: 10px; }
 
 #quiz-content .answers-grid .answer-card {
@@ -220,16 +204,15 @@ select.lang-select {
 #quiz-content .answers-grid .answer-card:focus-visible { outline: 3px solid rgba(14,165,166,0.35); outline-offset: 3px; }
 #quiz-content .answers-grid .answer-card:active { transform: translateY(1px); }
 
-/* Ikony odpowiedzi — MONO: pastelowy kolor startowy */
 .answer-icon {
   width: var(--icon-size-answer);
   height: var(--icon-size-answer);
   display: inline-block;
-  color: #8E7D90; /* domyślny kolor */
+  color: #8E7D90;
   transition: color 0.18s;
 }
 #quiz-content .answers-grid .answer-card:hover .answer-icon {
-  color: #1C191F !important; /* kolor na hover */
+  color: #1C191F !important;
 }
 .answer-icon svg { width: 100% !important; height: 100% !important; }
 .answer-icon svg * {
@@ -239,7 +222,6 @@ select.lang-select {
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
-#quiz-content .answers-grid .answer-card:hover .answer-icon { color: #1C191F !important; }
 
 .answer-title {
   font-size: 1.28rem;
@@ -248,7 +230,6 @@ select.lang-select {
   color: currentColor;
 }
 
-/* Wiersz z przyciskiem wstecz wyrównany do lewej */
 .back-row {
   display: flex;
   justify-content: flex-start;
@@ -276,10 +257,8 @@ select.lang-select {
 }
 .back-icon-btn .sr-only { font-size: 1.03rem; }
 
-/* Dostępność */
 .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-/* Wyniki */
 #results-container {
   display: none;
   flex-grow: 1;
@@ -294,25 +273,30 @@ select.lang-select {
 .results-title { font-size: 2rem; font-weight: 700; color: var(--brand); margin-bottom: 24px; }
 .recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; width: 100%; }
 .recommendation-card {
-  background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); padding: 20px; text-align: center;
-  display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+  align-items: center;
 }
-
-/* Ramka i powiększenie obrazów telefonów + trzeci kolor tła */
 .recommendation-image {
   width: 100%;
-  height: 300px; /* +50% */
+  height: 300px;
   object-fit: contain;
   margin-bottom: 16px;
 
-  /* nowe tło (trzeci kolor) + ramka */
-  background: var(--phones-bg);
+  background: var(--phones-bg); /* pastelowe tło, nie białe! */
   border: 1px solid var(--image-frame-border);
   border-radius: 12px;
-  padding: 10px;
+  padding: 16px 10px; /* większy padding pionowy */
 
   display: block;
   box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(44, 56, 80, 0.07);
 }
 
 .recommendation-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
@@ -324,14 +308,12 @@ select.lang-select {
 }
 .store-link:hover { background-color: var(--brand); color: #fff; }
 
-/* Restart */
 .restart-btn {
   margin-top: 32px; padding: 12px 32px; font-size: 1.1rem; border: none; border-radius: 24px; background: var(--brand); color: #fff; cursor: pointer; font-weight: 600;
   transition: background-color 0.2s;
 }
 .restart-btn:hover { background-color: #0c8b8c; }
 
-/* Footer (wyśrodkowany na wszystkich szerokościach) */
 footer {
   margin-top: auto;
   width: 100%;
@@ -342,13 +324,13 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  align-items: center;      /* wyśrodkowanie */
-  text-align: center;       /* wyśrodkowanie tekstu */
+  align-items: center;
+  text-align: center;
 }
 .footer-links {
   display: flex;
   gap: 16px;
-  justify-content: center;  /* wyśrodkuj linki */
+  justify-content: center;
   flex-wrap: wrap;
 }
 .footer-links a {
@@ -358,7 +340,6 @@ footer {
 }
 .footer-links a:hover { text-decoration: underline; }
 
-/* Responsive */
 @media (max-width: 900px) {
   .quiz-section-bg { min-height: 70vh; }
   .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px;}
@@ -375,10 +356,8 @@ footer {
   .answers-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
   .answer-title { font-size: 1.18rem; }
 
-  /* mniejsza wysokość obrazów telefonów i delikatnie mniejszy padding */
   .recommendation-image { height: 240px; padding: 8px; }
 
-  /* stopka wyrównana na środku na mobile */
   footer { align-items: center; text-align: center; }
   .footer-links { justify-content: center; flex-wrap: wrap; }
 }
