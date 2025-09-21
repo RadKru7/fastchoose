@@ -1,219 +1,148 @@
+/* FastChoose — jednokolorowe ikony (mono), większe napisy, spójny Back */
+
 :root {
-  --bg: #F6F8F4;
-  --brand: #8CC0C3;
-  --brand-dark: #4D7D80;
-  --brand-mid: #75938C;
-  --brand-extra: #232E26;
-  --brand-accent: #4D7D80;
+  /* Motyw (teal domyślnie) */
+  --brand: #0ea5a6;
+  --brand-accent: #34d399;
 
-  --text: #232E26;
-  --muted: #75938C;
-  --border: #d0dedb;
-  --card-bg: #fff;
+  --bg: #f7f8fa;
+  --text: #222;
+  --muted: #444;
+  --border: #e5e7eb;
+  --card-bg: #ffffff;
 
-  --shadow-soft: 0 4px 24px rgba(77,125,128,0.07);
-  --shadow-hover: 0 8px 24px rgba(77,125,128,0.14);
+  --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-hover: 0 6px 18px rgba(0,0,0,0.14);
 
+  /* Kafelki odpowiedzi — delikatne tło widoczne od razu */
+  --answer-bg: #f1fbf8;
+  --answer-border: #c9f2ea;
+
+  /* Ikony */
   --icon-size-question: 60px;
   --icon-size-answer: 60px;
   --icon-stroke-width: 1.8;
-  --icon-initial-color: #8E7D90;
-  --icon-hover-color: #1C191F;
 
-  --phones-bg: #E3F2EF;
-  --image-frame-border: #d0dedb;
+  /* Mono-kolor ikon: pastelowy start */
+  --icon-initial-color: color-mix(in oklab, var(--brand) 55%, white);
+
+  /* Ramka dla obrazów telefonów (wyniki) */
+  --image-frame-border: #e5e7eb;
+
+  /* Trzeci kolor — subtelne tło pod zdjęciami telefonów
+     (lekko odróżnia się od głównego tła strony) */
+  --phones-bg: color-mix(in oklab, var(--brand) 9%, white);
 }
 
-/* HEADER */
+/* Alternatywne motywy */
+:root[data-theme="blue"] {
+  --brand: #3c68f7;
+  --brand-accent: #5be7a9;
+  --answer-bg: #f5f8ff;
+  --answer-border: #dfe6ff;
+  --phones-bg: color-mix(in oklab, #3c68f7 9%, white); /* delikatny błękit */
+}
+:root[data-theme="violet"] {
+  --brand: #7c3aed;
+  --brand-accent: #a78bfa;
+  --answer-bg: #f7f5ff;
+  --answer-border: #e2d9ff;
+  --phones-bg: color-mix(in oklab, #7c3aed 9%, white); /* delikatny fiolet */
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
 header {
   display: flex; justify-content: space-between; align-items: center;
   padding: 24px 32px 8px 32px;
   background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.03);
   flex-shrink: 0;
 }
-.logo { font-size: 2rem; font-weight: bold; color: var(--brand-dark); letter-spacing: 1px; text-decoration: none; transition: color 0.2s;}
+.logo { font-size: 2rem; font-weight: bold; color: var(--brand); letter-spacing: 1px; text-decoration: none; }
 .lang-select-container { display: flex; align-items: center; gap: 8px; }
-.lang-icon { width: 22px; height: 22px; vertical-align: middle;}
-.lang-icon * { stroke: var(--brand-dark) !important; transition: stroke .2s;}
+.lang-icon { width: 22px; height: 22px; vertical-align: middle; }
 select.lang-select {
   border: 1px solid #d9e2ec; border-radius: 6px; background: var(--bg);
   padding: 6px 28px 6px 32px; font-size: 1rem; appearance: none; cursor: pointer; outline: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='%234D7D80' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5' stroke-wi[...]
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat; background-position: right 8px center;
 }
 
-/* LANDING */
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+/* Landing */
 .main-content {
   flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
   padding: 24px 0 32px 0;
 }
-.hero-image-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  background: var(--bg);
-  box-shadow: none !important;
-  border-radius: 0;
-}
-.hero-image {
-  width: 340px;
-  max-width: 90vw;
-  animation: phone-move 2s infinite alternate ease-in-out;
-  background: var(--bg);
-  box-shadow: none !important;
-  border-radius: 0;
-}
+.hero-image-container { width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+.hero-image { width: 340px; max-width: 90vw; animation: phone-move 2s infinite alternate ease-in-out; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 @keyframes phone-move { 0% { transform: translateX(-12px) rotate(-2deg);} 100% { transform: translateX(12px) rotate(2deg);} }
 .big-title { font-size: 2.2rem; font-weight: 700; color: var(--brand); }
 .subtitle { font-size: 1.1rem; margin-top: 10px; color: var(--muted); }
 .get-started-btn {
   margin-top: 30px; padding: 14px 48px; font-size: 1.2rem; font-weight: 600;
-  background: linear-gradient(90deg, var(--brand), var(--brand-dark)); color: #fff;
+  background: linear-gradient(90deg, var(--brand), var(--brand-accent)); color: #fff;
   border: none; border-radius: 32px; cursor: pointer; box-shadow: 0 2px 16px rgba(0,0,0,0.12);
   transition: background 0.2s, box-shadow 0.2s;
 }
-.get-started-btn:hover { background: linear-gradient(90deg, var(--brand-dark), var(--brand)); box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
+.get-started-btn:hover { background: linear-gradient(90deg, var(--brand-accent), var(--brand)); box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
 
-/* QUIZ SECTION FULL-WIDTH, CENTERED VERTICALLY */
-.quiz-section-bg {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  background: var(--brand) !important;
-  min-height: 100vh;
-  position: relative;
-  box-shadow: 0 6px 48px rgba(140,192,195,0.07);
-  transition: background .3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 0;
-}
-
-/* Quiz i wyniki wyśrodkowane */
-#quiz-content, #results-container {
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-/* Wyniki na tej samej szerokości i paddingu co quiz */
-#results-container {
-  display: none;
-  flex-grow: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 65px 36px 44px 36px;
-  min-height: 320px;
-  box-sizing: border-box;
-  background: transparent;
-  z-index: 2;
-}
-
-/* QUIZ CONTENT BOX */
+/* Quiz */
+#quiz-container { display: none; flex-grow: 1; flex-direction: column; justify-content: center; align-items: center; padding: 24px 12px 32px; }
 #quiz-content {
-  background: var(--card-bg);
-  border-radius: 24px;
-  box-shadow: var(--shadow-soft);
-  padding: 65px 36px 44px 36px;
-  text-align: center;
-  position: relative;
-  transition: box-shadow .2s;
-  min-height: 320px;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%; max-width: 960px; background: var(--card-bg); border-radius: 18px; padding: 26px 24px;
+  box-shadow: var(--shadow-soft); text-align: center;
 }
 
-/* LICZNIK PYTAŃ */
-.quiz-progress-counter {
-  position: absolute;
-  top: 16px;
-  right: 32px;
-  z-index: 10;
-  background: var(--brand-dark);
-  color: #fff;
-  font-size: 1.17rem;
-  font-weight: 700;
-  border-radius: 999px;
-  padding: 8px 22px;
-  box-shadow: 0 2px 12px rgba(77,125,128,0.12);
-  letter-spacing: 1px;
-  min-width: 64px;
-  text-align: center;
-  border: 3px solid var(--card-bg);
-  transition: background .2s;
-  margin-bottom: 0;
+/* Pytanie */
+.question-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 26px; }
+.question-icon { display: inline-flex; width: var(--icon-size-question); height: var(--icon-size-question); color: var(--brand); }
+.question-icon svg { width: 100% !important; height: 100% !important; }
+.question-icon svg * {
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
-@media (max-width: 900px) {
-  .quiz-section-bg { min-height: 70vh; }
-  .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px;}
-  #quiz-content { padding: 55px 2vw 24px 2vw; }
-  #results-container { padding: 55px 2vw 24px 2vw;}
-}
+#quiz-content .question-text { font-size: 1.9rem; font-weight: 700; color: var(--brand); margin: 0; }
 
-/* Nowoczesny nagłówek pytania */
-#quiz-content .question-text {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--brand-dark);
-  margin: 0 0 24px 0;
-  letter-spacing: -1px;
-  word-break: break-word;
-  width: 100%;
-}
-
-/* Odpowiedzi w siatce */
-.answers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-  width: 100%;
-  margin-top: 10px;
-}
+/* Odpowiedzi */
+.answers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; width: 100%; margin-top: 10px; }
 
 #quiz-content .answers-grid .answer-card {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-  background: var(--bg);
-  border: 2.5px solid transparent;
-  border-radius: 18px;
-  padding: 24px 10px 22px 10px;
-  cursor: pointer;
-  text-align: center;
-  color: var(--brand-dark);
-  font-size: 1.08rem;
-  transition: border-color .2s, box-shadow .2s, background .18s, color .2s;
-  box-shadow: 0 2px 12px rgba(140,192,195,.07);
+  background: var(--answer-bg);
+  border: 1.5px solid var(--answer-border);
+  border-radius: 16px; padding: 20px 18px;
+  cursor: pointer; text-align: center;
+  color: var(--brand); /* Ustala kolor tekstu i bazowy kolor ikon (currentColor) */
+  transition: border-color .2s, box-shadow .2s, transform .06s ease-out, background-color .2s, color .2s;
 }
-#quiz-content .answers-grid .answer-card:hover, #quiz-content .answers-grid .answer-card:focus-visible {
-  border-color: var(--brand-dark);
-  background: #fff;
-  color: var(--brand-dark);
+#quiz-content .answers-grid .answer-card:hover {
+  border-color: var(--brand) !important;
+  background-color: var(--brand) !important;
+  color: #fff !important; /* Tekst i ikona stają się białe */
   box-shadow: var(--shadow-hover);
 }
+#quiz-content .answers-grid .answer-card:focus-visible { outline: 3px solid rgba(14,165,166,0.35); outline-offset: 3px; }
+#quiz-content .answers-grid .answer-card:active { transform: translateY(1px); }
 
-/* Ikony odpowiedzi pastelowe */
-.answer-icon {
-  width: var(--icon-size-answer);
-  height: var(--icon-size-answer);
-  display: inline-block;
-  color: var(--icon-initial-color);
-}
+/* Ikony odpowiedzi — MONO: pastelowy kolor startowy */
+.answer-icon { width: var(--icon-size-answer); height: var(--icon-size-answer); display: inline-block; color: var(--icon-initial-color); }
 .answer-icon svg { width: 100% !important; height: 100% !important; }
+/* Ujednolicamy tylko kontury przez CSS; wypełnienia ustawi JS zależnie od oryginału */
 .answer-icon svg * {
   stroke: currentColor;
   stroke-width: var(--icon-stroke-width);
@@ -221,88 +150,85 @@ body {
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
-#quiz-content .answers-grid .answer-card:hover .answer-icon { color: var(--icon-hover-color); }
+/* Na hover ikona przejmuje kolor tekstu (tu stanie się biała) */
+#quiz-content .answers-grid .answer-card:hover .answer-icon { color: currentColor; }
 
-/* Napisy odpowiedzi */
+/* Napisy odpowiedzi — większe */
 .answer-title {
-  font-size: 1.18rem;
-  line-height: 1.43;
+  font-size: 1.28rem;
+  line-height: 1.45;
   font-weight: 700;
   color: currentColor;
 }
 
-/* Przycisk wstecz - padding od lewej */
-.back-row {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 16px;
-  width: 100%;
-  padding-left: 20px;
-  box-sizing: border-box;
-}
+/* Wiersz z przyciskiem wstecz wyrównany do lewej */
+.back-row { display: flex; justify-content: flex-start; margin-top: 16px; }
+
+/* Przycisk wstecz — okrągły, w kolorze motywu */
 .back-icon-btn {
   width: 44px; height: 44px; border-radius: 50%;
-  border: 2px solid var(--brand-dark);
-  background: var(--bg);
-  color: var(--brand-dark);
+  border: 1.5px solid var(--brand);
+  background: var(--answer-bg);
+  color: var(--brand);
   display: inline-flex; align-items: center; justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   transition: background-color .2s, transform .06s ease-out, box-shadow .2s;
-  font-size: 0.97rem;
 }
-.back-icon-btn:hover { background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
+.back-icon-btn:hover { background: #e7f5f1; box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
 .back-icon-btn:active { transform: translateY(1px); }
 .back-icon-btn svg {
   width: 22px; height: 22px; stroke: currentColor; fill: none;
   stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
 }
-.back-icon-btn .sr-only { font-size: 1.03rem; }
 
-/* WYNIKI I REKOMENDACJE */
+/* Dostępność */
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* Wyniki */
+#results-container { display: none; flex-grow: 1; flex-direction: column; justify-content: center; align-items: center; padding: 32px 16px; width: 100%; box-sizing: border-box; }
 #results-content-wrapper { width: 100%; max-width: 960px; text-align: center; }
-.results-title { font-size: 2rem; font-weight: 700; color: var(--brand-dark); margin-bottom: 24px; }
-
-/* --- KLUCZOWA ZMIANA: zawsze 3 w linii, wyśrodkowane --- */
-.recommendations-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  justify-content: center;
-  width: auto;
-}
+.results-title { font-size: 2rem; font-weight: 700; color: var(--brand); margin-bottom: 24px; }
+.recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; width: 100%; }
 .recommendation-card {
-  width: 280px;
-  background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); padding: 20px; text-align: center;
+  background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); padding: 20px; text-align: center;
   display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;
 }
-.recommendation-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(77,125,128,0.11); }
+
+/* Ramka i powiększenie obrazów telefonów + trzeci kolor tła */
 .recommendation-image {
   width: 100%;
-  height: 300px;
+  height: 300px; /* +50% */
   object-fit: contain;
   margin-bottom: 16px;
+
+  /* nowe tło (trzeci kolor) + ramka */
   background: var(--phones-bg);
   border: 1px solid var(--image-frame-border);
   border-radius: 12px;
   padding: 10px;
+
   display: block;
   box-sizing: border-box;
 }
-.recommendation-name { font-size: 1.25rem; font-weight: 600; color: var(--brand-dark); margin-bottom: 16px; }
+
+.recommendation-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.recommendation-name { font-size: 1.25rem; font-weight: 600; color: #333; margin-bottom: 16px; }
 .store-links-container { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
 .store-link {
-  display: block; padding: 10px 15px; background-color: var(--brand); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600;
+  display: block; padding: 10px 15px; background-color: #f0f4ff; color: var(--brand); text-decoration: none; border-radius: 8px; font-weight: 600;
   transition: background-color 0.2s, color 0.2s;
 }
-.store-link:hover { background-color: var(--brand-dark); color: #fff; }
+.store-link:hover { background-color: var(--brand); color: #fff; }
 
+/* Restart */
 .restart-btn {
-  margin-top: 32px; padding: 12px 32px; font-size: 1.1rem; border: none; border-radius: 24px; background: var(--brand-dark); color: #fff; cursor: pointer; font-weight: 600;
+  margin-top: 32px; padding: 12px 32px; font-size: 1.1rem; border: none; border-radius: 24px; background: var(--brand); color: #fff; cursor: pointer; font-weight: 600;
   transition: background-color 0.2s;
 }
-.restart-btn:hover { background-color: var(--brand); }
+.restart-btn:hover { background-color: #0c8b8c; }
 
+/* Footer (przywrócone stylowanie) */
 footer {
   margin-top: auto;
   width: 100%;
@@ -313,45 +239,28 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  align-items: center;
-  text-align: center;
 }
-.footer-links {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+.footer-links { display: flex; gap: 16px; }
+.footer-links a { color: var(--brand); text-decoration: none; font-weight: 600; }
+.footer-links a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .answers-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
 }
-.footer-links a {
-  color: var(--brand-dark);
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s;
-  font-size: 1.08rem;
-}
-.footer-links a:hover { text-decoration: underline; color: var(--brand);}
-@media (max-width: 700px) {
-  #quiz-content { padding: 55px 2vw 24px 2vw; }
-  #results-container { padding: 55px 2vw 24px 2vw;}
-  .quiz-section-bg { min-height: 70vh; }
-  .recommendations-grid {
-    grid-template-columns: 1fr !important;
-    justify-content: center;
-    width: auto;
-  }
-  .recommendation-image { height: 200px; }
-  .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px; }
-  .main-content { padding: 16px 0 18px 0; }
-}
+
 @media (max-width: 600px) {
   .logo { font-size: 1.3rem; }
   header { flex-direction: column; gap: 12px; padding: 16px 8px 2px 8px; }
   .hero-image { width: 94vw; max-width: 330px; }
   .big-title { font-size: 1.25rem; }
   .answers-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-  .answer-title { font-size: 1.06rem; }
-  .recommendation-image { height: 170px; }
+  .answer-title { font-size: 1.18rem; }
+
+  /* mniejsza wysokość obrazów telefonów i delikatnie mniejszy padding */
+  .recommendation-image { height: 240px; padding: 8px; }
+
+  /* stopka wyrównana na środku na mobile */
   footer { align-items: center; text-align: center; }
-  .footer-links { justify-content: center; flex-wrap: wrap; gap: 14px;}
+  .footer-links { justify-content: center; flex-wrap: wrap; }
 }
