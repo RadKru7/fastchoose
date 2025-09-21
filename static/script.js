@@ -1,357 +1,384 @@
-:root {
-  --bg: #F6F8F4;
-  --brand: #8CC0C3;
-  --brand-dark: #4D7D80;
-  --brand-mid: #75938C;
-  --brand-extra: #232E26;
-  --brand-accent: #4D7D80;
+// FastChoose — inline SVG z MONO-kolorem: fill/stroke ustawiane rozsądnie
+document.addEventListener('DOMContentLoaded', () => {
+  const startBtn = document.getElementById('get-started-btn');
+  const langSelect = document.getElementById('lang-select');
 
-  --text: #232E26;
-  --muted: #75938C;
-  --border: #d0dedb;
-  --card-bg: #fff;
+  const mainContent = document.getElementById('main-content');
+  const quizSectionBg = document.getElementById('quiz-section-bg');
+  const quizContent = document.getElementById('quiz-content');
 
-  --shadow-soft: 0 4px 24px rgba(77,125,128,0.07);
-  --shadow-hover: 0 8px 24px rgba(77,125,128,0.14);
+  const resultsContainer = document.getElementById('results-container');
+  const resultsWrapper = document.getElementById('results-content-wrapper');
+  const footerLinks = document.getElementById('footer-links');
+  const logo = document.querySelector('.logo');
+  const langIcon = document.querySelector('.lang-icon');
 
-  --icon-size-question: 60px;
-  --icon-size-answer: 60px;
-  --icon-stroke-width: 1.8;
-  --icon-initial-color: #8E7D90;
-  --icon-hover-color: #1C191F;
+  let currentQuestionId = 1;
+  let pathAnswers = [];
+  let history = [];
+  let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'pl';
+  let totalQuestions = 5; // Domyślnie, można nadpisać dynamicznie!
 
-  --phones-bg: #E3F2EF;
-  --image-frame-border: #d0dedb;
-}
+  const svgCache = new Map();
 
-/* HEADER */
-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 24px 32px 8px 32px;
-  background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-  flex-shrink: 0;
-}
-.logo { font-size: 2rem; font-weight: bold; color: var(--brand-dark); letter-spacing: 1px; text-decoration: none; transition: color 0.2s;}
-.lang-select-container { display: flex; align-items: center; gap: 8px; }
-.lang-icon { width: 22px; height: 22px; vertical-align: middle;}
-.lang-icon * { stroke: var(--brand-dark) !important; transition: stroke .2s;}
-select.lang-select {
-  border: 1px solid #d9e2ec; border-radius: 6px; background: var(--bg);
-  padding: 6px 28px 6px 32px; font-size: 1rem; appearance: none; cursor: pointer; outline: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='%234D7D80' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5' stroke-wi[...]
-  background-repeat: no-repeat; background-position: right 8px center;
-}
+  let questionTextEl = null;
+  let questionIconWrap = null;
+  let answersContainerEl = null;
+  let backBtnEl = null;
+  let quizProgressCounter = null;
 
-/* LANDING */
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-.main-content {
-  flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-  padding: 24px 0 32px 0;
-}
-.hero-image-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  background: var(--bg);
-  box-shadow: none !important;
-  border-radius: 0;
-}
-.hero-image {
-  width: 340px;
-  max-width: 90vw;
-  animation: phone-move 2s infinite alternate ease-in-out;
-  background: var(--bg);
-  box-shadow: none !important;
-  border-radius: 0;
-}
-@keyframes phone-move { 0% { transform: translateX(-12px) rotate(-2deg);} 100% { transform: translateX(12px) rotate(2deg);} }
-.big-title { font-size: 2.2rem; font-weight: 700; color: var(--brand); }
-.subtitle { font-size: 1.1rem; margin-top: 10px; color: var(--muted); }
-.get-started-btn {
-  margin-top: 30px; padding: 14px 48px; font-size: 1.2rem; font-weight: 600;
-  background: linear-gradient(90deg, var(--brand), var(--brand-dark)); color: #fff;
-  border: none; border-radius: 32px; cursor: pointer; box-shadow: 0 2px 16px rgba(0,0,0,0.12);
-  transition: background 0.2s, box-shadow 0.2s;
-}
-.get-started-btn:hover { background: linear-gradient(90deg, var(--brand-dark), var(--brand)); box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
-
-/* QUIZ SECTION FULL-WIDTH, CENTERED VERTICALLY */
-.quiz-section-bg {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  background: var(--brand) !important;
-  min-height: 100vh;
-  position: relative;
-  box-shadow: 0 6px 48px rgba(140,192,195,0.07);
-  transition: background .3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 0;
-}
-
-/* Quiz i wyniki wyśrodkowane */
-#quiz-content, #results-container {
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-/* Wyniki na tej samej szerokości i paddingu co quiz */
-#results-container {
-  display: none;
-  flex-grow: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 65px 36px 44px 36px;
-  min-height: 320px;
-  box-sizing: border-box;
-  background: transparent;
-  z-index: 2;
-}
-
-/* QUIZ CONTENT BOX */
-#quiz-content {
-  background: var(--card-bg);
-  border-radius: 24px;
-  box-shadow: var(--shadow-soft);
-  padding: 65px 36px 44px 36px;
-  text-align: center;
-  position: relative;
-  transition: box-shadow .2s;
-  min-height: 320px;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* LICZNIK PYTAŃ */
-.quiz-progress-counter {
-  position: absolute;
-  top: 16px;
-  right: 32px;
-  z-index: 10;
-  background: var(--brand-dark);
-  color: #fff;
-  font-size: 1.17rem;
-  font-weight: 700;
-  border-radius: 999px;
-  padding: 8px 22px;
-  box-shadow: 0 2px 12px rgba(77,125,128,0.12);
-  letter-spacing: 1px;
-  min-width: 64px;
-  text-align: center;
-  border: 3px solid var(--card-bg);
-  transition: background .2s;
-  margin-bottom: 0;
-}
-@media (max-width: 900px) {
-  .quiz-section-bg { min-height: 70vh; }
-  .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px;}
-  #quiz-content { padding: 55px 2vw 24px 2vw; }
-  #results-container { padding: 55px 2vw 24px 2vw;}
-}
-
-/* Nowoczesny nagłówek pytania */
-#quiz-content .question-text {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--brand-dark);
-  margin: 0 0 24px 0;
-  letter-spacing: -1px;
-  word-break: break-word;
-  width: 100%;
-}
-
-/* Odpowiedzi w siatce */
-.answers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-  width: 100%;
-  margin-top: 10px;
-}
-
-#quiz-content .answers-grid .answer-card {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-  background: var(--bg);
-  border: 2.5px solid transparent;
-  border-radius: 18px;
-  padding: 24px 10px 22px 10px;
-  cursor: pointer;
-  text-align: center;
-  color: var(--brand-dark);
-  font-size: 1.08rem;
-  transition: border-color .2s, box-shadow .2s, background .18s, color .2s;
-  box-shadow: 0 2px 12px rgba(140,192,195,.07);
-}
-#quiz-content .answers-grid .answer-card:hover, #quiz-content .answers-grid .answer-card:focus-visible {
-  border-color: var(--brand-dark);
-  background: #fff;
-  color: var(--brand-dark);
-  box-shadow: var(--shadow-hover);
-}
-
-/* Ikony odpowiedzi pastelowe */
-.answer-icon {
-  width: var(--icon-size-answer);
-  height: var(--icon-size-answer);
-  display: inline-block;
-  color: var(--icon-initial-color);
-}
-.answer-icon svg { width: 100% !important; height: 100% !important; }
-.answer-icon svg * {
-  stroke: currentColor;
-  stroke-width: var(--icon-stroke-width);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-#quiz-content .answers-grid .answer-card:hover .answer-icon { color: var(--icon-hover-color); }
-
-/* Napisy odpowiedzi */
-.answer-title {
-  font-size: 1.18rem;
-  line-height: 1.43;
-  font-weight: 700;
-  color: currentColor;
-}
-
-/* Przycisk wstecz - padding od lewej */
-.back-row {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 16px;
-  width: 100%;
-  padding-left: 20px;
-  box-sizing: border-box;
-}
-.back-icon-btn {
-  width: 44px; height: 44px; border-radius: 50%;
-  border: 2px solid var(--brand-dark);
-  background: var(--bg);
-  color: var(--brand-dark);
-  display: inline-flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
-  transition: background-color .2s, transform .06s ease-out, box-shadow .2s;
-  font-size: 0.97rem;
-}
-.back-icon-btn:hover { background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
-.back-icon-btn:active { transform: translateY(1px); }
-.back-icon-btn svg {
-  width: 22px; height: 22px; stroke: currentColor; fill: none;
-  stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
-}
-.back-icon-btn .sr-only { font-size: 1.03rem; }
-
-/* WYNIKI I REKOMENDACJE */
-#results-content-wrapper { width: 100%; max-width: 960px; text-align: center; }
-.results-title { font-size: 2rem; font-weight: 700; color: var(--brand-dark); margin-bottom: 24px; }
-
-/* --- KLUCZOWA ZMIANA: zawsze 3 w linii, wyśrodkowane --- */
-.recommendations-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  justify-content: center;
-  width: auto;
-}
-.recommendation-card {
-  width: 280px;
-  background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); padding: 20px; text-align: center;
-  display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;
-}
-.recommendation-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(77,125,128,0.11); }
-.recommendation-image {
-  width: 100%;
-  height: 300px;
-  object-fit: contain;
-  margin-bottom: 16px;
-  background: var(--phones-bg);
-  border: 1px solid var(--image-frame-border);
-  border-radius: 12px;
-  padding: 10px;
-  display: block;
-  box-sizing: border-box;
-}
-.recommendation-name { font-size: 1.25rem; font-weight: 600; color: var(--brand-dark); margin-bottom: 16px; }
-.store-links-container { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
-.store-link {
-  display: block; padding: 10px 15px; background-color: var(--brand); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600;
-  transition: background-color 0.2s, color 0.2s;
-}
-.store-link:hover { background-color: var(--brand-dark); color: #fff; }
-
-.restart-btn {
-  margin-top: 32px; padding: 12px 32px; font-size: 1.1rem; border: none; border-radius: 24px; background: var(--brand-dark); color: #fff; cursor: pointer; font-weight: 600;
-  transition: background-color 0.2s;
-}
-.restart-btn:hover { background-color: var(--brand); }
-
-footer {
-  margin-top: auto;
-  width: 100%;
-  background: #fff;
-  border-top: 1px solid var(--border);
-  padding: 16px 24px;
-  color: var(--muted);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-  text-align: center;
-}
-.footer-links {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-.footer-links a {
-  color: var(--brand-dark);
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s;
-  font-size: 1.08rem;
-}
-.footer-links a:hover { text-decoration: underline; color: var(--brand);}
-@media (max-width: 700px) {
-  #quiz-content { padding: 55px 2vw 24px 2vw; }
-  #results-container { padding: 55px 2vw 24px 2vw;}
-  .quiz-section-bg { min-height: 70vh; }
-  .recommendations-grid {
-    grid-template-columns: 1fr !important;
-    justify-content: center;
-    width: auto;
+  // --- Stopka About/Contact tłumaczenia ---
+  function renderFooterLinks() {
+    const dict = {
+      pl: { about: "O nas", contact: "Kontakt" },
+      en: { about: "About", contact: "Contact" },
+      es: { about: "Acerca de", contact: "Contacto" }
+    };
+    const lang = currentLang in dict ? currentLang : "pl";
+    if (!footerLinks) return;
+    footerLinks.innerHTML = `
+      <a href="/about">${dict[lang].about}</a>
+      <a href="/contact">${dict[lang].contact}</a>
+    `;
   }
-  .recommendation-image { height: 200px; }
-  .quiz-progress-counter { top: 7px; right: 7px; font-size: 0.97rem; padding: 5px 13px; }
-  .main-content { padding: 16px 0 18px 0; }
-}
-@media (max-width: 600px) {
-  .logo { font-size: 1.3rem; }
-  header { flex-direction: column; gap: 12px; padding: 16px 8px 2px 8px; }
-  .hero-image { width: 94vw; max-width: 330px; }
-  .big-title { font-size: 1.25rem; }
-  .answers-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-  .answer-title { font-size: 1.06rem; }
-  .recommendation-image { height: 170px; }
-  footer { align-items: center; text-align: center; }
-  .footer-links { justify-content: center; flex-wrap: wrap; gap: 14px;}
-}
+
+  // --- Logo kolor jak pytanie ---
+  function updateLogoColor() {
+    if (logo) logo.style.color = "var(--brand-dark)";
+  }
+
+  // --- Ikona języka kolor brand-dark ---
+  function updateLangIconColor() {
+    if (!langIcon) return;
+    langIcon.querySelectorAll('*').forEach(el => {
+      el.setAttribute('stroke', getComputedStyle(document.documentElement).getPropertyValue('--brand-dark').trim() || "#4D7D80");
+    });
+  }
+
+  async function fetchInlineSvg(url) {
+    if (!url || !url.endsWith('.svg')) return null;
+    try {
+      if (!svgCache.has(url)) {
+        const res = await fetch(url, { cache: 'force-cache' });
+        if (!res.ok) throw new Error(`Failed to fetch ${url}`);
+        const text = await res.text();
+        svgCache.set(url, text);
+      }
+      const wrap = document.createElement('div');
+      wrap.innerHTML = svgCache.get(url);
+      return wrap.querySelector('svg');
+    } catch (e) {
+      console.warn('SVG inline error:', url, e);
+      return null;
+    }
+  }
+
+  function normalizeSvg(svgEl) {
+    if (!svgEl) return;
+    svgEl.removeAttribute('width');
+    svgEl.removeAttribute('height');
+    svgEl.style.color = 'inherit';
+
+    const nodes = svgEl.querySelectorAll('*');
+    nodes.forEach(n => {
+      const tag = n.tagName.toLowerCase();
+
+      const style = n.getAttribute('style') || '';
+      if (style) {
+        const cleaned = style
+          .replace(/fill\s*:\s*[^;]+;?/gi, '')
+          .replace(/stroke\s*:\s*[^;]+;?/gi, '')
+          .replace(/color\s*:\s*[^;]+;?/gi, '');
+        if (cleaned.trim()) n.setAttribute('style', cleaned);
+        else n.removeAttribute('style');
+      }
+      if (n.hasAttribute('color')) n.removeAttribute('color');
+
+      const hadStroke = n.hasAttribute('stroke');
+      const hadFill = n.hasAttribute('fill');
+      const fillVal = (n.getAttribute('fill') || '').trim().toLowerCase();
+
+      if (tag === 'text') {
+        n.setAttribute('fill', 'currentColor');
+        n.removeAttribute('stroke');
+        return;
+      }
+
+      if (hadStroke) n.setAttribute('stroke', 'currentColor');
+      if (hadFill) {
+        if (fillVal !== 'none') {
+          n.setAttribute('fill', 'currentColor');
+        }
+      } else if (hadStroke) {
+        n.setAttribute('fill', 'none');
+      }
+    });
+  }
+
+  function backAriaLabel() {
+    return currentLang === 'pl' ? '' :
+           currentLang === 'es' ? '' : '';
+  }
+
+  function renderQuizShell() {
+    quizContent.innerHTML = `
+      <div class="quiz-progress-counter" id="quiz-progress-counter" style="display:none;">1/5</div>
+      <div class="question-header">
+        <div id="question-icon" class="question-icon" aria-hidden="true"></div>
+        <div id="question-text" class="question-text"></div>
+      </div>
+      <div id="answers-container" class="answers-grid"></div>
+      <div class="back-row">
+        <button id="back-btn" class="back-icon-btn" style="display:none;" aria-label=""></button>
+      </div>
+    `;
+    questionTextEl = document.getElementById('question-text');
+    questionIconWrap = document.getElementById('question-icon');
+    answersContainerEl = document.getElementById('answers-container');
+    backBtnEl = document.getElementById('back-btn');
+    quizProgressCounter = document.getElementById('quiz-progress-counter');
+
+    if (backBtnEl) {
+      backBtnEl.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        <span class="sr-only">${backAriaLabel()}</span>
+      `;
+      backBtnEl.setAttribute('aria-label', backAriaLabel());
+      backBtnEl.addEventListener('click', goBack);
+    }
+  }
+
+  function startQuiz() {
+    mainContent.style.display = 'none';
+    resultsContainer.style.display = 'none';
+    if (quizSectionBg) quizSectionBg.style.display = 'flex';
+
+    currentQuestionId = 1;
+    pathAnswers = [];
+    history = [];
+
+    renderQuizShell();
+    fetchQuestion(currentQuestionId, true);
+  }
+
+  function handleLanguageChange() {
+    currentLang = this.value;
+    renderFooterLinks();
+    updateLogoColor();
+    updateLangIconColor();
+    if (quizSectionBg && quizSectionBg.style.display !== 'none') {
+      renderQuizShell();
+      fetchQuestion(currentQuestionId, true);
+    }
+  }
+
+  function goBack() {
+    if (history.length > 0) {
+      const prevId = history.pop();
+      if (pathAnswers.length > 0) pathAnswers.pop();
+      currentQuestionId = prevId;
+      fetchQuestion(currentQuestionId, true);
+    }
+  }
+
+  function getResults() {
+    fetch('/api/quiz/result', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pathAnswers, language: currentLang })
+    })
+    .then(r => r.ok ? r.json() : Promise.reject(r))
+    .then(d => displayResults(d.recommendations || []))
+    .catch(err => {
+      console.error('Error getting results:', err);
+      alert(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' : 'Failed to load results.');
+    });
+  }
+
+  function fetchQuestion(questionId, noHistoryPush = false) {
+    if (!noHistoryPush) history.push(currentQuestionId);
+
+    fetch(`/api/quiz/question?current_question_id=${encodeURIComponent(questionId)}&language=${encodeURIComponent(currentLang)}`)
+      .then(r => r.ok ? r.json() : Promise.reject(r))
+      .then(d => displayQuestion(d))
+      .catch(err => {
+        console.error('Error fetching question:', err);
+        alert(currentLang === 'pl' ? 'Nie udało się pobrać pytania.' : 'Failed to load question.');
+      });
+  }
+
+  async function displayQuestion(data) {
+    if (!questionTextEl || !answersContainerEl || !questionIconWrap || !backBtnEl) return;
+
+    // Licznik pytań (dynamiczny, wyciągaj total z serwera jeśli jest)
+    let qIndex = data.question_number || (history.length + 1);
+    let qTotal = data.total_questions || totalQuestions;
+    totalQuestions = qTotal;
+
+    if (quizProgressCounter) {
+      quizProgressCounter.textContent = `${qIndex}/${qTotal}`;
+      quizProgressCounter.style.display = "block";
+    }
+
+    // Tekst pytania
+    questionTextEl.textContent = data.question_text || '';
+
+    // Ikona pytania
+    questionIconWrap.innerHTML = '';
+    if (data.question_icon_url && data.question_icon_url.endsWith('.svg')) {
+      const svgQ = await fetchInlineSvg(data.question_icon_url);
+      if (svgQ) {
+        normalizeSvg(svgQ);
+        questionIconWrap.appendChild(svgQ);
+        questionIconWrap.style.display = 'inline-flex';
+      } else {
+        questionIconWrap.style.display = 'none';
+      }
+    } else {
+      questionIconWrap.style.display = 'none';
+    }
+
+    // Odpowiedzi
+    answersContainerEl.innerHTML = '';
+    const answers = Array.isArray(data.answers) ? data.answers : [];
+    for (const ans of answers) {
+      const card = document.createElement('button');
+      card.className = 'answer-card';
+      card.type = 'button';
+      const label = ans.answer_text || 'answer';
+      card.setAttribute('aria-label', label);
+      card.setAttribute('title', label);
+
+      const iconWrap = document.createElement('div');
+      iconWrap.className = 'answer-icon';
+
+      if (ans.icon_url && ans.icon_url.endsWith('.svg')) {
+        const svg = await fetchInlineSvg(ans.icon_url);
+        if (svg) {
+          normalizeSvg(svg);
+          iconWrap.appendChild(svg);
+        }
+      }
+      card.appendChild(iconWrap);
+
+      const title = document.createElement('div');
+      title.className = 'answer-title';
+      title.textContent = label;
+      card.appendChild(title);
+
+      card.addEventListener('click', () => handleAnswer(ans));
+      answersContainerEl.appendChild(card);
+    }
+
+    // Pokaż/ukryj przycisk Wstecz
+    backBtnEl.style.display = history.length > 0 ? 'inline-flex' : 'none';
+    backBtnEl.setAttribute('aria-label', backAriaLabel());
+
+    // Pokazuj quiz, chowaj wyniki (ale nie chowaj quiz-section-bg!)
+    resultsContainer.style.display = 'none';
+    quizContent.style.display = 'block';
+  }
+
+  function handleAnswer(answer) {
+    if (typeof answer.answer_id !== 'undefined') pathAnswers.push(answer.answer_id);
+
+    const nextId = answer.next_question_id;
+    if (nextId === '' || nextId === null || typeof nextId === 'undefined') {
+      getResults();
+    } else {
+      currentQuestionId = parseInt(nextId, 10);
+      fetchQuestion(currentQuestionId, false);
+    }
+  }
+
+  function displayResults(recommendations) {
+    quizContent.style.display = 'none';
+    resultsContainer.style.display = 'flex';
+    resultsWrapper.innerHTML = '';
+
+    const dict = {
+      pl: 'Nasze rekomendacje',
+      en: 'Our Recommendations',
+      es: 'Nuestras recomendaciones'
+    };
+    const title = document.createElement('div');
+    title.className = 'results-title';
+    title.textContent = dict[currentLang] || dict.pl;
+    resultsWrapper.appendChild(title);
+
+    if (!recommendations.length) {
+      const p = document.createElement('p');
+      p.textContent = currentLang === 'pl' ? 'Brak rekomendacji dla wybranej ścieżki.' : 'No recommendations for the selected path.';
+      resultsWrapper.appendChild(p);
+    } else {
+      const grid = document.createElement('div');
+      grid.className = 'recommendations-grid';
+
+      recommendations.forEach(rec => {
+        const card = document.createElement('div');
+        card.className = 'recommendation-card';
+
+        const img = document.createElement('img');
+        img.className = 'recommendation-image';
+        img.src = rec.image_url || '';
+        img.alt = rec.product_name || '';
+        card.appendChild(img);
+
+        const name = document.createElement('div');
+        name.className = 'recommendation-name';
+        name.textContent = rec.product_name || '';
+        card.appendChild(name);
+
+        const linksWrap = document.createElement('div');
+        linksWrap.className = 'store-links-container';
+
+        (rec.links || []).forEach(link => {
+          const a = document.createElement('a');
+          a.className = 'store-link';
+          a.href = link.link_url || '#';
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = link.store_name || 'Store';
+          linksWrap.appendChild(a);
+        });
+
+        card.appendChild(linksWrap);
+        grid.appendChild(card);
+      });
+
+      resultsWrapper.appendChild(grid);
+    }
+
+    const dictBtn = {
+      pl: 'Zacznij od nowa',
+      en: 'Restart',
+      es: 'Empezar de nuevo'
+    };
+    const restart = document.createElement('button');
+    restart.className = 'restart-btn';
+    restart.textContent = dictBtn[currentLang] || dictBtn.pl;
+    restart.addEventListener('click', resetApp);
+    resultsWrapper.appendChild(restart);
+  }
+
+  function resetApp() {
+    currentQuestionId = 1;
+    pathAnswers = [];
+    history = [];
+    resultsContainer.style.display = 'none';
+    quizContent.style.display = 'none';
+    if (quizSectionBg) quizSectionBg.style.display = 'none';
+    mainContent.style.display = 'flex';
+  }
+
+  // --- INIT ---
+  if (startBtn) startBtn.addEventListener('click', startQuiz);
+  if (langSelect) langSelect.addEventListener('change', handleLanguageChange);
+
+  // --- Inicjalizacja na starcie ---
+  renderFooterLinks();
+  updateLogoColor();
+  updateLangIconColor();
+});
