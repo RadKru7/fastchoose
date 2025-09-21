@@ -6,9 +6,7 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose**:
 
 1. **Dodaj pozostałe grafiki telefonów**  
    Dodaj wszystkie brakujące grafiki telefonów wykorzystywane w rekomendacjach oraz quizie. Grafiki powinny być spójne stylistycznie, zoptymalizowane pod web oraz poprawnie podpisane alt-tekstem. Uwzględnij różne modele telefonów prezentowane użytkownikowi.
-
-2. **Popraw przycisk wstecz**  
-   Popraw działanie i wygląd przycisku Wstecz w quizie. Przycisk powinien być zawsze widoczny, czytelny, responsywny i powinien jednoznacznie prowadzić użytkownika do poprzedniego pytania lub kroku. Zadbaj o UX oraz dostępność przycisku.
+8. **Sprawdz czy wszystkie ścieżki zawsaze mają 5 pytań , jest przynajmniej jedna gdzie jest 6 do weryfikacji**
 
 3. **Opracuj powiązania linków i produktów w zależności od języka**  
    Zaprojektuj oraz wdroż mechanizm dynamicznego powiązania linków do sklepów oraz produktów prezentowanych w rekomendacjach z wybranym językiem użytkownika. Linki i opisy produktów mają być odpowiednio tłumaczone oraz kierować do odpowiednich wersji językowych sklepów.
@@ -25,4 +23,7 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose**:
 7. **Dodaj napis główny na każdej stronie**
    Na każdej stronie oprocz startowej dodaj hasło w stylu "znajdź swój idalny telefon, celnie i szybko
    
----
+-----------------
+Archiwum 
+[x] - 2025-09-21 2. **Popraw przycisk wstecz**  
+   Popraw działanie i wygląd przycisku Wstecz w quizie. Przycisk powinien być zawsze widoczny, czytelny, responsywny i powinien jednoznacznie prowadzić użytkownika do poprzedniego pytania lub kroku. Zadbaj o UX oraz dostępność przycisku.
