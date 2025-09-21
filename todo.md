@@ -21,7 +21,9 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose**:
    Opracuj i przygotuj kompletne treści dla podstron O nas i Kontakt w języku polskim, angielskim i hiszpańskim. Treści powinny być krótkie, profesjonalne, zachęcające do kontaktu oraz spójne stylistycznie ze stroną główną.
    
 7. **Dodaj napis główny na każdej stronie**
-   Na każdej stronie oprocz startowej dodaj hasło w stylu "znajdź swój idalny telefon, celnie i szybko
+   Na każdej stronie oprocz startowej dodaj hasło w stylu Fastchoose - Twój idealny telefon, w kilka sekund!
+   Język angielski: "Fastchoose - Your ideal phone, in seconds!"
+   Język hiszpański: "Fastchoose - Tu teléfono ideal, ¡en segundos!"
    
 -----------------
 Archiwum 
