@@ -51,8 +51,8 @@ answers_db = {
     1002: {'question_id': 10, 'next_question_id': 11, 'en': 'Apple', 'es': 'Apple', 'pl': 'Apple', 'icon_path': 'icons/apple.svg'},
     1003: {'question_id': 10, 'next_question_id': 11, 'en': 'I don''t have a preference', 'es': 'No tengo preferencia', 'pl': 'Nie mam preferencji', 'icon_path': 'icons/any.svg'},
     1101: {'question_id': 11, 'next_question_id': None, 'en': 'Very important', 'es': 'Muy importante', 'pl': 'Bardzo ważne', 'icon_path': 'icons/charging_fast.svg'},
-    1102: {'question_id': 11, 'next_question_id': None, 'en': 'Neutral', 'es': 'Neutral', 'pl': 'Neutralne', 'icon_path': 'icons/any.svg'},
-    1103: {'question_id': 11, 'next_question_id': None, 'en': 'Not important', 'es': 'No importa', 'pl': 'Nie ważne', 'icon_path': 'icons/charging_slow.svg'},
+    1102: {'question_id': 11, 'next_question_id': None, 'en': 'Neutral', 'es': 'Neutral', 'pl': 'Neutralne', 'icon_path': 'icons/charging_normal.svg'},
+    1103: {'question_id': 11, 'next_question_id': None, 'en': 'Not important', 'es': 'No importa', 'pl': 'Nie ważne', 'icon_path': 'icons/charging_never_mind.svg'},
 }
 answers_x_products = {
     # 101: Najtańsze telefony
