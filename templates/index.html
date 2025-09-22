@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}">
+<html lang="pl">
 <head>
   <meta charset="utf-8">
   <title>FastChoose</title>
@@ -9,14 +9,13 @@
 </head>
 <body>
   <header>
-    <a href="/" class="logo">FastChoose</a>
+    <a href="/" class="logo" id="logo">FastChoose</a>
     <div class="lang-select-container">
-      <!-- Jeśli masz inną nazwę ikony języka, popraw tutaj -->
       <img src="/static/language.svg" alt="" class="lang-icon" />
       <select class="lang-select" id="lang-select">
-        <option value="pl" {% if lang == 'pl' %}selected{% endif %}>PL</option>
-        <option value="en" {% if lang == 'en' %}selected{% endif %}>EN</option>
-        <option value="es" {% if lang == 'es' %}selected{% endif %}>ES</option>
+        <option value="pl">PL</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
       </select>
     </div>
   </header>
@@ -26,26 +25,15 @@
     <div class="hero-image-container">
       <img class="hero-image" src="/static/graphic/start_page.png" alt="phone illustration">
     </div>
-    <div class="big-title">
-      {% if lang == 'pl' %}
-        Wybierz idealny telefon w kilka sekund!
-      {% elif lang == 'es' %}
-        ¡Encuentra tu teléfono ideal en segundos!
-      {% else %}
-        Find your perfect phone in seconds!
-      {% endif %}
+    <div class="big-title" id="big-title">
+      <!-- Wartość domyślna -->
+      Wybierz idealny telefon w kilka sekund!
     </div>
-    <div class="subtitle">
-      {% if lang == 'pl' %}
-        Odpowiedz na kilka pytań, a my dobierzemy model spełniający Twoje potrzeby.
-      {% elif lang == 'es' %}
-        Responde unas preguntas y te recomendaremos el modelo perfecto.
-      {% else %}
-        Answer a few questions and we’ll recommend the right model for you.
-      {% endif %}
+    <div class="subtitle" id="subtitle">
+      Odpowiedz na kilka pytań, a my dobierzemy model spełniający Twoje potrzeby.
     </div>
     <button class="get-started-btn" id="get-started-btn">
-      {% if lang == 'pl' %}Zaczynamy!{% elif lang == 'es' %}¡Vamos!{% else %}Get started{% endif %}
+      Zaczynamy!
     </button>
   </div>
 
@@ -64,8 +52,8 @@
 
   <footer>
     <div class="footer-links" id="footer-links">
-      <a href="/about" rel="nofollow">{% if lang == 'pl' %}O nas{% elif lang == 'es' %}Sobre nosotros{% else %}About us{% endif %}</a>
-      <a href="/contact" rel="nofollow">{% if lang == 'pl' %}Kontakt{% elif lang == 'es' %}Contacto{% else %}Contact{% endif %}</a>
+      <a href="/about" rel="nofollow">O nas</a>
+      <a href="/contact" rel="nofollow">Kontakt</a>
     </div>
     <div>
       &copy; 2025 FastChoose. All rights reserved.
