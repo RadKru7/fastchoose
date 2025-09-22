@@ -1,8 +1,9 @@
 :root {
   --brand: #0ea5a6;
   --brand-accent: #34d399;
-  --brand-dark: #1992d4;
-  --headline-accent: #1992d4;
+  --brand-light: #858F8D; /*Pierwsza ramka za telefonem*/
+  --brand-dark: #223429;
+  --headline-accent: #223429;
 
   --bg: #f7f8fa;
   --text: #222;
@@ -332,9 +333,16 @@ select.lang-select {
   letter-spacing: -1px;
 }
 #results-content-wrapper { width: 100%; max-width: 1440px; text-align: center; }
-.recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 36px; width: 100%; }
+.recommendations-grid { 
+  display: grid;
+  background: #9e9593; 
+  padding: 2em 0;
+  border-radius: 18px;
+  grid-template-columns:
+  repeat(auto-fit, minmax(420px, 1fr));
+  gap: 36px; width: 100%; }
 .recommendation-card {
-  background: #fff;
+  background: var(--brand-light);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.08);
   padding: 40px;
