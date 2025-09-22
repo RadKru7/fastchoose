@@ -11,7 +11,8 @@
   <header>
     <a href="/" class="logo">FastChoose</a>
     <div class="lang-select-container">
-      <img src="/static/lang.svg" alt="" class="lang-icon" />
+      <!-- Jeśli masz inną nazwę ikony języka, popraw tutaj -->
+      <img src="/static/language.svg" alt="" class="lang-icon" />
       <select class="lang-select" id="lang-select">
         <option value="pl" {% if lang == 'pl' %}selected{% endif %}>PL</option>
         <option value="en" {% if lang == 'en' %}selected{% endif %}>EN</option>
@@ -21,9 +22,9 @@
   </header>
 
   <!-- Landing page -->
-  <div id="landing-content" class="main-content">
+  <div id="main-content" class="main-content">
     <div class="hero-image-container">
-      <img class="hero-image" src="/static/phone_hero.svg" alt="phone illustration">
+      <img class="hero-image" src="/static/start_page.png" alt="phone illustration">
     </div>
     <div class="big-title">
       {% if lang == 'pl' %}
@@ -43,22 +44,26 @@
         Answer a few questions and we’ll recommend the right model for you.
       {% endif %}
     </div>
-    <button class="get-started-btn" id="start-quiz-btn">
+    <button class="get-started-btn" id="get-started-btn">
       {% if lang == 'pl' %}Zaczynamy!{% elif lang == 'es' %}¡Vamos!{% else %}Get started{% endif %}
     </button>
   </div>
 
   <!-- Quiz/wyniki (ukryte na start, pokazywane przez JS) -->
-  <div id="quiz-section" class="quiz-section-bg" style="display:none;">
+  <div id="quiz-section-bg" class="quiz-section-bg" style="display:none;">
     <h1 class="headline-multicolor" id="fastchoose-headline" style="display:none;">
       <span class="headline-main"></span><span class="headline-accent"></span>
     </h1>
-    <div id="quiz-container"><div id="quiz-content"></div></div>
-    <div id="results-container"><div id="results-content-wrapper"></div></div>
+    <div id="quiz-container">
+      <div id="quiz-content"></div>
+    </div>
+    <div id="results-container">
+      <div id="results-content-wrapper"></div>
+    </div>
   </div>
 
   <footer>
-    <div class="footer-links">
+    <div class="footer-links" id="footer-links">
       <a href="/about" rel="nofollow">{% if lang == 'pl' %}O nas{% elif lang == 'es' %}Sobre nosotros{% else %}About us{% endif %}</a>
       <a href="/contact" rel="nofollow">{% if lang == 'pl' %}Kontakt{% elif lang == 'es' %}Contacto{% else %}Contact{% endif %}</a>
     </div>
