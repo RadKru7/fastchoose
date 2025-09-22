@@ -1,61 +1,71 @@
 <!DOCTYPE html>
-<html lang="pl" data-theme="teal">
+<html lang="{{ lang }}">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>FastChoose</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Zewnętrzny arkusz stylów (cache-busting) -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=theme1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" href="/static/favicon.ico">
 </head>
 <body>
   <header>
     <a href="/" class="logo">FastChoose</a>
     <div class="lang-select-container">
-      <svg class="lang-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <circle cx="12" cy="12" r="10" stroke-width="2"/>
-        <path d="M2 12h20M12 2a10 10 0 000 20" stroke-width="1.5"/>
-        <ellipse cx="12" cy="12" rx="4.5" ry="10" stroke-width="1.5"/>
-      </svg>
-      <select id="lang-select" class="lang-select" aria-label="Wybierz język">
-        <option value="pl">Polski</option>
-        <option value="en">English</option>
-        <option value="es">Español</option>
+      <img src="/static/lang.svg" alt="" class="lang-icon" />
+      <select class="lang-select" id="lang-select">
+        <option value="pl" {% if lang == 'pl' %}selected{% endif %}>PL</option>
+        <option value="en" {% if lang == 'en' %}selected{% endif %}>EN</option>
+        <option value="es" {% if lang == 'es' %}selected{% endif %}>ES</option>
       </select>
     </div>
   </header>
 
-  <main class="main-content" id="main-content">
+  <!-- Landing page -->
+  <div id="landing-content" class="main-content">
     <div class="hero-image-container">
-      <img src="{{ url_for('static', filename='graphic/start_page.png') }}"
-           alt="Telefon prezentujący aplikację"
-           class="hero-image start-page-animated">
+      <img class="hero-image" src="/static/phone_hero.svg" alt="phone illustration">
     </div>
-    <div class="big-title">Wybierz szybciej, żyj wygodniej!</div>
+    <div class="big-title">
+      {% if lang == 'pl' %}
+        Wybierz idealny telefon w kilka sekund!
+      {% elif lang == 'es' %}
+        ¡Encuentra tu teléfono ideal en segundos!
+      {% else %}
+        Find your perfect phone in seconds!
+      {% endif %}
+    </div>
     <div class="subtitle">
-      FastChoose pomaga podejmować decyzje, wybierać szybko i trafnie!<br>
-      Aktywuj poniższy przycisk i rozpocznij serię pytań.
+      {% if lang == 'pl' %}
+        Odpowiedz na kilka pytań, a my dobierzemy model spełniający Twoje potrzeby.
+      {% elif lang == 'es' %}
+        Responde unas preguntas y te recomendaremos el modelo perfecto.
+      {% else %}
+        Answer a few questions and we’ll recommend the right model for you.
+      {% endif %}
     </div>
-    <button class="get-started-btn" id="get-started-btn">Rozpocznij</button>
-  </main>
+    <button class="get-started-btn" id="start-quiz-btn">
+      {% if lang == 'pl' %}Zaczynamy!{% elif lang == 'es' %}¡Vamos!{% else %}Get started{% endif %}
+    </button>
+  </div>
 
-  <!-- Uwaga: quiz i wyniki są teraz w jednym wspólnym kontenerze .quiz-section-bg -->
-  <div class="quiz-section-bg" id="quiz-section-bg" style="display:none;">
-    <div id="quiz-content">
-      <!-- Quiz dynamicznie generowany przez JS -->
-    </div>
-    <div id="results-container" style="display:none;">
-      <div id="results-content-wrapper"></div>
-    </div>
+  <!-- Quiz/wyniki (ukryte na start, pokazywane przez JS) -->
+  <div id="quiz-section" class="quiz-section-bg" style="display:none;">
+    <h1 class="headline-multicolor" id="fastchoose-headline" style="display:none;">
+      <span class="headline-main"></span><span class="headline-accent"></span>
+    </h1>
+    <div id="quiz-container"><div id="quiz-content"></div></div>
+    <div id="results-container"><div id="results-content-wrapper"></div></div>
   </div>
 
   <footer>
-    <div class="footer-links" id="footer-links">
-      <!-- Linki About/Contact generowane przez JS zgodnie z językiem -->
+    <div class="footer-links">
+      <a href="/about" rel="nofollow">{% if lang == 'pl' %}O nas{% elif lang == 'es' %}Sobre nosotros{% else %}About us{% endif %}</a>
+      <a href="/contact" rel="nofollow">{% if lang == 'pl' %}Kontakt{% elif lang == 'es' %}Contacto{% else %}Contact{% endif %}</a>
     </div>
-    &copy; 2025 FastChoose. All rights reserved.
+    <div>
+      &copy; 2025 FastChoose. All rights reserved.
+    </div>
   </footer>
-
-  <!-- Skrypt aplikacji (cache-busting) -->
-  <script src="{{ url_for('static', filename='script.js') }}?v=theme1" defer></script>
+  <script src="/static/script.js"></script>
 </body>
 </html>
