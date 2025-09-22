@@ -132,16 +132,16 @@ select.lang-select {
   justify-content: flex-start;
   padding: 40px 12px 32px 12px;
   width: 100%;
-  margin-top: 72px; /* było 32px: teraz większy odstęp od góry */
+  margin-top: 72px; /* bigger margin under headline */
   z-index: 2;
 }
 
 #quiz-content {
   width: 100%;
-  max-width: 900px; /* było 600px, teraz +50% */
+  max-width: 900px; /* +50% width */
   background: var(--card-bg);
   border-radius: 24px;
-  padding: 60px 54px 60px 54px; /* zwiększone paddingi */
+  padding: 60px 54px 60px 54px; /* larger padding */
   box-shadow: var(--shadow-soft);
   text-align: center;
   position: relative;
@@ -155,7 +155,7 @@ select.lang-select {
 
 .quiz-progress-counter {
   position: absolute;
-  top: -32px; /* było 16px; teraz nad oknem pytania */
+  top: -32px; /* above the quiz content */
   right: 32px;
   z-index: 10;
   background: var(--brand);
@@ -179,7 +179,6 @@ select.lang-select {
   .quiz-progress-counter { right: 12px; }
 }
 
-/* Pytanie i ikonka */
 .question-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 26px; }
 .question-icon { display: inline-flex; width: var(--icon-size-question); height: var(--icon-size-question); color: var(--brand); }
 .question-icon svg { width: 100% !important; height: 100% !important; }
@@ -210,7 +209,7 @@ select.lang-select {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
   background: var(--answer-bg);
   border: 1.5px solid var(--answer-border);
-  border-radius: 16px; padding: 32px 18px; /* większy padding */
+  border-radius: 16px; padding: 32px 18px;
   cursor: pointer; text-align: center;
   color: var(--brand);
   transition: border-color .2s, box-shadow .2s, transform .06s ease-out, background-color .2s, color .2s;
@@ -284,7 +283,7 @@ select.lang-select {
   font-size: 2.2rem;
   font-weight: 800;
   text-align: center;
-  margin: 38px 0 0 0; /* był 28px */
+  margin: 38px 0 0 0;
   letter-spacing: -0.5px;
   line-height: 1.08;
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -314,7 +313,16 @@ select.lang-select {
   box-sizing: border-box;
 }
 
-/* POWIĘKSZONE WYNIKI QUIZU O 50% */
+/* ---- RECOMMENDATIONS ---- */
+.recommendations-title {
+  font-size: 2.3rem;
+  font-weight: bold;
+  color: var(--brand-dark);
+  text-align: center;
+  margin-bottom: 32px;
+  margin-top: 0;
+  letter-spacing: -1px;
+}
 #results-content-wrapper { width: 100%; max-width: 1440px; text-align: center; }
 .recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 36px; width: 100%; }
 .recommendation-card {
