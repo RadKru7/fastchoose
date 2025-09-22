@@ -3,6 +3,7 @@
 :root {
   --brand: #0ea5a6;
   --brand-accent: #34d399;
+  --brand-dark: #8E7D90;
 
   --bg: #f7f8fa;
   --text: #222;
@@ -63,7 +64,7 @@ header {
 .logo {
   font-size: 2rem;
   font-weight: bold;
-  color: #8E7D90; /* pastelowy fiolet, spójny z ikonami */
+  color: var(--brand-dark); /* pastelowy fiolet, spójny z ikonami */
   letter-spacing: 1px;
   text-decoration: none;
   transition: color 0.2s;
@@ -308,12 +309,10 @@ select.lang-select {
   height: 300px;
   object-fit: contain;
   margin-bottom: 16px;
-
   background: #CFCBE1; /* pastelowy fiolet, NIE białe! */
   border: 1px solid var(--image-frame-border);
   border-radius: 12px;
   padding: 16px 10px;
-
   display: block;
   box-sizing: border-box;
   box-shadow: 0 2px 8px rgba(44, 56, 80, 0.07);
