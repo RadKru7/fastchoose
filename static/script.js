@@ -184,6 +184,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Pokaż headline na quizie ---
     updateFastchooseHeadline(currentLang);
 
+    // --- POKAŻ QUIZ ---
+    document.getElementById('quiz-container').style.display = 'flex';
+
     currentQuestionId = 1;
     pathAnswers = [];
     history = [];
