@@ -1,4 +1,30 @@
 // FastChoose — inline SVG z MONO-kolorem: fill/stroke ustawiane rozsądnie
+
+// --- Multicolor headline obsługa ---
+function updateFastchooseHeadline(lang) {
+  const texts = {
+    pl: {
+      main: "Fastchoose - Twój idealny telefon, ",
+      accent: "w kilka sekund!"
+    },
+    en: {
+      main: "Fastchoose - Your ideal phone, ",
+      accent: "in seconds!"
+    },
+    es: {
+      main: "Fastchoose - Tu teléfono ideal, ",
+      accent: "¡en segundos!"
+    }
+  };
+  const t = texts[lang] || texts.pl;
+  const headline = document.getElementById('fastchoose-headline');
+  if (headline) {
+    headline.style.display = '';
+    headline.querySelector('.headline-main').textContent = t.main;
+    headline.querySelector('.headline-accent').textContent = t.accent;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('get-started-btn');
   const langSelect = document.getElementById('lang-select');
@@ -155,6 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
     resultsContainer.style.display = 'none';
     if (quizSectionBg) quizSectionBg.style.display = 'flex';
 
+    // --- Pokaż headline na quizie ---
+    updateFastchooseHeadline(currentLang);
+
     currentQuestionId = 1;
     pathAnswers = [];
     history = [];
@@ -168,6 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderFooterLinks();
     updateLogoColor();
     updateLangIconColor();
+    // --- Zmień headline na quizie/wynikach ---
+    updateFastchooseHeadline(currentLang);
     if (quizSectionBg && quizSectionBg.style.display !== 'none') {
       renderQuizShell();
       fetchQuestion(currentQuestionId, true);
@@ -298,6 +329,9 @@ document.addEventListener('DOMContentLoaded', () => {
     resultsContainer.style.display = 'flex';
     resultsWrapper.innerHTML = '';
 
+    // --- Pokaż headline na wynikach ---
+    updateFastchooseHeadline(currentLang);
+
     const dict = {
       pl: 'Nasze rekomendacje',
       en: 'Our Recommendations',
@@ -371,6 +405,9 @@ document.addEventListener('DOMContentLoaded', () => {
     quizContent.style.display = 'none';
     if (quizSectionBg) quizSectionBg.style.display = 'none';
     mainContent.style.display = 'flex';
+    // --- Ukryj headline na powrót do startu ---
+    const headline = document.getElementById('fastchoose-headline');
+    if (headline) headline.style.display = 'none';
   }
 
   // --- INIT ---
@@ -381,4 +418,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFooterLinks();
   updateLogoColor();
   updateLangIconColor();
+
+  // --- Ukryj headline na stronie głównej ---
+  const headline = document.getElementById('fastchoose-headline');
+  if (headline) headline.style.display = 'none';
 });
