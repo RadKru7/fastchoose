@@ -2,8 +2,8 @@
   --brand: linear-gradient(101deg,rgba(60, 179, 181, 1) 75%, rgba(0, 0, 0, 1) 100%); /*Główny motyw tła*/
   --brand-accent: #8FB4AE;
   --brand-light: radial-gradient(circle,rgba(69, 174, 186, 1) 80%, rgba(0, 0, 0, 1) 100%); /*Drguga ramka za telefonem ramka za telefonem*/
-  --brand-dark: linear-gradient(90deg,rgba(9, 9, 121, 1) 19%, rgba(0, 212, 255, 1) 100%); /*Kolor ikon w quizie i kolor napisu głównego FastChoose*/
-  --headline-accent: #22192E;
+  --brand-dark: linear-gradient(90deg,rgba(131, 58, 180, 1) 58%, rgba(57, 61, 184, 1) 81%, rgba(252, 176, 69, 1) 100%); /*Kolor ikon w quiz i kolor napisu głównego FastChoose*/
+  --headline-accent: #393DB8;
   --result-main: #4D7D8000; /*Główna ramka za telefonami - na razie przeźroczysty*/
 
   --bg: #f7f8fa;
