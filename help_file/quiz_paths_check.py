@@ -1,5 +1,5 @@
 # Sprawdź wszystkie możliwe ścieżki w quizie i zlicz liczbę pytań w każdej ścieżce
-
+from app import answers_db, questions_db
 def build_paths(answers_db, start_qid):
     # Mapowanie: pytanie -> lista odpowiedzi
     question_to_answers = {}
