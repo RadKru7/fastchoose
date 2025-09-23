@@ -237,7 +237,7 @@ select.lang-select {
   color: var(--answer-iconcolor);
 }
 #quiz-content .answers-grid .answer-card:hover .answer-icon {
-  color: #1C191F !important;
+  color: #833AB4 !important;
 }
 .answer-icon svg { width: 100% !important; height: 100% !important; }
 .answer-icon svg * {
