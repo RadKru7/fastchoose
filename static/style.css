@@ -16,7 +16,7 @@
   --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
   --shadow-hover: 0 6px 18px rgba(0,0,0,0.14);
 
-  --answer-bg: #8FB4AE;  /*Tło wstecz na quizie*/
+  --answer-bg: #3CBFC6;  /*Tło wstecz na quizie oraz tło pod oknami odpwowiedzi */
   --answer-border: #c9f2ea;
 
   --icon-size-question: 60px;
