@@ -1,5 +1,5 @@
 :root {
-  --brand: linear-gradient(101deg,rgba(60, 179, 181, 1) 75%, rgba(0, 0, 0, 1) 100%); /*Główny motyw tła*/
+  --brand: linear-gradient(101deg,rgba(60, 179, 181, 1) 75%, rgba(0, 0, 0, 1) 100%); /*Główny motyw czcionek w pytaniach i odpwiedziach*/
   --brand-accent: #8FB4AE;
   --brand-light: radial-gradient(circle,rgba(69, 174, 186, 1) 80%, rgba(0, 0, 0, 1) 100%); /*Drguga ramka za telefonem ramka za telefonem*/
   --brand-dark: linear-gradient(90deg,rgba(131, 58, 180, 1) 58%, rgba(57, 61, 184, 1) 81%, rgba(252, 176, 69, 1) 100%); /*Kolor ikon w quiz i kolor napisu głównego FastChoose*/
@@ -224,7 +224,7 @@ select.lang-select {
 #quiz-content .answers-grid .answer-card:hover {
   border-color: var(--brand) !important;
   background-color: var(--brand) !important;
-  color: #fff !important;
+  color: var(--brand) !important;
   box-shadow: var(--shadow-hover);
 }
 #quiz-content .answers-grid .answer-card:focus-visible { outline: 3px solid rgba(14,165,166,0.35); outline-offset: 3px; }
