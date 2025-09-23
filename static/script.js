@@ -320,8 +320,14 @@ document.addEventListener('DOMContentLoaded', () => {
     quizContent.style.display = 'block';
   }
 
+ // --- LIMIT 5 PYTAŃ: zmodyfikowana funkcja handleAnswer ---
   function handleAnswer(answer) {
     if (typeof answer.answer_id !== 'undefined') pathAnswers.push(answer.answer_id);
+    // LIMIT PYTAŃ: jeśli mamy już 5, kończymy quiz
+    if (pathAnswers.length >= 5) {
+      getResults();
+      return;
+    }
     const nextId = answer.next_question_id;
     if (nextId === '' || nextId === null || typeof nextId === 'undefined') {
       getResults();
