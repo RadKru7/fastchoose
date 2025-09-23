@@ -44,15 +44,15 @@ answers_db = {
     703: {'question_id': 7, 'next_question_id': 8, 'en': 'Standard performance is enough for less demanding games', 'es': 'El rendimiento estándar es suficiente para juegos menos exigentes', 'pl': 'Wystarczy mi standardowa wydajność w mniej wymagających tytułach', 'icon_path': 'icons/performance_low.svg'},
     801: {'question_id': 8, 'next_question_id': 9, 'en': 'Android', 'es': 'Android', 'pl': 'Android', 'icon_path': 'icons/android.svg'},
     802: {'question_id': 8, 'next_question_id': 9, 'en': 'iOS', 'es': 'iOS', 'pl': 'iOS', 'icon_path': 'icons/apple.svg'},
-    901: {'question_id': 9, 'next_question_id': None,'en': 'Optical zoom', 'es': 'Zoom óptico', 'pl': 'Zoom optyczny', 'icon_path': 'icons/zoom.svg'},
-    902: {'question_id': 9, 'next_question_id': None, 'en': 'Video image stabilization', 'es': 'Estabilización de imagen de video', 'pl': 'Stabilizacja obrazu video', 'icon_path': 'icons/stabilization.svg'},
-    903: {'question_id': 9, 'next_question_id': None,'en': 'Good quality photos at night', 'es': 'Buena calidad de fotos nocturnas', 'pl': 'Dobra jakość zdjęć w nocy', 'icon_path': 'icons/moon.svg'},
+    901: {'question_id': 9, 'next_question_id': 11,'en': 'Optical zoom', 'es': 'Zoom óptico', 'pl': 'Zoom optyczny', 'icon_path': 'icons/zoom.svg'},
+    902: {'question_id': 9, 'next_question_id': 11, 'en': 'Video image stabilization', 'es': 'Estabilización de imagen de video', 'pl': 'Stabilizacja obrazu video', 'icon_path': 'icons/stabilization.svg'},
+    903: {'question_id': 9, 'next_question_id': 11,'en': 'Good quality photos at night', 'es': 'Buena calidad de fotos nocturnas', 'pl': 'Dobra jakość zdjęć w nocy', 'icon_path': 'icons/moon.svg'},
     1001: {'question_id': 10, 'next_question_id': 11, 'en': 'Samsung', 'es': 'Samsung', 'pl': 'Samsung', 'icon_path': 'icons/samsung.svg'},
     1002: {'question_id': 10, 'next_question_id': 11, 'en': 'Apple', 'es': 'Apple', 'pl': 'Apple', 'icon_path': 'icons/apple.svg'},
     1003: {'question_id': 10, 'next_question_id': 11, 'en': 'I don''t have a preference', 'es': 'No tengo preferencia', 'pl': 'Nie mam preferencji', 'icon_path': 'icons/any.svg'},
-    1101: {'question_id': 11, 'next_question_id': None, 'en': 'Very important', 'es': 'Muy importante', 'pl': 'Bardzo ważne', 'icon_path': 'icons/charging_fast.svg'},
-    1102: {'question_id': 11, 'next_question_id': None, 'en': 'Neutral', 'es': 'Neutral', 'pl': 'Neutralne', 'icon_path': 'icons/charging_normal.svg'},
-    1103: {'question_id': 11, 'next_question_id': None, 'en': 'Not important', 'es': 'No importa', 'pl': 'Nie ważne', 'icon_path': 'icons/charging_never_mind.svg'},
+    1101: {'question_id': 11, 'next_question_id': 10, 'en': 'Very important', 'es': 'Muy importante', 'pl': 'Bardzo ważne', 'icon_path': 'icons/charging_fast.svg'},
+    1102: {'question_id': 11, 'next_question_id': 10, 'en': 'Neutral', 'es': 'Neutral', 'pl': 'Neutralne', 'icon_path': 'icons/charging_normal.svg'},
+    1103: {'question_id': 11, 'next_question_id': 10, 'en': 'Not important', 'es': 'No importa', 'pl': 'Nie ważne', 'icon_path': 'icons/charging_never_mind.svg'},
 }
 answers_x_products = {
     # 101: Najtańsze telefony
