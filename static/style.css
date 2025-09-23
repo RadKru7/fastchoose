@@ -1,7 +1,7 @@
 :root {
   --brand: linear-gradient(101deg,rgba(60, 179, 181, 1) 75%, rgba(0, 0, 0, 1) 100%); /*Główny motyw czcionek w pytaniach i odpwiedziach*/
   --brand-accent: #8FB4AE;
-  --brand-light: radial-gradient(circle,rgba(69, 174, 186, 1) 80%, rgba(0, 0, 0, 1) 100%); /*Drguga ramka za telefonem ramka za telefonem*/
+  --brand-light: radial-gradient(circle,rgba(69, 174, 186, 0.5) 80%, rgba(0, 0, 0, 0,5) 100%); /*Drguga ramka za telefonem ramka za telefonem*/
   --brand-dark: linear-gradient(90deg,rgba(131, 58, 180, 1) 58%, rgba(57, 61, 184, 1) 81%, rgba(252, 176, 69, 1) 100%); /*Kolor ikon w quiz i kolor napisu głównego FastChoose*/
   --headline-accent: #393DB8; /*Druga część nagłówka - sloganu*/
   --result-main: #4D7D8000; /*Główna ramka za telefonami - na razie przeźroczysty*/
@@ -16,7 +16,7 @@
   --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
   --shadow-hover: 0 6px 18px rgba(0,0,0,0.14);
 
-  --answer-bg: #f1fbf8;
+  --answer-bg: #8FB4AE;  /*Tło wstecz na quizie*/
   --answer-border: #c9f2ea;
 
   --icon-size-question: 60px;
@@ -110,11 +110,14 @@ select.lang-select {
 .subtitle { font-size: 1.1rem; margin-top: 10px; color: var(--muted); }
 .get-started-btn {
   margin-top: 30px; padding: 14px 48px; font-size: 1.2rem; font-weight: 600;
-  background: linear-gradient(90deg, var(--brand), var(--brand-accent)); color: #fff;
+  background: linear-gradient(90deg, var(--brand), var(--brand-accent));
+  color: #833AB4;
   border: none; border-radius: 32px; cursor: pointer; box-shadow: 0 2px 16px rgba(0,0,0,0.12);
   transition: background 0.2s, box-shadow 0.2s;
 }
-.get-started-btn:hover { background: linear-gradient(90deg, var(--brand-accent), var(--brand)); box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
+.get-started-btn:hover {
+  background: linear-gradient(90deg, var(--brand-accent), var(--brand));
+  box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
 
 .quiz-section-bg {
   width: 100vw;
