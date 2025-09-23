@@ -1,7 +1,7 @@
 :root {
   --brand: #0ea5a6;
   --brand-accent: #34d399;
-  --brand-light: #343369; /*Drguga ramka za telefonem ramka za telefonem*/
+  --brand-light: linear-gradient(101deg,rgba(34, 193, 195, 1) 0%, rgba(0, 0, 0, 1) 100%); /*Drguga ramka za telefonem ramka za telefonem*/
   --brand-dark: #223429;
   --headline-accent: #223429;
   --result-main: #4D7D8000; /*Główna ramka za telefonami - na razie przeźroczysty*/
