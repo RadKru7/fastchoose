@@ -302,7 +302,9 @@ select.lang-select {
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 .headline-multicolor .headline-main {
-  color: #1C191F;
+   background: var(--brand-dark);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .headline-multicolor .headline-accent {
   color: var(--headline-accent);
