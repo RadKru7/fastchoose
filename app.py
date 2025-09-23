@@ -235,11 +235,11 @@ products_db = {
 251: {'pl': 'Infinix Hot 40', 'en': 'Infinix Hot 40', 'es': 'Infinix Hot 40', 'image_path': 'graphic/infinix_hot_40.png'}
 }
 stores_db = {
-    1: {'name': 'Amazon US', 'language': 'en'},
-    2: {'name': 'Best Buy', 'language': 'en'},
-    3: {'name': 'Allegro', 'language': 'pl'},
-    4: {'name': 'Media Expert', 'language': 'pl'},
-    5: {'name': 'Amazon ES', 'language': 'es'}
+    1: {'name': 'Order on Amazon US', 'language': 'en'},
+    2: {'name': 'Order on  Best Buy', 'language': 'en'},
+    3: {'name': 'Zamów na Allegro', 'language': 'pl'},
+    4: {'name': 'Zamów na Media Expert', 'language': 'pl'},
+    5: {'name': 'Ordenar en amazon', 'language': 'es'}
 }
 product_links_db = {
     201: [{'store_id': 3, 'url': '#'}, {'store_id': 4, 'url': '#'}, {'store_id': 1, 'url': '#'}],
