@@ -346,11 +346,12 @@ select.lang-select {
 .recommendations-grid { 
   display: grid;
   background: var(--result-main); 
-  padding: 2em 0;
+  padding: 1em 0;
   border-radius: 18px;
   grid-template-columns:
   repeat(auto-fit, minmax(420px, 1fr));
-  gap: 36px; width: 100%; }
+  gap: 20px;
+  width: 100%; }
 .recommendation-card {
   background: var(--brand-light);
   border-radius: 24px;
