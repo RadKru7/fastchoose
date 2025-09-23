@@ -5,6 +5,7 @@
   --brand-dark: linear-gradient(90deg,rgba(131, 58, 180, 1) 58%, rgba(57, 61, 184, 1) 81%, rgba(252, 176, 69, 1) 100%); /*Kolor ikon w quiz i kolor napisu głównego FastChoose*/
   --headline-accent: #393DB8; /*Druga część nagłówka - sloganu*/
   --result-main: #4D7D8000; /*Główna ramka za telefonami - na razie przeźroczysty*/
+  --answer-iconcolor: #393DB8;
 
   --bg: #f7f8fa;
   --text: #222;
@@ -233,8 +234,7 @@ select.lang-select {
   width: var(--icon-size-answer);
   height: var(--icon-size-answer);
   display: inline-block;
-  color: var(--brand-dark);
-  transition: color 0.18s;
+  color: var(--answer-iconcolor);
 }
 #quiz-content .answers-grid .answer-card:hover .answer-icon {
   color: #1C191F !important;
