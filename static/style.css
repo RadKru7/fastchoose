@@ -64,10 +64,13 @@ header {
 .logo {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--brand-dark);
   letter-spacing: 1px;
   text-decoration: none;
   transition: color 0.2s;
+  background: var(--brand-dark);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
 }
 .lang-select-container { display: flex; align-items: center; gap: 8px; }
 .lang-icon { width: 22px; height: 22px; vertical-align: middle; }
