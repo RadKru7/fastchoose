@@ -1,6 +1,6 @@
 # TODO
 
-Lista bieżących zadań do wykonania w projekcie **fastchoose**:
+Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięcia MVP:
 
 ---
 
@@ -24,6 +24,13 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose**:
    Na każdej stronie oprocz startowej dodaj hasło w stylu Fastchoose - Twój idealny telefon, w kilka sekund!
    Język angielski: "Fastchoose - Your ideal phone, in seconds!"
    Język hiszpański: "Fastchoose - Tu teléfono ideal, ¡en segundos!"
+10 **Dodaj certyfikat - bezpieczna strona**
+11. ***wykupienie domeny najlepiej z mailem na pierwszy rok*
+
+
+Lista bieżących zadań do wykonania w projekcie **fastchoose** po osiągnięciu projektu MVP:
+8. **Opracować stragegie Marketingową** - 1 Etap darmowe sposoby
+9. **Opracować stragegie Marketingową** - 2 Etap - wykupić kampanię , Facebook, zeta?
    
 -----------------
 Archiwum 
