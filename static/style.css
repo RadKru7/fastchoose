@@ -144,7 +144,7 @@ select.lang-select {
   justify-content: flex-start;
   padding: 40px 12px 32px 12px;
   width: 100%;
-  margin-top: 30px; /* bigger margin under headline */
+  margin-top: 15px; /* bigger margin under headline */
   z-index: 2;
 }
 
@@ -332,7 +332,7 @@ select.lang-select {
   padding: 32px 16px;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 10px;   
+  margin-top: 8px;   
 }
 
 /* ---- RECOMMENDATIONS ---- */
