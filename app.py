@@ -21,9 +21,9 @@ questions_db = {
     11: {'en': 'How important is fast charging?', 'es': '¿Qué tan importante es la carga rápida?', 'pl': 'Jak ważne jest szybkie ładowanie?', 'icon_path': 'icons/charging.svg'},
 }
 answers_db = {
-    101: {'question_id': 1, 'next_question_id': 2, 'en': 'Under $350', 'es': 'Menos de $350', 'pl': 'Poniżej 1500 zł', 'icon_path': 'icons/price_low.svg'},
-    102: {'question_id': 1, 'next_question_id': 2, 'en': '$350 - $700', 'es': '$350 - $700', 'pl': '1500 - 3000 zł', 'icon_path': 'icons/price_mid.svg'},
-    103: {'question_id': 1, 'next_question_id': 2, 'en': 'Above $700', 'es': 'Más de $700', 'pl': 'Powyżej 3000 zł', 'icon_path': 'icons/price_high.svg'},
+    101: {'question_id': 1, 'next_question_id': 2, 'en': 'Under $350', 'es': 'Menos de $350', 'pl': 'Poniżej 1500 zł', 'icon_path': 'icons/price_low.svg', 'price_level': 1},
+    102: {'question_id': 1, 'next_question_id': 2, 'en': '$350 - $700', 'es': '$350 - $700', 'pl': '1500 - 3000 zł', 'icon_path': 'icons/price_mid.svg', 'price_level': 2},
+    103: {'question_id': 1, 'next_question_id': 2, 'en': 'Above $700', 'es': 'Más de $700', 'pl': 'Powyżej 3000 zł', 'icon_path': 'icons/price_high.svg', 'price_level': 3},
     201: {'question_id': 2, 'next_question_id': 3, 'en': 'Calls & basic use', 'es': 'Llamadas y uso básico', 'pl': 'Tylko dzwonienie i SMS-y', 'icon_path': 'icons/calls.svg'},
     202: {'question_id': 2, 'next_question_id': 5, 'en': 'Photos & videos', 'es': 'Fotos y videos', 'pl': 'Robienie zdjęć i filmów', 'icon_path': 'icons/camera.svg'},
     203: {'question_id': 2, 'next_question_id': 7, 'en': 'Gaming', 'es': 'Juegos', 'pl': 'Granie w gry', 'icon_path': 'icons/gaming.svg'},
@@ -182,57 +182,64 @@ answers_x_products = {
 }
 
 products_db = {
-201: {'pl': 'iPhone 15 Pro Max', 'en': 'iPhone 15 Pro Max', 'es': 'iPhone 15 Pro Max', 'image_path': 'graphic/iphone_15_pro_max.png'},
-202: {'pl': 'iPhone 15', 'en': 'iPhone 15', 'es': 'iPhone 15', 'image_path': 'graphic/iphone_15.png'},
-203: {'pl': 'iPhone 15 Pro', 'en': 'iPhone 15 Pro', 'es': 'iPhone 15 Pro', 'image_path': 'graphic/iphone_15_pro.png'},
-204: {'pl': 'iPhone 15 Plus', 'en': 'iPhone 15 Plus', 'es': 'iPhone 15 Plus', 'image_path': 'graphic/iphone_15_plus.png'},
-205: {'pl': 'iPhone 14 Pro Max', 'en': 'iPhone 14 Pro Max', 'es': 'iPhone 14 Pro Max', 'image_path': 'graphic/iphone_14_pro_max.png'},
-206: {'pl': 'iPhone 14', 'en': 'iPhone 14', 'es': 'iPhone 14', 'image_path': 'graphic/iphone_14.png'},
-207: {'pl': 'iPhone 14 Pro', 'en': 'iPhone 14 Pro', 'es': 'iPhone 14 Pro', 'image_path': 'graphic/iphone_14_pro.png'},
-208: {'pl': 'iPhone 13', 'en': 'iPhone 13', 'es': 'iPhone 13', 'image_path': 'graphic/iphone_13.png'},
-209: {'pl': 'iPhone SE 3rd Gen', 'en': 'iPhone SE 3rd Gen', 'es': 'iPhone SE 3rd Gen', 'image_path': 'graphic/iphone_se_3rd_gen.png'},
-210: {'pl': 'iPhone 12', 'en': 'iPhone 12', 'es': 'iPhone 12', 'image_path': 'graphic/iphone_12.png'},
-211: {'pl': 'Samsung Galaxy S23 Ultra', 'en': 'Samsung Galaxy S23 Ultra', 'es': 'Samsung Galaxy S23 Ultra', 'image_path': 'graphic/samsung_galaxy_s23_ultra.png'},
-212: {'pl': 'Samsung Galaxy S23', 'en': 'Samsung Galaxy S23', 'es': 'Samsung Galaxy S23', 'image_path': 'graphic/samsung_galaxy_s23.png'},
-213: {'pl': 'Samsung Galaxy S23 FE', 'en': 'Samsung Galaxy S23 FE', 'es': 'Samsung Galaxy S23 FE', 'image_path': 'graphic/samsung_galaxy_s23_fe.png'},
-214: {'pl': 'Samsung Galaxy S22', 'en': 'Samsung Galaxy S22', 'es': 'Samsung Galaxy S22', 'image_path': 'graphic/samsung_galaxy_s22.png'},
-215: {'pl': 'Samsung Galaxy A54', 'en': 'Samsung Galaxy A54', 'es': 'Samsung Galaxy A54', 'image_path': 'graphic/samsung_galaxy_a54.png'},
-216: {'pl': 'Samsung Galaxy A34', 'en': 'Samsung Galaxy A34', 'es': 'Samsung Galaxy A34', 'image_path': 'graphic/samsung_galaxy_a34.png'},
-217: {'pl': 'Samsung Galaxy A14', 'en': 'Samsung Galaxy A14', 'es': 'Samsung Galaxy A14', 'image_path': 'graphic/samsung_galaxy_a14.png'},
-218: {'pl': 'Samsung Galaxy A14 5G', 'en': 'Samsung Galaxy A14 5G', 'es': 'Samsung Galaxy A14 5G', 'image_path': 'graphic/samsung_galaxy_a14_5g.png'},
-219: {'pl': 'Samsung Galaxy A24', 'en': 'Samsung Galaxy A24', 'es': 'Samsung Galaxy A24', 'image_path': 'graphic/samsung_galaxy_a24.png'},
-220: {'pl': 'Samsung Galaxy M14', 'en': 'Samsung Galaxy M14', 'es': 'Samsung Galaxy M14', 'image_path': 'graphic/samsung_galaxy_m14.png'},
-221: {'pl': 'Samsung Galaxy A05s', 'en': 'Samsung Galaxy A05s', 'es': 'Samsung Galaxy A05s', 'image_path': 'graphic/samsung_galaxy_a05s.png'},
-222: {'pl': 'Xiaomi Redmi Note 13', 'en': 'Xiaomi Redmi Note 13', 'es': 'Xiaomi Redmi Note 13', 'image_path': 'graphic/xiaomi_redmi_note_13.png'},
-223: {'pl': 'Xiaomi Redmi Note 12', 'en': 'Xiaomi Redmi Note 12', 'es': 'Xiaomi Redmi Note 12', 'image_path': 'graphic/xiaomi_redmi_note_12.png'},
-224: {'pl': 'Xiaomi Redmi Note 13 Pro', 'en': 'Xiaomi Redmi Note 13 Pro', 'es': 'Xiaomi Redmi Note 13 Pro', 'image_path': 'graphic/xiaomi_redmi_note_13_pro.png'},
-225: {'pl': 'Xiaomi Redmi Note 12 Pro', 'en': 'Xiaomi Redmi Note 12 Pro', 'es': 'Xiaomi Redmi Note 12 Pro', 'image_path': 'graphic/xiaomi_redmi_note_12_pro.png'},
-226: {'pl': 'Xiaomi Redmi 13C', 'en': 'Xiaomi Redmi 13C', 'es': 'Xiaomi Redmi 13C', 'image_path': 'graphic/xiaomi_redmi_13c.png'},
-227: {'pl': 'Xiaomi Redmi 12C', 'en': 'Xiaomi Redmi 12C', 'es': 'Xiaomi Redmi 12C', 'image_path': 'graphic/xiaomi_redmi_12c.png'},
-228: {'pl': 'Xiaomi Poco X6', 'en': 'Xiaomi Poco X6', 'es': 'Xiaomi Poco X6', 'image_path': 'graphic/xiaomi_poco_x6.png'},
-229: {'pl': 'Xiaomi Poco X5', 'en': 'Xiaomi Poco X5', 'es': 'Xiaomi Poco X5', 'image_path': 'graphic/xiaomi_poco_x5.png'},
-230: {'pl': 'Xiaomi Poco F5', 'en': 'Xiaomi Poco F5', 'es': 'Xiaomi Poco F5', 'image_path': 'graphic/xiaomi_poco_f5.png'},
-231: {'pl': 'Oppo A78', 'en': 'Oppo A78', 'es': 'Oppo A78', 'image_path': 'graphic/oppo_a78.png'},
-232: {'pl': 'Oppo Reno 11', 'en': 'Oppo Reno 11', 'es': 'Oppo Reno 11', 'image_path': 'graphic/oppo_reno_11.png'},
-233: {'pl': 'Realme 11', 'en': 'Realme 11', 'es': 'Realme 11', 'image_path': 'graphic/realme_11.png'},
-234: {'pl': 'Realme 10', 'en': 'Realme 10', 'es': 'Realme 10', 'image_path': 'graphic/realme_10.png'},
-235: {'pl': 'Vivo Y36', 'en': 'Vivo Y36', 'es': 'Vivo Y36', 'image_path': 'graphic/vivo_y36.png'},
-236: {'pl': 'Vivo Y16', 'en': 'Vivo Y16', 'es': 'Vivo Y16', 'image_path': 'graphic/vivo_y16.png'},
-237: {'pl': 'Honor 90', 'en': 'Honor 90', 'es': 'Honor 90', 'image_path': 'graphic/honor_90.png'},
-238: {'pl': 'Honor X7b', 'en': 'Honor X7b', 'es': 'Honor X7b', 'image_path': 'graphic/honor_x7b.png'},
-239: {'pl': 'Motorola Moto G54 Power', 'en': 'Motorola Moto G54 Power', 'es': 'Motorola Moto G54 Power', 'image_path': 'graphic/motorola_moto_g54_power.png'},
-240: {'pl': 'Motorola Moto G84', 'en': 'Motorola Moto G84', 'es': 'Motorola Moto G84', 'image_path': 'graphic/motorola_moto_g84.png'},
-241: {'pl': 'Motorola Edge 40 Neo', 'en': 'Motorola Edge 40 Neo', 'es': 'Motorola Edge 40 Neo', 'image_path': 'graphic/motorola_edge_40_neo.png'},
-242: {'pl': 'Google Pixel 8', 'en': 'Google Pixel 8', 'es': 'Google Pixel 8', 'image_path': 'graphic/google_pixel_8.png'},
-243: {'pl': 'Google Pixel 8 Pro', 'en': 'Google Pixel 8 Pro', 'es': 'Google Pixel 8 Pro', 'image_path': 'graphic/google_pixel_8_pro.png'},
-244: {'pl': 'Google Pixel 7a', 'en': 'Google Pixel 7a', 'es': 'Google Pixel 7a', 'image_path': 'graphic/google_pixel_7a.png'},
-245: {'pl': 'Google Pixel 7', 'en': 'Google Pixel 7', 'es': 'Google Pixel 7', 'image_path': 'graphic/google_pixel_7.png'},
-246: {'pl': 'Huawei P60 Pro', 'en': 'Huawei P60 Pro', 'es': 'Huawei P60 Pro', 'image_path': 'graphic/huawei_p60_pro.png'},
-247: {'pl': 'Huawei Nova 12', 'en': 'Huawei Nova 12', 'es': 'Huawei Nova 12', 'image_path': 'graphic/huawei_nova_12.png'},
-248: {'pl': 'OnePlus 12', 'en': 'OnePlus 12', 'es': 'OnePlus 12', 'image_path': 'graphic/oneplus_12.png'},
-249: {'pl': 'OnePlus Nord 3', 'en': 'OnePlus Nord 3', 'es': 'OnePlus Nord 3', 'image_path': 'graphic/oneplus_nord_3.png'},
-250: {'pl': 'Tecno Spark 20', 'en': 'Tecno Spark 20', 'es': 'Tecno Spark 20', 'image_path': 'graphic/tecno_spark_20.png'},
-251: {'pl': 'Infinix Hot 40', 'en': 'Infinix Hot 40', 'es': 'Infinix Hot 40', 'image_path': 'graphic/infinix_hot_40.png'}
+    # iPhone
+    201: {'pl': 'iPhone 15 Pro Max', 'en': 'iPhone 15 Pro Max', 'es': 'iPhone 15 Pro Max', 'image_path': 'graphic/iphone_15_pro_max.png', 'price_level': 3},
+    202: {'pl': 'iPhone 15', 'en': 'iPhone 15', 'es': 'iPhone 15', 'image_path': 'graphic/iphone_15.png', 'price_level': 3},
+    203: {'pl': 'iPhone 15 Pro', 'en': 'iPhone 15 Pro', 'es': 'iPhone 15 Pro', 'image_path': 'graphic/iphone_15_pro.png', 'price_level': 3},
+    204: {'pl': 'iPhone 15 Plus', 'en': 'iPhone 15 Plus', 'es': 'iPhone 15 Plus', 'image_path': 'graphic/iphone_15_plus.png', 'price_level': 3},
+    205: {'pl': 'iPhone 14 Pro Max', 'en': 'iPhone 14 Pro Max', 'es': 'iPhone 14 Pro Max', 'image_path': 'graphic/iphone_14_pro_max.png', 'price_level': 3},
+    206: {'pl': 'iPhone 14', 'en': 'iPhone 14', 'es': 'iPhone 14', 'image_path': 'graphic/iphone_14.png', 'price_level': 3},
+    207: {'pl': 'iPhone 14 Pro', 'en': 'iPhone 14 Pro', 'es': 'iPhone 14 Pro', 'image_path': 'graphic/iphone_14_pro.png', 'price_level': 3},
+    208: {'pl': 'iPhone 13', 'en': 'iPhone 13', 'es': 'iPhone 13', 'image_path': 'graphic/iphone_13.png', 'price_level': 2},
+    209: {'pl': 'iPhone SE 3rd Gen', 'en': 'iPhone SE 3rd Gen', 'es': 'iPhone SE 3rd Gen', 'image_path': 'graphic/iphone_se_3rd_gen.png', 'price_level': 1},
+    210: {'pl': 'iPhone 12', 'en': 'iPhone 12', 'es': 'iPhone 12', 'image_path': 'graphic/iphone_12.png', 'price_level': 2},
+
+    # Samsung
+    211: {'pl': 'Samsung Galaxy S23 Ultra', 'en': 'Samsung Galaxy S23 Ultra', 'es': 'Samsung Galaxy S23 Ultra', 'image_path': 'graphic/samsung_galaxy_s23_ultra.png', 'price_level': 3},
+    212: {'pl': 'Samsung Galaxy S23', 'en': 'Samsung Galaxy S23', 'es': 'Samsung Galaxy S23', 'image_path': 'graphic/samsung_galaxy_s23.png', 'price_level': 3},
+    213: {'pl': 'Samsung Galaxy S23 FE', 'en': 'Samsung Galaxy S23 FE', 'es': 'Samsung Galaxy S23 FE', 'image_path': 'graphic/samsung_galaxy_s23_fe.png', 'price_level': 2},
+    214: {'pl': 'Samsung Galaxy S22', 'en': 'Samsung Galaxy S22', 'es': 'Samsung Galaxy S22', 'image_path': 'graphic/samsung_galaxy_s22.png', 'price_level': 2},
+    215: {'pl': 'Samsung Galaxy A54', 'en': 'Samsung Galaxy A54', 'es': 'Samsung Galaxy A54', 'image_path': 'graphic/samsung_galaxy_a54.png', 'price_level': 1},
+    216: {'pl': 'Samsung Galaxy A34', 'en': 'Samsung Galaxy A34', 'es': 'Samsung Galaxy A34', 'image_path': 'graphic/samsung_galaxy_a34.png', 'price_level': 1},
+    217: {'pl': 'Samsung Galaxy A14', 'en': 'Samsung Galaxy A14', 'es': 'Samsung Galaxy A14', 'image_path': 'graphic/samsung_galaxy_a14.png', 'price_level': 1},
+    218: {'pl': 'Samsung Galaxy A14 5G', 'en': 'Samsung Galaxy A14 5G', 'es': 'Samsung Galaxy A14 5G', 'image_path': 'graphic/samsung_galaxy_a14_5g.png', 'price_level': 1},
+    219: {'pl': 'Samsung Galaxy A24', 'en': 'Samsung Galaxy A24', 'es': 'Samsung Galaxy A24', 'image_path': 'graphic/samsung_galaxy_a24.png', 'price_level': 1},
+    220: {'pl': 'Samsung Galaxy M14', 'en': 'Samsung Galaxy M14', 'es': 'Samsung Galaxy M14', 'image_path': 'graphic/samsung_galaxy_m14.png', 'price_level': 1},
+    221: {'pl': 'Samsung Galaxy A05s', 'en': 'Samsung Galaxy A05s', 'es': 'Samsung Galaxy A05s', 'image_path': 'graphic/samsung_galaxy_a05s.png', 'price_level': 1},
+
+    # Xiaomi
+    222: {'pl': 'Xiaomi Redmi Note 13', 'en': 'Xiaomi Redmi Note 13', 'es': 'Xiaomi Redmi Note 13', 'image_path': 'graphic/xiaomi_redmi_note_13.png', 'price_level': 1},
+    223: {'pl': 'Xiaomi Redmi Note 12', 'en': 'Xiaomi Redmi Note 12', 'es': 'Xiaomi Redmi Note 12', 'image_path': 'graphic/xiaomi_redmi_note_12.png', 'price_level': 1},
+    224: {'pl': 'Xiaomi Redmi Note 13 Pro', 'en': 'Xiaomi Redmi Note 13 Pro', 'es': 'Xiaomi Redmi Note 13 Pro', 'image_path': 'graphic/xiaomi_redmi_note_13_pro.png', 'price_level': 1},
+    225: {'pl': 'Xiaomi Redmi Note 12 Pro', 'en': 'Xiaomi Redmi Note 12 Pro', 'es': 'Xiaomi Redmi Note 12 Pro', 'image_path': 'graphic/xiaomi_redmi_note_12_pro.png', 'price_level': 1},
+    226: {'pl': 'Xiaomi Redmi 13C', 'en': 'Xiaomi Redmi 13C', 'es': 'Xiaomi Redmi 13C', 'image_path': 'graphic/xiaomi_redmi_13c.png', 'price_level': 1},
+    227: {'pl': 'Xiaomi Redmi 12C', 'en': 'Xiaomi Redmi 12C', 'es': 'Xiaomi Redmi 12C', 'image_path': 'graphic/xiaomi_redmi_12c.png', 'price_level': 1},
+    228: {'pl': 'Xiaomi Poco X6', 'en': 'Xiaomi Poco X6', 'es': 'Xiaomi Poco X6', 'image_path': 'graphic/xiaomi_poco_x6.png', 'price_level': 2},
+    229: {'pl': 'Xiaomi Poco X5', 'en': 'Xiaomi Poco X5', 'es': 'Xiaomi Poco X5', 'image_path': 'graphic/xiaomi_poco_x5.png', 'price_level': 2},
+    230: {'pl': 'Xiaomi Poco F5', 'en': 'Xiaomi Poco F5', 'es': 'Xiaomi Poco F5', 'image_path': 'graphic/xiaomi_poco_f5.png', 'price_level': 2},
+
+    # Oppo, Realme, Vivo, Honor, Motorola, Google, Huawei, OnePlus, Tecno, Infinix
+    231: {'pl': 'Oppo A78', 'en': 'Oppo A78', 'es': 'Oppo A78', 'image_path': 'graphic/oppo_a78.png', 'price_level': 1},
+    232: {'pl': 'Oppo Reno 11', 'en': 'Oppo Reno 11', 'es': 'Oppo Reno 11', 'image_path': 'graphic/oppo_reno_11.png', 'price_level': 2},
+    233: {'pl': 'Realme 11', 'en': 'Realme 11', 'es': 'Realme 11', 'image_path': 'graphic/realme_11.png', 'price_level': 1},
+    234: {'pl': 'Realme 10', 'en': 'Realme 10', 'es': 'Realme 10', 'image_path': 'graphic/realme_10.png', 'price_level': 1},
+    235: {'pl': 'Vivo Y36', 'en': 'Vivo Y36', 'es': 'Vivo Y36', 'image_path': 'graphic/vivo_y36.png', 'price_level': 1},
+    236: {'pl': 'Vivo Y16', 'en': 'Vivo Y16', 'es': 'Vivo Y16', 'image_path': 'graphic/vivo_y16.png', 'price_level': 1},
+    237: {'pl': 'Honor 90', 'en': 'Honor 90', 'es': 'Honor 90', 'image_path': 'graphic/honor_90.png', 'price_level': 2},
+    238: {'pl': 'Honor X7b', 'en': 'Honor X7b', 'es': 'Honor X7b', 'image_path': 'graphic/honor_x7b.png', 'price_level': 1},
+    239: {'pl': 'Motorola Moto G54 Power', 'en': 'Motorola Moto G54 Power', 'es': 'Motorola Moto G54 Power', 'image_path': 'graphic/motorola_moto_g54_power.png', 'price_level': 1},
+    240: {'pl': 'Motorola Moto G84', 'en': 'Motorola Moto G84', 'es': 'Motorola Moto G84', 'image_path': 'graphic/motorola_moto_g84.png', 'price_level': 1},
+    241: {'pl': 'Motorola Edge 40 Neo', 'en': 'Motorola Edge 40 Neo', 'es': 'Motorola Edge 40 Neo', 'image_path': 'graphic/motorola_edge_40_neo.png', 'price_level': 2},
+    242: {'pl': 'Google Pixel 8', 'en': 'Google Pixel 8', 'es': 'Google Pixel 8', 'image_path': 'graphic/google_pixel_8.png', 'price_level': 3},
+    243: {'pl': 'Google Pixel 8 Pro', 'en': 'Google Pixel 8 Pro', 'es': 'Google Pixel 8 Pro', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 3},
+    244: {'pl': 'Google Pixel 7a', 'en': 'Google Pixel 7a', 'es': 'Google Pixel 7a', 'image_path': 'graphic/google_pixel_7a.png', 'price_level': 2},
+    245: {'pl': 'Google Pixel 7', 'en': 'Google Pixel 7', 'es': 'Google Pixel 7', 'image_path': 'graphic/google_pixel_7.png', 'price_level': 2},
+    246: {'pl': 'Huawei P60 Pro', 'en': 'Huawei P60 Pro', 'es': 'Huawei P60 Pro', 'image_path': 'graphic/huawei_p60_pro.png', 'price_level': 3},
+    247: {'pl': 'Huawei Nova 12', 'en': 'Huawei Nova 12', 'es': 'Huawei Nova 12', 'image_path': 'graphic/huawei_nova_12.png', 'price_level': 2},
+    248: {'pl': 'OnePlus 12', 'en': 'OnePlus 12', 'es': 'OnePlus 12', 'image_path': 'graphic/oneplus_12.png', 'price_level': 3},
+    249: {'pl': 'OnePlus Nord 3', 'en': 'OnePlus Nord 3', 'es': 'OnePlus Nord 3', 'image_path': 'graphic/oneplus_nord_3.png', 'price_level': 2},
+    250: {'pl': 'Tecno Spark 20', 'en': 'Tecno Spark 20', 'es': 'Tecno Spark 20', 'image_path': 'graphic/tecno_spark_20.png', 'price_level': 1},
+    251: {'pl': 'Infinix Hot 40', 'en': 'Infinix Hot 40', 'es': 'Infinix Hot 40', 'image_path': 'graphic/infinix_hot_40.png', 'price_level': 1},
 }
 stores_db = {
     1: {'name': 'Order on Amazon US', 'language': 'en'},
@@ -287,11 +294,9 @@ product_links_db = {
 def home():
     return render_template('index.html')
 
-# ============== JEDYNA DODANA ZMIANA ===============
 @app.route('/quiz')
 def quiz():
     return render_template('quiz.html')
-# ===================================================
 
 @app.route('/api/quiz/question', methods=['GET'])
 def get_question():
@@ -304,29 +309,20 @@ def get_question():
             return jsonify({'error': 'Invalid question ID.'}), 404
 
         question_text = question_data.get(language, question_data['en'])
-        
-        # === BEZPIECZNE GENEROWANIE LINKU DO IKONY PYTANIA ===
         question_icon_url = ''
         icon_path = question_data.get('icon_path')
-        if icon_path:
-            # Sprawdź, czy plik istnieje, zanim wygenerujesz URL
-            if os.path.exists(os.path.join(app.static_folder, icon_path)):
-                question_icon_url = url_for('static', filename=icon_path)
+        if icon_path and os.path.exists(os.path.join(app.static_folder, icon_path)):
+            question_icon_url = url_for('static', filename=icon_path)
 
         answers = []
         for ans_id, ans_data in answers_db.items():
             if ans_data['question_id'] == current_question_id:
                 next_id = ans_data.get('next_question_id')
                 next_id_for_frontend = next_id if next_id is not None else ''
-
-                # === BEZPIECZNE GENEROWANIE LINKU DO IKONY ODPOWIEDZI ===
                 answer_icon_url = ''
                 icon_path = ans_data.get('icon_path')
-                if icon_path:
-                    # Sprawdź, czy plik istnieje, zanim wygenerujesz URL
-                    if os.path.exists(os.path.join(app.static_folder, icon_path)):
-                        answer_icon_url = url_for('static', filename=icon_path)
-
+                if icon_path and os.path.exists(os.path.join(app.static_folder, icon_path)):
+                    answer_icon_url = url_for('static', filename=icon_path)
                 answers.append({
                     'answer_id': ans_id,
                     'answer_text': ans_data.get(language, ans_data['en']),
@@ -340,7 +336,6 @@ def get_question():
             'question_icon_url': question_icon_url,
             'answers': answers
         })
-
     except (ValueError, KeyError):
         return jsonify({'error': 'Invalid question ID or language.'}), 400
 
@@ -350,23 +345,38 @@ def get_result():
         data = request.get_json()
         if not data:
             return jsonify({'error': 'No JSON data received.'}), 400
-
         path_answers = data.get('pathAnswers')
         language = data.get('language', 'en')
-
         if not path_answers or not isinstance(path_answers, list):
-            return jsonify({'error': 'Invalid or missing "pathAnswers" parameter.'}), 400
+            return jsonify({'error': 'Invalid or missing \"pathAnswers\" parameter.'}), 400
 
-        # NOWY ALGORYTM SCORINGOWY (answers_x_products)
+        # --- ALGORYTM price_level ---
         product_scores = {pid: 0 for pid in products_db.keys()}
-        for answer_id in path_answers:
+
+        # 1. Pobierz price_level z odpowiedzi na pierwsze pytanie (budżet)
+        first_answer_id = path_answers[0] if path_answers else None
+        user_price_level = 2  # domyślnie średni
+        if first_answer_id and answers_db.get(first_answer_id, {}).get('question_id') == 1:
+            user_price_level = answers_db[first_answer_id].get('price_level', 2)
+
+        # 2. Scoring
+        for idx, answer_id in enumerate(path_answers):
             ranking = answers_x_products.get(answer_id, [])
             n = len(ranking)
-            for idx, phone_id in enumerate(ranking):
-                if phone_id in product_scores:
-                    product_scores[phone_id] += n - idx
+            for pos, product_id in enumerate(ranking):
+                if product_id in product_scores:
+                    multiplier = 1.0
+                    if idx == 0:  # pierwsze pytanie
+                        product_level = products_db.get(product_id, {}).get('price_level', 2)
+                        diff = abs(product_level - user_price_level)
+                        if diff == 0:
+                            multiplier = 2.0
+                        elif diff == 1:
+                            multiplier = 0.5
+                        else:
+                            multiplier = 0.1
+                    product_scores[product_id] += (n - pos) * multiplier
 
-        # Sortuj produkty po punktach malejąco, wybierz tylko te z punktami
         top_products = sorted(product_scores.items(), key=lambda x: x[1], reverse=True)
         product_ids = [pid for pid, score in top_products if score > 0][:3]
 
@@ -380,9 +390,7 @@ def get_result():
             product_data = products_db.get(product_id)
             if not product_data:
                 continue
-
             product_name = product_data.get(language, product_data['en'])
-
             product_links = []
             for link_data in product_links_db.get(product_id, []):
                 if link_data['store_id'] in matching_store_ids:
@@ -391,17 +399,15 @@ def get_result():
                         'store_name': store_name,
                         'link_url': link_data['url']
                     })
-
             image_url = ''
-            if product_data.get('image_path'):
-                if os.path.exists(os.path.join(app.static_folder, product_data['image_path'])):
-                    image_url = url_for('static', filename=product_data['image_path'])
-
+            if product_data.get('image_path') and os.path.exists(os.path.join(app.static_folder, product_data['image_path'])):
+                image_url = url_for('static', filename=product_data['image_path'])
             recommendations.append({
                 'product_id': product_id,
                 'product_name': product_name,
                 'image_url': image_url,
-                'links': product_links
+                'links': product_links,
+                'price_level': product_data.get('price_level')
             })
 
         return jsonify({'recommendations': recommendations})
