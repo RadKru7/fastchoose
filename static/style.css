@@ -394,7 +394,9 @@ select.lang-select {
   margin-top: 32px; padding: 12px 32px; font-size: 1.1rem; border: none; border-radius: 24px; background: var(--brand); color: #fff; cursor: pointer; font-weight: 600;
   transition: background-color 0.2s;
 }
-.restart-btn:hover { background-color: #0c8b8c; }
+.restart-btn:hover {
+  background: var(--brand-accent);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
 
 footer {
   margin-top: auto;
