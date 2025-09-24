@@ -6,6 +6,7 @@
   --headline-accent: #393DB8; /*Druga część nagłówka - sloganu*/
   --result-main: #4D7D8000; /*Główna ramka za telefonami - na razie przeźroczysty*/
   --answer-iconcolor: #393DB8;
+  --button-background: #3CBFC6;
 
   --bg: #f7f8fa;
   --text: #222;
@@ -77,6 +78,7 @@ header {
 .lang-icon { width: 22px; height: 22px; vertical-align: middle; }
 select.lang-select {
   border: 1px solid #d9e2ec; border-radius: 6px; background: var(--bg);
+  color: var(--text);
   padding: 6px 28px 6px 32px; font-size: 1rem; appearance: none; cursor: pointer; outline: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat; background-position: right 8px center;
@@ -110,13 +112,13 @@ select.lang-select {
 .subtitle { font-size: 1.1rem; margin-top: 10px; color: var(--muted); }
 .get-started-btn {
   margin-top: 30px; padding: 14px 48px; font-size: 1.2rem; font-weight: 600;
-  background: linear-gradient(90deg, var(--brand), var(--brand-accent));
+  background: var(--brand);
   color: #3CBFC6;
   border: none; border-radius: 32px; cursor: pointer; box-shadow: 0 2px 16px rgba(0,0,0,0.12);
   transition: background 0.2s, box-shadow 0.2s;
 }
 .get-started-btn:hover {
-  background: linear-gradient(90deg, var(--brand-accent), var(--brand));
+  background: var(--brand-accent);
   box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
 
 .quiz-section-bg {
