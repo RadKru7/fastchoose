@@ -111,7 +111,7 @@ select.lang-select {
 .get-started-btn {
   margin-top: 30px; padding: 14px 48px; font-size: 1.2rem; font-weight: 600;
   background: linear-gradient(90deg, var(--brand), var(--brand-accent));
-  color: #833AB4;
+  color: #3CBFC6;
   border: none; border-radius: 32px; cursor: pointer; box-shadow: 0 2px 16px rgba(0,0,0,0.12);
   transition: background 0.2s, box-shadow 0.2s;
 }
