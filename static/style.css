@@ -25,7 +25,9 @@
   --icon-size-question: 60px;
   --icon-size-answer: 60px;
   --icon-stroke-width: 1.8;
-
+  --icon-answer-svg-front-color: #124E66;
+  --icon-answer-svg-hover-color: #212A31;
+  
   --icon-initial-color: #2E3944;
   --image-frame-border: #2E3944;
   --phones-bg: #CFCBE1;
@@ -242,14 +244,15 @@ select.lang-select {
   width: var(--icon-size-answer);
   height: var(--icon-size-answer);
   display: inline-block;
-  color: var(--answer-iconcolor);
-}
+  color: var(--icon-answer-svg-front-color);
+  
 #quiz-content .answers-grid .answer-card:hover .answer-icon {
   color: #833AB4 !important;
 }
 .answer-icon svg { width: 100% !important; height: 100% !important; }
 .answer-icon svg * {
   stroke: currentColor;
+  color: var(--icon-answer-svg-hover-color);
   stroke-width: var(--icon-stroke-width);
   stroke-linecap: round;
   stroke-linejoin: round;
