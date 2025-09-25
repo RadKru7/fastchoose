@@ -242,11 +242,56 @@ products_db = {
     251: {'pl': 'Infinix Hot 40', 'en': 'Infinix Hot 40', 'es': 'Infinix Hot 40', 'image_path': 'graphic/infinix_hot_40.png', 'price_level': 1},
 }
 stores_db = {
-    1: {'name': 'Order on Amazon US', 'language': 'en'},
-    2: {'name': 'Order on  Best Buy', 'language': 'en'},
-    3: {'name': 'Zamów na Allegro', 'language': 'pl'},
-    4: {'name': 'Zamów na Media Expert', 'language': 'pl'},
-    5: {'name': 'Ordenar en amazon', 'language': 'es'}
+    # Język polski
+    1: {
+        'language': 'pl',
+        'name': 'Zamów na Allegro',
+        'affiliate_url': 'https://allegro.pl/listing?string='
+    },
+    2: {
+        'language': 'pl',
+        'name': 'Zamów na MediaMarkt',
+        'affiliate_url': 'https://mediamarkt.pl/search.html?query='
+    },
+    3: {
+        'language': 'pl',
+        'name': 'Zamów na Euro RTV AGD',
+        'affiliate_url': 'https://www.euro.com.pl/search.bhtml?keyword='
+    },
+
+    # Język angielski
+    4: {
+        'language': 'en',
+        'name': 'Order on Amazon.com',
+        'affiliate_url': 'https://www.amazon.com/s?k='
+    },
+    5: {
+        'language': 'en',
+        'name': 'Order on Amazon.co.uk',
+        'affiliate_url': 'https://www.amazon.co.uk/s?k='
+    },
+    6: {
+        'language': 'en',
+        'name': 'Order on Flipkart',
+        'affiliate_url': 'https://www.flipkart.com/search?q='
+    },
+
+    # Język hiszpański
+    7: {
+        'language': 'es',
+        'name': 'Ordenar en Amazon.es',
+        'affiliate_url': 'https://www.amazon.es/s?k='
+    },
+    8: {
+        'language': 'es',
+        'name': 'Ordenar en Amazon.mx',
+        'affiliate_url': 'https://www.amazon.com.mx/s?k='
+    },
+    9: {
+        'language': 'es',
+        'name': 'Ordenar en MercadoLibre',
+        'affiliate_url': 'https://www.mercadolibre.com.ar/jm/search?as_word='
+    }
 }
 product_links_db = {
     201: [{'store_id': 3, 'url': '#'}, {'store_id': 4, 'url': '#'}, {'store_id': 1, 'url': '#'}],
