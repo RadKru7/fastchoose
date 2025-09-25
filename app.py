@@ -246,53 +246,64 @@ stores_db = {
     1: {
         'language': 'pl',
         'name': 'Zamów na Allegro',
-        'affiliate_url': 'https://allegro.pl/listing?string='
+        # Kategoria smartfony i telefony komórkowe (ID 165)
+        'affiliate_url': 'https://allegro.pl/kategoria/smartfony-i-telefony-komorkowe-165?string='  # + NAZWA TELEFONU (spacje %20)
     },
     2: {
         'language': 'pl',
         'name': 'Zamów na MediaMarkt',
-        'affiliate_url': 'https://mediamarkt.pl/search.html?query='
+        # Kategoria: Telefony i Smartfony (CAT_PL_MM_25975//CAT_PL_MM_25983)
+        # NAZWA TELEFONU w środku, potem &category=...
+        'affiliate_url': 'https://mediamarkt.pl/pl/search.html?query={}&category=CAT_PL_MM_25975//CAT_PL_MM_25983'  # .format(query)
     },
     3: {
         'language': 'pl',
         'name': 'Zamów na Euro RTV AGD',
-        'affiliate_url': 'https://www.euro.com.pl/search.bhtml?keyword='
+        # Kategoria: Telefony i smartfony (ID 178)
+        'affiliate_url': 'https://www.euro.com.pl/telefony-komorkowe,_smartfony.bhtml?keyword='  # + NAZWA TELEFONU (spacje %20)
     },
 
     # Język angielski
     4: {
         'language': 'en',
         'name': 'Order on Amazon.com',
-        'affiliate_url': 'https://www.amazon.com/s?k='
+        # Kategoria cell phones & smartphones (id 2407749011), k=product
+        'affiliate_url': 'https://www.amazon.com/s?i=mobile&k='  # + NAZWA TELEFONU (spacje +)
     },
     5: {
         'language': 'en',
         'name': 'Order on Amazon.co.uk',
-        'affiliate_url': 'https://www.amazon.co.uk/s?k='
+        # Kategoria Mobile Phones & Smartphones (id 356496011), k=product
+        'affiliate_url': 'https://www.amazon.co.uk/s?i=mobile&k='  # + NAZWA TELEFONU (spacje +)
     },
     6: {
         'language': 'en',
         'name': 'Order on Flipkart',
-        'affiliate_url': 'https://www.flipkart.com/search?q='
+        # Kategoria Mobiles (tylko query wystarczy)
+        'affiliate_url': 'https://www.flipkart.com/search?q='  # + NAZWA TELEFONU (spacje +)
     },
 
     # Język hiszpański
     7: {
         'language': 'es',
         'name': 'Ordenar en Amazon.es',
-        'affiliate_url': 'https://www.amazon.es/s?k='
+        # Kategoria: Móviles y smartphones (id 938008031), k=product
+        'affiliate_url': 'https://www.amazon.es/s?i=mobile&k='  # + NAZWA TELEFONU (spacje +)
     },
     8: {
         'language': 'es',
         'name': 'Ordenar en Amazon.mx',
-        'affiliate_url': 'https://www.amazon.com.mx/s?k='
+        # Kategoria: Celulares y Smartphones (id 17934631011), k=product
+        'affiliate_url': 'https://www.amazon.com.mx/s?i=mobile&k='  # + NAZWA TELEFONU (spacje +)
     },
     9: {
         'language': 'es',
         'name': 'Ordenar en MercadoLibre',
-        'affiliate_url': 'https://www.mercadolibre.com.ar/jm/search?as_word='
+        # Kategoria: Celulares y Smartphones (adres z as_word, nie wymaga ID kategorii)
+        'affiliate_url': 'https://www.mercadolibre.com.ar/jm/search?as_word='  # + NAZWA TELEFONU (spacje +)
     }
 }
+
 product_links_db = {
     201: [{'store_id': 3, 'url': '#'}, {'store_id': 4, 'url': '#'}, {'store_id': 1, 'url': '#'}],
     202: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
@@ -435,11 +446,15 @@ def get_result():
         selected_stores = [store for store in stores_db.values() if store['language'] == language][:3]
 
         def generate_store_link(store, product_name):
-            if 'allegro' in store['affiliate_url'] or 'mediamarkt' in store['affiliate_url'] or 'euro' in store['affiliate_url']:
+            if store['name'].startswith('Zamów na MediaMarkt'):
                 query = product_name.replace(' ', '%20')
+                return store['affiliate_url'].format(query)
+            elif 'allegro' in store['affiliate_url'] or 'euro' in store['affiliate_url']:
+                query = product_name.replace(' ', '%20')
+                return store['affiliate_url'] + query
             else:
                 query = product_name.replace(' ', '+')
-            return store['affiliate_url'] + query
+                return store['affiliate_url'] + query
 
         for product_id in product_ids:
             product_data = products_db.get(product_id)
