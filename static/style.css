@@ -76,11 +76,11 @@ header {
   -webkit-text-fill-color: transparent;
   
 }
-.lang-select-container { display: flex; align-items: center; gap: 8px; background: var(--button-bg-violet-blue);}
+.lang-select-container { display: flex; align-items: center; gap: 8px;}
 .lang-icon { width: 22px; height: 22px; vertical-align: middle; }
 select.lang-select {
   border: 1px solid #d9e2ec; border-radius: 6px; 
-  background: var(--button-bg-violet-blue);
+  background: var(--brand-accent:);
   color: var(--text-white);
   padding: 6px 28px 6px 32px; font-size: 1rem; appearance: none; cursor: pointer; outline: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
