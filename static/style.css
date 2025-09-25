@@ -31,6 +31,8 @@
   --icon-initial-color: #2E3944;
   --image-frame-border: #2E3944;
   --phones-bg: #CFCBE1;
+
+  --main-font: 'Montserrat', Arial, sans-serif; /*czcionka*/
 }
 
 :root[data-theme="blue"] {
@@ -53,7 +55,7 @@
 *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: var(--main-font);
   background: var(--brand);
   color: var(--text);
   display: flex;
@@ -167,6 +169,7 @@ select.lang-select {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 48px;
 }
 
 .quiz-progress-counter {
@@ -247,7 +250,7 @@ select.lang-select {
   color: var(--icon-answer-svg-front-color);
   
 #quiz-content .answers-grid .answer-card:hover .answer-icon {
-  color: #833AB4 !important;
+  color: var(--icon-answer-svg-hover-color) !important;
 }
 .answer-icon svg { width: 100% !important; height: 100% !important; }
 .answer-icon svg * {
@@ -311,6 +314,7 @@ select.lang-select {
   letter-spacing: -0.5px;
   line-height: 1.08;
   font-family: 'Segoe UI', Arial, sans-serif;
+  margin-bottom: 48px;
 }
 .headline-multicolor .headline-main {
    background: var(--brand-dark);
