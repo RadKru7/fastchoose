@@ -393,7 +393,7 @@ def get_result():
         path_answers = data.get('pathAnswers')
         language = data.get('language', 'en')
         if not path_answers or not isinstance(path_answers, list):
-            return jsonify({'error': 'Invalid or missing \"pathAnswers\" parameter.'}), 400
+            return jsonify({'error': 'Invalid or missing "pathAnswers" parameter.'}), 400
 
         # --- ALGORYTM price_level ---
         product_scores = {pid: 0 for pid in products_db.keys()}
@@ -429,29 +429,42 @@ def get_result():
             return jsonify({'recommendations': [], 'message': 'No specific recommendations found for your answers.'})
 
         recommendations = []
-        matching_store_ids = [store_id for store_id, store_data in stores_db.items() if store_data['language'] == language]
+
+        # --- ZAMIANA: generuj linki sklepów dynamicznie po języku ---
+        # Zamiast product_links_db - wybierz sklepy z stores_db zgodnie z language
+        selected_stores = [store for store in stores_db.values() if store['language'] == language][:3]
+
+        def generate_store_link(store, product_name):
+            if 'allegro' in store['affiliate_url'] or 'mediamarkt' in store['affiliate_url'] or 'euro' in store['affiliate_url']:
+                query = product_name.replace(' ', '%20')
+            else:
+                query = product_name.replace(' ', '+')
+            return store['affiliate_url'] + query
 
         for product_id in product_ids:
             product_data = products_db.get(product_id)
             if not product_data:
                 continue
             product_name = product_data.get(language, product_data['en'])
-            product_links = []
-            for link_data in product_links_db.get(product_id, []):
-                if link_data['store_id'] in matching_store_ids:
-                    store_name = stores_db[link_data['store_id']]['name']
-                    product_links.append({
-                        'store_name': store_name,
-                        'link_url': link_data['url']
-                    })
             image_url = ''
             if product_data.get('image_path') and os.path.exists(os.path.join(app.static_folder, product_data['image_path'])):
                 image_url = url_for('static', filename=product_data['image_path'])
+
+            # Nowe: generowanie linków do sklepów po języku
+            store_links = []
+            for store in selected_stores:
+                store_link = generate_store_link(store, product_name)
+                store_name = store['name']
+                store_links.append({
+                    'store_name': store_name,
+                    'link_url': store_link
+                })
+
             recommendations.append({
                 'product_id': product_id,
                 'product_name': product_name,
                 'image_url': image_url,
-                'links': product_links,
+                'links': store_links,
                 'price_level': product_data.get('price_level')
             })
 
