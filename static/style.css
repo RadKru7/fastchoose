@@ -7,10 +7,11 @@
   --result-main: #4D7D8000; /*Główna ramka za telefonami - na razie przeźroczysty*/
   --answer-iconcolor: #393DB8;
   --button-background: #3CBFC6;
+  --button-bg-violet-orange: linear-gradient(90deg,rgba(131, 58, 180, 1) 58%, rgba(117, 94, 218, 0.79) 87%, rgba(252, 176, 69, 1) 96%); /*Dodatkowy motym przycisków i tła fioletowo-pomarańczowy*/
 
   --bg: #f7f8fa;
   --text: #222; /*czarny tekst*/
-  --text-white: #FFFFFF; /*czarny tekst*/
+  --text-white: #FFFFFF; /*biały tekst*/
   --muted: #444;
   --border: #e5e7eb;
   --card-bg: #ffffff;
@@ -109,8 +110,8 @@ select.lang-select {
   border: none !important;
 }
 @keyframes phone-move { 0% { transform: translateX(-12px) rotate(-2deg);} 100% { transform: translateX(12px) rotate(2deg);} }
-.big-title { font-size: 2.2rem; font-weight: 700; color: var(--brand); }
-.subtitle { font-size: 1.1rem; margin-top: 10px; color: var(--muted); }
+.big-title { font-size: 2.6rem; font-weight: 700; color: var(--brand); }
+.subtitle { font-size: 1.4rem; margin-top: 10px; color: var(--muted); }
 .get-started-btn {
   margin-top: 30px; padding: 14px 48px; font-size: 1.2rem; font-weight: 600;
   background: var(--brand);
@@ -372,7 +373,7 @@ select.lang-select {
   height: 450px;
   object-fit: contain;
   margin-bottom: 24px;
-  background: #CFCBE1;
+  background: var(--button-bg-violet-orange);
   border: 1px solid var(--image-frame-border);
   border-radius: 18px;
   padding: 28px 16px;
@@ -388,15 +389,25 @@ select.lang-select {
   display: block; padding: 18px 24px; background-color: #f0f4ff; color: var(--brand); text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 1.17rem;
   transition: background-color 0.2s, color 0.2s;
 }
-.store-link:hover { background-color: var(--brand); color: #fff; }
+.store-link:hover {
+  background-color: var(button-bg-violet-orange);
+  color: #fff; 
+}
 
 .restart-btn {
-  margin-top: 32px; padding: 12px 32px; font-size: 1.1rem; border: none; border-radius: 24px; background: var(--brand); color: #fff; cursor: pointer; font-weight: 600;
+  margin-top: 32px; padding: 12px 32px;
+  font-size: 1.1rem; border: none;
+  border-radius: 24px;
+  background: var(--brand-dark);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
   transition: background-color 0.2s;
 }
 .restart-btn:hover {
   background: var(--brand-accent);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
+  box-shadow: 0 6px 24px rgba(0,0,0,0.24);
+}
 
 footer {
   margin-top: auto;
