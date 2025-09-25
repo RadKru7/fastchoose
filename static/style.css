@@ -1,18 +1,18 @@
 :root {
-  --brand: linear-gradient(101deg,rgba(60, 179, 181, 1) 75%, rgba(0, 0, 0, 1) 100%); /*Główny motyw tła zielono czarny*/
-  --brand-accent: #8FB4AE; /*zielony wojskowy - hoover przycisku rozpocznij*/
-  --brand-light: radial-gradient(circle,rgba(69, 174, 186, 0.5) 80%, rgba(0, 0, 0, 0,5) 100%); /*Drguga ramka za telefonem ramka za telefonem*/
-  --brand-dark: linear-gradient(90deg,rgba(131, 58, 180, 1) 58%, rgba(57, 61, 184, 1) 81%, rgba(252, 176, 69, 1) 100%); /*Kolor ikon w quiz i kolor napisu głównego FastChoose*/
-  --headline-accent: #393DB8; /*Druga część nagłówka - sloganu*/
+  --brand: linear-gradient(91deg,rgba(211, 217, 212, 1) 80%, rgba(46, 57, 68, 1) 97%); /*Główny motyw tła szary*/
+  --brand-accent: #124E66; /*zielony wojskowy - hoover przycisku rozpocznij - niebieski*/
+  --brand-light: #748D92; /*Drguga ramka za telefonem ramka za telefonem*/
+  --brand-dark: #2E3944; /*Kolor ikon w quiz i kolor napisu głównego FastChoose*/
+  --headline-accent: #124E66; /*Druga część nagłówka - sloganu*/
   --result-main: #4D7D8000; /*Główna ramka za telefonami - na razie przeźroczysty*/
-  --answer-iconcolor: #393DB8; /*ikon tła przycisków odpowiedzi - morski*/
+  --answer-iconcolor: #748D92; /*ikon tła przycisków odpowiedzi - morski*/
   --button-background: #3CBFC6;
-  --button-bg-violet-blue: radial-gradient(circle,rgba(195, 169, 217, 1) 25%, rgba(60, 191, 198, 1) 81%); /*Dodatkowy motym przycisków i tła fioletowo-morski*/
+  --button-bg-violet-blue: radial-gradient(circle,rgba(46, 57, 68, 1) 20%, rgba(116, 141, 146, 1) 43%) /*Dodatkowy motym przycisków i tła fioletowo-morski*/
 
-  --bg: #f7f8fa;
+
   --text: #222; /*czarny tekst*/
   --text-white: #FFFFFF; /*biały tekst*/
-  --muted: #444;
+  --text-subtitle: #444;
   --border: #e5e7eb;
   --card-bg: #ffffff;
 
@@ -52,7 +52,7 @@
 html, body { margin: 0; padding: 0; }
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: var(--bg);
+  background: var(--brand);
   color: var(--text);
   display: flex;
   flex-direction: column;
@@ -112,7 +112,7 @@ select.lang-select {
 }
 @keyframes phone-move { 0% { transform: translateX(-12px) rotate(-2deg);} 100% { transform: translateX(12px) rotate(2deg);} }
 .big-title { font-size: 2.6rem; font-weight: 700; color: var(--brand); }
-.subtitle { font-size: 1.4rem; margin-top: 10px; color: var(--muted); }
+.subtitle { font-size: 1.4rem; margin-top: 10px; color: var(--text-subtitle); }
 .get-started-btn {
   margin-top: 30px; padding: 14px 48px; font-size: 1.2rem; font-weight: 600;
   background: var(--brand);
