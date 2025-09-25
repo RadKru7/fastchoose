@@ -1,6 +1,6 @@
 :root {
   --brand: linear-gradient(91deg,rgba(211, 217, 212, 1) 80%, rgba(46, 57, 68, 1) 97%); /*Główny motyw tła szary*/
-  --brand-accent: #124E66; /*zielony wojskowy - hoover przycisku rozpocznij - niebieski*/
+  --brand-accent: #124E66; /* hoover przycisku rozpocznij */
   --brand-light: #748D92; /*Drguga ramka za telefonem ramka za telefonem*/
   --brand-dark: #2E3944; /*Kolor ikon w quiz i kolor napisu głównego FastChoose*/
   --headline-accent: #124E66; /*Druga część nagłówka - sloganu*/
@@ -115,7 +115,7 @@ select.lang-select {
 .subtitle { font-size: 1.4rem; margin-top: 10px; color: var(--text-subtitle); }
 .get-started-btn {
   margin-top: 30px; padding: 14px 48px; font-size: 1.2rem; font-weight: 600;
-  background: var(--brand);
+  background: var(--brand-dark);
   color: var(--text-white);
   border: none; border-radius: 32px; cursor: pointer; box-shadow: 0 2px 16px rgba(0,0,0,0.12);
   transition: background 0.2s, box-shadow 0.2s;
