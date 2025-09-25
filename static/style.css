@@ -255,7 +255,7 @@ select.lang-select {
 .answer-icon svg { width: 100% !important; height: 100% !important; }
 .answer-icon svg * {
   stroke: currentColor;
-  color: var(--icon-answer-svg-hover-color);
+  color: var(--icon-answer-svg-front-color);
   stroke-width: var(--icon-stroke-width);
   stroke-linecap: round;
   stroke-linejoin: round;
