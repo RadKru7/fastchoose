@@ -250,12 +250,11 @@ select.lang-select {
   color: var(--icon-answer-svg-front-color);
 }
 #quiz-content .answers-grid .answer-card:hover .answer-icon {
-  color: var(--icon-answer-svg-hover-color) !important;
+  color: var(--icon-answer-svg-hover-color);
 }
 .answer-icon svg { width: 100% !important; height: 100% !important; }
 .answer-icon svg * {
   stroke: currentColor;
-  color: var(--icon-answer-svg-front-color);
   stroke-width: var(--icon-stroke-width);
   stroke-linecap: round;
   stroke-linejoin: round;
