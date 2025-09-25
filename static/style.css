@@ -194,7 +194,7 @@ select.lang-select {
 
 @media (max-width: 1000px) {
   #quiz-content { max-width: 98vw; padding: 40px 2vw 36px 2vw; }
-  #quiz-container { margin-top: 32px; }
+  #quiz-container { margin-top: 20px; }
   .quiz-progress-counter { right: 12px; }
 }
 
