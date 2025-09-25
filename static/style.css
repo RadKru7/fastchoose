@@ -248,7 +248,7 @@ select.lang-select {
   height: var(--icon-size-answer);
   display: inline-block;
   color: var(--icon-answer-svg-front-color);
-  
+}
 #quiz-content .answers-grid .answer-card:hover .answer-icon {
   color: var(--icon-answer-svg-hover-color) !important;
 }
