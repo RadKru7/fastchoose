@@ -146,7 +146,7 @@ select.lang-select {
   justify-content: flex-start;
   padding: 20px 12px 20px 12px;
   width: 100%;
-  margin-top: 40px; /* bigger margin under headline */
+  margin-top: 15px; /* bigger margin under headline */
   z-index: 2;
 }
 
@@ -304,7 +304,7 @@ select.lang-select {
   font-size: 2.2rem;
   font-weight: 800;
   text-align: center;
-  margin: 38px 0 0 0;
+  margin: 20px 0 0 0;
   letter-spacing: -0.5px;
   line-height: 1.08;
   font-family: 'Segoe UI', Arial, sans-serif;
