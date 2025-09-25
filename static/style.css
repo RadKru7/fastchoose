@@ -7,7 +7,7 @@
   --result-main: #4D7D8000; /*Główna ramka za telefonami - na razie przeźroczysty*/
   --answer-iconcolor: #393DB8;
   --button-background: #3CBFC6;
-  --button-bg-violet-orange: linear-gradient(90deg,rgba(131, 58, 180, 1) 58%, rgba(117, 94, 218, 0.79) 87%, rgba(252, 176, 69, 1) 96%); /*Dodatkowy motym przycisków i tła fioletowo-pomarańczowy*/
+  --button-bg-violet-orange: radial-gradient(circle,rgba(195, 169, 217, 1) 45%, rgba(242, 211, 170, 1) 74%); /*Dodatkowy motym przycisków i tła fioletowo-pomarańczowy*/
 
   --bg: #f7f8fa;
   --text: #222; /*czarny tekst*/
