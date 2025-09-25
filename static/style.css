@@ -146,7 +146,7 @@ select.lang-select {
   justify-content: flex-start;
   padding: 20px 12px 20px 12px;
   width: 100%;
-  margin-top: 25px; /* bigger margin under headline */
+  margin-top: 40px; /* bigger margin under headline */
   z-index: 2;
 }
 
