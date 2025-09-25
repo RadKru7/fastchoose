@@ -4,11 +4,11 @@
   --brand-light: #748D92; /*Drguga ramka za telefonem ramka za telefonem*/
   --brand-dark: #2E3944; /*Kolor ikon w quiz i kolor napisu głównego FastChoose*/
   --headline-accent: #124E66; /*Druga część nagłówka - sloganu*/
-  --result-main: #D3D9D4; /*Główna ramka za telefonami - na razie przeźroczysty*/
+  --result-main: #FFFFFF00; /*zewnętrzna - nieistotna ramka za telefonami - zostaw  przeźroczysty*/
   --answer-iconcolor: #748D92; /*ikon tła przycisków odpowiedzi - morski*/
   --button-background: #3CBFC6;
   --button-bg-violet-blue: radial-gradient(circle,rgba(46, 57, 68, 1) 20%, rgba(116, 141, 146, 1) 43%) /*Dodatkowy motym przycisków i tła fioletowo-morski*/
-
+  --result-internal-window: #D3D9D4;
 
   --text: #222; /*czarny tekst*/
   --text-white: #FFFFFF; /*biały tekst*/
@@ -377,7 +377,7 @@ select.lang-select {
   height: 450px;
   object-fit: contain;
   margin-bottom: 24px;
-  background: var(--button-bg-violet-blue);
+  background: var(--result-internal-window);
   border: 1px solid var(--image-frame-border);
   border-radius: 18px;
   padding: 28px 16px;
