@@ -7,7 +7,7 @@
   --result-main: #4D7D8000; /*Główna ramka za telefonami - na razie przeźroczysty*/
   --answer-iconcolor: #393DB8;
   --button-background: #3CBFC6;
-  --button-bg-violet-blue: radial-gradient(circle,rgba(195, 169, 217, 1) 49%, rgba(60, 191, 198, 1) 81%); /*Dodatkowy motym przycisków i tła fioletowo-morski*/
+  --button-bg-violet-blue: radial-gradient(circle,rgba(195, 169, 217, 1) 25%, rgba(60, 191, 198, 1) 81%); /*Dodatkowy motym przycisków i tła fioletowo-morski*/
 
   --bg: #f7f8fa;
   --text: #222; /*czarny tekst*/
@@ -144,9 +144,9 @@ select.lang-select {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 40px 12px 32px 12px;
+  padding: 20px 12px 20px 12px;
   width: 100%;
-  margin-top: 15px; /* bigger margin under headline */
+  margin-top: 25px; /* bigger margin under headline */
   z-index: 2;
 }
 
@@ -347,7 +347,10 @@ select.lang-select {
   margin-top: 0;
   letter-spacing: -1px;
 }
-#results-content-wrapper { width: 100%; max-width: 1440px; text-align: center; }
+#results-content-wrapper { 
+  width: 100%; max-width: 1440px;
+  text-align: center; 
+}
 .recommendations-grid { 
   display: grid;
   background: var(--result-main); 
