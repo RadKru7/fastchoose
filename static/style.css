@@ -371,7 +371,7 @@ select.lang-select {
   margin: 0 auto;      /* wyśrodkuj poziomo */
 }
 .recommendation-card {
-  width: 280px;
+  width: 360px;
   background: var(--brand-light);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.08);
