@@ -425,12 +425,16 @@ display: none !important;
   object-fit: contain;
   margin-bottom: 15px;
   background: var(--result-internal-window) !important;
-  border: 1px solid var(--image-frame-border);
+  border: 2px solid var(--image-frame-border);
   border-radius: 18px;
   padding: 15px 11px;
   display: block;
   box-sizing: border-box;
   box-shadow: 0 4px 16px rgba(44, 56, 80, 0.11);
+}
+.recommendation-image img {
+  object-fit: contain;
+  background: var(--result-internal-window) !important;
 }
 
 .recommendation-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
