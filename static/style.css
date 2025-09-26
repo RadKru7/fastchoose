@@ -320,7 +320,7 @@ select.lang-select {
   letter-spacing: -0.5px;
   line-height: 1.08;
   font-family: 'Segoe UI', Arial, sans-serif;
-  margin-bottom: 48px;
+  margin-bottom: 16px;
 }
 .headline-multicolor .headline-main {
    background: var(--brand-dark);
