@@ -338,7 +338,7 @@ select.lang-select {
   justify-content: center;
   align-items: center;
   padding: 32px 16px;
-  width: 55%;
+  width: 80%;
   box-sizing: border-box;
   margin-top: 8px;   
 }
@@ -363,9 +363,11 @@ select.lang-select {
   padding: 1em 0;
   border-radius: 18px;
   grid-template-columns:
-  repeat(auto-fit, minmax(420px, 1fr));
+  repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  width: 100%; }
+  flex: 1 1 260px;   /* elastyczna szerokość, minimum 260px */
+  max-width: 320px;  /* maksymalna szerokość */
+  min-width: 220px;  /* opcjonalnie */}
 .recommendation-card {
   background: var(--brand-light);
   border-radius: 24px;
