@@ -502,6 +502,43 @@ footer {
 }
 .footer-links a:hover { text-decoration: underline; }
 
+#about-page, #contact-page {
+  max-width: 700px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(60,90,120,0.07);
+  padding: 2.6em 2em 2em 2em;
+  font-size: 1.07rem;
+  color: #20303a;
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+#about-page h1, #contact-page h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--brand-dark, #4d7d80);
+  margin-top: 0;
+  margin-bottom: 1em;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+#about-page div, #contact-page div {
+  font-size: 1.12em;
+  font-weight: 400;
+  color: inherit;
+  text-align: left;
+}
+
+#contact-page a, #about-page a {
+  color: var(--brand-dark, #4d7d80);
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+
 @media (max-width: 900px) {
   .quiz-section-bg { min-height: 70vh; }
   .quiz-progress-counter { right: 7px; font-size: 0.97rem; padding: 5px 13px;}
