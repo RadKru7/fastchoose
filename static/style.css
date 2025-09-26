@@ -271,7 +271,7 @@ display: none !important;
   font-size: 1.35rem;
 }
 #quiz-content .answers-grid .answer-card:hover {
-  border-color: var(--brand) !important;
+  border-color: var(--card-bg) !important;
   background-color: var(--brand) !important;
   color: var(--brand) !important;
   box-shadow: var(--shadow-hover);
