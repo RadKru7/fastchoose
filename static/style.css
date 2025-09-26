@@ -338,7 +338,7 @@ select.lang-select {
   justify-content: center;
   align-items: center;
   padding: 32px 16px;
-  width: 100%;
+  width: 70%;
   box-sizing: border-box;
   margin-top: 8px;   
 }
