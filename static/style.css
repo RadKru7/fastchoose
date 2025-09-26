@@ -168,6 +168,14 @@ padding: 0 !important;
   display: none !important;
 }
 
+#quiz-container > *:empty {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 #quiz-content {
   outline: 1px solid red !important; /*TESTY*/
   background: rgba(255,0,0,0.05) !important; /*TESTY*/
@@ -190,6 +198,14 @@ padding: 0 !important;
 
 #quiz-content:empty {
 display: none !important;
+}
+
+#quiz-content: > *:empty {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .quiz-progress-counter {
