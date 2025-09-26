@@ -3,18 +3,9 @@
 // --- Multicolor headline obsługa ---
 function updateFastchooseHeadline(lang) {
   const texts = {
-    pl: {
-      main: "Fastchoose - Twój idealny telefon, ",
-      accent: "w kilka sekund!"
-    },
-    en: {
-      main: "Fastchoose - Your ideal phone, ",
-      accent: "in seconds!"
-    },
-    es: {
-      main: "Fastchoose - Tu teléfono ideal, ",
-      accent: "¡en segundos!"
-    }
+    pl: { main: "Fastchoose - Twój idealny telefon, ", accent: "w kilka sekund!" },
+    en: { main: "Fastchoose - Your ideal phone, ", accent: "in seconds!" },
+    es: { main: "Fastchoose - Tu teléfono ideal, ", accent: "¡en segundos!" }
   };
   const t = texts[lang] || texts.pl;
   const headline = document.getElementById('fastchoose-headline');
@@ -47,6 +38,76 @@ const landingDict = {
   }
 };
 
+// --- O nas i Kontakt tłumaczenia ---
+const aboutDict = {
+  pl: {
+    title: "O nas",
+    text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon dla siebie. Nasze narzędzie pozwala zaoszczędzić Twój czas — nie musisz już przeglądać setek ofert i modeli. Wystarczy odpowiedzieć na kilka prostych pytań, a my wskażemy najlepsze propozycje dopasowane do Twoich potrzeb.<br><br>Grafiki telefonów na stronie mają charakter poglądowy i mogą nie odzwierciedlać rzeczywistego wyglądu konkretnych modeli.<br><br>FastChoose jest miejscem, które łączy nowoczesność, wygodę i rzetelność. Cieszymy się, że tu jesteś — mamy nadzieję, że nasza strona spełni Twoje oczekiwania i sprawi, że poszukiwanie telefonu stanie się proste i przyjemne!"
+  },
+  en: {
+    title: "About us",
+    text: "FastChoose is a website created to help you find your perfect smartphone in just a few seconds. Our tool saves your time — no more browsing through hundreds of offers and models. Simply answer a few quick questions and we'll recommend the best options tailored to your needs.<br><br>The phone images on our website are for illustrative purposes only and may not represent the actual appearance of the models.<br><br>FastChoose combines modern solutions, convenience, and reliability. We're glad you're here — we hope our site meets your expectations and makes searching for a new phone easy and enjoyable!"
+  },
+  es: {
+    title: "Sobre nosotros",
+    text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal en cuestión de segundos. Nuestra herramienta ahorra tu tiempo: no necesitas revisar cientos de ofertas y modelos. Solo responde unas pocas preguntas y te mostraremos las mejores opciones adaptadas a tus necesidades.<br><br>Las imágenes de teléfonos en nuestra web son solo ilustrativas y pueden no reflejar el aspecto real de los modelos.<br><br>FastChoose combina modernidad, comodidad y confianza. ¡Nos alegra que estés aquí! Esperamos que nuestra web cumpla tus expectativas y que buscar un teléfono sea fácil y agradable."
+  }
+};
+
+const contactDict = {
+  pl: {
+    title: "Kontakt",
+    text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>"
+  },
+  en: {
+    title: "Contact",
+    text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>"
+  },
+  es: {
+    title: "Contacto",
+    text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>"
+  }
+};
+
+// --- Funkcje renderujące O nas i Kontakt ---
+function showAboutPage(lang) {
+  const dict = aboutDict[lang] || aboutDict.pl;
+  const container = document.getElementById('main-content');
+  if (container) {
+    container.innerHTML = `
+      <section id="about-page">
+        <h1>${dict.title}</h1>
+        <div>${dict.text}</div>
+      </section>
+    `;
+    container.style.display = 'flex';
+    if (document.getElementById('quiz-section-bg')) document.getElementById('quiz-section-bg').style.display = 'none';
+    if (document.getElementById('results-container')) document.getElementById('results-container').style.display = 'none';
+    if (document.getElementById('quiz-container')) document.getElementById('quiz-container').style.display = 'none';
+    const headline = document.getElementById('fastchoose-headline');
+    if (headline) headline.style.display = '';
+  }
+}
+
+function showContactPage(lang) {
+  const dict = contactDict[lang] || contactDict.pl;
+  const container = document.getElementById('main-content');
+  if (container) {
+    container.innerHTML = `
+      <section id="contact-page">
+        <h1>${dict.title}</h1>
+        <div>${dict.text}</div>
+      </section>
+    `;
+    container.style.display = 'flex';
+    if (document.getElementById('quiz-section-bg')) document.getElementById('quiz-section-bg').style.display = 'none';
+    if (document.getElementById('results-container')) document.getElementById('results-container').style.display = 'none';
+    if (document.getElementById('quiz-container')) document.getElementById('quiz-container').style.display = 'none';
+    const headline = document.getElementById('fastchoose-headline');
+    if (headline) headline.style.display = '';
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('get-started-btn');
   const langSelect = document.getElementById('lang-select');
@@ -77,9 +138,15 @@ document.addEventListener('DOMContentLoaded', () => {
     lang = lang in dict ? lang : "pl";
     if (!footerLinks) return;
     footerLinks.innerHTML = `
-      <a href="/about">${dict[lang].about}</a>
-      <a href="/contact">${dict[lang].contact}</a>
+      <a href="#" id="about-link">${dict[lang].about}</a>
+      <a href="#" id="contact-link">${dict[lang].contact}</a>
     `;
+    // Ponownie podpinamy eventy po aktualizacji innerHTML
+    const aboutLink = document.getElementById('about-link');
+    const contactLink = document.getElementById('contact-link');
+    let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'pl';
+    if (aboutLink) aboutLink.addEventListener('click', (e) => { e.preventDefault(); showAboutPage(currentLang); });
+    if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); showContactPage(currentLang); });
   }
 
   // --- Logo kolor jak pytanie ---
@@ -91,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const langIcon = document.querySelector('.lang-icon');
   function updateLangIconColor() {
     if (!langIcon) return;
-    if (langIcon.tagName.toLowerCase() === 'img') return; // dla obrazka nic nie zmieniamy
+    if (langIcon.tagName.toLowerCase() === 'img') return;
     langIcon.querySelectorAll('*').forEach(el => {
       el.setAttribute('stroke', getComputedStyle(document.documentElement).getPropertyValue('--brand-dark').trim() || "#4D7D80");
     });
@@ -225,6 +292,11 @@ document.addEventListener('DOMContentLoaded', () => {
       renderQuizShell();
       fetchQuestion(currentQuestionId, true);
     }
+    if (mainContent && mainContent.innerHTML.includes('id="about-page"')) {
+      showAboutPage(currentLang);
+    } else if (mainContent && mainContent.innerHTML.includes('id="contact-page"')) {
+      showContactPage(currentLang);
+    }
   }
 
   function goBack() {
@@ -338,11 +410,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function displayResults(recommendations) {
-  // USUŃ nadmiarowy div, żeby nie robił luki
-  const mainContent = document.getElementById('quiz-container');
-  if (mainContent) {
-    mainContent.remove();
-  }
+    // USUŃ nadmiarowy div, żeby nie robił luki
+    const mainContent = document.getElementById('quiz-container');
+    if (mainContent) {
+      mainContent.remove();
+    }
     quizContent.style.display = 'none';
     resultsContainer.style.display = 'flex';
     resultsWrapper.innerHTML = '';
@@ -426,4 +498,13 @@ document.addEventListener('DOMContentLoaded', () => {
   updateLangIconColor();
   const headline = document.getElementById('fastchoose-headline');
   if (headline) headline.style.display = 'none';
+
+  // --- O nas/Kontakt obsługa linków (na wszelki wypadek po załadowaniu) ---
+  setTimeout(() => {
+    const aboutLink = document.getElementById('about-link');
+    const contactLink = document.getElementById('contact-link');
+    let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'pl';
+    if (aboutLink) aboutLink.addEventListener('click', (e) => { e.preventDefault(); showAboutPage(currentLang); });
+    if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); showContactPage(currentLang); });
+  }, 100);
 });
