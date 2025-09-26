@@ -158,6 +158,14 @@ select.lang-select {
 /*JEżeli quiz-container jest pusty to ustaw*/
 #quiz-container:empty {
 display: none !important;
+height: 0 !important;
+min-height: 0 !important;
+margin: 0 !important;
+padding: 0 !important;
+}
+
+#quiz-container:empty + * {
+  display: none !important;
 }
 
 #quiz-content {
