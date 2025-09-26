@@ -155,10 +155,7 @@ select.lang-select {
 }
 /*JEżeli quiz-container jest pusty to ustaw*/
 #quiz-container:empty {
-  margin: 0 !important;
-  padding: 0 !important;
-  min-height: 0 !important;
-  height: 0 !important;
+display: none !important;
 }
 
 #quiz-content {
@@ -177,6 +174,10 @@ select.lang-select {
   flex-direction: column;
   align-items: center;
   margin-top: 48px;
+}
+
+#quiz-content:empty {
+display: none !important;
 }
 
 .quiz-progress-counter {
