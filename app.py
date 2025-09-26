@@ -268,7 +268,7 @@ stores_db = {
         'language': 'en',
         'name': 'Order on Amazon.com',
         # Kategoria cell phones & smartphones (id 2407749011), k=product
-        'affiliate_url': 'https://www.amazon.com/s?i=mobile&k='  # + NAZWA TELEFONU (spacje +)
+        'affiliate_url': 'https://www.amazon.com/s?i=mobile&rh=n%3A2407749011&k='  # + NAZWA TELEFONU (spacje +)
     },
     5: {
         'language': 'en',
@@ -452,6 +452,10 @@ def get_result():
             elif 'allegro' in store['affiliate_url'] or 'euro' in store['affiliate_url']:
                 query = product_name.replace(' ', '%20')
                 return store['affiliate_url'] + query
+            elif 'Order on Amazon.com' in store['affiliate_url']:
+                query = product_name.replace(' ', '+')
+                from urllib.parse import quote_plus
+                return f"https://www.amazon.com/s?i=mobile&rh=n%3A2407749011&k={quote_plus(phone_name)}"    
             else:
                 query = product_name.replace(' ', '+')
                 return store['affiliate_url'] + query
