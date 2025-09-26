@@ -455,7 +455,19 @@ def get_result():
             elif 'Order on Amazon.com' in store['affiliate_url']:
                 query = product_name.replace(' ', '+')
                 from urllib.parse import quote_plus
-                return f"https://www.amazon.com/s?i=mobile&rh=n%3A2407749011&k={quote_plus(phone_name)}"    
+                return f"https://www.amazon.com/s?i=mobile&rh=n%3A2407749011&k={quote_plus(phone_name)}"
+            elif 'Order on Amazon.co.uk' in store['affiliate_url']:
+                query = product_name.replace(' ', '+')
+                from urllib.parse import quote_plus
+                return f"https://www.amazon.co.uk/s?i=mobile&rh=n%3A2407749011&k={quote_plus(phone_name)}"
+            elif 'Order on Amazon.es' in store['affiliate_url']:
+                query = product_name.replace(' ', '+')
+                from urllib.parse import quote_plus
+                return f"https://www.amazon.es/s?i=mobile&rh=n%3A2407749011&k={quote_plus(phone_name)}"
+            elif 'Order on Amazon.mx' in store['affiliate_url']:
+                query = product_name.replace(' ', '+')
+                from urllib.parse import quote_plus
+                return f"https://www.amazon.mx/s?i=mobile&rh=n%3A2407749011&k={quote_plus(phone_name)}"
             else:
                 query = product_name.replace(' ', '+')
                 return store['affiliate_url'] + query
