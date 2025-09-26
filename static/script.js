@@ -338,6 +338,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function displayResults(recommendations) {
+  // USUŃ nadmiarowy div, żeby nie robił luki
+  const mainContent = document.getElementById('quiz-container');
+  if (mainContent) {
+    mainContent.remove();
+  }
     quizContent.style.display = 'none';
     resultsContainer.style.display = 'flex';
     resultsWrapper.innerHTML = '';
