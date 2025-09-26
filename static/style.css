@@ -400,14 +400,14 @@ display: none !important;
   border-radius: 18px;
   grid-template-columns:
   repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 15px;
   max-width: 100vw;    /* nie wychodź poza ekran */
   max-height: 100vh;   /* nie wychodź poza wysokość ekranu */
   overflow: auto;      /* jeśli coś się nie mieści, pojawi się scroll tylko na tym kontenerze */
   margin: 0 auto;      /* wyśrodkuj poziomo */
 }
 .recommendation-card {
-  width: 330px;
+  width: 300px;
   background: var(--brand-light);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.08);
@@ -427,7 +427,7 @@ display: none !important;
   background: #D3D9D4 !important;
   border: 2px solid var(--image-frame-border);
   border-radius: 18px;
-  padding: 15px 11px;
+  padding: 11px 11px;
   display: block;
   box-sizing: border-box;
   box-shadow: 0 4px 16px rgba(44, 56, 80, 0.11);
