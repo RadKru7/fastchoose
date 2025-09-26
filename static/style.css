@@ -367,7 +367,10 @@ select.lang-select {
   gap: 20px;
   flex: 1 1 260px;   /* elastyczna szerokość, minimum 260px */
   max-width: 1100px;  /* maksymalna szerokość */
-  min-width: 950px;  /* opcjonalnie */}
+  min-width: 950px;  /* opcjonalnie */
+  min-height: 1000px;
+  max-height: 1200px;
+}
 .recommendation-card {
   background: var(--brand-light);
   border-radius: 24px;
