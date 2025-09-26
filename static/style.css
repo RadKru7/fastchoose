@@ -153,6 +153,13 @@ select.lang-select {
   margin-top: 15px; /* bigger margin under headline */
   z-index: 2;
 }
+/*JEżeli quiz-container jest pusty to ustaw*/
+#quiz-container:empty {
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  height: 0 !important;
+}
 
 #quiz-content {
   width: 100%;
