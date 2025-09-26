@@ -424,7 +424,7 @@ display: none !important;
   width: 100%;
   object-fit: contain;
   margin-bottom: 15px;
-  background: var(--result-internal-window);
+  background: var(--result-internal-window) !important;
   border: 1px solid var(--image-frame-border);
   border-radius: 18px;
   padding: 15px 11px;
