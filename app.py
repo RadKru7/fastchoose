@@ -260,7 +260,7 @@ stores_db = {
         'language': 'pl',
         'name': 'Zamów na Euro RTV AGD',
         # Kategoria: Telefony i smartfony (ID 178)
-        'affiliate_url': 'https://www.euro.com.pl/telefony-komorkowe,_smartfony.bhtml?keyword='  # + NAZWA TELEFONU (spacje %20)
+        'affiliate_url': 'https://www.euro.com.pl/search2.bhtml?keyword='  # + NAZWA TELEFONU (spacje %20)
     },
 
     # Język angielski
