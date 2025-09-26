@@ -366,8 +366,8 @@ select.lang-select {
   repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   flex: 1 1 260px;   /* elastyczna szerokość, minimum 260px */
-  max-width: 900px;  /* maksymalna szerokość */
-  min-width: 750px;  /* opcjonalnie */}
+  max-width: 1100px;  /* maksymalna szerokość */
+  min-width: 950px;  /* opcjonalnie */}
 .recommendation-card {
   background: var(--brand-light);
   border-radius: 24px;
