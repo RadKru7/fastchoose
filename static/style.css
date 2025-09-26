@@ -144,8 +144,8 @@ select.lang-select {
 }
 
 #quiz-container {
-  outline: 1px solid red !important; /*TESTY*/
-  background: rgba(0,255,0,0.05) !important; /*TESTY*/
+  /*outline: 1px solid red !important; /*TESTY*/
+  /*background: rgba(0,255,0,0.05) !important; /*TESTY*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -177,8 +177,8 @@ padding: 0 !important;
 }
 
 #quiz-content {
-  outline: 1px solid red !important; /*TESTY*/
-  background: rgba(255,0,0,0.05) !important; /*TESTY*/
+  /*outline: 1px solid red !important; /*TESTY*/
+  /*background: rgba(255,0,0,0.05) !important; /*TESTY*/
   width: 100%;
   max-width: 900px; /* +50% width */
   background: var(--card-bg);
