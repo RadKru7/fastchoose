@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ponownie podpinamy eventy po aktualizacji innerHTML
     const aboutLink = document.getElementById('about-link');
     const contactLink = document.getElementById('contact-link');
-    let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'pl';
+    let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'en';
     if (aboutLink) aboutLink.addEventListener('click', (e) => { e.preventDefault(); showAboutPage(currentLang); });
     if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); showContactPage(currentLang); });
   }
