@@ -420,14 +420,14 @@ display: none !important;
   min-height: 480px;
 }
 .recommendation-image {
-  max-height: 250px; 
+  max-height: 320px; 
   width: 100%;
   object-fit: contain;
-  margin-bottom: 24px;
+  margin-bottom: 15px;
   background: var(--result-internal-window);
   border: 1px solid var(--image-frame-border);
   border-radius: 18px;
-  padding: 28px 16px;
+  padding: 15px 11px;
   display: block;
   box-sizing: border-box;
   box-shadow: 0 4px 16px rgba(44, 56, 80, 0.11);
@@ -435,9 +435,21 @@ display: none !important;
 
 .recommendation-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
 .recommendation-name { font-size: 1.5rem; font-weight: 550; color: #333; margin-bottom: 15px; }
-.store-links-container { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+.store-links-container { /*obszar z guzikami do sklepów*/
+  max-height: 50px; 
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; }
 .store-link {
-  display: block; padding: 18px 24px; background-color: #f0f4ff; color: var(--brand); text-decoration: none; border-radius: 12px; font-weight: 450; font-size: 0,9rem;
+  display: block;
+  padding: 10px 15px;
+  background-color: #f0f4ff;
+  color: var(--brand);
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 550;
+  font-size: 1.1rem;
   transition: background-color 0.2s, color 0.2s;
 }
 .store-link:hover {
