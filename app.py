@@ -8,17 +8,17 @@ CORS(app)
 
 # --- Symulacja Bazy Danych (bez zmian) ---
 questions_db = {
-    1: {'en': 'What is your budget?', 'es': '¿Cuál es tu presupuesto?', 'pl': 'Jaki masz budżet?', 'icon_path': 'icons/budget.svg'},
-    2: {'en': 'What is the primary use of the phone?', 'es': '¿Cuál es el uso principal del teléfono?', 'pl': 'Do czego będziesz używać telefonu?', 'icon_path': 'icons/usage.svg'},
-    3: {'en': 'How important is battery life?', 'es': '¿Qué tan importante es la duración de la batería?', 'pl': 'Jak ważna jest żywotność baterii?', 'icon_path': 'icons/battery.svg'},
-    4: {'en': 'What screen size do you prefer?', 'es': '¿Qué tamaño de pantalla prefieres?', 'pl': 'Jaki rozmiar ekranu preferujesz?', 'icon_path': 'icons/screen.svg'},
-    5: {'en': 'What is your priority for photos?', 'es': '¿Cuál es tu prioridad para las fotos?', 'pl': 'Jaki jest Twój priorytet w zdjęciach?', 'icon_path': 'icons/questuins_camera.svg'},
-    6: {'en': 'How much internal memory do you need', 'es': '¿Cuánta memoria interna necesitas?', 'pl': 'Ile pamięci wewnętrznej potrzebujesz?', 'icon_path': 'icons/memory.svg'},
-    7: {'en': 'How important is processing power for games?', 'es': '¿Qué tan importante es la potencia de procesamiento para juegos?', 'pl': 'Jak ważna jest moc do gier?', 'icon_path': 'icons/gaming.svg'},
-    8: {'en': 'Which operating system do you prefer?', 'es': '¿Qué sistema operativo prefieres?', 'pl': 'Jaki system operacyjny preferujesz?', 'icon_path': 'icons/os.svg'},
-    9: {'en': 'What is most important in terms of camera features?', 'es': '¿Qué es lo más importante en cuanto a características de la cámara?', 'pl': 'Co jest najważniejsze w aparacie?', 'icon_path': 'icons/camera_features.svg'},
-    10: {'en': 'Which brand do you prefer?', 'es': '¿Qué marca prefieres?', 'pl': 'Jaką markę preferujesz?', 'icon_path': 'icons/brand.svg'},
-    11: {'en': 'How important is fast charging?', 'es': '¿Qué tan importante es la carga rápida?', 'pl': 'Jak ważne jest szybkie ładowanie?', 'icon_path': 'icons/charging.svg'},
+    1: {'en': 'What is your budget?', 'es': '¿Cuál es tu presupuesto?', 'pl': 'Jaki masz budżet?', 'icon_path': 'icons/budgetx.svg'},
+    2: {'en': 'What is the primary use of the phone?', 'es': '¿Cuál es el uso principal del teléfono?', 'pl': 'Do czego będziesz używać telefonu?', 'icon_path': 'icons/usagex.svg'},
+    3: {'en': 'How important is battery life?', 'es': '¿Qué tan importante es la duración de la batería?', 'pl': 'Jak ważna jest żywotność baterii?', 'icon_path': 'icons/batteryx.svg'},
+    4: {'en': 'What screen size do you prefer?', 'es': '¿Qué tamaño de pantalla prefieres?', 'pl': 'Jaki rozmiar ekranu preferujesz?', 'icon_path': 'icons/screenxx.svg'},
+    5: {'en': 'What is your priority for photos?', 'es': '¿Cuál es tu prioridad para las fotos?', 'pl': 'Jaki jest Twój priorytet w zdjęciach?', 'icon_path': 'icons/questuins_camerax.svg'},
+    6: {'en': 'How much internal memory do you need', 'es': '¿Cuánta memoria interna necesitas?', 'pl': 'Ile pamięci wewnętrznej potrzebujesz?', 'icon_path': 'icons/memoryx.svg'},
+    7: {'en': 'How important is processing power for games?', 'es': '¿Qué tan importante es la potencia de procesamiento para juegos?', 'pl': 'Jak ważna jest moc do gier?', 'icon_path': 'icons/gamingx.svg'},
+    8: {'en': 'Which operating system do you prefer?', 'es': '¿Qué sistema operativo prefieres?', 'pl': 'Jaki system operacyjny preferujesz?', 'icon_path': 'icons/osx.svg'},
+    9: {'en': 'What is most important in terms of camera features?', 'es': '¿Qué es lo más importante en cuanto a características de la cámara?', 'pl': 'Co jest najważniejsze w aparacie?', 'icon_path': 'icons/camera_featuresx.svg'},
+    10: {'en': 'Which brand do you prefer?', 'es': '¿Qué marca prefieres?', 'pl': 'Jaką markę preferujesz?', 'icon_path': 'icons/brandx.svg'},
+    11: {'en': 'How important is fast charging?', 'es': '¿Qué tan importante es la carga rápida?', 'pl': 'Jak ważne jest szybkie ładowanie?', 'icon_path': 'icons/chargingx.svg'},
 }
 answers_db = {
     101: {'question_id': 1, 'next_question_id': 2, 'en': 'Under $350', 'es': 'Menos de $350', 'pl': 'Poniżej 1500 zł', 'icon_path': 'icons/price_low.svg', 'price_level': 1},
@@ -39,7 +39,7 @@ answers_db = {
     601: {'question_id': 6, 'next_question_id': 11, 'en': '128 GB', 'es': '128 GB', 'pl': '128 GB', 'icon_path': 'icons/memory_low.svg'},
     602: {'question_id': 6, 'next_question_id': 11, 'en': '256 GB', 'es': '256 GB', 'pl': '256 GB', 'icon_path': 'icons/memory_normal.svg'},
     603: {'question_id': 6, 'next_question_id': 11, 'en': '512 GB or more', 'es': '512 GB o más', 'pl': '512 GB lub więcej', 'icon_path': 'icons/memory_high.svg'},
-   701: {'question_id': 7, 'next_question_id': 8, 'en': 'I need the highest possible performance', 'es': 'Necesito el máximo rendimiento posible', 'pl': 'Potrzebuję najwyższej wydajności', 'icon_path': 'icons/performance_high.svg'},
+    701: {'question_id': 7, 'next_question_id': 8, 'en': 'I need the highest possible performance', 'es': 'Necesito el máximo rendimiento posible', 'pl': 'Potrzebuję najwyższej wydajności', 'icon_path': 'icons/performance_high.svg'},
     702: {'question_id': 7, 'next_question_id': 8, 'en': 'I need high performance for gaming', 'es': 'Necesito alto rendimiento para juegos', 'pl': 'Potrzebuję wysokiej wydajności w grach', 'icon_path': 'icons/performance_normal.svg'},
     703: {'question_id': 7, 'next_question_id': 8, 'en': 'Standard performance is enough for less demanding games', 'es': 'El rendimiento estándar es suficiente para juegos menos exigentes', 'pl': 'Wystarczy mi standardowa wydajność w mniej wymagających tytułach', 'icon_path': 'icons/performance_low.svg'},
     801: {'question_id': 8, 'next_question_id': 9, 'en': 'Android', 'es': 'Android', 'pl': 'Android', 'icon_path': 'icons/android.svg'},
