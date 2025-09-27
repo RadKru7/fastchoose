@@ -18,7 +18,8 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
 13 **przycvisk lern more w cookies jest nieaktywny tzn prwoadzi do nikąd do poprawki przed go to prod**
     
 14. **Przyciski na mobilnej wersji są prezentowane podówjnie do diagnozy i korekty **
-------------****************<<<<<<<<<<<<<<<<<<\\\|||>>>>>>>>>>>>***************---------------
+    
+**------------<<<<<<<<<<<<<<<<<<\\\|||>>>>>>>>>>>>--------------**
 
 Lista bieżących zadań do wykonania w projekcie **fastchoose** po osiągnięciu projektu MVP:
 
