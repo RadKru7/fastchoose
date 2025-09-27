@@ -89,21 +89,6 @@ function getCurrentLang() {
   return (langSelect && langSelect.value) ? langSelect.value : 'pl';
 }
 
-function updateFastchooseHeadline(lang) {
-  const texts = {
-    pl: { main: "Fastchoose - Twój idealny telefon, ", accent: "w kilka sekund!" },
-    en: { main: "Fastchoose - Your ideal phone, ", accent: "in seconds!" },
-    es: { main: "Fastchoose - Tu teléfono ideal, ", accent: "¡en segundos!" }
-  };
-  const t = texts[lang] || texts.pl;
-  const headline = document.getElementById('fastchoose-headline');
-  if (headline) {
-    headline.style.display = '';
-    headline.querySelector('.headline-main').textContent = t.main;
-    headline.querySelector('.headline-accent').textContent = t.accent;
-  }
-}
-
 function renderQuizShell() {
   const quizContent = document.getElementById('quiz-content');
   quizContent.innerHTML = `
@@ -242,6 +227,7 @@ async function displayQuestion(data) {
   backBtnEl.setAttribute('aria-label', backAriaLabel());
   document.getElementById('results-container').style.display = 'none';
   document.getElementById('quiz-content').style.display = 'block';
+  if (document.getElementById('quiz-container')) document.getElementById('quiz-container').style.display = 'flex';
 }
 
 function showQuizQuestionById(id) {
@@ -257,6 +243,7 @@ function showQuizSection() {
   document.getElementById('quiz-section-bg').style.display = 'flex';
   document.getElementById('quiz-content').style.display = 'flex';
   document.getElementById('results-container').style.display = 'none';
+  if (document.getElementById('quiz-container')) document.getElementById('quiz-container').style.display = 'flex';
   const headline = document.getElementById('fastchoose-headline');
   if (headline) headline.style.display = '';
   updateFastchooseHeadline(currentLang);
@@ -282,6 +269,7 @@ function displayResults(recommendations) {
   document.getElementById('main-content').style.display = 'none';
   document.getElementById('quiz-section-bg').style.display = 'flex';
   document.getElementById('quiz-content').style.display = 'none';
+  if (document.getElementById('quiz-container')) document.getElementById('quiz-container').style.display = 'none';
   const resultsContainer = document.getElementById('results-container');
   resultsContainer.style.display = 'flex';
   const resultsWrapper = document.getElementById('results-content-wrapper');
@@ -353,6 +341,7 @@ function resetApp() {
   document.getElementById('results-container').style.display = 'none';
   document.getElementById('quiz-content').style.display = 'none';
   document.getElementById('quiz-section-bg').style.display = 'none';
+  if (document.getElementById('quiz-container')) document.getElementById('quiz-container').style.display = 'flex';
   document.getElementById('main-content').style.display = 'flex';
   const headline = document.getElementById('fastchoose-headline');
   if (headline) headline.style.display = 'none';
@@ -429,6 +418,7 @@ function showAboutPage(lang) {
     document.getElementById('quiz-section-bg').style.display = 'none';
     document.getElementById('results-container').style.display = 'none';
     document.getElementById('quiz-content').style.display = 'none';
+    if (document.getElementById('quiz-container')) document.getElementById('quiz-container').style.display = 'none';
     const headline = document.getElementById('fastchoose-headline');
     if (headline) headline.style.display = '';
   }
@@ -447,6 +437,7 @@ function showContactPage(lang) {
     document.getElementById('quiz-section-bg').style.display = 'none';
     document.getElementById('results-container').style.display = 'none';
     document.getElementById('quiz-content').style.display = 'none';
+    if (document.getElementById('quiz-container')) document.getElementById('quiz-container').style.display = 'none';
     const headline = document.getElementById('fastchoose-headline');
     if (headline) headline.style.display = '';
   }
@@ -500,6 +491,7 @@ function showViewByHash() {
   document.getElementById('main-content').style.display = 'flex';
   document.getElementById('quiz-section-bg').style.display = 'none';
   document.getElementById('results-container').style.display = 'none';
+  if (document.getElementById('quiz-container')) document.getElementById('quiz-container').style.display = 'flex';
   const headline = document.getElementById('fastchoose-headline');
   if (headline) headline.style.display = 'none';
 }
