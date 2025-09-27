@@ -24,8 +24,9 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
    Na każdej stronie oprocz startowej dodaj hasło w stylu Fastchoose - Twój idealny telefon, w kilka sekund!
    Język angielski: "Fastchoose - Your ideal phone, in seconds!"
    Język hiszpański: "Fastchoose - Tu teléfono ideal, ¡en segundos!"
-10 **Dodaj certyfikat - bezpieczna strona**
+10. Dodanie SEO słów i fraz kluczowych pod wyszukiwarki   
 11. ***wykupienie domeny najlepiej z mailem na pierwszy rok*
+    Dobrą opcją wydaje się  Google Domains
 
 
 Lista bieżących zadań do wykonania w projekcie **fastchoose** po osiągnięciu projektu MVP:
