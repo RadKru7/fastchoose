@@ -465,7 +465,8 @@ display: none !important;
 }
 
 .restart-btn {
-  margin-top: 10px; padding: 10px 10px;
+  margin-top: 12px;
+  padding: 12px 20px;
   font-size: 0.9rem; border: none;
   border-radius: 24px;
   background: var(--brand-accent);
