@@ -10,15 +10,13 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
 5. **Dodaj Google Analytics i rejestrację w Google Analytics**  
    Dodaj integrację Google Analytics do strony, w tym pełną rejestrację projektu w Google Analytics. Zapewnij poprawne umieszczenie kodu śledzącego w szablonach, zgodność z RODO (możliwość zgody użytkownika) oraz dokumentację dla administratora.
 
-
-   
-
-10. Dodanie SEO słów i fraz kluczowych pod wyszukiwarki   
 11. ***wykupienie domeny najlepiej z mailem na pierwszy rok*
     Dobrą opcją wydaje się  Google Domains
 
+------------****************<<<<<<<<<<<<<<<<<<\\\|||>>>>>>>>>>>>***************---------------
 
 Lista bieżących zadań do wykonania w projekcie **fastchoose** po osiągnięciu projektu MVP:
+
 8. **Opracować stragegie Marketingową** - 1 Etap darmowe sposoby
 9. **Opracować stragegie Marketingową** - 2 Etap - wykupić kampanię , Facebook, zeta?
 
@@ -38,3 +36,4 @@ Archiwum
    Na każdej stronie oprocz startowej dodaj hasło w stylu Fastchoose - Twój idealny telefon, w kilka sekund!
    Język angielski: "Fastchoose - Your ideal phone, in seconds!"
    Język hiszpański: "Fastchoose - Tu teléfono ideal, ¡en segundos!"
+ [x] - 2025-09-24  10. Dodanie SEO słów i fraz kluczowych pod wyszukiwarki   
