@@ -409,7 +409,7 @@ display: none !important;
   margin: 0 auto;      /* wyśrodkuj poziomo */
 }
 .recommendation-card {
-  width: 330px;
+  width: 310px;
   background: var(--brand-light);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.08);
@@ -423,14 +423,14 @@ display: none !important;
   margin: 15px;
 }
 .recommendation-image {
-  max-height: 300px; 
+  max-height: 280px; 
   width: 100%;
   object-fit: contain;
-  margin-bottom: 15px;
+  margin-bottom: 9px;
   background: #D3D9D4 !important;
   border: 2px solid var(--image-frame-border);
   border-radius: 18px;
-  padding: 11px 11px;
+  padding: 8px 8px;
   display: block;
   box-sizing: border-box;
   box-shadow: 0 4px 16px rgba(44, 56, 80, 0.11);
