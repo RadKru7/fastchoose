@@ -466,6 +466,52 @@ function renderFooterLinks(lang) {
   `;
 }
 
+// --- Cookie consent wielojęzyczny ---
+function getCookieContent(lang) {
+  const dict = {
+    pl: {
+      message: "Używamy plików cookie, aby lepiej działała ta strona.",
+      dismiss: "OK",
+      link: "Dowiedz się więcej",
+      href: "/polityka-prywatnosci"
+    },
+    en: {
+      message: "We use cookies to ensure this website works better for you.",
+      dismiss: "OK",
+      link: "Learn more",
+      href: "/privacy-policy"
+    },
+    es: {
+      message: "Usamos cookies para que este sitio funcione mejor.",
+      dismiss: "OK",
+      link: "Saber más",
+      href: "/politica-de-privacidad"
+    }
+  };
+  return dict[lang] || dict.en;
+}
+
+function showCookieConsentBar(lang) {
+  if (window.cookieconsent) {
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": { "background": "#000" },
+        "button": { "background": "#f1d600" }
+      },
+      "content": getCookieContent(lang)
+    });
+  }
+}
+
+// Obsługa inicjalizacji po wybraniu języka (i tylko raz)
+let cookieBannerInitialized = false;
+function initCookieConsentOnce(lang) {
+  if (!cookieBannerInitialized && window.cookieconsent) {
+    showCookieConsentBar(lang);
+    cookieBannerInitialized = true;
+  }
+}
+
 // --- Hash routing logika ---
 function showViewByHash() {
   const hash = window.location.hash;
@@ -514,9 +560,20 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLandingTexts(currentLang);
     renderFooterLinks(currentLang);
     updateFastchooseHeadline(currentLang);
+
+    // --- Cookie consent: odśwież na nowy język ---
+    const cc = document.querySelector('.cc-window');
+    if (cc) cc.parentNode.removeChild(cc);
+    showCookieConsentBar(currentLang);
   });
 
   // Routing
   window.addEventListener("hashchange", showViewByHash);
   showViewByHash();
+
+  // --- Cookie consent init ---
+  window.addEventListener("load", function() {
+    let lang = getCurrentLang();
+    initCookieConsentOnce(lang);
+  });
 });
