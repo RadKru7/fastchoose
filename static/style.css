@@ -373,10 +373,11 @@ display: none !important;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 8px 6px;
+  padding: 4px 4px;
   width: 80%;
+  height: 80%;
   box-sizing: border-box;
-  margin-top: 6px;   
+  margin-top: 5px;   
 }
 
 /* ---- RECOMMENDATIONS ---- */
