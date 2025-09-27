@@ -42,15 +42,15 @@ const landingDict = {
 const aboutDict = {
   pl: {
     title: "O nas",
-    text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon dla siebie. Nasze narzędzie pozwala zaoszczędzić Twój czas — nie musisz już przeglądać setek ofert i modeli. Wystarczy odpowiedzieć na kilka prostych pytań, a my wskażemy najlepsze propozycje dopasowane do Twoich potrzeb.<br><br>Grafiki telefonów na stronie mają charakter poglądowy i mogą nie odzwierciedlać rzeczywistego wyglądu konkretnych modeli.<br><br>FastChoose jest miejscem, które łączy nowoczesność, wygodę i rzetelność. Cieszymy się, że tu jesteś — mamy nadzieję, że nasza strona spełni Twoje oczekiwania i sprawi, że poszukiwanie telefonu stanie się proste i przyjemne!"
+    text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon dla siebie. Nasze narzędzie pozwala zaoszczędzić Twój czas — nie musisz już przeglądać setek ofert i modeli. Odpowiedz na kilka pytań, a my dobierzemy najlepszą propozycję!"
   },
   en: {
     title: "About us",
-    text: "FastChoose is a website created to help you find your perfect smartphone in just a few seconds. Our tool saves your time — no more browsing through hundreds of offers and models. Simply answer a few quick questions and we'll recommend the best options tailored to your needs.<br><br>The phone images on our website are for illustrative purposes only and may not represent the actual appearance of the models.<br><br>FastChoose combines modern solutions, convenience, and reliability. We're glad you're here — we hope our site meets your expectations and makes searching for a new phone easy and enjoyable!"
+    text: "FastChoose is a website created to help you find your perfect smartphone in just a few seconds. Our tool saves your time — no more browsing through hundreds of offers and models. Simply answer a few questions and we’ll recommend the best match for you!"
   },
   es: {
     title: "Sobre nosotros",
-    text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal en cuestión de segundos. Nuestra herramienta ahorra tu tiempo: no necesitas revisar cientos de ofertas y modelos. Solo responde unas pocas preguntas y te mostraremos las mejores opciones adaptadas a tus necesidades.<br><br>Las imágenes de teléfonos en nuestra web son solo ilustrativas y pueden no reflejar el aspecto real de los modelos.<br><br>FastChoose combina modernidad, comodidad y confianza. ¡Nos alegra que estés aquí! Esperamos que nuestra web cumpla tus expectativas y que buscar un teléfono sea fácil y agradable."
+    text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal en cuestión de segundos. Nuestra herramienta ahorra tu tiempo: no necesitas revisar cientos de ofertas y modelos. Responde unas preguntas y te mostraremos la mejor opción para ti."
   }
 };
 
@@ -108,6 +108,46 @@ function showContactPage(lang) {
   }
 }
 
+// --- Nowość: Obsługa historii widoków przez hash w URL ---
+function showViewByHash() {
+  const hash = window.location.hash;
+  const mainContent = document.getElementById('main-content');
+  const quizSectionBg = document.getElementById('quiz-section-bg');
+  const resultsContainer = document.getElementById('results-container');
+  const quizContainer = document.getElementById('quiz-container');
+  const headline = document.getElementById('fastchoose-headline');
+  // Ukryj wszystkie sekcje
+  if (mainContent) mainContent.style.display = 'none';
+  if (quizSectionBg) quizSectionBg.style.display = 'none';
+  if (resultsContainer) resultsContainer.style.display = 'none';
+
+  if (hash === "#quiz") {
+    if (quizSectionBg) quizSectionBg.style.display = 'flex';
+    if (quizContainer) quizContainer.style.display = 'flex';
+    if (headline) headline.style.display = '';
+  } else if (hash === "#results") {
+    if (quizSectionBg) quizSectionBg.style.display = 'flex';
+    if (resultsContainer) resultsContainer.style.display = 'flex';
+    if (headline) headline.style.display = '';
+  } else if (hash === "#about") {
+    showAboutPage(getCurrentLang());
+  } else if (hash === "#contact") {
+    showContactPage(getCurrentLang());
+  } else {
+    // Domyślnie strona główna
+    if (mainContent) mainContent.style.display = 'flex';
+    if (headline) headline.style.display = 'none';
+  }
+}
+
+// Pomocnicza funkcja do pobierania aktualnego języka
+function getCurrentLang() {
+  const langSelect = document.getElementById('lang-select');
+  return (langSelect && langSelect.value) ? langSelect.value : 'pl';
+}
+
+window.addEventListener("hashchange", showViewByHash);
+
 document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('get-started-btn');
   const langSelect = document.getElementById('lang-select');
@@ -138,15 +178,10 @@ document.addEventListener('DOMContentLoaded', () => {
     lang = lang in dict ? lang : "pl";
     if (!footerLinks) return;
     footerLinks.innerHTML = `
-      <a href="#" id="about-link">${dict[lang].about}</a>
-      <a href="#" id="contact-link">${dict[lang].contact}</a>
+      <a href="#about" id="about-link">${dict[lang].about}</a>
+      <a href="#contact" id="contact-link">${dict[lang].contact}</a>
     `;
-    // Ponownie podpinamy eventy po aktualizacji innerHTML
-    const aboutLink = document.getElementById('about-link');
-    const contactLink = document.getElementById('contact-link');
-    let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'en';
-    if (aboutLink) aboutLink.addEventListener('click', (e) => { e.preventDefault(); showAboutPage(currentLang); });
-    if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); showContactPage(currentLang); });
+    // Eventy niepotrzebne, bo hashchange wystarczy!
   }
 
   // --- Logo kolor jak pytanie ---
@@ -269,11 +304,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function startQuiz() {
-    mainContent.style.display = 'none';
-    resultsContainer.style.display = 'none';
-    if (quizSectionBg) quizSectionBg.style.display = 'flex';
-    updateFastchooseHeadline(currentLang);
-    document.getElementById('quiz-container').style.display = 'flex';
+    window.location.hash = "#quiz";
+    // Widoki przełączą się automatycznie przez showViewByHash
     currentQuestionId = 1;
     pathAnswers = [];
     history = [];
@@ -300,6 +332,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function goBack() {
+    if (window.location.hash === '#quiz') {
+      // Powrót do home
+      window.location.hash = "#home";
+      return;
+    }
     if (history.length > 0) {
       const prevId = history.pop();
       if (pathAnswers.length > 0) pathAnswers.pop();
@@ -309,6 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getResults() {
+    window.location.hash = "#results";
     fetch('/api/quiz/result', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -410,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function displayResults(recommendations) {
+    window.location.hash = "#results";
     // USUŃ nadmiarowy div, żeby nie robił luki
     const mainContent = document.getElementById('quiz-container');
     if (mainContent) {
@@ -478,6 +517,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function resetApp() {
+    window.location.hash = "#home";
     currentQuestionId = 1;
     pathAnswers = [];
     history = [];
@@ -499,12 +539,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const headline = document.getElementById('fastchoose-headline');
   if (headline) headline.style.display = 'none';
 
-  // --- O nas/Kontakt obsługa linków (na wszelki wypadek po załadowaniu) ---
-  setTimeout(() => {
-    const aboutLink = document.getElementById('about-link');
-    const contactLink = document.getElementById('contact-link');
-    let currentLang = (langSelect && langSelect.value) ? langSelect.value : 'pl';
-    if (aboutLink) aboutLink.addEventListener('click', (e) => { e.preventDefault(); showAboutPage(currentLang); });
-    if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); showContactPage(currentLang); });
-  }, 100);
+  // Wywołaj na starcie, by ustawić widok zgodnie z hashem (np. bezpośredni link)
+  showViewByHash();
+
+  // --- O nas/Kontakt obsługa linków (hashchange wystarczy) ---
 });
