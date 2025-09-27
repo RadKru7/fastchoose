@@ -540,7 +540,13 @@ footer {
   text-decoration: underline;
   word-break: break-all;
 }
-
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 
 @media (max-width: 900px) {
   .quiz-section-bg { min-height: 70vh; }
