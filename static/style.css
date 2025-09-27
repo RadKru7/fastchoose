@@ -553,7 +553,28 @@ footer {
   height: 1px;
   overflow: hidden;
 }
+/* CookieConsent minimalistycznie: tylko kolory, zaokrąglenie i font */
+.cc-window {
+  background: var(--brand);
+  color: #fafafa !important;
+  font-family: 'Montserrat', Arial, sans-serif !important;
+  border-radius: 12px !important;
+}
 
+.cc-btn {
+  background: var(--brand-accent);
+  color: #222 !important;
+  border-radius: 20px !important;
+  font-weight: 700 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.cc-btn:hover, .cc-btn:focus {
+  background: var(--answer-bg);
+  color: #000 !important;
+}
+/* CookieConsent minimalistycznie: tylko kolory, zaokrąglenie i font */
 @media (max-width: 900px) {
   .quiz-section-bg { min-height: 70vh; }
   .quiz-progress-counter { right: 7px; font-size: 0.97rem; padding: 5px 13px;}
