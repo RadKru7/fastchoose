@@ -461,7 +461,7 @@ def get_result():
                         if diff == 0:
                             multiplier = 2.6
                         elif diff == 1:
-                            multiplier = 0.5
+                            multiplier = 0.3
                         else:
                             multiplier = 0.1
                     product_scores[product_id] += (n - pos) * multiplier
