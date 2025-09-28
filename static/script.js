@@ -470,22 +470,17 @@ function renderFooterLinks(lang) {
 function getCookieContent(lang) {
   const dict = {
     pl: {
-      message: "Używamy plików cookie, aby lepiej działała ta strona.",
-      dismiss: "OK",
-      link: "Dowiedz się więcej",
-      href: "/polityka-prywatnosci"
+      message: "Ta strona korzysta z plików cookies w celach statystycznych. Możesz zapoznać się z polityką prywatności przechodząc do niej przez link w stopce strony.",
+      dismiss: "OK"
     },
     en: {
-      message: "We use cookies to ensure this website works better for you.",
-      dismiss: "OK",
-      link: "Learn more",
-      href: "/privacy-policy"
+      message: "This site uses cookies for statistical purposes. You can read our privacy policy by following the link in the footer of the site.",
+      dismiss: "OK"
+
     },
     es: {
-      message: "Usamos cookies para que este sitio funcione mejor.",
-      dismiss: "OK",
-      link: "Saber más",
-      href: "/politica-de-privacidad"
+      message: "Este sitio utiliza cookies con fines estadísticos. Puedes consultar la política de privacidad utilizando el enlace en el pie de página del sitio.",
+      dismiss: "OK"
     }
   };
   return dict[lang] || dict.en;
