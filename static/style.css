@@ -610,8 +610,8 @@ footer {
   header { flex-direction: column;
           gap: 8px;
           padding: 12px 8px 2px 8px; }
-  .hero-image { width: 88vw;
-               max-width: 310px; }
+  .hero-image { width: 100vw;
+               max-width: 330px; }
   .big-title { font-size: 1.15rem; }
   .answers-grid { grid-template-columns: 1fr; }
   .answer-title { font-size: 1.16rem; }
