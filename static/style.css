@@ -628,7 +628,7 @@ footer {
   footer { align-items: center; text-align: center; }
   .footer-links { justify-content: center; flex-wrap: wrap; }
   .recommendations-grid {
-    background: red !important;
+    background: #748D92 !important;
     width: 80vw !important;
     max-width: 80vw !important;
     box-sizing: border-box !important;
@@ -639,7 +639,7 @@ footer {
     overflow-x: hidden !important; /* na wszelki wypadek */
   }
   .recommendation-card {
-    background: green !important;
+    background: #D3D9D4 !important;
     width: 80% !important;
     max-width: 80% !important;
     min-width: 0 !important;
