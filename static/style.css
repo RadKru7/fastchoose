@@ -614,13 +614,6 @@ footer {
   .big-title { font-size: 1.15rem; }
   .answers-grid { grid-template-columns: 1fr; }
   .answer-title { font-size: 1.16rem; }
-  .results-container {
-    max-width: 100vw;
-    width: 100vw;
-    min-width: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
   .recommendation-name { font-size: 0.8rem;
                        padding: 0;
                        margin: 0;
@@ -651,5 +644,12 @@ footer {
     margin: 0 auto 10px auto !important;
     box-sizing: border-box !important;
   }
+  #results-container,
+  .main-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  html, body {
+  overflow-x: hidden !important;
   
 }
