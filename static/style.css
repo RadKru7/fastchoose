@@ -620,6 +620,7 @@ footer {
     min-width: 0;
     margin: 0;
     box-sizing: border-box;
+  }
   .recommendations-grid {
     max-width: 98vw !important;
     width: 98vw !important;
