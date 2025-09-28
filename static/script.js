@@ -42,15 +42,15 @@ const landingDict = {
 const aboutDict = {
   pl: {
     title: "O nas",
-    text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon dla siebie. Nasze narzędzie pozwala zaoszczędzić Twój czas — nie musisz już przeglądać setek ofert i modeli. Odpowiedz na kilka pytań, a my dobierzemy najlepszą propozycję!"
+    text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon dla siebie. Nasze narzędzie pozwala zaoszczędzić Twój czas — nie musisz już przeglądać setek ofert i modeli. Po prostu odpowiedz na kilka pytań i gotowe!"
   },
   en: {
     title: "About us",
-    text: "FastChoose is a website created to help you find your perfect smartphone in just a few seconds. Our tool saves your time — no more browsing through hundreds of offers and models. Simply answer a few questions and we’ll recommend the best match for you!"
+    text: "FastChoose is a website created to help you find your perfect smartphone in just a few seconds. Our tool saves your time — no more browsing through hundreds of offers and models. Simply answer a few questions and that’s it!"
   },
   es: {
     title: "Sobre nosotros",
-    text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal en cuestión de segundos. Nuestra herramienta ahorra tu tiempo: no necesitas revisar cientos de ofertas y modelos. Responde unas preguntas y te mostraremos la mejor opción para ti."
+    text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal en cuestión de segundos. Nuestra herramienta ahorra tu tiempo: no necesitas revisar cientos de ofertas y modelos. ¡Solo responde unas preguntas y listo!"
   }
 };
 
@@ -135,7 +135,7 @@ function startQuiz() {
   renderQuizShell();
   setQuizHash(currentQuestionId);
   showQuizSection();
-  fetchQuestion(currentQuestionId, true);
+  // fetchQuestion(currentQuestionId, true); // USUNIĘTE: nie fetchuj tutaj, hashchange to zrobi
 }
 
 function setQuizHash(qId) {
@@ -156,8 +156,8 @@ function handleAnswer(answer) {
     getResults();
   } else {
     currentQuestionId = parseInt(nextId, 10);
-    setQuizHash(currentQuestionId);
-    fetchQuestion(currentQuestionId, false);
+    setQuizHash(currentQuestionId);  // zmiana hasha wywoła event hashchange → showQuizQuestionById()
+    // NIE fetchuj bezpośrednio pytania tutaj!
   }
 }
 
@@ -476,7 +476,6 @@ function getCookieContent(lang) {
     en: {
       message: "This site uses cookies for statistical purposes. You can read our privacy policy by following the link in the footer of the site.",
       dismiss: "OK"
-
     },
     es: {
       message: "Este sitio utiliza cookies con fines estadísticos. Puedes consultar la política de privacidad utilizando el enlace en el pie de página del sitio.",
