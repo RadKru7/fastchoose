@@ -58,7 +58,7 @@ answers_x_products = {
     # 101: Najtańsze telefony
     # Algorytm: Telefony posortowane rosnąco po cenie – najtańszy jako pierwszy, najdroższy jako ostatni.
     # Użytkownik dostaje najwięcej punktów za wybór najtańszego modelu dla tej odpowiedzi.
-    101: [251, 250, 209, 212, 210, 211, 216, 249, 244, 245, 246, , 218, 241, 247, 243, 242, 246, 240, 238, 239, 202, 203, 217, 201, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276],
+    101: [251, 250, 209, 212, 210, 211, 216, 249, 244, 245, 246, 218, 241, 247, 243, 242, 246, 240, 238, 239, 202, 203, 217, 201, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276],
 
     # 102: Przedział 1500–3000 zł
     # Algorytm: Telefony posortowane według odległości ceny od środka przedziału 1500–3000 zł (najbliższy 2250 zł na początku).
