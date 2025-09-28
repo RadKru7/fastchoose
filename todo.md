@@ -12,12 +12,12 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
 
 11. ***wykupienie domeny najlepiej z mailem na pierwszy rok**
     Dobrą opcją wydaje się  Google Domains
-12 **Najważniejsza rzecz to do - core to jest sortowanie telefonów do danej odpowidzi jest bardzo błędnie trzeba przeglądać jeszcze raz posczegółne odpowiedzi i jeszcze raz posotować prawidłowo bo jest tragicznie żle**
+12 **Najważniejsza rzecz to do - core to jest sortowanie telefonów do danej odpowidzi jest bardzo błędnie trzeba przeglądać jeszcze raz poszczegółne odpowiedzi i jeszcze raz posotować prawidłowo bo jest tragicznie żle**
     np w pytniu o zoom optyczny na trzecim miesjcu jest telefon który takiego zomo nie ma
     
 
     
-14. **Przyciski na mobilnej wersji są prezentowane podówjnie do diagnozy i korekty**
+
     
 **------------<<<<<<<<<<<<<<<<<<\\\|||>>>>>>>>>>>>--------------**
 
@@ -42,5 +42,6 @@ Archiwum
    Na każdej stronie oprocz startowej dodaj hasło w stylu Fastchoose - Twój idealny telefon, w kilka sekund!
    Język angielski: "Fastchoose - Your ideal phone, in seconds!"
    Język hiszpański: "Fastchoose - Tu teléfono ideal, ¡en segundos!"
- [x] - 2025-09-24  10. Dodanie SEO słów i fraz kluczowych pod wyszukiwarki 
-  [x] - 2025-09-28 13 **przycvisk lern more w cookies jest nieaktywny tzn prwoadzi do nikąd do poprawki przed go to prod**
+[x] - 2025-09-24  10. Dodanie SEO słów i fraz kluczowych pod wyszukiwarki 
+[x] - 2025-09-28 13 **przycvisk lern more w cookies jest nieaktywny tzn prwoadzi do nikąd do poprawki przed go to prod**
+[x] - 2025-09-28  14. **Przyciski na mobilnej wersji są prezentowane podówjnie do diagnozy i korekty**
