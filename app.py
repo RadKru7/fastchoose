@@ -459,7 +459,7 @@ def get_result():
                         product_level = products_db.get(product_id, {}).get('price_level', 2)
                         diff = abs(product_level - user_price_level)
                         if diff == 0:
-                            multiplier = 2.6
+                            multiplier = 3.0
                         elif diff == 1:
                             multiplier = 0.3
                         else:
