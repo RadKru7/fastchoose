@@ -34,6 +34,9 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
       align-items: center; justify-content: center;
       transition: background 0.15s;
     }
+    #privacy-modal-bg.active {
+      display: flex;
+    }
     #privacy-modal {
       background: #fff;
       max-width: 700px;
@@ -165,13 +168,11 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
     document.getElementById('close-privacy-modal').addEventListener('click', function() {
       document.getElementById('privacy-modal-bg').style.display = 'none';
     });
-    // Zamknięcie modal po kliknięciu w tło
     document.getElementById('privacy-modal-bg').addEventListener('click', function(e) {
       if(e.target === this) {
         this.style.display = 'none';
       }
     });
-    // Zamknięcie ESC
     window.addEventListener('keydown', function(e) {
       if(e.key === "Escape") {
         document.getElementById('privacy-modal-bg').style.display = 'none';
