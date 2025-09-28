@@ -594,12 +594,14 @@ footer {
 }
 
 @media (max-width: 600px) {
-  body { background: #fafafa !important; }
+
   .headline-multicolor .headline-main,
   .headline-main,
   .headline-multicolor .headline-accent,
   .headline-accent {
     color: var(--text) !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
     }
 
   
@@ -640,7 +642,7 @@ footer {
               }
   footer { align-items: center; text-align: center; }
   .footer-links { justify-content: center; flex-wrap: wrap; }
-  
+  :root { --brand: #fafafa !important; }
 
   
 }
