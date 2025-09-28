@@ -607,16 +607,19 @@ footer {
 
   
   .logo { font-size: 1.1rem; }
-  header { flex-direction: column; gap: 12px; padding: 16px 8px 2px 8px; }
-  .hero-image { width: 88vw; max-width: 310px; }
-  .big-title { font-size: 1.25rem; }
+  header { flex-direction: column;
+          gap: 8px;
+          padding: 12px 8px 2px 8px; }
+  .hero-image { width: 88vw;
+               max-width: 300px; }
+  .big-title { font-size: 1.15rem; }
   .answers-grid { grid-template-columns: 1fr; }
-  .answer-title { font-size: 1.18rem; }
+  .answer-title { font-size: 1.16rem; }
   .recommendation-card {
     max-width: 88vw;
     width: 88vw;
     min-width: 0;
-    margin: 0 auto 5px auto;
+    margin: 0;
     box-sizing: border-box;
   }
   .recommendation-image {
