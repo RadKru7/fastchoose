@@ -611,23 +611,18 @@ footer {
           gap: 8px;
           padding: 12px 8px 2px 8px; }
   .hero-image { width: 88vw;
-               max-width: 300px; }
+               max-width: 310px; }
   .big-title { font-size: 1.15rem; }
   .answers-grid { grid-template-columns: 1fr; }
   .answer-title { font-size: 1.16rem; }
-  .recommendation-card {
+  .results-container {
     max-width: 88vw;
     width: 88vw;
     min-width: 0;
     margin: 0;
     box-sizing: border-box;
   }
-  .recommendation-image {
-    height: 120px;
-    width: 80%;
-    object-fit: contain;
-    padding: 3px;
-  }
+  
   .recommendation-name { font-size: 0.8rem;
                        padding: 0;
                        margin: 0;
@@ -642,11 +637,6 @@ footer {
   footer { align-items: center; text-align: center; }
   .footer-links { justify-content: center; flex-wrap: wrap; }
   
-  .headline-main, .headline-accent {
-  color: var(--text) !important;
-  background: none !important;
-  -webkit-background-clip: initial !important;
-  -webkit-text-fill-color: initial !important;
-  }
+
   
 }
