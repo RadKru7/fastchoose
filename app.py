@@ -378,6 +378,7 @@ product_links_db = {
 }
 # --- Punkty końcowe API ---
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -436,7 +437,7 @@ def get_result():
         path_answers = data.get('pathAnswers')
         language = data.get('language', 'en')
         if not path_answers or not isinstance(path_answers, list):
-            return jsonify({'error': 'Invalid or missing "pathAnswers" parameter.'}), 400
+            return jsonify({'error': 'Invalid or missing \"pathAnswers\" parameter.'}), 400
 
         # --- ALGORYTM price_level ---
         product_scores = {pid: 0 for pid in products_db.keys()}
@@ -447,7 +448,7 @@ def get_result():
         if first_answer_id and answers_db.get(first_answer_id, {}).get('question_id') == 1:
             user_price_level = answers_db[first_answer_id].get('price_level', 2)
 
-        # 2. Scoring
+        # 2. Scoring (jak dotychczas)
         for idx, answer_id in enumerate(path_answers):
             ranking = answers_x_products.get(answer_id, [])
             n = len(ranking)
@@ -465,7 +466,28 @@ def get_result():
                             multiplier = 0.1
                     product_scores[product_id] += (n - pos) * multiplier
 
-        top_products = sorted(product_scores.items(), key=lambda x: x[1], reverse=True)
+        # --- NOWOŚĆ: Uwzględnienie dostępności w sklepach dla danego języka ---
+        max_shops = 0
+        products_with_availability = {}
+        for pid in product_scores:
+            # liczba sklepów dla danego języka
+            available_shops = product_links_db.get(pid, {}).get(language, [])
+            shop_count = len(available_shops)
+            products_with_availability[pid] = shop_count
+            if shop_count > max_shops:
+                max_shops = shop_count
+
+        # Modyfikacja score biorąc pod uwagę dostępność
+        adjusted_scores = {}
+        for pid, score in product_scores.items():
+            shops = products_with_availability.get(pid, 0)
+            if shops == 0:
+                continue  # nie pokazuj produktów niedostępnych
+            # Przelicz: score * (liczba sklepów / max_sklepów)
+            adjusted_score = score * shops / max_shops if max_shops else 0
+            adjusted_scores[pid] = adjusted_score
+
+        top_products = sorted(adjusted_scores.items(), key=lambda x: x[1], reverse=True)
         product_ids = [pid for pid, score in top_products if score > 0][:3]
 
         if not product_ids:
@@ -474,7 +496,6 @@ def get_result():
         recommendations = []
 
         # --- ZAMIANA: generuj linki sklepów dynamicznie po języku ---
-        # Zamiast product_links_db - wybierz sklepy z stores_db zgodnie z language
         selected_stores = [store for store in stores_db.values() if store['language'] == language][:3]
 
         def generate_store_link(store, product_name):
@@ -487,19 +508,19 @@ def get_result():
             elif 'Order on Amazon.com' in store['affiliate_url']:
                 query = product_name.replace(' ', '+')
                 from urllib.parse import quote_plus
-                return f"https://www.amazon.com/s?i=mobile&rh=n%3A2407749011&k={quote_plus(phone_name)}"
+                return f"https://www.amazon.com/s?i=mobile&rh=n%3A2407749011&k={quote_plus(product_name)}"
             elif 'Order on Amazon.co.uk' in store['affiliate_url']:
                 query = product_name.replace(' ', '+')
                 from urllib.parse import quote_plus
-                return f"https://www.amazon.co.uk/s?i=mobile&rh=n%3A2407749011&k={quote_plus(phone_name)}"
+                return f"https://www.amazon.co.uk/s?i=mobile&rh=n%3A2407749011&k={quote_plus(product_name)}"
             elif 'Order on Amazon.es' in store['affiliate_url']:
                 query = product_name.replace(' ', '+')
                 from urllib.parse import quote_plus
-                return f"https://www.amazon.es/s?i=mobile&rh=n%3A2407749011&k={quote_plus(phone_name)}"
+                return f"https://www.amazon.es/s?i=mobile&rh=n%3A2407749011&k={quote_plus(product_name)}"
             elif 'Order on Amazon.mx' in store['affiliate_url']:
                 query = product_name.replace(' ', '+')
                 from urllib.parse import quote_plus
-                return f"https://www.amazon.mx/s?i=mobile&rh=n%3A2407749011&k={quote_plus(phone_name)}"
+                return f"https://www.amazon.mx/s?i=mobile&rh=n%3A2407749011&k={quote_plus(product_name)}"
             else:
                 query = product_name.replace(' ', '+')
                 return store['affiliate_url'] + query
