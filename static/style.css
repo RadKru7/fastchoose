@@ -606,7 +606,7 @@ footer {
     }
 
   
-  .logo { font-size: 1.3rem; }
+  .logo { font-size: 1.1rem; }
   header { flex-direction: column; gap: 12px; padding: 16px 8px 2px 8px; }
   .hero-image { width: 88vw; max-width: 310px; }
   .big-title { font-size: 1.25rem; }
@@ -625,7 +625,9 @@ footer {
     object-fit: contain;
     padding: 3px;
   }
-  .recommendation-name { font-size: 0.8rem; }
+  .recommendation-name { font-size: 0.8rem;
+                       padding: 0px;
+                       margin: 0px 0px 0px 0px;}
   .store-link { font-size: 0.8rem; padding: 4px 4px; }
   footer { align-items: center; text-align: center; }
   .footer-links { justify-content: center; flex-wrap: wrap; }
