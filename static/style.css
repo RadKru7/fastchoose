@@ -598,8 +598,6 @@ footer {
   header { flex-direction: column; gap: 12px; padding: 16px 8px 2px 8px; }
   .hero-image { width: 88vw; max-width: 310px; }
   .big-title { font-size: 1.25rem; }
-  .headline-main { color: var(--text); }
-  .headline-accent { color: var(--text); }
   .answers-grid { grid-template-columns: 1fr; }
   .answer-title { font-size: 1.18rem; }
   .recommendation-card {
@@ -619,4 +617,12 @@ footer {
   .store-link { font-size: 0.9rem; padding: 7px 6px; }
   footer { align-items: center; text-align: center; }
   .footer-links { justify-content: center; flex-wrap: wrap; }
+  
+  .headline-main, .headline-accent {
+  color: var(--text) !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  }
+  
 }
