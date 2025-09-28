@@ -146,7 +146,7 @@ answers_x_products = {
 
     # 901: Zoom optyczny
     # Algorytm: Telefony z najlepszym zoomem optycznym na początku.
-    901: [201, 203, 239, 202, 246, 218, 248, 247, 243, 242, 211, 217, 210, 241, 240, 238, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276],
+    901: [201, 203, 205, 207, 211, 243, 246, 248],
 
     # 902: Stabilizacja video
     # Algorytm: Telefony z najlepszą stabilizacją OIS/EIS na początku.
@@ -166,7 +166,7 @@ answers_x_products = {
 
     # 1003: Dowolna marka
     # Algorytm: Wszystkie telefony w dowolnej kolejności.
-    1003: [201, 203, 239, 202, 246, 218, 248, 247, 243, 242, 211, 217, 210, 241, 240, 238, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276],
+    1003: [0],
 
     # 1101: Bardzo ważne szybkie ładowanie
     # Algorytm: Telefony z najszybszym ładowaniem na początku listy.
@@ -178,7 +178,7 @@ answers_x_products = {
 
     # 1103: Nie ważne szybkie ładowanie
     # Algorytm: Szybkość ładowania nie ma znaczenia – dowolna kolejność.
-    1103: [201, 203, 202, 239, 238, 240, 241, 246, 248, 218, 247, 243, 242, 211, 217, 210, 212, 209, 250, 251, 244, 249, 216, 245, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276],
+    1103: [0],
 }
 
 products_db = {
@@ -305,45 +305,77 @@ stores_db = {
 }
 
 product_links_db = {
-    201: [{'store_id': 3, 'url': '#'}, {'store_id': 4, 'url': '#'}, {'store_id': 1, 'url': '#'}],
-    202: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        203: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        204: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        205: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        206: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        207: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        208: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        209: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        210: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        211: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        212: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        213: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        214: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        215: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        216: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        217: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        218: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        219: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        220: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        221: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        222: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        223: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        224: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        225: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        226: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        227: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        228: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        229: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        230: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        231: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        232: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        233: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        234: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        235: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        236: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}],
-        237: [{'store_id': 3, 'url': '#'}, {'store_id': 1, 'url': '#'}, {'store_id': 5, 'url': '#'}]
-}
+    # iPhone – szeroko dostępne
+    201: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    202: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    203: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    204: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    205: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    206: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    207: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    208: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    209: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    210: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
 
+    # Samsung – szeroko dostępne
+    211: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    212: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    213: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    214: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    215: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    216: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    217: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    218: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    219: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    220: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    221: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+
+    # Xiaomi – szeroko dostępne
+    222: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    223: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    224: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    225: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    226: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    227: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    228: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    229: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+    230: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},
+
+    # Oppo, Realme, Vivo, Honor – najczęściej szeroko dostępne, ale czasem ograniczone (np. Honor slabiej na Amazon USA)
+    231: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Oppo A78
+    232: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Oppo Reno 11
+    233: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Realme 11
+    234: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Realme 10
+    235: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Vivo Y36
+    236: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Vivo Y16
+
+    # Honor 90 – możliwy brak na Amazon.com, ale szeroki dostęp w Europie
+    237: {'pl': [1,2,3], 'en': [5,6], 'es': [7,8,9]},   # Honor 90
+    238: {'pl': [1,2,3], 'en': [], 'es': [7,8]},        # Honor X7b – głównie EU i Am. Łac.
+
+    # Motorola – najnowsze modele nie zawsze na Amazon USA/UK
+    239: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Moto G54 Power
+    240: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Moto G84
+    241: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Edge 40 Neo
+
+    # Google Pixel – szeroko w Amazon.com/co.uk, czasami mniej na Amazon.es/mx
+    242: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 8
+    243: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 8 Pro
+    244: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 7a
+    245: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 7
+
+    # Huawei – ograniczona dostępność w USA/UK, lepsza w Europie i Am. Łac.
+    246: {'pl': [1,2,3], 'en': [], 'es': [7,8]},       # Huawei P60 Pro
+    247: {'pl': [1,3], 'en': [], 'es': []},            # Huawei Nova 12
+
+    # OnePlus – szeroko Amazon UK/EU, słabo w USA
+    248: {'pl': [1,3], 'en': [5], 'es': [7,8]},        # OnePlus 12
+    249: {'pl': [1,3], 'en': [5], 'es': [7,8]},        # OnePlus Nord 3
+
+    # Tecno, Infinix – głównie Allegro, MediaMarkt, czasem Amazon.es/mx
+    250: {'pl': [1,2], 'en': [], 'es': [7,8]},         # Tecno Spark 20
+    251: {'pl': [1,2], 'en': [], 'es': [7,8]},         # Infinix Hot 40
+}
 # --- Punkty końcowe API ---
 
 @app.route('/')
