@@ -176,7 +176,7 @@ function fetchQuestion(questionId, noHistoryPush = false) {
 
 async function displayQuestion(data) {
   if (!questionTextEl || !answersContainerEl || !questionIconWrap || !backBtnEl) return;
-  let qIndex = data.question_number || (history.length + 1);
+  let qIndex = data.question_number || (pathAnswers.length + 1);
   let qTotal = data.total_questions || totalQuestions;
   totalQuestions = qTotal;
   if (quizProgressCounter) {
