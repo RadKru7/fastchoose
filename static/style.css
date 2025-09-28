@@ -626,8 +626,9 @@ footer {
     padding: 3px;
   }
   .recommendation-name { font-size: 0.8rem;
-                       padding: 0px;
-                       margin: 0px 0px 0px 0px;}
+                       padding: 0;
+                       margin: 0;
+                       }
   .store-link { font-size: 0.8rem; padding: 4px 4px; }
   footer { align-items: center; text-align: center; }
   .footer-links { justify-content: center; flex-wrap: wrap; }
