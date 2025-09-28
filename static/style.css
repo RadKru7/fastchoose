@@ -629,8 +629,8 @@ footer {
   .footer-links { justify-content: center; flex-wrap: wrap; }
   .recommendations-grid {
     background: red !important;
-    width: 97vw !important;
-    max-width: 97vw !important;
+    width: 80vw !important;
+    max-width: 80vw !important;
     box-sizing: border-box !important;
     padding: 0 !important;
     margin: 0 auto !important;
@@ -640,8 +640,8 @@ footer {
   }
   .recommendation-card {
     background: green !important;
-    width: 97% !important;
-    max-width: 97% !important;
+    width: 80% !important;
+    max-width: 80% !important;
     min-width: 0 !important;
     margin: 0 auto 10px auto !important;
     box-sizing: border-box !important;
@@ -650,8 +650,10 @@ footer {
   .main-content {
     padding-left: 0 !important;
     padding-right: 0 !important;
+    margin: 0 !important;
   }
   html, body {
   overflow-x: hidden !important;
+
   
 }
