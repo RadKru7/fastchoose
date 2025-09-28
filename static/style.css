@@ -594,11 +594,22 @@ footer {
   header { flex-direction: column; gap: 12px; padding: 16px 8px 2px 8px; }
   .hero-image { width: 94vw; max-width: 330px; }
   .big-title { font-size: 1.25rem; }
-  .headline-multicolor .headline-main {
-   color: var(--text);
+  .headline-multicolor .headline-main { color: var(--text); }
   .answers-grid { grid-template-columns: 1fr; }
   .answer-title { font-size: 1.18rem; }
-  .recommendation-image { height: 120px; padding: 3px; }
+  .recommendation-card {
+    max-width: 95vw;
+    width: 96vw;
+    min-width: 0;
+    margin: 0 auto 16px auto;
+    box-sizing: border-box;
+  }
+  .recommendation-image {
+    height: 120px;
+    width: 100%;
+    object-fit: contain;
+    padding: 3px;
+  }
   .recommendation-name { font-size: 1rem; }
   .store-link { font-size: 0.9rem; padding: 7px 6px; }
   footer { align-items: center; text-align: center; }
