@@ -437,7 +437,7 @@ def get_result():
         path_answers = data.get('pathAnswers')
         language = data.get('language', 'en')
         if not path_answers or not isinstance(path_answers, list):
-            return jsonify({'error': 'Invalid or missing \"pathAnswers\" parameter.'}), 400
+            return jsonify({'error': 'Invalid or missing "pathAnswers" parameter.'}), 400
 
         # --- ALGORYTM price_level ---
         product_scores = {pid: 0 for pid in products_db.keys()}
@@ -487,8 +487,27 @@ def get_result():
             adjusted_score = score * shops / max_shops if max_shops else 0
             adjusted_scores[pid] = adjusted_score
 
+        # --- WYBÓR TOP 3 Z RÓŻNORODNOŚCIĄ ---
+        def get_brand(product_name):
+            name = product_name.lower()
+            if 'iphone' in name:
+                return 'apple'
+            if 'samsung' in name:
+                return 'samsung'
+            return 'other'
+
         top_products = sorted(adjusted_scores.items(), key=lambda x: x[1], reverse=True)
         product_ids = [pid for pid, score in top_products if score > 0][:3]
+
+        # Dodaj alternatywę spoza Apple/Samsung, jeśli Top3 to tylko te marki
+        brands = [get_brand(products_db[pid]['pl']) for pid in product_ids]
+        if len(product_ids) == 3 and all(brand in ('apple', 'samsung') for brand in brands):
+            # szukaj najlepszego modelu spoza tej dwójki
+            for pid, score in top_products[3:]:
+                alt_brand = get_brand(products_db[pid]['pl'])
+                if alt_brand == 'other':
+                    product_ids[-1] = pid
+                    break
 
         if not product_ids:
             return jsonify({'recommendations': [], 'message': 'No specific recommendations found for your answers.'})
