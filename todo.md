@@ -10,7 +10,7 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
 5. **Dodaj Google Analytics i rejestrację w Google Analytics**  
    Dodaj integrację Google Analytics do strony, w tym pełną rejestrację projektu w Google Analytics. Zapewnij poprawne umieszczenie kodu śledzącego w szablonach, zgodność z RODO (możliwość zgody użytkownika) oraz dokumentację dla administratora.
 
-11. ***wykupienie domeny najlepiej z mailem na pierwszy rok*
+11. ***wykupienie domeny najlepiej z mailem na pierwszy rok**
     Dobrą opcją wydaje się  Google Domains
 12 **Najważniejsza rzecz to do - core to jest sortowanie telefonów do danej odpowidzi jest bardzo błędnie trzeba przeglądać jeszcze raz posczegółne odpowiedzi i jeszcze raz posotować prawidłowo bo jest tragicznie żle**
     np w pytniu o zoom optyczny na trzecim miesjcu jest telefon który takiego zomo nie ma
