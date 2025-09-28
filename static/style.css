@@ -594,6 +594,18 @@ footer {
 }
 
 @media (max-width: 600px) {
+  
+  .headline-multicolor .headline-main,
+  .headline-main,
+  .headline-multicolor .headline-accent,
+  .headline-accent {
+    color: var(--text) !important;
+    background: var(--result-internal-window) !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    }
+
+  
   .logo { font-size: 1.3rem; }
   header { flex-direction: column; gap: 12px; padding: 16px 8px 2px 8px; }
   .hero-image { width: 88vw; max-width: 310px; }
