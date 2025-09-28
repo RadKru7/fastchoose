@@ -616,7 +616,7 @@ footer {
     max-width: 88vw;
     width: 88vw;
     min-width: 0;
-    margin: 0 auto 12px auto;
+    margin: 0 auto 5px auto;
     box-sizing: border-box;
   }
   .recommendation-image {
@@ -625,8 +625,8 @@ footer {
     object-fit: contain;
     padding: 3px;
   }
-  .recommendation-name { font-size: 1rem; }
-  .store-link { font-size: 0.9rem; padding: 7px 6px; }
+  .recommendation-name { font-size: 0.8rem; }
+  .store-link { font-size: 0.8rem; padding: 4px 4px; }
   footer { align-items: center; text-align: center; }
   .footer-links { justify-content: center; flex-wrap: wrap; }
   
