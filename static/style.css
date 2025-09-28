@@ -639,7 +639,7 @@ footer {
     overflow-x: hidden !important; /* na wszelki wypadek */
   }
   .recommendation-card {
-    background: white !important;
+    background: red !important;
     width: 80% !important;
     max-width: 80% !important;
     min-width: 0 !important;
