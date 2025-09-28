@@ -608,7 +608,7 @@ footer {
   .logo { font-size: 1.1rem; }
   header { flex-direction: column;
           gap: 8px;
-          padding: 12px 8px 2px 8px; }
+          padding: 8px 8px 2px 8px; }
   .hero-image { width: 100vw;
                max-width: 330px; }
   .big-title { font-size: 1.15rem; }
@@ -628,6 +628,7 @@ footer {
   footer { align-items: center; text-align: center; }
   .footer-links { justify-content: center; flex-wrap: wrap; }
   .recommendations-grid {
+    background: red !important;
     width: 97vw !important;
     max-width: 97vw !important;
     box-sizing: border-box !important;
@@ -638,6 +639,7 @@ footer {
     overflow-x: hidden !important; /* na wszelki wypadek */
   }
   .recommendation-card {
+    background: green !important;
     width: 97% !important;
     max-width: 97% !important;
     min-width: 0 !important;
