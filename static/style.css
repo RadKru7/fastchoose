@@ -511,6 +511,10 @@ footer {
 }
 .footer-links a:hover { text-decoration: underline; }
 
+#open-privacy-modal {
+  color: #111 !important;
+  text-decoration: none; /* lub none jeśli nie chcesz podkreślenia */
+}
 #about-page, #contact-page {
   max-width: 700px;
   margin: 40px auto 0 auto;
