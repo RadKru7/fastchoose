@@ -620,12 +620,21 @@ footer {
     min-width: 0;
     margin: 0;
     box-sizing: border-box;
+  .recommendations-grid {
+    max-width: 98vw !important;
+    width: 98vw !important;
+    box-sizing: border-box;
+    padding: 0 1vw !important;
+    margin: 0 auto !important;
+    overflow-x: auto !important;
+    grid-template-columns: 1fr !important; /* pojedyncza kolumna */
+    gap: 12px !important;
   }
-  .results-content-wrapper {
-    max-width: 100vw;
-    width: 100vw;
-    min-width: 0;
-    margin: 0;
+  .recommendation-card {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 auto 12px auto !important;
     box-sizing: border-box;
   }
   
