@@ -646,7 +646,7 @@ footer {
     margin: 0 auto 10px auto !important;
     box-sizing: border-box !important;
   }
-  #results-container,
+
   .main-content {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -654,6 +654,6 @@ footer {
   }
   html, body {
   overflow-x: hidden !important;
-
+  }
   
 }
