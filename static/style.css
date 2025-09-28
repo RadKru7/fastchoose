@@ -594,15 +594,12 @@ footer {
 }
 
 @media (max-width: 600px) {
-  
+  body { background: #fafafa !important; }
   .headline-multicolor .headline-main,
   .headline-main,
   .headline-multicolor .headline-accent,
   .headline-accent {
     color: var(--text) !important;
-    background: var(--result-internal-window) !important;
-    -webkit-background-clip: initial !important;
-    -webkit-text-fill-color: initial !important;
     }
 
   
