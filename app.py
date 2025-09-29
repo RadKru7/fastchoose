@@ -49,7 +49,7 @@ answers_db = {
     903: {'question_id': 9, 'next_question_id': 11,'en': 'Good quality photos at night', 'es': 'Buena calidad de fotos nocturnas', 'pl': 'Dobra jakość zdjęć w nocy', 'icon_path': 'icons/moon.svg'},
     1001: {'question_id': 10, 'next_question_id': None, 'en': 'Samsung', 'es': 'Samsung', 'pl': 'Samsung', 'icon_path': 'icons/samsung.svg'},
     1002: {'question_id': 10, 'next_question_id': None, 'en': 'Apple', 'es': 'Apple', 'pl': 'Apple', 'icon_path': 'icons/apple.svg'},
-    1003: {'question_id': 10, 'next_question_id': None, 'en': 'I don''t have a preference', 'es': 'No tengo preferencia', 'pl': 'Nie mam preferencji', 'icon_path': 'icons/any.svg'},
+    1003: {'question_id': 10, 'next_question_id': None, 'en': 'I prefer other brands', 'es': 'Prefiero otras marcas', 'pl': 'Preferuję inne marki', 'icon_path': 'icons/any.svg'},
     1101: {'question_id': 11, 'next_question_id': 10, 'en': 'Very important', 'es': 'Muy importante', 'pl': 'Bardzo ważne', 'icon_path': 'icons/charging_fast.svg'},
     1102: {'question_id': 11, 'next_question_id': 10, 'en': 'Neutral', 'es': 'Neutral', 'pl': 'Neutralne', 'icon_path': 'icons/charging_normal.svg'},
     1103: {'question_id': 11, 'next_question_id': 10, 'en': 'Not important', 'es': 'No importa', 'pl': 'Nie ważne', 'icon_path': 'icons/charging_never_mind.svg'},
@@ -164,9 +164,9 @@ answers_x_products = {
     # Algorytm: Wszystkie telefony marki Apple na początku.
     1002: [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 248, 245, 246, 240, 238, 239, 241, 247, 243, 242, 218, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 250, 251, 212, 211, 216, 249, 244, 217],
 
-    # 1003: Dowolna marka
-    # Algorytm: Wszystkie telefony w dowolnej kolejności.
-    1003: [0],
+    # 1003: Inne marki
+    # Algorytm: PReferuje i punktuje marki inne niż apple i samsung.
+    1003: [248, 245, 246, 240, 238, 239, 241, 247, 243, 242, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 250, 251, 249, 244],
 
     # 1101: Bardzo ważne szybkie ładowanie
     # Algorytm: Telefony z najszybszym ładowaniem na początku listy.
