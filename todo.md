@@ -14,7 +14,7 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
     Dobrą opcją wydaje się  Google Domains
 12 **Najważniejsza rzecz to do - core to jest sortowanie telefonów do danej odpowidzi jest bardzo błędnie trzeba przeglądać jeszcze raz poszczegółne odpowiedzi i jeszcze raz posotować prawidłowo bo jest tragicznie żle**
     np w pytniu o zoom optyczny na trzecim miesjcu jest telefon który takiego zomo nie ma
-    
+15 **dodaj ikone do zakładki na przeglądarce jakieś fajne logo fastchoose**    
 
     
 
