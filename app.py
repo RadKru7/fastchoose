@@ -66,7 +66,7 @@ answers_x_products = {
 
     # 103: Najdroższe telefony
     # Algorytm: Telefony posortowane malejąco po cenie – najdroższy jako pierwszy, najtańszy jako ostatni.
-    103: [243, 257, 239, 248, 238, 253, 252, 240, 246, 242, 247, 241, 256, 218, 246, 245, 201, 203, 202, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 253, 254,217],
+    103: [243, 257, 239, 248, 238, 253, 252, 240, 246, 242, 247, 241, 256, 218, 246, 245, 201, 203, 202, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 253, 254, 217],
 
     # 201: Dzwonienie/SMS
     # Algorytm: Telefony z najprostszą obsługą, dobrą baterią, solidnością i niską ceną na początku listy.
@@ -74,7 +74,7 @@ answers_x_products = {
 
     # 202: Zdjęcia i filmy (aparat)
     # Algorytm: Najlepsze aparaty (najwyższa jakość zdjęć, zoom, tryby nocne, stabilizacja) na początku listy.
-    202: [239, 248, 257, 247, 218, 243,  253, 252, 202, 246, 211, 201, 203, 210, 241, 240, 238, 242, 212, 249, 255, 244, 216, 245, 209, 250, 251, 252, 253, 254,217],
+    202: [239, 248, 257, 247, 218, 243, 253, 252, 202, 246, 211, 201, 203, 210, 241, 240, 238, 242, 212, 249, 255, 244, 216, 245, 209, 250, 251, 252, 253, 254, 217],
 
     # 203: Gry (wydajność)
     # Algorytm: Telefony z najmocniejszym procesorem, najlepszym GPU, dużą pamięcią RAM i szybkim ekranem na początku listy.
@@ -173,7 +173,7 @@ answers_x_products = {
 
     # 1101: Bardzo ważne szybkie ładowanie
     # Algorytm: Telefony z najszybszym ładowaniem na początku listy.
-    1101: [239, 257, 248, 238, 243, 252 ,253  246,256, 218, 241, 247, 242, 211, 217, 210, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 252, 253, 254],
+    1101: [239, 257, 248, 238, 243, 252 ,253, 246, 256, 218, 241, 247, 242, 211, 217, 210, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 252, 253, 254],
 
     # 1102: Neutralne szybkie ładowanie
     # Algorytm: Telefony z szybkim (ale nie topowym) ładowaniem na początku.
