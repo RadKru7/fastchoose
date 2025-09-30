@@ -66,7 +66,7 @@ answers_x_products = {
 
     # 103: Najdroższe telefony
     # Algorytm: Telefony posortowane malejąco po cenie – najdroższy jako pierwszy, najtańszy jako ostatni.
-    103: [243, 257, 239, 248, 238, 253, 252, 240, 246, 242, 247, 241, 256, 218, 246, 245, 201, 203, 202, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 253, 254, 217],
+    103: [258,243, 257, 239, 248, 238, 253, 252, 240, 246, 242, 247, 241, 256, 218, 246, 245, 201, 203, 202, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 253, 254, 217],
 
     # 201: Dzwonienie/SMS
     # Algorytm: Telefony z najprostszą obsługą, dobrą baterią, solidnością i niską ceną na początku listy.
@@ -86,7 +86,7 @@ answers_x_products = {
 
     # 302: Bateria ważna, ale nie najważniejsza
     # Algorytm: Telefony z dobrą baterią, ale też dobrą ogólną specyfikacją.
-    302: [241, 246, 218, 243, 239, 238, 211, 210, 256, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 242, 247, 217, 248, 252, 253, 254],
+    302: [241, 246, 218, 243, 239, 238, 211, 210, 258,256, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 242, 247, 217, 248, 252, 253, 254],
 
     # 303: Mało ważna bateria
     # Algorytm: Priorytet dla innych cech, np. wydajność, aparat, design – bateria nie jest brana pod uwagę.
@@ -94,7 +94,7 @@ answers_x_products = {
 
     # 401: Duży ekran , 6.7 cala i więcej
     # Algorytm: Telefony z największym ekranem na początku listy.
-    401: [202, 204, 205, 211, 221, 226, 227, 232, 233, 237, 238, 243, 247, 248, 249, 251],
+    401: [202, 204,258, 205, 211, 221, 226, 227, 232, 233, 237, 238, 243, 247, 248, 249, 251],
 
     # 402: Standardowy ekran 6.5-6.69 cala
     # Algorytm: Telefony o przekątnej ekranu w okolicach  cala, reszta dalej.
@@ -105,7 +105,7 @@ answers_x_products = {
     
     # 501: Selfie
     # Algorytm: Telefony z najlepszym przednim aparatem (wysoka rozdzielczość, autofocus) na początku listy.
-    501: [248, 239, 247, 257, 218, 202, 246, 201, 203, 211, 210, 241, 240, 238, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254, 217],
+    501: [248, 239, 247, 257,258, 218, 202, 246, 201, 203, 211, 210, 241, 240, 238, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254, 217],
 
     # 502: Zdjęcia nocne
     # Algorytm: Telefony z najlepszym trybem nocnym i jasnym obiektywem na początku listy.
@@ -113,7 +113,7 @@ answers_x_products = {
 
     # 503: Wszechstronny aparat
     # Algorytm: Telefony z kilkoma obiektywami, dobrym zoomem, szerokim kątem, makro itd.
-    503: [247, 246, 201, 248, 257, 203, 239, 256, 218, 211, 253, 252, 217, 202, 210, 241, 240, 238, 255, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254],
+    503: [247, 246, 201,258, 248, 257, 203, 239, 256, 218, 211, 253, 252, 217, 202, 210, 241, 240, 238, 255, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254],
 
     # 601: 128GB
     # Algorytm: Telefony z minimum 128GB pamięci, najtańsze na początku.
@@ -121,19 +121,19 @@ answers_x_products = {
 
     # 602: 256GB
     # Algorytm: Telefony z minimum 256GB pamięci, najtańsze na początku.
-    602: [245, 246, 257, 248, 218, 256, 241, 253, 252,255, 247, 243, 242, 246, 240, 238, 239, 202, 203, 201, 252, 253, 254, 251, 250, 209, 212, 210, 211, 216, 249, 244, 217],
+    602: [245, 246, 257, 248,258, 218, 256, 241, 253, 252,255, 247, 243, 242, 246, 240, 238, 239, 202, 203, 201, 252, 253, 254, 251, 250, 209, 212, 210, 211, 216, 249, 244, 217],
 
     # 603: 512GB+
     # Algorytm: Telefony z minimum 512GB pamięci lub więcej, od najtańszego do najdroższego.
-    603: [257, 239, 238, 256, 240, 246, 201, 241, 247,255, 243, 242, 203, 218, 248, 246, 245, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 253, 254,217],
+    603: [257, 239, 238, 256, 240,258, 246, 201, 241, 247,255, 243, 242, 203, 218, 248, 246, 245, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 253, 254,217],
 
     # 701: Top wydajność
     # Algorytm: Telefony z najlepszym SoC, największą ilością RAM, najnowszymi technologiami.
-    701: [248, 201, 239, 238, 240, 246, 202, 241, 218, 211, 203, 210,256, 242, 243, 247, 212, 249, 244, 216, 245, 209, 250, 251, 252, 217],
+    701: [248, 201, 239, 238, 240,258, 246, 202, 241, 218, 211, 203, 210,256, 242, 243, 247, 212, 249, 244, 216, 245, 209, 250, 251, 252, 217],
 
     # 702: Wysoka wydajność do gier
     # Algorytm: Tak jak wyżej, z naciskiem na GPU i szybkie ekrany.
-    702: [239, 238, 240, 246, 257, 202, 241, 248, 218, 211, 217, 210, 256, 242, 201, 252, 253, 243, 247, 212, 249, 244, 203, 216,255, 245, 209, 250, 251, 252, 253, 254,251],
+    702: [239, 238, 240, 246, 257,258, 202, 241, 248, 218, 211, 217, 210, 256, 242, 201, 252, 253, 243, 247, 212, 249, 244, 203, 216,255, 245, 209, 250, 251, 252, 253, 254,251],
 
     # 703: Standardowa wydajność
     # Algorytm: Telefony z podstawowym, ale stabilnym SoC, niższa cena.
@@ -141,7 +141,7 @@ answers_x_products = {
 
     # 801: Android
     # Algorytm: Wszystkie telefony z Androidem na początku listy.
-    801: [239, 248, 238, 257, 240, 241, 246,256, 255, 218, 247, 243, 242, 211, 217, 212, 254, 250, 251, 244, 249, 216, 245, 252, 253, 254],
+    801: [239, 248,258, 238, 257, 240, 241, 246,256, 255, 218, 247, 243, 242, 211, 217, 212, 254, 250, 251, 244, 249, 216, 245, 252, 253, 254],
 
     # 802: iOS
     # Algorytm: Wszystkie telefony Apple na początku listy.
@@ -149,11 +149,11 @@ answers_x_products = {
 
     # 901: Zoom optyczny
     # Algorytm: Telefony z najlepszym zoomem optycznym na początku.
-    901: [201, 248, 203, 205, 207, 211, 243, 246, 252, 253],
+    901: [201, 248, 203,258, 205, 207, 211, 243, 246, 252, 253],
 
     # 902: Stabilizacja video
     # Algorytm: Telefony z najlepszą stabilizacją OIS/EIS na początku.
-    902: [243, 248, 253, 203, 257, 252, 202, 210, 242, 244, 255,256, 245, 201, 246, 249, 211, 212, 241, 240, 216, 209, 218, 217, 239, 247, 238, 250, 251],
+    902: [243, 248, 253,258, 203, 257, 252, 202, 210, 242, 244, 255,256, 245, 201, 246, 249, 211, 212, 241, 240, 216, 209, 218, 217, 239, 247, 238, 250, 251],
 
     # 903: Jakość zdjęć nocnych
     # Algorytm: Telefony z najlepszym trybem nocnym i dużą matrycą na początku.
@@ -169,15 +169,15 @@ answers_x_products = {
 
     # 1003: Inne marki
     # Algorytm: Preferuje i punktuje marki inne niż apple i samsung.
-    1003: [248, 245,256, 252, 253, 246, 240, 238, 255, 239, 241, 254, 247, 243, 242, 252, 253, 254,250, 251, 249, 244],
+    1003: [248,258, 245,256, 252, 253, 246, 240, 238, 255, 239, 241, 254, 247, 243, 242, 252, 253, 254,250, 251, 249, 244],
 
     # 1101: Bardzo ważne szybkie ładowanie
     # Algorytm: Telefony z najszybszym ładowaniem na początku listy.
-    1101: [239, 257, 248, 238, 243, 252 ,253, 246, 256, 218, 241, 247, 242, 211, 217, 210, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 252, 253, 254],
+    1101: [239, 257, 248,258, 238, 243, 252 ,253, 246, 256, 218, 241, 247, 242, 211, 217, 210, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 252, 253, 254],
 
     # 1102: Neutralne szybkie ładowanie
     # Algorytm: Telefony z szybkim (ale nie topowym) ładowaniem na początku.
-    1102: [241, 246, 252, 253, 218, 239, 238, 248, 211, 217, 257,  210, 240, 201,256, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 243, 242, 247, 252, 253, 254],
+    1102: [241, 246,258, 252, 253, 218, 239, 238, 248, 211, 217, 257,  210, 240, 201,256, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 243, 242, 247, 252, 253, 254],
 
     # 1103: Nie ważne szybkie ładowanie
     # Algorytm: Szybkość ładowania nie ma znaczenia – dowolna kolejność.
@@ -249,6 +249,7 @@ products_db = {
     251: {'pl': 'Infinix Hot 40', 'en': 'Infinix Hot 40', 'es': 'Infinix Hot 40', 'image_path': 'graphic/infinix_hot_40.png', 'price_level': 1},
     252: {'pl': 'Google Pixel 9', 'en': 'Google Pixel 9', 'es': 'Google Pixel 9', 'image_path': 'graphic/pixel_7.png', 'price_level': 3},
     253: {'pl': 'Google Pixel 10', 'en': 'Google Pixel 10', 'es': 'Google Pixel 10', 'image_path': 'graphic/pixel_7.png', 'price_level': 3},
+    258: {'pl': 'Google Pixel 10 Pro XL', 'en': 'Google Pixel 10 Pro XL', 'es': 'Google Pixel 10 Pro XL', 'image_path': 'graphic/pixel_7.png', 'price_level': 3}
 }
 stores_db = {
     # Język polski
@@ -377,7 +378,9 @@ product_links_db = {
     244: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 7a
     245: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 7
     252: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 9
-    253: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 9
+    253: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 10
+    258: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 10 Pro XL
+    
     # Huawei – ograniczona dostępność w USA/UK, lepsza w Europie i Am. Łac.
     246: {'pl': [1,2,3], 'en': [], 'es': [7,8]},       # Huawei P60 Pro
     247: {'pl': [1,3], 'en': [], 'es': []},            # Huawei Nova 12
