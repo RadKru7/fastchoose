@@ -237,10 +237,16 @@ products_db = {
     239: {'pl': 'Motorola Moto G54 Power', 'en': 'Motorola Moto G54 Power', 'es': 'Motorola Moto G54 Power', 'image_path': 'graphic/motorola_moto_g54_power.png', 'price_level': 1},
     240: {'pl': 'Motorola Moto G84', 'en': 'Motorola Moto G84', 'es': 'Motorola Moto G84', 'image_path': 'graphic/motorola_moto_g84.png', 'price_level': 1},
     241: {'pl': 'Motorola Edge 40 Neo', 'en': 'Motorola Edge 40 Neo', 'es': 'Motorola Edge 40 Neo', 'image_path': 'graphic/motorola_edge_40_neo.png', 'price_level': 2},
+
+    # Google Pixels
     242: {'pl': 'Google Pixel 8', 'en': 'Google Pixel 8', 'es': 'Google Pixel 8', 'image_path': 'graphic/google_pixel_8.png', 'price_level': 3},
     243: {'pl': 'Google Pixel 8 Pro', 'en': 'Google Pixel 8 Pro', 'es': 'Google Pixel 8 Pro', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 3},
     244: {'pl': 'Google Pixel 7a', 'en': 'Google Pixel 7a', 'es': 'Google Pixel 7a', 'image_path': 'graphic/google_pixel_7a.png', 'price_level': 2},
     245: {'pl': 'Google Pixel 7', 'en': 'Google Pixel 7', 'es': 'Google Pixel 7', 'image_path': 'graphic/google_pixel_7.png', 'price_level': 2},
+    252: {'pl': 'Google Pixel 9', 'en': 'Google Pixel 9', 'es': 'Google Pixel 9', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 3},
+    253: {'pl': 'Google Pixel 10', 'en': 'Google Pixel 10', 'es': 'Google Pixel 10', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 3},
+    258: {'pl': 'Google Pixel 10 Pro XL', 'en': 'Google Pixel 10 Pro XL', 'es': 'Google Pixel 10 Pro XL', 'image_path': 'graphic/pixel_10_pro_xl.png', 'price_level': 3}
+    
     246: {'pl': 'Huawei P60 Pro', 'en': 'Huawei P60 Pro', 'es': 'Huawei P60 Pro', 'image_path': 'graphic/huawei_p60_pro.png', 'price_level': 3},
     247: {'pl': 'Huawei Nova 12', 'en': 'Huawei Nova 12', 'es': 'Huawei Nova 12', 'image_path': 'graphic/huawei_nova_12.png', 'price_level': 2},
     
@@ -250,9 +256,7 @@ products_db = {
     
     250: {'pl': 'Tecno Spark 20', 'en': 'Tecno Spark 20', 'es': 'Tecno Spark 20', 'image_path': 'graphic/tecno_spark_20.png', 'price_level': 1},
     251: {'pl': 'Infinix Hot 40', 'en': 'Infinix Hot 40', 'es': 'Infinix Hot 40', 'image_path': 'graphic/infinix_hot_40.png', 'price_level': 1},
-    252: {'pl': 'Google Pixel 9', 'en': 'Google Pixel 9', 'es': 'Google Pixel 9', 'image_path': 'graphic/pixel_7.png', 'price_level': 3},
-    253: {'pl': 'Google Pixel 10', 'en': 'Google Pixel 10', 'es': 'Google Pixel 10', 'image_path': 'graphic/pixel_7.png', 'price_level': 3},
-    258: {'pl': 'Google Pixel 10 Pro XL', 'en': 'Google Pixel 10 Pro XL', 'es': 'Google Pixel 10 Pro XL', 'image_path': 'graphic/pixel_10_pro_xl.png', 'price_level': 3}
+
 }
 stores_db = {
     # Język polski
