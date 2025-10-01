@@ -44,6 +44,7 @@ answers_db = {
     703: {'question_id': 7, 'next_question_id': 8, 'en': 'Standard performance is enough for less demanding games', 'es': 'El rendimiento estándar es suficiente para juegos menos exigentes', 'pl': 'Wystarczy mi standardowa wydajność w mniej wymagających tytułach', 'icon_path': 'icons/performance_low.svg'},
     801: {'question_id': 8, 'next_question_id': 6, 'en': 'Android', 'es': 'Android', 'pl': 'Android', 'icon_path': 'icons/android.svg'},
     802: {'question_id': 8, 'next_question_id': 6, 'en': 'iOS', 'es': 'iOS', 'pl': 'iOS', 'icon_path': 'icons/apple.svg'},
+    803: {'question_id': 8, 'next_question_id': 6, 'en': 'I have no preference', 'es': 'No tengo preferencia', 'pl': 'Nie mam preferencji', 'icon_path': 'icons/any.svg'},
     901: {'question_id': 9, 'next_question_id': 11,'en': 'Optical zoom', 'es': 'Zoom óptico', 'pl': 'Zoom optyczny', 'icon_path': 'icons/zoom.svg'},
     902: {'question_id': 9, 'next_question_id': 11, 'en': 'Video image stabilization', 'es': 'Estabilización de imagen de video', 'pl': 'Stabilizacja obrazu video', 'icon_path': 'icons/stabilization.svg'},
     903: {'question_id': 9, 'next_question_id': 11,'en': 'Good quality photos at night', 'es': 'Buena calidad de fotos nocturnas', 'pl': 'Dobra jakość zdjęć w nocy', 'icon_path': 'icons/moon.svg'},
@@ -147,6 +148,10 @@ answers_x_products = {
     # Algorytm: Wszystkie telefony Apple na początku listy.
     802: [201, 202, 203, 239, 248, 238, 240, 241, 246, 218, 247, 243, 242, 211, 217, 210, 212, 209, 250, 251, 244, 249, 216],
 
+    # 803: Nie mam preferencji
+    # Jeżeli nie ma preferencji nie naliczaj punktów za tą odpowiedź.
+    803: [0],
+    
     # 901: Zoom optyczny
     # Algorytm: Telefony z najlepszym zoomem optycznym na początku.
     901: [201, 248, 259,203,258, 205, 207, 211, 243, 246, 252, 253],
