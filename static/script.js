@@ -42,9 +42,12 @@ const landingDict = {
 
 /* ---------------- About & Contact ---------------- */
 const aboutDict = {
-  pl: { title: "O nas", text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon..." },
-  en: { title: "About us", text: "FastChoose is a website created to help you find your perfect smartphone..." },
-  es: { title: "Sobre nosotros", text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal..." }
+  pl: { title: "O nas", text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon dla siebie." \ 
+    "Nasze narzędzie pozwala zaoszczędzić Twój czas — nie musisz już przeglądać setek ofert i specyfikacji. Zdjęcia telefonów przedstawione na stronie mają charakter poglądowy." },
+  en: { title: "About us", text: "FastChoose is a website created to help you find your perfect smartphone in just a few seconds. " \
+    "Our tool saves your time — no more browsing through hundreds of offers and specs. The photos of the phones shown on the website are for illustrative purposes only." },
+  es: { title: "Sobre nosotros", text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal en cuestión de segundos." \
+    "Nuestra herramienta ahorra tu tiempo — sin revisar cientos de ofertas y especificaciones. Las fotos de los teléfonos mostradas en el sitio web tienen un carácter ilustrativo." }
 };
 const contactDict = {
   pl: { title: "Kontakt", text: "FastChoose<br>Email: <a href='mailto:contact@fast-choose.com'>contact@fast-choose.com</a>" },
