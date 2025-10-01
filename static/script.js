@@ -18,59 +18,68 @@ function updateFastchooseHeadline(lang) {
 
 // --- Teksty strony głównej, tłumaczenia ---
 const landingDict = {
-  pl: {
-    title: "Wybierz idealny telefon w kilka sekund!",
-    subtitle: "Odpowiedz na kilka pytań, a my dobierzemy model spełniający Twoje potrzeby.",
-    btn: "Zaczynamy!",
-    logo: "FastChoose"
-  },
-  en: {
-    title: "Find your perfect phone in seconds!",
-    subtitle: "Answer a few questions and we’ll recommend the right model for you.",
-    btn: "Get started",
-    logo: "FastChoose"
-  },
-  es: {
-    title: "¡Encuentra tu teléfono ideal en segundos!",
-    subtitle: "Responde unas preguntas y te recomendaremos el modelo perfecto.",
-    btn: "¡Vamos!",
-    logo: "FastChoose"
-  }
+  pl: { title: "Wybierz idealny telefon w kilka sekund!", subtitle: "Odpowiedz na kilka pytań, a my dobierzemy model spełniający Twoje potrzeby.", btn: "Zaczynamy!", logo: "FastChoose" },
+  en: { title: "Find your perfect phone in seconds!", subtitle: "Answer a few questions and we’ll recommend the right model for you.", btn: "Get started", logo: "FastChoose" },
+  es: { title: "¡Encuentra tu teléfono ideal en segundos!", subtitle: "Responde unas preguntas y te recomendaremos el modelo perfecto.", btn: "¡Vamos!", logo: "FastChoose" }
 };
 
 // --- O nas i Kontakt tłumaczenia ---
 const aboutDict = {
-  pl: {
-    title: "O nas",
-    text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon dla siebie. Nasze narzędzie pozwala zaoszczędzić Twój czas — nie musisz już przeglądać setek ofert i modeli. Po prostu odpowiedz na kilka pytań i gotowe!"
-  },
-  en: {
-    title: "About us",
-    text: "FastChoose is a website created to help you find your perfect smartphone in just a few seconds. Our tool saves your time — no more browsing through hundreds of offers and models. Simply answer a few questions and that’s it!"
-  },
-  es: {
-    title: "Sobre nosotros",
-    text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal en cuestión de segundos. Nuestra herramienta ahorra tu tiempo: no necesitas revisar cientos de ofertas y modelos. ¡Solo responde unas preguntas y listo!"
-  }
+  pl: { title: "O nas", text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon dla siebie. Nasze narzędzie pozwala zaoszczędzić Twój czas — nie musisz już przeglądać setek ofert i specyfikacji." },
+  en: { title: "About us", text: "FastChoose is a website created to help you find your perfect smartphone in just a few seconds. Our tool saves your time — no more browsing through hundreds of offers and specs." },
+  es: { title: "Sobre nosotros", text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal en cuestión de segundos. Nuestra herramienta ahorra tu tiempo — sin revisar cientos de ofertas y especificaciones." }
 };
 
 const contactDict = {
-  pl: {
-    title: "Kontakt",
-    text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>"
-  },
-  en: {
-    title: "Contact",
-    text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>"
-  },
-  es: {
-    title: "Contacto",
-    text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>"
-  }
+  pl: { title: "Kontakt", text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>" },
+  en: { title: "Contact", text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>" },
+  es: { title: "Contacto", text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>" }
 };
 
+// --- NOWE: Fraza polityki prywatności + dynamiczny modal ---
+const privacyLabelDict = {
+  pl: "Polityka prywatności",
+  en: "Privacy Policy",
+  es: "Política de privacidad"
+};
+
+function updatePrivacyUI(lang) {
+  // Link w stopce
+  const link = document.getElementById('open-privacy-modal');
+  if (link) {
+    link.textContent = privacyLabelDict[lang] || privacyLabelDict.en;
+  }
+  // Modal
+  const modal = document.getElementById('privacy-modal');
+  if (!modal) return;
+
+  // Nagłówek h2 – ustaw tylko wybraną wersję
+  const h2 = modal.querySelector('h2');
+  if (h2) {
+    h2.textContent = privacyLabelDict[lang] || privacyLabelDict.en;
+  }
+
+  // Ukryj sekcje innych języków (h3 + następujący po nim UL)
+  const langMap = { PL: 'pl', EN: 'en', ES: 'es' };
+  const allH3s = modal.querySelectorAll('h3');
+
+  allH3s.forEach(h3 => {
+    const raw = h3.textContent.trim(); // np. "PL – Polityka prywatności"
+    // Wyciąg kod języka przed "–" lub pierwszą spacją
+    let code = raw.split('–')[0].trim().split(' ')[0]; // "PL", "EN", "ES"
+    const normalized = langMap[code] || null;
+    const shouldShow = normalized === lang;
+
+    h3.style.display = shouldShow ? '' : 'none';
+    // Następny element UL (lista treści)
+    const ul = h3.nextElementSibling;
+    if (ul && ul.tagName === 'UL') {
+      ul.style.display = shouldShow ? '' : 'none';
+    }
+  });
+}
+
 // --- Quiz obsługa historii quizu przez hash ---
-// Główne zmienne quizu
 let currentQuestionId = 1;
 let pathAnswers = [];
 let history = [];
@@ -117,7 +126,7 @@ function renderQuizShell() {
     `;
     backBtnEl.setAttribute('aria-label', backAriaLabel());
     backBtnEl.addEventListener('click', function() {
-      window.history.back(); // Poprzedni hash = poprzednie pytanie
+      window.history.back();
     });
   }
 }
@@ -135,7 +144,6 @@ function startQuiz() {
   renderQuizShell();
   setQuizHash(currentQuestionId);
   showQuizSection();
-  // fetchQuestion(currentQuestionId, true); // USUNIĘTE: nie fetchuj tutaj, hashchange to zrobi
 }
 
 function setQuizHash(qId) {
@@ -144,7 +152,6 @@ function setQuizHash(qId) {
 
 function handleAnswer(answer) {
   if (typeof answer.answer_id !== 'undefined') pathAnswers.push(answer.answer_id);
-  // LIMIT PYTAŃ: jeśli mamy już 5, kończymy quiz
   if (pathAnswers.length >= 5) {
     window.location.hash = "#results";
     getResults();
@@ -156,8 +163,7 @@ function handleAnswer(answer) {
     getResults();
   } else {
     currentQuestionId = parseInt(nextId, 10);
-    setQuizHash(currentQuestionId);  // zmiana hasha wywoła event hashchange → showQuizQuestionById()
-    // NIE fetchuj bezpośrednio pytania tutaj!
+    setQuizHash(currentQuestionId);
   }
 }
 
@@ -231,7 +237,6 @@ async function displayQuestion(data) {
 }
 
 function showQuizQuestionById(id) {
-  // nie resetujemy historii! tylko wyświetl pytanie
   currentQuestionId = id;
   renderQuizShell();
   showQuizSection();
@@ -275,11 +280,7 @@ function displayResults(recommendations) {
   const resultsWrapper = document.getElementById('results-content-wrapper');
   resultsWrapper.innerHTML = '';
   updateFastchooseHeadline(currentLang);
-  const dict = {
-    pl: 'Nasze rekomendacje',
-    en: 'Our Recommendations',
-    es: 'Nuestras recomendaciones'
-  };
+  const dict = { pl: 'Nasze rekomendacje', en: 'Our Recommendations', es: 'Nuestras recomendaciones' };
   const title = document.createElement('div');
   title.className = 'results-title';
   title.textContent = dict[currentLang] || dict.pl;
@@ -321,11 +322,7 @@ function displayResults(recommendations) {
     });
     resultsWrapper.appendChild(grid);
   }
-  const dictBtn = {
-    pl: 'Zacznij od nowa',
-    en: 'Restart',
-    es: 'Empezar de nuevo'
-  };
+  const dictBtn = { pl: 'Zacznij od nowa', en: 'Restart', es: 'Empezar de nuevo' };
   const restart = document.createElement('button');
   restart.className = 'restart-btn';
   restart.textContent = dictBtn[currentLang] || dictBtn.pl;
@@ -538,12 +535,14 @@ function showViewByHash() {
 
 // --- INIT ---
 document.addEventListener('DOMContentLoaded', () => {
-  // Inicjalizacja języka
   currentLang = getCurrentLang();
   updateLandingTexts(currentLang);
   renderFooterLinks(currentLang);
   const headline = document.getElementById('fastchoose-headline');
   if (headline) headline.style.display = 'none';
+
+  // PRIVACY: inicjalne ustawienie
+  updatePrivacyUI(currentLang);
 
   // Przycisk start quizu
   document.getElementById('get-started-btn').addEventListener('click', startQuiz);
@@ -554,18 +553,41 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLandingTexts(currentLang);
     renderFooterLinks(currentLang);
     updateFastchooseHeadline(currentLang);
+    updatePrivacyUI(currentLang); // <- odśwież frazę i modal
 
-    // --- Cookie consent: odśwież na nowy język ---
+    // Cookie consent refresh
     const cc = document.querySelector('.cc-window');
     if (cc) cc.parentNode.removeChild(cc);
     showCookieConsentBar(currentLang);
   });
 
+  // Obsługa otwierania modala (na wypadek, gdy index.html ma prosty link)
+  const openPrivacy = document.getElementById('open-privacy-modal');
+  const modalBg = document.getElementById('privacy-modal-bg');
+  const closeBtn = document.getElementById('close-privacy-modal');
+  if (openPrivacy && modalBg) {
+    openPrivacy.addEventListener('click', (e) => {
+      e.preventDefault();
+      updatePrivacyUI(getCurrentLang()); // upewnij się, że modal ma właściwy język
+      modalBg.style.display = 'flex';
+    });
+  }
+  if (closeBtn && modalBg) {
+    closeBtn.addEventListener('click', () => {
+      modalBg.style.display = 'none';
+    });
+  }
+  if (modalBg) {
+    modalBg.addEventListener('click', (e) => {
+      if (e.target === modalBg) modalBg.style.display = 'none';
+    });
+  }
+
   // Routing
   window.addEventListener("hashchange", showViewByHash);
   showViewByHash();
 
-  // --- Cookie consent init ---
+  // Cookie consent init
   window.addEventListener("load", function() {
     let lang = getCurrentLang();
     initCookieConsentOnce(lang);
