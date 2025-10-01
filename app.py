@@ -250,7 +250,7 @@ products_db = {
     245: {'pl': 'Google Pixel 7', 'en': 'Google Pixel 7', 'es': 'Google Pixel 7', 'image_path': 'graphic/google_pixel_7.png', 'price_level': 2},
     252: {'pl': 'Google Pixel 9', 'en': 'Google Pixel 9', 'es': 'Google Pixel 9', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 3},
     253: {'pl': 'Google Pixel 10', 'en': 'Google Pixel 10', 'es': 'Google Pixel 10', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 3},
-    258: {'pl': 'Google Pixel 10 Pro XL', 'en': 'Google Pixel 10 Pro XL', 'es': 'Google Pixel 10 Pro XL', 'image_path': 'graphic/pixel_10_pro_xl.png', 'price_level': 3}
+    258: {'pl': 'Google Pixel 10 Pro XL', 'en': 'Google Pixel 10 Pro XL', 'es': 'Google Pixel 10 Pro XL', 'image_path': 'graphic/pixel_10_pro_xl.png', 'price_level': 3},
     
     246: {'pl': 'Huawei P60 Pro', 'en': 'Huawei P60 Pro', 'es': 'Huawei P60 Pro', 'image_path': 'graphic/huawei_p60_pro.png', 'price_level': 3},
     247: {'pl': 'Huawei Nova 12', 'en': 'Huawei Nova 12', 'es': 'Huawei Nova 12', 'image_path': 'graphic/huawei_nova_12.png', 'price_level': 2},
