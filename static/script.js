@@ -1,6 +1,6 @@
-// FastChoose — inline SVG z MONO-kolorem: fill/stroke ustawiane rozsądnie
+// FastChoose script.js (Wariant 1 z filtracją polityki prywatności przez data-lang)
 
-// --- Multicolor headline obsługa ---
+/* ---------------- Headline multicolor ---------------- */
 function updateFastchooseHeadline(lang) {
   const texts = {
     pl: { main: "Fastchoose - Twój idealny telefon, ", accent: "w kilka sekund!" },
@@ -11,78 +11,87 @@ function updateFastchooseHeadline(lang) {
   const headline = document.getElementById('fastchoose-headline');
   if (headline) {
     headline.style.display = '';
-    headline.querySelector('.headline-main').textContent = t.main;
-    headline.querySelector('.headline-accent').textContent = t.accent;
+    const mainSpan = headline.querySelector('.headline-main');
+    const accentSpan = headline.querySelector('.headline-accent');
+    if (mainSpan) mainSpan.textContent = t.main;
+    if (accentSpan) accentSpan.textContent = t.accent;
   }
 }
 
-// --- Teksty strony głównej, tłumaczenia ---
+/* ---------------- Landing dictionary ---------------- */
 const landingDict = {
-  pl: { title: "Wybierz idealny telefon w kilka sekund!", subtitle: "Odpowiedz na kilka pytań, a my dobierzemy model spełniający Twoje potrzeby.", btn: "Zaczynamy!", logo: "FastChoose" },
-  en: { title: "Find your perfect phone in seconds!", subtitle: "Answer a few questions and we’ll recommend the right model for you.", btn: "Get started", logo: "FastChoose" },
-  es: { title: "¡Encuentra tu teléfono ideal en segundos!", subtitle: "Responde unas preguntas y te recomendaremos el modelo perfecto.", btn: "¡Vamos!", logo: "FastChoose" }
+  pl: {
+    title: "Wybierz idealny telefon w kilka sekund!",
+    subtitle: "Odpowiedz na kilka pytań, a my dobierzemy model spełniający Twoje potrzeby.",
+    btn: "Zaczynamy!",
+    logo: "FastChoose"
+  },
+  en: {
+    title: "Find your perfect phone in seconds!",
+    subtitle: "Answer a few questions and we’ll recommend the right model for you.",
+    btn: "Get started",
+    logo: "FastChoose"
+  },
+  es: {
+    title: "¡Encuentra tu teléfono ideal en segundos!",
+    subtitle: "Responde unas preguntas y te recomendaremos el modelo perfecto.",
+    btn: "¡Vamos!",
+    logo: "FastChoose"
+  }
 };
 
-// --- O nas i Kontakt tłumaczenia ---
+/* ---------------- About & Contact ---------------- */
 const aboutDict = {
-  pl: { title: "O nas", text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon dla siebie. Nasze narzędzie pozwala zaoszczędzić Twój czas — nie musisz już przeglądać setek ofert i specyfikacji." },
-  en: { title: "About us", text: "FastChoose is a website created to help you find your perfect smartphone in just a few seconds. Our tool saves your time — no more browsing through hundreds of offers and specs." },
-  es: { title: "Sobre nosotros", text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal en cuestión de segundos. Nuestra herramienta ahorra tu tiempo — sin revisar cientos de ofertas y especificaciones." }
+  pl: { title: "O nas", text: "FastChoose to strona stworzona po to, byś w kilka sekund znalazł idealny smartfon..." },
+  en: { title: "About us", text: "FastChoose is a website created to help you find your perfect smartphone..." },
+  es: { title: "Sobre nosotros", text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal..." }
 };
-
 const contactDict = {
-  pl: { title: "Kontakt", text: "FastChoose<br>Email: <a href='mailto:contact@fast-choose.com'>contact@fast-choose.com</a>" },
-  en: { title: "Contact", text: "FastChoose<br>Email: <a href='mailto:contact@fast-choose.com'>contact@fast-choose.com</a>" },
-  es: { title: "Contacto", text: "FastChoose<br>Email: <a href='mailto:contact@fast-choose.com'>contact@fast-choose.com</a>" }
+  pl: { title: "Kontakt", text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>" },
+  en: { title: "Contact", text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>" },
+  es: { title: "Contacto", text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>" }
 };
 
-// --- NOWE: Fraza polityki prywatności + dynamiczny modal ---
-const privacyLabelDict = {
+/* ---------------- Privacy (Variant 1) ---------------- */
+const privacyLabels = {
   pl: "Polityka prywatności",
   en: "Privacy Policy",
   es: "Política de privacidad"
 };
 
-function updatePrivacyUI(lang) {
-  // Link w stopce
-  const link = document.getElementById('open-privacy-modal');
-  if (link) {
-    link.textContent = privacyLabelDict[lang] || privacyLabelDict.en;
-  }
-  // Modal
-  const modal = document.getElementById('privacy-modal');
-  if (!modal) return;
-
-  // Nagłówek h2 – ustaw tylko wybraną wersję
-  const h2 = modal.querySelector('h2');
-  if (h2) {
-    h2.textContent = privacyLabelDict[lang] || privacyLabelDict.en;
-  }
-
-  // Ukryj sekcje innych języków (h3 + następujący po nim UL)
-  const langMap = { PL: 'pl', EN: 'en', ES: 'es' };
-  const allH3s = modal.querySelectorAll('h3');
-
-  allH3s.forEach(h3 => {
-    const raw = h3.textContent.trim(); // np. "PL – Polityka prywatności"
-    // Wyciąg kod języka przed "–" lub pierwszą spacją
-    let code = raw.split('–')[0].trim().split(' ')[0]; // "PL", "EN", "ES"
-    const normalized = langMap[code] || null;
-    const shouldShow = normalized === lang;
-
-    h3.style.display = shouldShow ? '' : 'none';
-    // Następny element UL (lista treści)
-    const ul = h3.nextElementSibling;
-    if (ul && ul.tagName === 'UL') {
-      ul.style.display = shouldShow ? '' : 'none';
+/**
+ * Pokazuje tylko <ul data-lang="..."> odpowiadający bieżącemu językowi.
+ * Jeśli coś poszło nie tak (brak dopasowania), pokazuje wszystkie (fallback).
+ */
+function filterPrivacy(lang) {
+  const lists = document.querySelectorAll('#privacy-modal ul[data-lang]');
+  if (!lists.length) return;
+  let shown = false;
+  lists.forEach(ul => {
+    if (ul.getAttribute('data-lang') === lang) {
+      ul.style.display = 'block';
+      shown = true;
+    } else {
+      ul.style.display = 'none';
     }
   });
+  if (!shown) { // fallback
+    lists.forEach(ul => ul.style.display = 'block');
+  }
+  const title = document.getElementById('privacy-modal-title');
+  if (title) {
+    title.textContent = privacyLabels[lang] || privacyLabels.en;
+  }
+  const link = document.getElementById('open-privacy-modal');
+  if (link) {
+    link.textContent = privacyLabels[lang] || privacyLabels.en;
+  }
 }
 
-// --- Quiz obsługa historii quizu przez hash ---
+/* ---------------- Quiz core vars ---------------- */
 let currentQuestionId = 1;
 let pathAnswers = [];
-let history = [];
+let historyStack = [];
 let currentLang = "pl";
 let totalQuestions = 5;
 
@@ -92,12 +101,18 @@ let answersContainerEl = null;
 let backBtnEl = null;
 let quizProgressCounter = null;
 
-// Pomocnicza: pobierz aktualny język z selecta
+/* ---------------- Helpers ---------------- */
 function getCurrentLang() {
   const langSelect = document.getElementById('lang-select');
   return (langSelect && langSelect.value) ? langSelect.value : 'pl';
 }
 
+function backAriaLabel() {
+  return currentLang === 'pl' ? 'Wstecz' :
+         currentLang === 'es' ? 'Atrás' : 'Back';
+}
+
+/* ---------------- Quiz rendering ---------------- */
 function renderQuizShell() {
   const quizContent = document.getElementById('quiz-content');
   quizContent.innerHTML = `
@@ -131,15 +146,10 @@ function renderQuizShell() {
   }
 }
 
-function backAriaLabel() {
-  return currentLang === 'pl' ? 'Wstecz' :
-         currentLang === 'es' ? 'Atrás' : 'Back';
-}
-
 function startQuiz() {
   currentQuestionId = 1;
   pathAnswers = [];
-  history = [];
+  historyStack = [];
   currentLang = getCurrentLang();
   renderQuizShell();
   setQuizHash(currentQuestionId);
@@ -158,7 +168,7 @@ function handleAnswer(answer) {
     return;
   }
   const nextId = answer.next_question_id;
-  if (nextId === '' || nextId === null || typeof nextId === 'undefined') {
+  if (!nextId) {
     window.location.hash = "#results";
     getResults();
   } else {
@@ -168,15 +178,15 @@ function handleAnswer(answer) {
 }
 
 function fetchQuestion(questionId, noHistoryPush = false) {
-  if (!noHistoryPush) history.push(currentQuestionId);
+  if (!noHistoryPush) historyStack.push(currentQuestionId);
   fetch(`/api/quiz/question?current_question_id=${encodeURIComponent(questionId)}&language=${encodeURIComponent(currentLang)}`)
     .then(r => r.ok ? r.json() : Promise.reject(r))
     .then(d => displayQuestion(d))
     .catch(err => {
       console.error('Error fetching question:', err);
       alert(currentLang === 'pl' ? 'Nie udało się pobrać pytania.' :
-        currentLang === 'es' ? 'No se pudo cargar la pregunta.' :
-        'Failed to load question.');
+            currentLang === 'es' ? 'No se pudo cargar la pregunta.' :
+            'Failed to load question.');
     });
 }
 
@@ -229,7 +239,7 @@ async function displayQuestion(data) {
     card.addEventListener('click', () => handleAnswer(ans));
     answersContainerEl.appendChild(card);
   }
-  backBtnEl.style.display = history.length > 0 ? 'inline-flex' : 'none';
+  backBtnEl.style.display = historyStack.length > 0 ? 'inline-flex' : 'none';
   backBtnEl.setAttribute('aria-label', backAriaLabel());
   document.getElementById('results-container').style.display = 'none';
   document.getElementById('quiz-content').style.display = 'block';
@@ -260,14 +270,14 @@ function getResults() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ pathAnswers, language: currentLang })
   })
-  .then(r => r.ok ? r.json() : Promise.reject(r))
-  .then(d => displayResults(d.recommendations || []))
-  .catch(err => {
-    console.error('Error getting results:', err);
-    alert(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' :
-      currentLang === 'es' ? 'No se pudieron obtener los resultados.' :
-      'Failed to load results.');
-  });
+    .then(r => r.ok ? r.json() : Promise.reject(r))
+    .then(d => displayResults(d.recommendations || []))
+    .catch(err => {
+      console.error('Error getting results:', err);
+      alert(currentLang === 'pl' ? 'Nie udało się pobrać wyników.' :
+            currentLang === 'es' ? 'No se pudieron obtener los resultados.' :
+            'Failed to load results.');
+    });
 }
 
 function displayResults(recommendations) {
@@ -285,11 +295,12 @@ function displayResults(recommendations) {
   title.className = 'results-title';
   title.textContent = dict[currentLang] || dict.pl;
   resultsWrapper.appendChild(title);
+
   if (!recommendations.length) {
     const p = document.createElement('p');
     p.textContent = currentLang === 'pl' ? 'Brak rekomendacji dla wybranej ścieżki.' :
-      currentLang === 'es' ? 'No hay recomendaciones para el camino seleccionado.' :
-      'No recommendations for the selected path.';
+                 currentLang === 'es' ? 'No hay recomendaciones para el camino seleccionado.' :
+                 'No recommendations for the selected path.';
     resultsWrapper.appendChild(p);
   } else {
     const grid = document.createElement('div');
@@ -334,7 +345,7 @@ function resetApp() {
   window.location.hash = "#home";
   currentQuestionId = 1;
   pathAnswers = [];
-  history = [];
+  historyStack = [];
   document.getElementById('results-container').style.display = 'none';
   document.getElementById('quiz-content').style.display = 'none';
   document.getElementById('quiz-section-bg').style.display = 'none';
@@ -344,7 +355,7 @@ function resetApp() {
   if (headline) headline.style.display = 'none';
 }
 
-// --- SVG cache i obsługa ---
+/* ---------------- SVG inline helpers ---------------- */
 const svgCache = new Map();
 async function fetchInlineSvg(url) {
   if (!url || !url.endsWith('.svg')) return null;
@@ -370,7 +381,6 @@ function normalizeSvg(svgEl) {
   svgEl.style.color = 'inherit';
   const nodes = svgEl.querySelectorAll('*');
   nodes.forEach(n => {
-    const tag = n.tagName.toLowerCase();
     const style = n.getAttribute('style') || '';
     if (style) {
       const cleaned = style
@@ -384,7 +394,7 @@ function normalizeSvg(svgEl) {
     const hadStroke = n.hasAttribute('stroke');
     const hadFill = n.hasAttribute('fill');
     const fillVal = (n.getAttribute('fill') || '').trim().toLowerCase();
-    if (tag === 'text') {
+    if (n.tagName.toLowerCase() === 'text') {
       n.setAttribute('fill', 'currentColor');
       n.removeAttribute('stroke');
       return;
@@ -400,7 +410,7 @@ function normalizeSvg(svgEl) {
   });
 }
 
-// --- O nas/Kontakt ---
+/* ---------------- About / Contact pages ---------------- */
 function showAboutPage(lang) {
   const dict = aboutDict[lang] || aboutDict.pl;
   const container = document.getElementById('main-content');
@@ -440,13 +450,17 @@ function showContactPage(lang) {
   }
 }
 
-// --- Landing texts, footer ---
+/* ---------------- Landing & footer text ---------------- */
 function updateLandingTexts(lang) {
   const dict = landingDict[lang] || landingDict.pl;
-  document.getElementById('big-title').textContent = dict.title;
-  document.getElementById('subtitle').textContent = dict.subtitle;
-  document.getElementById('get-started-btn').textContent = dict.btn;
-  document.getElementById('logo').textContent = dict.logo;
+  const t1 = document.getElementById('big-title');
+  const t2 = document.getElementById('subtitle');
+  const btn = document.getElementById('get-started-btn');
+  const logo = document.getElementById('logo');
+  if (t1) t1.textContent = dict.title;
+  if (t2) t2.textContent = dict.subtitle;
+  if (btn) btn.textContent = dict.btn;
+  if (logo) logo.textContent = dict.logo;
 }
 function renderFooterLinks(lang) {
   const dict = {
@@ -463,7 +477,7 @@ function renderFooterLinks(lang) {
   `;
 }
 
-// --- Cookie consent wielojęzyczny ---
+/* ---------------- Cookie consent ---------------- */
 function getCookieContent(lang) {
   const dict = {
     pl: {
@@ -471,31 +485,28 @@ function getCookieContent(lang) {
       dismiss: "OK"
     },
     en: {
-      message: "This site uses cookies for statistical purposes. You can read our privacy policy by following the link in the footer of the site.",
+      message: "This site uses cookies for statistical purposes. You can read our privacy policy via the link in the footer.",
       dismiss: "OK"
     },
     es: {
-      message: "Este sitio utiliza cookies con fines estadísticos. Puedes consultar la política de privacidad utilizando el enlace en el pie de página del sitio.",
+      message: "Este sitio utiliza cookies con fines estadísticos. Puedes leer la política de privacidad mediante el enlace en el pie de página.",
       dismiss: "OK"
     }
   };
   return dict[lang] || dict.en;
 }
-
+let cookieBannerInitialized = false;
 function showCookieConsentBar(lang) {
   if (window.cookieconsent) {
     window.cookieconsent.initialise({
-      "palette": {
-        "popup": { "background": "#000" },
-        "button": { "background": "#f1d600" }
+      palette: {
+        popup: { background: "#000" },
+        button: { background: "#f1d600" }
       },
-      "content": getCookieContent(lang)
+      content: getCookieContent(lang)
     });
   }
 }
-
-// Obsługa inicjalizacji po wybraniu języka (i tylko raz)
-let cookieBannerInitialized = false;
 function initCookieConsentOnce(lang) {
   if (!cookieBannerInitialized && window.cookieconsent) {
     showCookieConsentBar(lang);
@@ -503,7 +514,7 @@ function initCookieConsentOnce(lang) {
   }
 }
 
-// --- Hash routing logika ---
+/* ---------------- Hash routing ---------------- */
 function showViewByHash() {
   const hash = window.location.hash;
   currentLang = getCurrentLang();
@@ -524,7 +535,7 @@ function showViewByHash() {
     showContactPage(currentLang);
     return;
   }
-  // domyślnie home
+  // Home
   document.getElementById('main-content').style.display = 'flex';
   document.getElementById('quiz-section-bg').style.display = 'none';
   document.getElementById('results-container').style.display = 'none';
@@ -533,7 +544,7 @@ function showViewByHash() {
   if (headline) headline.style.display = 'none';
 }
 
-// --- INIT ---
+/* ---------------- INIT ---------------- */
 document.addEventListener('DOMContentLoaded', () => {
   currentLang = getCurrentLang();
   updateLandingTexts(currentLang);
@@ -541,45 +552,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const headline = document.getElementById('fastchoose-headline');
   if (headline) headline.style.display = 'none';
 
-  // PRIVACY: inicjalne ustawienie
-  updatePrivacyUI(currentLang);
+  // Inicjalne ustawienie polityki (pokazuje tylko bieżący język)
+  filterPrivacy(currentLang);
 
-  // Przycisk start quizu
-  document.getElementById('get-started-btn').addEventListener('click', startQuiz);
+  // Start quiz
+  const startBtn = document.getElementById('get-started-btn');
+  if (startBtn) startBtn.addEventListener('click', startQuiz);
 
   // Zmiana języka
-  document.getElementById('lang-select').addEventListener('change', function() {
-    currentLang = this.value;
-    updateLandingTexts(currentLang);
-    renderFooterLinks(currentLang);
-    updateFastchooseHeadline(currentLang);
-    updatePrivacyUI(currentLang); // <- odśwież frazę i modal
+  const langSelect = document.getElementById('lang-select');
+  if (langSelect) {
+    langSelect.addEventListener('change', function() {
+      currentLang = this.value;
+      updateLandingTexts(currentLang);
+      renderFooterLinks(currentLang);
+      updateFastchooseHeadline(currentLang);
+      filterPrivacy(currentLang);
 
-    // Cookie consent refresh
-    const cc = document.querySelector('.cc-window');
-    if (cc) cc.parentNode.removeChild(cc);
-    showCookieConsentBar(currentLang);
-  });
-
-  // Obsługa otwierania modala (na wypadek, gdy index.html ma prosty link)
-  const openPrivacy = document.getElementById('open-privacy-modal');
-  const modalBg = document.getElementById('privacy-modal-bg');
-  const closeBtn = document.getElementById('close-privacy-modal');
-  if (openPrivacy && modalBg) {
-    openPrivacy.addEventListener('click', (e) => {
-      e.preventDefault();
-      updatePrivacyUI(getCurrentLang()); // upewnij się, że modal ma właściwy język
-      modalBg.style.display = 'flex';
-    });
-  }
-  if (closeBtn && modalBg) {
-    closeBtn.addEventListener('click', () => {
-      modalBg.style.display = 'none';
-    });
-  }
-  if (modalBg) {
-    modalBg.addEventListener('click', (e) => {
-      if (e.target === modalBg) modalBg.style.display = 'none';
+      // Cookie consent refresh (jeśli już istniał)
+      const cc = document.querySelector('.cc-window');
+      if (cc) cc.parentNode.removeChild(cc);
+      showCookieConsentBar(currentLang);
     });
   }
 
@@ -589,7 +582,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Cookie consent init
   window.addEventListener("load", function() {
-    let lang = getCurrentLang();
-    initCookieConsentOnce(lang);
+    initCookieConsentOnce(getCurrentLang());
   });
 });
