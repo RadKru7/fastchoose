@@ -47,9 +47,9 @@ const aboutDict = {
   es: { title: "Sobre nosotros", text: "FastChoose es una página creada para ayudarte a encontrar tu smartphone ideal..." }
 };
 const contactDict = {
-  pl: { title: "Kontakt", text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>" },
-  en: { title: "Contact", text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>" },
-  es: { title: "Contacto", text: "FastChoose<br>Email: <a href='mailto:contact@fastchoose.com'>contact@fastchoose.com</a>" }
+  pl: { title: "Kontakt", text: "FastChoose<br>Email: <a href='mailto:contact@fast-choose.com'>contact@fast-choose.com</a>" },
+  en: { title: "Contact", text: "FastChoose<br>Email: <a href='mailto:contact@fast-choose.com'>contact@fast-choose.com</a>" },
+  es: { title: "Contacto", text: "FastChoose<br>Email: <a href='mailto:contact@fast-choose.com'>contact@fast-choose.com</a>" }
 };
 
 /* ---------------- Privacy (Variant 1) ---------------- */
