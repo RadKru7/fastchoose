@@ -579,14 +579,7 @@ footer {
   color: #000 !important;
 }
 /* CookieConsent minimalistycznie: tylko kolory, zaokrąglenie i font */
-/*Privacy modal*/
-#privacy-modal a,
-#privacy-modal a:visited {
-  color: inherit;          /* Dziedziczy kolor z otaczającego tekstu */
-  text-decoration: none;   /* Bez podkreślenia */
-  font-weight: 500;        /* Opcjonalnie lekkie wzmocnienie */
-  cursor: pointer;
-}
+
 
 
 @media (max-width: 900px) {
