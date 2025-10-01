@@ -579,6 +579,16 @@ footer {
   color: #000 !important;
 }
 /* CookieConsent minimalistycznie: tylko kolory, zaokrąglenie i font */
+/*Privacy modal*/
+#privacy-modal a,
+#privacy-modal a:visited {
+  color: inherit;          /* Dziedziczy kolor z otaczającego tekstu */
+  text-decoration: none;   /* Bez podkreślenia */
+  font-weight: 500;        /* Opcjonalnie lekkie wzmocnienie */
+  cursor: pointer;
+}
+
+
 @media (max-width: 900px) {
   .quiz-section-bg { min-height: 70vh; }
   .quiz-progress-counter { right: 7px; font-size: 0.97rem; padding: 5px 13px;}
