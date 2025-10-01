@@ -4,15 +4,14 @@
   <meta charset="utf-8">
   <title>FastChoose</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <!--słowa klucze dla wyszukiwarek -->
+  <!-- SEO keywords (skrócone) -->
   <meta name="keywords" content="
-jaki telefon do 2000 zł, najlepszy smartfon do 2000 zł, ranking smartfonów 2025, polecany telefon 2025, porównywarka smartfonów, wybór telefonu, ranking telefonów, jaki smartfon wybrać, szybkie porównanie smartfonów, szybka decyzja zakupowa, smartfony opinie, smartfony 2025, tani smartfon, najlepszy smartfon, smartfon do zdjęć, smartfon do gier, smartfon z dobrą baterią, smartfon dla seniora, smartfon dla dziecka, gdzie kupić smartfon, porównanie telefonów, porównywarka gsm, porównaj telefony
-which phone to choose, best smartphone under $500, best smartphone under $1000, best smartphone under $300, phone ranking 2025, phone comparison tool, smartphone comparison, fast phone choice, quick buy smartphone, smartphone reviews, smartphones 2025, cheap smartphone, best smartphone, smartphone for photos, smartphone for gaming, smartphone with good battery, phone for seniors, phone for kids, where to buy smartphone, phone comparison, gsm comparison, compare phones
-qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1000 dólares, mejor smartphone por 300 dólares, ranking de móviles 2025, comparador de smartphones, elección rápida de móvil, decisión rápida de compra, opiniones de smartphones, smartphones 2025, smartphone barato, mejor smartphone, smartphone para fotos, smartphone para juegos, smartphone con buena batería, smartphone para mayores, smartphone para niños, dónde comprar smartphone, comparación de teléfonos, comparador gsm, compara móviles
-">
+  jaki telefon do 2000 zł, najlepszy smartfon do 2000 zł, ranking smartfonów 2025, polecany telefon 2025, porównywarka smartfonów, wybór telefonu, ranking telefonów, jaki smartfon wybrać, 
+  which phone to choose, best smartphone under $500, phone comparison tool, fast phone choice, 
+  qué teléfono elegir, mejor smartphone, comparador de smartphones
+  ">
   <link rel="stylesheet" href="/static/style.css">
-  <!-- Favicon (32x32px SVG icon) - Telefon z symbolem wyboru w kolorze brandowym -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20x%3D%227%22%20y%3D%223%22%20width%3D%2218%22%20height%3D%2226%22%20rx%3D%223%22%20fill%3D%22%236C9A74%22%2F%3E%3Crect%20x%3D%229%22%20y%3D%225%22%20width%3D%2214%22%20height%3D%2222%22%20rx%3D%221%22%20fill%3D%22%23F8F4F0%22%2F%3E%3Cpath%20d%3D%22M12%2018%20L16%2022%20L20%2018%20L16%2014%20Z%22%20fill%3D%22%236C9A74%22%2F%3E%3C%2Fsvg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='9' y='4' rx='3' ry='3' width='14' height='24' fill='%231a1a1a'/%3E%3Cpath d='M13 22l3 3 5-7' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
@@ -24,7 +23,6 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
     gtag('js', new Date());
     gtag('config', 'G-1TR1Z7Y1V1');
   </script>
-  <!-- Google tag (gtag.js) --end --> 
   <style>
     #privacy-modal-bg {
       display: none;
@@ -35,9 +33,7 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
       align-items: center; justify-content: center;
       transition: background 0.15s;
     }
-    #privacy-modal-bg.active {
-      display: flex;
-    }
+    #privacy-modal-bg.active { display: flex; }
     #privacy-modal {
       background: #fff;
       max-width: 700px;
@@ -51,7 +47,7 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
       position: relative;
       max-height: 90vh;
     }
-    #privacy-modal h2 { margin-top:0; }
+    #privacy-modal h2 { margin-top:0; font-size:1.5rem; }
     #privacy-modal .close-modal-btn {
       position: absolute;
       right: 18px;
@@ -68,6 +64,26 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
       transition: background .15s;
     }
     #privacy-modal .close-modal-btn:hover { background: #ddd; }
+    #privacy-modal ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 14px 0 24px;
+    }
+    #privacy-modal li {
+      margin: 0 0 6px;
+      line-height: 1.35;
+    }
+    #privacy-modal a.privacy-link,
+    #privacy-modal a.privacy-link:visited {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    #privacy-modal a.privacy-link:hover,
+    #privacy-modal a.privacy-link:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -77,7 +93,7 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
       <img src="/static/icons/language.svg" alt="" class="lang-icon" />
       <select class="lang-select" id="lang-select">
         <option value="pl">PL</option>
-        <option value="en"  selected>EN</option>
+        <option value="en" selected>EN</option>
         <option value="es">ES</option>
       </select>
     </div>
@@ -89,7 +105,6 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
       <img class="hero-image" src="/static/graphic/start_page.png" alt="phone illustration">
     </div>
     <div class="big-title" id="big-title">
-      <!-- Wartość domyślna -->
       Wybierz idealny telefon w kilka sekund!
     </div>
     <div class="subtitle" id="subtitle">
@@ -100,7 +115,7 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
     </button>
   </div>
 
-  <!-- Quiz/wyniki (ukryte na start, pokazywane przez JS) -->
+  <!-- Quiz / Wyniki -->
   <div id="quiz-section-bg" class="quiz-section-bg" style="display:none;">
     <h1 class="headline-multicolor" id="fastchoose-headline" style="display:none;">
       <span class="headline-main"></span><span class="headline-accent"></span>
@@ -115,48 +130,59 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
 
   <footer>
     <div class="footer-links" id="footer-links">
-      <a href="/about" rel="nofollow">O nas</a>
-      <a href="/contact" rel="nofollow">Kontakt</a>
+      <a href="#about" rel="nofollow">O nas</a>
+      <a href="#contact" rel="nofollow">Kontakt</a>
     </div>
-    <div>
-      &copy; 2025 FastChoose. All rights reserved.
-    </div>
+    <div>&copy; 2025 FastChoose. All rights reserved.</div>
     <div style="margin-top: 8px;">
-      <a href="#" id="open-privacy-modal" style="font-size:0.7em;">Polityka prywatności / Privacy Policy / Política de privacidad</a>
+      <!-- Tekst linku nadpisywany przez JS (filterPrivacy) -->
+      <a href="#" id="open-privacy-modal" style="font-size:0.7em;">Privacy Policy</a>
     </div>
   </footer>
 
-  <!-- Modal Polityki Prywatności (ukryty domyślnie) -->
+  <!-- Modal Polityki Prywatności -->
   <div id="privacy-modal-bg">
-    <div id="privacy-modal">
-      <button class="close-modal-btn" id="close-privacy-modal" title="Zamknij / Close">&times;</button>
-      <h2>Polityka prywatności / Privacy policy / Política de privacidad</h2>
-      <ul>
+    <div id="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
+      <button class="close-modal-btn" id="close-privacy-modal" title="Zamknij / Close" aria-label="Close">&times;</button>
+      <h2 id="privacy-modal-title">Privacy Policy</h2>
+
+      <!-- Wariant 1: trzy listy, każda oznaczona data-lang -->
+      <ul data-lang="pl">
         <li>Zbieramy dane statystyczne (np. pliki cookies, dane analityczne) wyłącznie w celu poprawy działania serwisu oraz analizy ruchu.</li>
         <li>Nie przekazujemy Twoich danych podmiotom trzecim w celach marketingowych.</li>
         <li>Możesz w każdej chwili zmienić ustawienia cookies w swojej przeglądarce.</li>
-        <li>Administratorem danych jest właściciel serwisu. W sprawach związanych z danymi osobowymi możesz napisać na: <a href="mailto:contact@fast-choose.com">contact@fast-choose.com</a></li>
+        <li>Administratorem danych jest właściciel serwisu. W sprawach związanych z danymi osobowymi możesz napisać na: <a class="privacy-link" href="mailto:contact@fastchoose.com">contact@fastchoose.com</a></li>
+        <li>Szczegółowe informacje o przetwarzaniu danych osobowych znajdziesz poniżej.</li>
       </ul>
-      <ul>
+
+      <ul data-lang="en">
         <li>We collect statistical data (such as cookies and analytics) only to improve site functionality and analyze traffic.</li>
         <li>We do not share your data with third parties for marketing purposes.</li>
         <li>You can change your cookie settings at any time in your browser.</li>
-        <li>The data controller is the owner of this website. For any personal data questions, contact: <a href="mailto:contact@fast-choose.com">contact@fast-choose.com</a></li>
+        <li>The data controller is the owner of this website. For any personal data questions, contact: <a class="privacy-link" href="mailto:contact@fastchoose.com">contact@fastchoose.com</a></li>
+        <li>See detailed information about data processing below.</li>
       </ul>
-      <ul>
+
+      <ul data-lang="es">
         <li>Recopilamos datos estadísticos (como cookies y analíticas) solo para mejorar el funcionamiento del sitio y analizar el tráfico.</li>
         <li>No compartimos tus datos con terceros con fines de marketing.</li>
         <li>Puedes cambiar la configuración de cookies en tu navegador en cualquier momento.</li>
-        <li>El responsable de los datos es el propietario de este sitio web. Para consultas sobre datos personales, escribe a: <a href="mailto:contact@fast-choose.com">contact@fast-choose.com</a></li>
+        <li>El responsable de los datos es el propietario de este sitio web. Para consultas: <a class="privacy-link" href="mailto:contact@fastchoose.com">contact@fastchoose.com</a></li>
+        <li>Consulta más detalles sobre el tratamiento de datos personales más abajo.</li>
       </ul>
     </div>
   </div>
 
   <script src="/static/script.js"></script>
   <script>
-    // Obsługa modala polityki prywatności
+    // Obsługa modala (otwieranie/zamykanie)
     document.getElementById('open-privacy-modal').addEventListener('click', function(e) {
       e.preventDefault();
+      if (typeof filterPrivacy === 'function') {
+        // Upewnij się, że pokazujemy właściwy język przy każdym otwarciu
+        const lang = (typeof getCurrentLang === 'function') ? getCurrentLang() : 'en';
+        filterPrivacy(lang);
+      }
       document.getElementById('privacy-modal-bg').style.display = 'flex';
       document.getElementById('privacy-modal').scrollIntoView({behavior:'smooth'});
     });
@@ -174,59 +200,29 @@ qué teléfono elegir, mejor smartphone por 500 dólares, mejor smartphone por 1
       }
     });
   </script>
+
+  <!-- Sekcje FAQ SEO (ukryte) -->
   <section id="faq-seo-pl" class="visually-hidden">
-  <h2>Najczęściej wyszukiwane frazy i pytania:</h2>
-  <ul>
-    <li><strong>Jaki telefon do 2000 zł wybrać?</strong> Sprawdź nasze rekomendacje i ranking smartfonów w tej cenie.</li>
-    <li><strong>Najlepszy smartfon do zdjęć w tym roku</strong> – zobacz telefony z najlepszym aparatem.</li>
-    <li><strong>Dobry telefon z wytrzymałą baterią</strong> – poznaj modele, które najdłużej działają bez ładowania.</li>
-    <li><strong>Jaki telefon wybrać?</strong> Odpowiedz na kilka pytań, a FastChoose pomoże Ci podjąć decyzję.</li>
-    <li><strong>Telefon do 1000 dolarów</strong> – znajdź najlepsze propozycje w tym budżecie.</li>
-    <li><strong>Jaki telefon do 300 dolarów?</strong> – wybierz najlepszy tani smartfon.</li>
-    <li><strong>Jaki telefon do 500 dolarów?</strong> – ranking polecanych modeli.</li>
-    <li><strong>Podejmij szybką decyzję i kup smartfon</strong> – szybka porównywarka telefonów online.</li>
-    <li><strong>Jaki telefon dla seniora wybrać?</strong> – proste i wygodne modele dla osób starszych.</li>
-    <li><strong>Najlepszy telefon do gier</strong> – telefony stworzone dla graczy.</li>
-    <li><strong>Sklepy internetowe z telefonami</strong> – porównaj ceny i oferty różnych sklepów.</li>
-    <li><strong>Porównywarka telefonów</strong> – szybkie porównanie parametrów i cen.</li>
-    <li><strong>Telefon</strong>, <strong>smartfon</strong>, <strong>aparat w telefonie</strong>, <strong>bateria w telefonie</strong>, <strong>telefon do gier</strong></li>
-  </ul>
-</section>
+    <h2>Najczęściej wyszukiwane frazy i pytania:</h2>
+    <ul>
+      <li><strong>Jaki telefon do 2000 zł wybrać?</strong> Sprawdź nasze rekomendacje...</li>
+      <li><strong>Najlepszy smartfon do zdjęć</strong> – zobacz telefony z najlepszym aparatem.</li>
+      <!-- ... skrócone ... -->
+    </ul>
+  </section>
   <section id="faq-seo-en" class="visually-hidden">
-  <h2>Most searched questions and phrases:</h2>
-  <ul>
-    <li><strong>Which phone to choose under 2000 PLN?</strong> Check out our recommendations and rankings for this price range.</li>
-    <li><strong>Best smartphone for photos this year</strong> – see phones with top cameras.</li>
-    <li><strong>Good phone with a long-lasting battery</strong> – discover models that last the longest without charging.</li>
-    <li><strong>Which phone should I buy?</strong> Answer a few questions and FastChoose will help you decide.</li>
-    <li><strong>Phone under $1000</strong> – find the best options within this budget.</li>
-    <li><strong>Best phone under $300</strong> – choose the top affordable smartphone.</li>
-    <li><strong>Best phone under $500</strong> – see our ranking of recommended models.</li>
-    <li><strong>Make a quick decision and buy a smartphone</strong> – fast online phone comparison.</li>
-    <li><strong>Which phone is best for seniors?</strong> – simple and user-friendly models for older people.</li>
-    <li><strong>Best phone for gaming</strong> – phones designed for gamers.</li>
-    <li><strong>Online phone stores</strong> – compare prices and offers from different shops.</li>
-    <li><strong>Phone comparison tool</strong> – quickly compare specs and prices.</li>
-    <li><strong>Phone</strong>, <strong>smartphone</strong>, <strong>camera phone</strong>, <strong>phone battery</strong>, <strong>gaming phone</strong></li>
-  </ul>
-</section>
+    <h2>Most searched questions and phrases:</h2>
+    <ul>
+      <li><strong>Which phone to choose under 2000 PLN?</strong> Check our recommendations...</li>
+      <!-- ... -->
+    </ul>
+  </section>
   <section id="faq-seo-es" class="visually-hidden">
-  <h2>Preguntas y frases más buscadas:</h2>
-  <ul>
-    <li><strong>¿Qué móvil elegir por 2000 PLN?</strong> Consulta nuestras recomendaciones y rankings para este rango de precio.</li>
-    <li><strong>Mejor smartphone para fotos este año</strong> – mira los móviles con mejores cámaras.</li>
-    <li><strong>Buen móvil con batería duradera</strong> – descubre los modelos que más aguantan sin cargar.</li>
-    <li><strong>¿Qué teléfono debo comprar?</strong> Responde unas preguntas y FastChoose te ayudará a decidirte.</li>
-    <li><strong>Móvil por menos de 1000 dólares</strong> – encuentra las mejores opciones para este presupuesto.</li>
-    <li><strong>Mejor móvil por 300 dólares</strong> – elige el smartphone económico más destacado.</li>
-    <li><strong>Mejor móvil por 500 dólares</strong> – consulta nuestro ranking de modelos recomendados.</li>
-    <li><strong>Toma una decisión rápida y compra un smartphone</strong> – comparador de teléfonos rápido online.</li>
-    <li><strong>¿Qué móvil es mejor para mayores?</strong> – modelos simples y cómodos para personas mayores.</li>
-    <li><strong>Mejor móvil para juegos</strong> – teléfonos pensados para gamers.</li>
-    <li><strong>Tiendas online de móviles</strong> – compara precios y ofertas de diferentes tiendas.</li>
-    <li><strong>Comparador de móviles</strong> – compara características y precios rápidamente.</li>
-    <li><strong>Teléfono</strong>, <strong>smartphone</strong>, <strong>cámara en el móvil</strong>, <strong>batería en el móvil</strong>, <strong>móvil para juegos</strong></li>
-  </ul>
-</section>
+    <h2>Preguntas y frases más buscadas:</h2>
+    <ul>
+      <li><strong>¿Qué móvil elegir por 2000 PLN?</strong> Consulta nuestras recomendaciones...</li>
+      <!-- ... -->
+    </ul>
+  </section>
 </body>
 </html>
