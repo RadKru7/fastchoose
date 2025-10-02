@@ -83,7 +83,7 @@ answers_x_products = {
 
     # 301: Bateria bardzo ważna
     # Algorytm: Telefony z największą pojemnością baterii i najlepszą optymalizacją na początku listy.
-    301: [259, 248, 239, 238, 218, 246, 241, 211, 210, 240, 249,255, 244, 216, 245, 257, 212, 209, 250, 251, 202, 243, 242, 201, 203, 247, 252, 253, 254,217],
+    301: [259, 248, 239, 238, 218, 246, 241, 211, 240, 249,255, 244, 216, 245, 257, 212, 209, 250, 251, 202, 243, 242, 201,210, 203, 247, 252, 253, 254,217],
 
     # 302: Bateria ważna, ale nie najważniejsza
     # Algorytm: Telefony z dobrą baterią, ale też dobrą ogólną specyfikacją.
@@ -102,7 +102,7 @@ answers_x_products = {
     402: [224, 216, 253, 217, 218, 252, 219, 256, 220, 255, 222, 223, 225, 228, 229, 230,259, 231, 235, 236, 239, 240, 241, 246, 250],
 
     # Mały ekran poniżej 6.5 cala
-    403: [201, 203, 206, 207, 257, 208, 209, 210, 212, 213, 214, 215, 234, 242, 244, 245],
+    403: [201, 203, 206, 207, 257, 208, 209,212, 213, 214, 215, 234, 242, 244,210, 245],
     
     # 501: Selfie
     # Algorytm: Telefony z najlepszym przednim aparatem (wysoka rozdzielczość, autofocus) na początku listy.
