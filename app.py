@@ -59,11 +59,11 @@ answers_x_products = {
     # 101: Najtańsze telefony
     # Algorytm: Telefony posortowane rosnąco po cenie – najtańszy jako pierwszy, najdroższy jako ostatni.
     # Użytkownik dostaje najwięcej punktów za wybór najtańszego modelu dla tej odpowiedzi.
-    101: [251, 250, 209, 212, 210, 211, 216, 249, 244, 255, 245, 246, 218, 241, 247, 243, 242, 246, 240, 238, 239, 202, 203, 217, 201, 252, 253, 254],
+    101: [251, 250, 209, 212, 211, 216, 249, 244, 255, 245, 246, 218, 241, 247, 243, 242, 246, 240, 238, 239, 202, 203, 217, 201, 252, 253, 254, 210],
 
     # 102: Przedział 1500–3000 zł
     # Algorytm: Telefony posortowane według odległości ceny od środka przedziału 1500–3000 zł (najbliższy 2250 zł na początku).
-    102: [211, 210, 216, 249, 244, 212, 209, 251, 250, 245, 246, 248, 218, 255, 241, 247, 243, 242, 246, 240, 238, 239, 202, 203, 201, 252, 253, 254,253, 252, 257, 259],
+    102: [211, 216, 249, 244, 212, 209, 251, 250, 245, 246, 248, 218, 255, 241, 247, 243, 242, 246, 240, 238, 239, 202, 203, 201, 252, 253, 254,253, 252, 257, 259,210],
 
     # 103: Najdroższe telefony
     # Algorytm: Telefony posortowane malejąco po cenie – najdroższy jako pierwszy, najtańszy jako ostatni.
@@ -71,7 +71,7 @@ answers_x_products = {
 
     # 201: Dzwonienie/SMS
     # Algorytm: Telefony z najprostszą obsługą, dobrą baterią, solidnością i niską ceną na początku listy.
-    201: [251, 250, 209, 212, 210, 259, 211, 216, 249, 244, 255, 217, 245, 246, 248,257, 218, 241, 247, 243, 242, 246, 240, 238, 239, 202, 203, 201, 252, 253, 254 ],
+    201: [251, 250, 209, 212, 259, 211, 216, 249, 244, 255, 217, 245, 246, 248,257,210, 218, 241, 247, 243, 242, 246, 240, 238, 239, 202, 203, 201, 252, 253, 254 ],
 
     # 202: Zdjęcia i filmy (aparat)
     # Algorytm: Najlepsze aparaty (najwyższa jakość zdjęć, zoom, tryby nocne, stabilizacja) na początku listy.
@@ -87,7 +87,7 @@ answers_x_products = {
 
     # 302: Bateria ważna, ale nie najważniejsza
     # Algorytm: Telefony z dobrą baterią, ale też dobrą ogólną specyfikacją.
-    302: [241, 246, 218, 243, 239, 238, 211, 210, 258,256, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 242, 247, 217, 248, 252, 253, 254],
+    302: [241, 246, 218, 243, 239, 238, 211, 258,256, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 242, 247, 217, 210, 248, 252, 253, 254],
 
     # 303: Mało ważna bateria
     # Algorytm: Priorytet dla innych cech, np. wydajność, aparat, design – bateria nie jest brana pod uwagę.
@@ -118,7 +118,7 @@ answers_x_products = {
 
     # 601: 128GB
     # Algorytm: Telefony z minimum 128GB pamięci, najtańsze na początku.
-    601: [251, 250, 209, 212, 210, 211,257, 255, 216, 249, 253, 252, 244, 217, 245, 246, 248, 218, 241, 247, 243, 242, 246, 240, 238, 239, 202, 203, 201, 252, 253, 254,],
+    601: [251, 250, 209, 212, 211,257, 255, 216, 249, 253, 252, 244, 217, 245, 246, 248, 218,210, 241, 247, 243, 242, 246, 240, 238, 239, 202, 203, 201, 252, 253, 254,],
 
     # 602: 256GB
     # Algorytm: Telefony z minimum 256GB pamięci, najtańsze na początku.
@@ -138,7 +138,7 @@ answers_x_products = {
 
     # 703: Standardowa wydajność
     # Algorytm: Telefony z podstawowym, ale stabilnym SoC, niższa cena.
-    703: [251, 250, 209, 212, 210, 211, 216, 249, 244, 217, 245, 246, 248, 218, 241, 247, 243, 242, 246, 254, 255, 252, 253, 240,254, 238, 239, 202, 203, 201, 252, 253, 254],
+    703: [251, 250, 209, 212, 211, 216, 249, 244, 217, 245, 246, 248, 218, 241, 247, 243, 242, 210, 246, 254, 255, 252, 253, 240,254, 238, 239, 202, 203, 201, 252, 253, 254],
 
     # 801: Android
     # Algorytm: Wszystkie telefony z Androidem na początku listy.
@@ -208,7 +208,7 @@ products_db = {
     213: {'pl': 'Samsung Galaxy S23 FE', 'en': 'Samsung Galaxy S23 FE', 'es': 'Samsung Galaxy S23 FE', 'image_path': 'graphic/samsung_galaxy_s23_fe.png', 'price_level': 2},
     214: {'pl': 'Samsung Galaxy S22', 'en': 'Samsung Galaxy S22', 'es': 'Samsung Galaxy S22', 'image_path': 'graphic/samsung_galaxy_s22.png', 'price_level': 2},
     215: {'pl': 'Samsung Galaxy A54', 'en': 'Samsung Galaxy A54', 'es': 'Samsung Galaxy A54', 'image_path': 'graphic/samsung_galaxy_a54.png', 'price_level': 1},
-    216: {'pl': 'Samsung Galaxy A34', 'en': 'Samsung Galaxy A34', 'es': 'Samsung Galaxy A34', 'image_path': 'graphic/samsung_galaxy_a34.png', 'price_level': 1},
+    216: {'pl': 'Samsung Galaxy A36', 'en': 'Samsung Galaxy A36', 'es': 'Samsung Galaxy A36', 'image_path': 'graphic/samsung_galaxy_a34.png', 'price_level': 1},
     217: {'pl': 'Samsung Galaxy A14', 'en': 'Samsung Galaxy A14', 'es': 'Samsung Galaxy A14', 'image_path': 'graphic/samsung_galaxy_a14.png', 'price_level': 1},
     218: {'pl': 'Samsung Galaxy A14 5G', 'en': 'Samsung Galaxy A14 5G', 'es': 'Samsung Galaxy A14 5G', 'image_path': 'graphic/samsung_galaxy_a14_5g.png', 'price_level': 1},
     219: {'pl': 'Samsung Galaxy A24', 'en': 'Samsung Galaxy A24', 'es': 'Samsung Galaxy A24', 'image_path': 'graphic/samsung_galaxy_a24.png', 'price_level': 1},
