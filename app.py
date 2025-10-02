@@ -209,11 +209,11 @@ products_db = {
     214: {'pl': 'Samsung Galaxy S22', 'en': 'Samsung Galaxy S22', 'es': 'Samsung Galaxy S22', 'image_path': 'graphic/samsung_galaxy_s22.png', 'price_level': 2},
     215: {'pl': 'Samsung Galaxy A54', 'en': 'Samsung Galaxy A54', 'es': 'Samsung Galaxy A54', 'image_path': 'graphic/samsung_galaxy_a54.png', 'price_level': 1},
     216: {'pl': 'Samsung Galaxy A36', 'en': 'Samsung Galaxy A36', 'es': 'Samsung Galaxy A36', 'image_path': 'graphic/samsung_galaxy_a34.png', 'price_level': 1},
-    217: {'pl': 'Samsung Galaxy A14', 'en': 'Samsung Galaxy A14', 'es': 'Samsung Galaxy A14', 'image_path': 'graphic/samsung_galaxy_a14.png', 'price_level': 1},
-    218: {'pl': 'Samsung Galaxy A14 5G', 'en': 'Samsung Galaxy A14 5G', 'es': 'Samsung Galaxy A14 5G', 'image_path': 'graphic/samsung_galaxy_a14_5g.png', 'price_level': 1},
-    219: {'pl': 'Samsung Galaxy A24', 'en': 'Samsung Galaxy A24', 'es': 'Samsung Galaxy A24', 'image_path': 'graphic/samsung_galaxy_a24.png', 'price_level': 1},
+    217: {'pl': 'Samsung Galaxy A05s', 'en': 'Samsung Galaxy A05s', 'es': 'Samsung Galaxy A05s', 'image_path': 'graphic/samsung_galaxy_a14.png', 'price_level': 1},
+    218: {'pl': 'Samsung Galaxy A17 5G', 'en': 'Samsung Galaxy A17 5G', 'es': 'Samsung Galaxy A17 5G', 'image_path': 'graphic/samsung_galaxy_a14_5g.png', 'price_level': 1},
+    219: {'pl': 'Samsung Galaxy A26', 'en': 'Samsung Galaxy A26', 'es': 'Samsung Galaxy A26', 'image_path': 'graphic/samsung_galaxy_a24.png', 'price_level': 1},
     220: {'pl': 'Samsung Galaxy M14', 'en': 'Samsung Galaxy M14', 'es': 'Samsung Galaxy M14', 'image_path': 'graphic/samsung_galaxy_m14.png', 'price_level': 1},
-    221: {'pl': 'Samsung Galaxy A05s', 'en': 'Samsung Galaxy A05s', 'es': 'Samsung Galaxy A05s', 'image_path': 'graphic/samsung_galaxy_a05s.png', 'price_level': 1},
+    221: {'pl': 'Samsung Galaxy M15 5G', 'en': 'Samsung Galaxy M15 5G', 'es': 'Samsung Galaxy M15 5G', 'image_path': 'graphic/samsung_galaxy_a05s.png', 'price_level': 1},
     257: {'pl': 'Samsung Galaxy S25', 'en': 'Samsung Galaxy S25', 'es': 'Samsung Galaxy S25', 'image_path': 'graphic/samsung_galaxy_s23.png', 'price_level': 3},
     
     # Xiaomi
