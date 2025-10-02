@@ -87,7 +87,7 @@ answers_x_products = {
 
     # 302: Bateria ważna, ale nie najważniejsza
     # Algorytm: Telefony z dobrą baterią, ale też dobrą ogólną specyfikacją.
-    302: [241, 246, 218, 243, 239, 238, 211, 258,256, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 242, 247, 217, 210, 248, 252, 253, 254],
+    302: [241, 246, 218, 243, 239, 238, 211, 258, 256, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 242, 247, 217, 210, 248, 252, 253, 254],
 
     # 303: Mało ważna bateria
     # Algorytm: Priorytet dla innych cech, np. wydajność, aparat, design – bateria nie jest brana pod uwagę.
@@ -95,11 +95,11 @@ answers_x_products = {
 
     # 401: Duży ekran , 6.7 cala i więcej
     # Algorytm: Telefony z największym ekranem na początku listy.
-    401: [259, 202, 204,258, 205, 211, 221, 226, 227, 232, 233, 237, 238, 243, 247, 248, 249, 251],
+    401: [259, 258, 202, 204, 205, 211, 221, 226, 227, 232, 233, 237, 238, 243, 247, 248, 249, 251],
 
     # 402: Standardowy ekran 6.5-6.69 cala
     # Algorytm: Telefony o przekątnej ekranu w okolicach  cala, reszta dalej.
-    402: [224, 216, 217, 218, 253, 252, 219, 256, 220, 255, 222, 223, 225, 228, 229, 230,259, 231, 235, 236, 239, 240, 241, 246, 250],
+    402: [224, 216, 253, 217, 218, 252, 219, 256, 220, 255, 222, 223, 225, 228, 229, 230,259, 231, 235, 236, 239, 240, 241, 246, 250],
 
     # Mały ekran poniżej 6.5 cala
     403: [201, 203, 206, 207, 257, 208, 209, 210, 212, 213, 214, 215, 234, 242, 244, 245],
@@ -110,11 +110,11 @@ answers_x_products = {
 
     # 502: Zdjęcia nocne
     # Algorytm: Telefony z najlepszym trybem nocnym i jasnym obiektywem na początku listy.
-    502: [239, 248, 247, 218, 256,257, 202, 246, 211, 217, 253, 252, 201, 203, 248, 210, 241, 240, 238, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254],
+    502: [239, 248, 247, 253, 218, 256,257, 202, 246, 211, 217, 252, 201, 203, 248, 210, 241, 240, 238, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254],
 
     # 503: Wszechstronny aparat
     # Algorytm: Telefony z kilkoma obiektywami, dobrym zoomem, szerokim kątem, makro itd.
-    503: [247, 246, 201,258, 248,259, 257, 203, 239, 256, 218, 211, 253, 252, 217, 202, 210, 241, 240, 238, 255, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254],
+    503: [247, 246, 201,258,253, 248,259, 257, 203, 239, 256, 218, 211, 252, 217, 202, 210, 241, 240, 238, 255, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254],
 
     # 601: 128GB
     # Algorytm: Telefony z minimum 128GB pamięci, najtańsze na początku.
@@ -126,7 +126,7 @@ answers_x_products = {
 
     # 603: 512GB+
     # Algorytm: Telefony z minimum 512GB pamięci lub więcej, od najtańszego do najdroższego.
-    603: [257, 239,259, 238, 256, 240,258, 246, 201, 241, 247,255, 243, 242, 203, 218, 248, 246, 245, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 253, 254,217],
+    603: [257, 239,259,253, 238, 256, 240,258, 246, 201, 241, 247,255, 243, 242, 203, 218, 248, 246, 245, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 254,217],
 
     # 701: Top wydajność
     # Algorytm: Telefony z najlepszym SoC, największą ilością RAM, najnowszymi technologiami.
@@ -162,7 +162,7 @@ answers_x_products = {
 
     # 903: Jakość zdjęć nocnych
     # Algorytm: Telefony z najlepszym trybem nocnym i dużą matrycą na początku.
-    903: [201, 203, 239,259, 202, 252, 257, 253, 246, 218, 248, 247,256, 243, 242, 211, 217, 210, 241, 240, 238, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254,],
+    903: [201, 203, 239,259,253, 202, 252, 257, 246, 218, 248, 247,256, 243, 242, 211, 217, 210, 241, 240, 238, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254,],
 
     # 1001: Samsung
     # Algorytm: Wszystkie telefony marki Samsung na początku.
@@ -174,7 +174,7 @@ answers_x_products = {
 
     # 1003: Inne marki
     # Algorytm: Preferuje i punktuje marki inne niż apple i samsung.
-    1003: [248, 259, 258, 245,256, 252, 253, 246, 240, 238, 255, 239, 241, 254, 247, 243, 242, 252, 253, 254,250, 251, 249, 244],
+    1003: [248, 259,253, 258, 245,256, 252, 246, 240, 238, 255, 239, 241, 254, 247, 243, 242, 252, 253, 254,250, 251, 249, 244],
 
     # 1101: Bardzo ważne szybkie ładowanie
     # Algorytm: Telefony z najszybszym ładowaniem na początku listy.
