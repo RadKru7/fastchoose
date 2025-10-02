@@ -408,7 +408,6 @@ product_links_db = {
 }
 # --- Punkty końcowe API ---
 
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -458,14 +457,19 @@ def get_question():
     except (ValueError, KeyError):
         return jsonify({'error': 'Invalid question ID or language.'}), 400
 
+
 @app.route('/api/quiz/result', methods=['POST'])
 def get_result():
     """
-    Nowy algorytm:
-    - Jeżeli pierwsza odpowiedź to 101 / 102 / 103 (pytanie o budżet),
-      działamy w trybie FILTRA – bierzemy tylko produkty z odpowiadającym price_level.
-    - Brak mnożników punktowych za dopasowanie ceny – reszta logiki scoringu bez zmian,
-      poza tym że ignorujemy produkty spoza filtra.
+    Algorytm po zmianie:
+    1. Budżet (101/102/103) – jeśli występuje jako PIERWSZA odpowiedź (Twoja obecna logika),
+       stosujemy FILTR produktów po price_level.
+       (Jeśli chcesz później brać ostatnią odpowiedź budżetową – mogę dodać.)
+    2. Scoring: niezależnie od długości listy rankingowej:
+         pozycja 0 -> 50 pkt, 1 -> 49 ... 49 -> 1, >=50 -> 0.
+       Odpowiedź 803 (brak preferencji OS) – ignorowana (nie dodaje punktów).
+    3. Sklepy: score *= (shops / max_shops), produkty z 0 sklepów odrzucane.
+    4. Różnorodność marek (Apple/Samsung) – ostatnia pozycja może zostać podmieniona na inną markę.
     """
     try:
         data = request.get_json()
@@ -477,57 +481,61 @@ def get_result():
         if not path_answers or not isinstance(path_answers, list):
             return jsonify({'error': 'Invalid or missing "pathAnswers" parameter.'}), 400
 
-        # --- ZMIANA: FILTR BUDŻETU ---
+        # --- FILTR BUDŻETU (obecna wersja: patrzy tylko na pierwszą odpowiedź) ---
+        allowed_products = list(products_db.keys())
         first_answer_id = path_answers[0] if path_answers else None
-        allowed_products = list(products_db.keys())  # domyślnie wszystkie
-
         if first_answer_id in (101, 102, 103) and answers_db.get(first_answer_id, {}).get('question_id') == 1:
             user_price_level = answers_db[first_answer_id].get('price_level')
             allowed_products = [
                 pid for pid, pdata in products_db.items()
                 if pdata.get('price_level') == user_price_level
             ]
+            if not allowed_products:
+                return jsonify({'recommendations': [], 'message': 'No products for selected budget.'})
 
-        # Jeśli cokolwiek przeszło do allowed_products
-        if not allowed_products:
-            return jsonify({'recommendations': [], 'message': 'No products for selected budget.'})
-
-        # Inicjalizacja punktów tylko dla dopuszczonych
+        # Inicjalizacja punktów
         product_scores = {pid: 0 for pid in allowed_products}
 
-        # --- Scoring bez mnożników cenowych ---
+        MAX_POINTS = 50  # stała wartość dla pozycji 0
+
+        # --- SCORING (stałe punkty 50..1) ---
         for answer_id in path_answers:
+            # Pomijamy odpowiedź "nie mam preferencji" (803) – nie wpływa na ranking
+            if answer_id == 803:
+                continue
             ranking = answers_x_products.get(answer_id, [])
-            n = len(ranking)
-            if not n:
+            if not ranking:
                 continue
             for pos, product_id in enumerate(ranking):
                 if product_id not in product_scores:
-                    continue  # odrzucone przez filtr
-                product_scores[product_id] += (n - pos)
+                    continue  # poza filtrem budżetu
+                base_points = MAX_POINTS - pos
+                if base_points <= 0:
+                    break  # dalsze pozycje = 0, można przerwać pętlę dla tej listy
+                product_scores[product_id] += base_points
 
-        # --- Dostępność w sklepach ---
+        # --- DOSTĘPNOŚĆ (filtruj i skaluj) ---
         max_shops = 0
         products_with_availability = {}
         for pid in product_scores:
-            available_shops = product_links_db.get(pid, {}).get(language, [])
-            shop_count = len(available_shops)
+            shop_count = len(product_links_db.get(pid, {}).get(language, []))
             products_with_availability[pid] = shop_count
             if shop_count > max_shops:
                 max_shops = shop_count
 
         adjusted_scores = {}
-        for pid, score in product_scores.items():
+        for pid, raw_score in product_scores.items():
             shops = products_with_availability.get(pid, 0)
             if shops == 0:
-                continue  # pomijamy brak dostępności
-            adjusted_scores[pid] = score * (shops / max_shops) if max_shops else 0
+                continue
+            factor = (shops / max_shops) if max_shops else 0
+            adjusted_scores[pid] = raw_score * factor
 
         if not adjusted_scores:
-            return jsonify({'recommendations': [], 'message': 'No available products for selected budget.'})
+            return jsonify({'recommendations': [], 'message': 'No available products for selected criteria.'})
 
-        # --- Różnorodność marek (Apple/Samsung) ---
-        def get_brand(product_name):
+        # --- RÓŻNORODNOŚĆ MAREK ---
+        def get_brand(product_name: str):
             name = product_name.lower()
             if 'iphone' in name:
                 return 'apple'
@@ -540,25 +548,22 @@ def get_result():
 
         brands = [get_brand(products_db[pid]['pl']) for pid in product_ids]
         if len(product_ids) == 3 and all(b in ('apple', 'samsung') for b in brands):
-            for pid, _sc in top_products[3:]:
-                alt_brand = get_brand(products_db[pid]['pl'])
-                if alt_brand == 'other':
+            for pid, sc in top_products[3:]:
+                if get_brand(products_db[pid]['pl']) == 'other':
                     product_ids[-1] = pid
                     break
 
         if not product_ids:
             return jsonify({'recommendations': [], 'message': 'No recommendations found.'})
 
-        # --- Generowanie linków sklepów (zachowane z poprzedniej wersji) ---
-        selected_stores = [store for store in stores_db.values() if store['language'] == language][:3]
+        selected_stores = [s for s in stores_db.values() if s['language'] == language][:3]
 
         def generate_store_link(store, product_name):
             if store['name'].startswith('Zamów na MediaMarkt'):
                 query = product_name.replace(' ', '%20')
                 return store['affiliate_url'].format(query)
             elif 'allegro' in store['affiliate_url'] or 'euro' in store['affiliate_url']:
-                query = product_name.replace(' ', '%20')
-                return store['affiliate_url'] + query
+                return store['affiliate_url'] + product_name.replace(' ', '%20')
             elif 'amazon.com' in store['affiliate_url']:
                 from urllib.parse import quote_plus
                 return f"https://www.amazon.com/s?i=mobile&rh=n%3A2407749011&k={quote_plus(product_name)}"
@@ -572,8 +577,7 @@ def get_result():
                 from urllib.parse import quote_plus
                 return f"https://www.amazon.mx/s?i=mobile&rh=n%3A2407749011&k={quote_plus(product_name)}"
             else:
-                query = product_name.replace(' ', '+')
-                return store['affiliate_url'] + query
+                return store['affiliate_url'] + product_name.replace(' ', '+')
 
         recommendations = []
         for pid in product_ids:
@@ -585,12 +589,10 @@ def get_result():
             if pdata.get('image_path') and os.path.exists(os.path.join(app.static_folder, pdata['image_path'])):
                 image_url = url_for('static', filename=pdata['image_path'])
 
-            links = []
-            for store in selected_stores:
-                links.append({
-                    'store_name': store['name'],
-                    'link_url': generate_store_link(store, product_name)
-                })
+            links = [{
+                'store_name': store['name'],
+                'link_url': generate_store_link(store, product_name)
+            } for store in selected_stores]
 
             recommendations.append({
                 'product_id': pid,
@@ -601,18 +603,18 @@ def get_result():
             })
 
         return jsonify({'recommendations': recommendations})
-
     except Exception as e:
         return jsonify({'error': 'An internal server error occurred', 'details': str(e)}), 500
 
+
 @app.route('/api/languages', methods=['GET'])
 def get_languages():
-    languages = [
+    return jsonify({'languages': [
         {'code': 'en', 'name': 'English'},
         {'code': 'es', 'name': 'Español'},
         {'code': 'pl', 'name': 'Polski'}
-    ]
-    return jsonify({'languages': languages})
+    ]})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
