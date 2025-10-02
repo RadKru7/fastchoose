@@ -102,7 +102,7 @@ answers_x_products = {
     402: [224, 216, 253, 217, 218, 252, 219, 256, 220, 255, 222, 223, 225, 228, 229, 230,259, 231, 235, 236, 239, 240, 241, 246, 250],
 
     # Mały ekran poniżej 6.5 cala
-    403: [201, 203, 206, 207, 257, 208, 209,212, 213, 214, 215, 234, 242, 244,210, 245],
+    403: [201, 203, 206, 207, 257, 208, 209,212, 213, 214, 215,210, 234, 242, 244, 245],
     
     # 501: Selfie
     # Algorytm: Telefony z najlepszym przednim aparatem (wysoka rozdzielczość, autofocus) na początku listy.
@@ -200,7 +200,7 @@ products_db = {
     207: {'pl': 'iPhone 14 Pro', 'en': 'iPhone 14 Pro', 'es': 'iPhone 14 Pro', 'image_path': 'graphic/iphone_14_pro.png', 'price_level': 3},
     208: {'pl': 'iPhone 13', 'en': 'iPhone 13', 'es': 'iPhone 13', 'image_path': 'graphic/iphone_13.png', 'price_level': 2},
     209: {'pl': 'iPhone SE 3rd Gen', 'en': 'iPhone SE 3rd Gen', 'es': 'iPhone SE 3rd Gen', 'image_path': 'graphic/iphone_se_3rd_gen.png', 'price_level': 1},
-    210: {'pl': 'iPhone 12', 'en': 'iPhone 12', 'es': 'iPhone 12', 'image_path': 'graphic/iphone_12.png', 'price_level': 2},
+    210: {'pl': 'iPhone 13', 'en': 'iPhone 13', 'es': 'iPhone 13', 'image_path': 'graphic/iphone_12.png', 'price_level': 2},
 
     # Samsung
     211: {'pl': 'Samsung Galaxy S23 Ultra', 'en': 'Samsung Galaxy S23 Ultra', 'es': 'Samsung Galaxy S23 Ultra', 'image_path': 'graphic/samsung_galaxy_s23_ultra.png', 'price_level': 3},
