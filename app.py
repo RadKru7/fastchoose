@@ -106,7 +106,7 @@ answers_x_products = {
     
     # 501: Selfie
     # Algorytm: Telefony z najlepszym przednim aparatem (wysoka rozdzielczość, autofocus) na początku listy.
-    501: [201, 243, 248, 237, 241, 245, 215, 259, 240, 224, 239, 247, 257,258, 218, 202, 246, 203, 211, 210, 238, 242, 212, 249, 244, 216, 209, 250, 251, 252, 253, 254, 217],
+    501: [201, 243, 259, 248, 237, 241, 245, 215, 240, 224, 239, 247, 257,258, 218, 202, 246, 203, 211, 210, 238, 242, 212, 249, 244, 216, 209, 250, 251, 252, 253, 254, 217],
 
     # 502: Zdjęcia nocne
     # Algorytm: Telefony z najlepszym trybem nocnym i jasnym obiektywem na początku listy.
@@ -174,7 +174,7 @@ answers_x_products = {
 
     # 1003: Inne marki
     # Algorytm: Preferuje i punktuje marki inne niż apple i samsung.
-    1003: [248, 259,253, 258, 245,256, 252, 246, 240,224, 238, 255, 239, 241, 254, 247, 243, 242, 253, 254,250, 251, 249, 244],
+    1003: [ 259, 253, 258, 245, 256, 248, 252, 246, 240,224, 238, 255, 239, 241, 254, 247, 243, 242, 253, 254,250, 251, 249, 244],
 
     # 1101: Bardzo ważne szybkie ładowanie
     # Algorytm: Telefony z najszybszym ładowaniem na początku listy.
