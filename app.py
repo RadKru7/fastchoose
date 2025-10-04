@@ -388,7 +388,7 @@ product_links_db = {
     # Google Pixel – szeroko w Amazon.com/co.uk, czasami mniej na Amazon.es/mx
     242: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9]},      # Google Pixel 8
     243: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9]},      # Google Pixel 8 Pro
-    244: {'pl': [1,3], 'en': [4,5,6], 'es': [7],8,9},      # Google Pixel 7a
+    244: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9},      # Google Pixel 7a
     245: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9]},      # Google Pixel 7
     252: {'pl': [1], 'en': [4,5,6], 'es': [7,8,9]},      # Google Pixel 9
     253: {'pl': [1], 'en': [4,5], 'es': [7]},      # Google Pixel 10
