@@ -381,7 +381,7 @@ product_links_db = {
     238: {'pl': [1,2,3], 'en': [], 'es': [7,8]},        # Honor X7b
 
     # Motorola – najnowsze modele nie zawsze na Amazon USA/UK
-    239: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},      # Motorola Moto G55'
+    239: {'pl': [1,2,3], 'en': [4,5], 'es': [7,8,9]},      # Motorola Moto G55'
     240: {'pl': [1], 'en': [4,5], 'es': [8,9]},      # Motorola Moto G Stylus 5G
     241: {'pl': [1,2,3], 'en': [4,56], 'es': [8,9]},      # Motorola Razr 60 Ultra
 
