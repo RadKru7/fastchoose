@@ -232,9 +232,9 @@ products_db = {
     
     # Oppo, Realme, Vivo, Honor, Motorola, Google, Huawei, OnePlus, Tecno, Infinix
     231: {'pl': 'Oppo A78', 'en': 'Oppo A78', 'es': 'Oppo A78', 'image_path': 'graphic/oppo_a78.png', 'price_level': 1},
-    232: {'pl': 'Oppo Reno 11', 'en': 'Oppo Reno 11', 'es': 'Oppo Reno 11', 'image_path': 'graphic/oppo_reno_11.png', 'price_level': 2},
-    233: {'pl': 'Realme 11', 'en': 'Realme 11', 'es': 'Realme 11', 'image_path': 'graphic/realme_11.png', 'price_level': 1},
-    234: {'pl': 'Realme 10', 'en': 'Realme 10', 'es': 'Realme 10', 'image_path': 'graphic/realme_10.png', 'price_level': 1},
+    232: {'pl': 'Oppo Reno 14', 'en': 'Oppo Reno 14', 'es': 'Oppo Reno 14', 'image_path': 'graphic/oppo_reno_11.png', 'price_level': 2},
+    233: {'pl': 'Realme 14 5G', 'en': 'Realme 11', 'es': 'Realme 11', 'image_path': 'graphic/realme_11.png', 'price_level': 1},
+    234: {'pl': 'Realme 14 Pro+', 'en': 'Realme 10', 'es': 'Realme 10', 'image_path': 'graphic/realme_10.png', 'price_level': 1},
     235: {'pl': 'Vivo Y29 5G', 'en': 'Vivo Y29 5G', 'es': 'Vivo Y29 5G', 'image_path': 'graphic/vivo_y36.png', 'price_level': 1},
     236: {'pl': 'Vivo V50', 'en': 'Vivo V50', 'es': 'Vivo V50', 'image_path': 'graphic/vivo_y16.png', 'price_level': 2},
     237: {'pl': 'Honor 200', 'en': 'Honor 200', 'es': 'Honor 200', 'image_path': 'graphic/honor_90.png', 'price_level': 2},
@@ -315,7 +315,7 @@ stores_db = {
     },
     8: {
         'language': 'es',
-        'name': 'Ordenar en Amazon.mx',
+        'name': 'Ordenar en Amazon.com.mx',
         # Kategoria: Celulares y Smartphones (id 17934631011), k=product
         'affiliate_url': 'https://www.amazon.com.mx/s?i=mobile&k='  # + NAZWA TELEFONU (spacje +)
     },
@@ -370,38 +370,38 @@ product_links_db = {
     
     # Oppo, Realme, Vivo, Honor – najczęściej szeroko dostępne, ale czasem ograniczone (np. Honor slabiej na Amazon USA)
     231: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Oppo A78
-    232: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Oppo Reno 11
-    233: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Realme 11
-    234: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Realme 10
-    235: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Vivo Y36
-    236: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Vivo Y16
+    232: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Oppo Reno 14
+    233: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Realme 14 5G
+    234: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Realme 14 Pro+
+    235: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Vivo Y29 5G
+    236: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Vivo V50
 
     # Honor 
     237: {'pl': [1,2,3], 'en': [5,6], 'es': [7,8,9]},   # Honor 90
     238: {'pl': [1,2,3], 'en': [], 'es': [7,8]},        # Honor X7b
 
     # Motorola – najnowsze modele nie zawsze na Amazon USA/UK
-    239: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Moto G55'
-    240: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Moto G Stylus 5G
-    241: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Razr 60 Ultra
+    239: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]},      # Motorola Moto G55'
+    240: {'pl': [1], 'en': [4,5], 'es': [8,9]},      # Motorola Moto G Stylus 5G
+    241: {'pl': [1,2,3], 'en': [4,56], 'es': [8,9]},      # Motorola Razr 60 Ultra
 
     # Google Pixel – szeroko w Amazon.com/co.uk, czasami mniej na Amazon.es/mx
-    242: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 8
-    243: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 8 Pro
-    244: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 7a
-    245: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 7
-    252: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 9
-    253: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 10
+    242: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9]},      # Google Pixel 8
+    243: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9]},      # Google Pixel 8 Pro
+    244: {'pl': [1,3], 'en': [4,5,6], 'es': [7],8,9},      # Google Pixel 7a
+    245: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9]},      # Google Pixel 7
+    252: {'pl': [1], 'en': [4,5,6], 'es': [7,8,9]},      # Google Pixel 9
+    253: {'pl': [1], 'en': [4,5], 'es': [7]},      # Google Pixel 10
     258: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 10 Pro XL
     
     # Huawei – ograniczona dostępność w USA/UK, lepsza w Europie i Am. Łac.
-    246: {'pl': [1,2,3], 'en': [], 'es': [7,8]},       # Huawei P60 Pro
-    247: {'pl': [1,3], 'en': [], 'es': []},            # Huawei Nova 13
+    246: {'pl': [1,2,3], 'en': [5], 'es': [7,8,9]},       # Huawei P60 Pro
+    247: {'pl': [1], 'en': [5], 'es': [9]},            # Huawei Nova 13
 
     # OnePlus – szeroko Amazon UK/EU, słabo w USA
-    248: {'pl': [1,3], 'en': [5], 'es': [7,8]},        # OnePlus 12
-    249: {'pl': [1,3], 'en': [5], 'es': [7,8]},        # OnePlus Nord 3
-    259: {'pl': [1,3], 'en': [5], 'es': [7,8]},        # OnePlus 13
+    248: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9]},        # OnePlus 12
+    249: {'pl': [1,3], 'en': [4,5,6]], 'es': [7,8,9]},        # OnePlus Nord 3
+    259: {'pl': [1,3], 'en': [4,5,6]], 'es': [7,8,9]},        # OnePlus 13
 
     # Tecno, Infinix – głównie Allegro, MediaMarkt, czasem Amazon.es/mx
     250: {'pl': [1,2], 'en': [], 'es': [7,8]},         # Tecno Spark 20
