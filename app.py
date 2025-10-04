@@ -63,11 +63,11 @@ answers_x_products = {
 
     # 102: Przedział 1500–3000 zł
     # Algorytm: Telefony posortowane według odległości ceny od środka przedziału 1500–3000 zł (najbliższy 2250 zł na początku).
-    102: [211, 216, 249, 244, 212,210, 209, 251, 250, 245, 246, 248, 218, 255, 241, 247, 243, 242, 240, 238, 239, 202, 203, 201, 252, 253, 254, 257, 259],
+    102: [211, 216, 249, 244, 212,210,207, 206,208,209,202, 251, 250, 245, 246, 248, 218, 255, 241, 247, 243, 242, 240, 238, 239, 203, 201, 252, 253, 254, 257, 259],
 
     # 103: Najdroższe telefony
     # Algorytm: Telefony posortowane malejąco po cenie – najdroższy jako pierwszy, najtańszy jako ostatni.
-    103: [258, 259, 243, 257, 239, 241, 248, 238, 253, 252, 240, 246, 242, 247, 256, 218, 245, 201, 203,224, 202, 244, 249, 216, 211, 210, 212, 209, 250, 251, 254, 217],
+    103: [258, 259, 243, 257, 239, 241, 248, 238, 253, 252, 240, 246, 242, 247, 256,207, 218, 245, 201, 203,224, 206,202,208, 244, 249, 216, 211, 210, 212, 209, 250, 251, 254, 217],
 
     # 201: Dzwonienie/SMS
     # Algorytm: Telefony z najprostszą obsługą, dobrą baterią, solidnością i niską ceną na początku listy.
