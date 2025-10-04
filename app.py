@@ -63,7 +63,7 @@ answers_x_products = {
 
     # 102: Przedział 1500–3000 zł
     # Algorytm: Telefony posortowane według odległości ceny od środka przedziału 1500–3000 zł (najbliższy 2250 zł na początku).
-    102: [211, 216, 249, 244, 212, 209, 251, 250, 245, 246, 248, 218, 255, 241, 247, 243, 242, 240, 238, 239, 202, 203, 201, 252, 253, 254, 257, 259,210],
+    102: [211, 216, 249, 244, 212,210, 209, 251, 250, 245, 246, 248, 218, 255, 241, 247, 243, 242, 240, 238, 239, 202, 203, 201, 252, 253, 254, 257, 259],
 
     # 103: Najdroższe telefony
     # Algorytm: Telefony posortowane malejąco po cenie – najdroższy jako pierwszy, najtańszy jako ostatni.
@@ -75,7 +75,7 @@ answers_x_products = {
 
     # 202: Zdjęcia i filmy (aparat)
     # Algorytm: Najlepsze aparaty (najwyższa jakość zdjęć, zoom, tryby nocne, stabilizacja) na początku listy.
-    202: [258, 201, 211, 245, 244, 237, 215, 224, 240, 259, 239, 248, 257, 247, 218, 243, 253, 252, 202, 246, 203, 210, 241, 238, 242, 212, 249, 255, 216, 209, 250, 251, 254, 217],
+    202: [258, 201, 211, 245, 244, 237, 215, 224, 240, 259, 239, 210, 248, 257, 247, 218, 243, 253, 252, 202, 246, 203, 241, 238, 242, 212, 249, 255, 216, 209, 250, 251, 254, 217],
 
     # 203: Gry (wydajność)
     # Algorytm: Telefony z najmocniejszym procesorem, najlepszym GPU, dużą pamięcią RAM i szybkim ekranem na początku listy.
@@ -114,7 +114,7 @@ answers_x_products = {
 
     # 503: Wszechstronny aparat
     # Algorytm: Telefony z kilkoma obiektywami, dobrym zoomem, szerokim kątem, makro itd.
-    503: [258, 201, 211, 245, 244, 237, 259, 215, 224, 240, 247, 246,253, 248, 257, 203, 239, 256, 218, 252, 217, 202, 210, 241, 238, 255, 242, 243, 212, 249, 216, 209, 250, 251, 254],
+    503: [258, 201, 211, 245, 244, 237, 259, 215, 224,210, 240, 247, 246,253, 248, 257, 203, 239, 256, 218, 252, 217, 202, 241, 238, 255, 242, 243, 212, 249, 216, 209, 250, 251, 254],
 
     # 601: 128GB
     # Algorytm: Telefony z minimum 128GB pamięci, najtańsze na początku.
@@ -146,7 +146,7 @@ answers_x_products = {
 
     # 802: iOS
     # Algorytm: Wszystkie telefony Apple na początku listy.
-    802: [201, 202, 203, 204,210, 205, 206, 207, 208, 209, 239, 248, 238, 240, 241, 246, 218, 247, 243, 242, 211, 217, 212, 250, 251, 244, 249, 216],
+    802: [201, 202, 203, 204, 210, 205, 206, 207, 208, 209, 239, 248, 238, 240, 241, 246, 218, 247, 243, 242, 211, 217, 212, 250, 251, 244, 249, 216],
 
     # 803: Nie mam preferencji
     # Jeżeli nie ma preferencji nie naliczaj punktów za tą odpowiedź.
@@ -154,15 +154,15 @@ answers_x_products = {
     
     # 901: Zoom optyczny
     # Algorytm: Telefony z najlepszym zoomem optycznym na początku.
-    901: [201, 259, 203, 258, 248, 205, 257, 207, 211, 243, 246, 252, 253],
+    901: [201, 259, 203, 258, 248, 205, 257, 207, 211, 243, 246, 252, 253,210],
 
     # 902: Stabilizacja video
     # Algorytm: Telefony z najlepszą stabilizacją OIS/EIS na początku.
-    902: [258, 201, 211, 245, 244, 259, 237, 215, 224, 240, 243, 248, 253, 203, 257, 252, 202, 210, 242, 255, 224, 256, 246, 249, 212, 241, 216, 209, 218, 217, 239, 247, 238, 250, 251],
+    902: [258, 201, 211, 245, 244, 259, 237, 215, 210, 224, 240, 243, 248, 253, 203, 257, 252, 202, 242, 255, 224, 256, 246, 249, 212, 241, 216, 209, 218, 217, 239, 247, 238, 250, 251],
 
     # 903: Jakość zdjęć nocnych
     # Algorytm: Telefony z najlepszym trybem nocnym i dużą matrycą na początku.
-    903: [201, 203, 239, 259, 253, 202, 252, 257, 246, 218, 248, 247, 224, 256, 243, 242, 211, 217, 210, 241, 240, 238, 212, 249, 244, 216, 245,220,221, 209, 250, 251, 254,],
+    903: [201, 203, 239, 259, 253, 202, 252, 257, 246,210, 218, 248, 247, 224, 256, 243, 242, 211, 217, 241, 240, 238, 212, 249, 244, 216, 245,220,221, 209, 250, 251, 254,],
 
     # 1001: Samsung
     # Algorytm: Wszystkie telefony marki Samsung na początku.
