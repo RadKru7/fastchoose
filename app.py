@@ -106,11 +106,11 @@ answers_x_products = {
     
     # 501: Selfie
     # Algorytm: Telefony z najlepszym przednim aparatem (wysoka rozdzielczość, autofocus) na początku listy.
-    501: [201, 243, 259, 248, 237, 241, 245, 215, 240, 224, 239, 247, 257,258, 218, 202, 246, 203, 211, 210, 238, 242, 212, 249, 244, 216, 209, 250, 251, 252, 253, 254, 217],
+    501: [201, 243, 259, 248, 237, 241, 245, 215, 240, 224,210, 239, 247, 257,258, 218, 202, 246, 203, 211, 238, 242, 212, 249, 244, 216, 209, 250, 251, 252, 253, 254, 217],
 
     # 502: Zdjęcia nocne
     # Algorytm: Telefony z najlepszym trybem nocnym i jasnym obiektywem na początku listy.
-    502: [258, 243, 201, 245, 244, 237, 224, 215, 259, 240, 239, 248, 247, 253, 218, 256,257, 202, 246, 211, 217, 252, 203, 210, 241, 238, 242, 212, 249, 216, 209, 250, 251, 254],
+    502: [258, 243, 201, 245, 244, 237, 224, 215, 259, 240, 239, 248, 247,210, 253, 218, 256,257, 202, 246, 211, 217, 252, 203, 241, 238, 242, 212, 249, 216, 209, 250, 251, 254],
 
     # 503: Wszechstronny aparat
     # Algorytm: Telefony z kilkoma obiektywami, dobrym zoomem, szerokim kątem, makro itd.
