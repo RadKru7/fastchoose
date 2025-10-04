@@ -400,8 +400,8 @@ product_links_db = {
 
     # OnePlus – szeroko Amazon UK/EU, słabo w USA
     248: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9]},        # OnePlus 12
-    249: {'pl': [1,3], 'en': [4,5,6]], 'es': [7,8,9]},        # OnePlus Nord 3
-    259: {'pl': [1,3], 'en': [4,5,6]], 'es': [7,8,9]},        # OnePlus 13
+    249: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9]},        # OnePlus Nord 3
+    259: {'pl': [1,3], 'en': [4,5,6], 'es': [7,8,9]},        # OnePlus 13
 
     # Tecno, Infinix – głównie Allegro, MediaMarkt, czasem Amazon.es/mx
     250: {'pl': [1,2], 'en': [], 'es': [7,8]},         # Tecno Spark 20
