@@ -405,7 +405,7 @@ product_links_db = {
 
     # Tecno, Infinix – głównie Allegro, MediaMarkt, czasem Amazon.es/mx
     250: {'pl': [1,2], 'en': [], 'es': [7,8]},         # Tecno Spark 20
-    251: {'pl': [1,2], 'en': [], 'es': [7,8]},         # Infinix Hot 40
+    251: {'pl': [1,2], 'en': [], 'es': [7,8]}         # Infinix Hot 40
 }
 # --- Punkty końcowe API ---
 
