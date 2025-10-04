@@ -75,7 +75,7 @@ answers_x_products = {
 
     # 202: Zdjęcia i filmy (aparat)
     # Algorytm: Najlepsze aparaty (najwyższa jakość zdjęć, zoom, tryby nocne, stabilizacja) na początku listy.
-    202: [258, 201, 211, 245, 244, 237, 215, 224, 240, 239, 248, 257, 247, 218, 243, 253, 252, 202, 246, 203, 210, 241, 238, 242, 212, 249, 255, 216, 209, 250, 251, 254, 217],
+    202: [258, 201, 211, 245, 244, 237, 215, 224, 240, 259, 239, 248, 257, 247, 218, 243, 253, 252, 202, 246, 203, 210, 241, 238, 242, 212, 249, 255, 216, 209, 250, 251, 254, 217],
 
     # 203: Gry (wydajność)
     # Algorytm: Telefony z najmocniejszym procesorem, najlepszym GPU, dużą pamięcią RAM i szybkim ekranem na początku listy.
@@ -110,7 +110,7 @@ answers_x_products = {
 
     # 502: Zdjęcia nocne
     # Algorytm: Telefony z najlepszym trybem nocnym i jasnym obiektywem na początku listy.
-    502: [258, 243, 201, 245, 244, 237, 224, 215, 240, 239, 248, 247, 253, 218, 256,257, 202, 246, 211, 217, 252, 203, 210, 241, 238, 242, 212, 249, 216, 209, 250, 251, 254],
+    502: [258, 243, 201, 245, 244, 237, 224, 215, 259, 240, 239, 248, 247, 253, 218, 256,257, 202, 246, 211, 217, 252, 203, 210, 241, 238, 242, 212, 249, 216, 209, 250, 251, 254],
 
     # 503: Wszechstronny aparat
     # Algorytm: Telefony z kilkoma obiektywami, dobrym zoomem, szerokim kątem, makro itd.
@@ -138,7 +138,7 @@ answers_x_products = {
 
     # 703: Standardowa wydajność
     # Algorytm: Telefony z podstawowym, ale stabilnym SoC, niższa cena.
-    703: [251, 250, 209, 212, 211, 216, 249, 244, 217, 245, 246, 248, 218, 224, 241, 247, 243, 242, 210, 255, 252, 253, 240, 238, 239, 202, 203, 201],
+    703: [251, 250, 209, 212, 211, 216, 249, 244, 217, 245, 246, 248,259, 218, 224, 241, 247, 243, 242, 210, 255, 252, 253, 240, 238, 239, 202, 203, 201],
 
     # 801: Android
     # Algorytm: Wszystkie telefony z Androidem na początku listy.
