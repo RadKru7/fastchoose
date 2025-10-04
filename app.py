@@ -178,7 +178,7 @@ answers_x_products = {
 
     # 1101: Bardzo ważne szybkie ładowanie
     # Algorytm: Telefony z najszybszym ładowaniem na początku listy.
-    1101: [239, 257, 259, 248, 258, 238, 243, 252 ,253, 246, 256, 218, 241, 247,224, 242, 211, 217, 210, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 254],
+    1101: [239, 257, 259, 248, 258, 238, 243, 252 ,253,210, 246, 256, 218, 241, 247,224, 242, 211, 217, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 254],
 
     # 1102: Neutralne szybkie ładowanie
     # Algorytm: Telefony z szybkim (ale nie topowym) ładowaniem na początku.
