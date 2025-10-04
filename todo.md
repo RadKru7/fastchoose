@@ -16,7 +16,7 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
     
 16. **dodaj jeszcze po jednym flagowcu od innych marek - do rozwarzenia**
     17. **Wygenruj nowe grafiki dla nowych modeli **
-    -  Motorola Razr Ultra
+    -  Motorola Razr 60 Ultra
     -  Moto G Stylus 5G
     -  Vivo V50
     -  Honor 200
