@@ -122,7 +122,7 @@ answers_x_products = {
 
     # 602: 256GB
     # Algorytm: Telefony z minimum 256GB pamięci, najtańsze na początku.
-    602: [245, 246, 257, 248,258, 218,259, 256, 241, 253, 252,255, 247, 243, 242,224, 246, 240, 238, 239, 202, 203, 201, 254, 251, 250, 209, 212, 210, 211, 216, 249, 244, 217],
+    602: [245, 246, 257, 258, 218,259, 256, 241, 253, 252,255, 247, 243, 242,224, 246, 240, 238, 239, 202, 203, 201, 254, 251, 250, 209, 212, 210, 211, 216, 249, 244, 217],
 
     # 603: 512GB+
     # Algorytm: Telefony z minimum 512GB pamięci lub więcej, od najtańszego do najdroższego.
@@ -142,7 +142,7 @@ answers_x_products = {
 
     # 801: Android
     # Algorytm: Wszystkie telefony z Androidem na początku listy.
-    801: [239, 259, 248,258, 238, 257, 240, 241, 246,256, 255, 218, 247, 243, 224, 242, 211, 217, 212, 254, 250, 251, 244, 249, 216, 245, 252, 253],
+    801: [239, 259, 258, 238, 257, 240, 241,248, 246,256, 255, 218, 247, 243, 224, 242, 211, 217, 212, 254, 250, 251, 244, 249, 216, 245, 252, 253],
 
     # 802: iOS
     # Algorytm: Wszystkie telefony Apple na początku listy.
@@ -154,7 +154,7 @@ answers_x_products = {
     
     # 901: Zoom optyczny
     # Algorytm: Telefony z najlepszym zoomem optycznym na początku.
-    901: [201, 248, 259, 203, 258, 205, 207, 211, 243, 246, 252, 253],
+    901: [201, 259, 203, 258, 248, 205, 207, 211, 243, 246, 252, 253],
 
     # 902: Stabilizacja video
     # Algorytm: Telefony z najlepszą stabilizacją OIS/EIS na początku.
@@ -182,7 +182,7 @@ answers_x_products = {
 
     # 1102: Neutralne szybkie ładowanie
     # Algorytm: Telefony z szybkim (ale nie topowym) ładowaniem na początku.
-    1102: [241, 246,258, 252, 253, 218, 239, 238, 259, 248, 211, 217, 257,  210, 240,224, 201,256, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 243, 242, 247, 254],
+    1102: [241, 246, 258, 252, 253, 218, 239, 238, 259, 248, 211, 217, 257,  210, 240,224, 201,256, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 243, 242, 247, 254],
 
     # 1103: Nie ważne szybkie ładowanie
     # Algorytm: Szybkość ładowania nie ma znaczenia – dowolna kolejność.
