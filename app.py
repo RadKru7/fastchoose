@@ -67,31 +67,31 @@ answers_x_products = {
 
     # 103: Najdroższe telefony
     # Algorytm: Telefony posortowane malejąco po cenie – najdroższy jako pierwszy, najtańszy jako ostatni.
-    103: [258, 259, 243, 257, 239, 248, 238, 253, 252, 240, 246, 242, 247, 241, 256, 218, 245, 201, 203, 202, 244, 249, 216, 211, 210, 212, 209, 250, 251, 254, 217],
+    103: [258, 259, 243, 257, 239, 248, 238, 253, 252, 240, 246, 242, 247, 241, 256, 218, 245, 201, 203,224, 202, 244, 249, 216, 211, 210, 212, 209, 250, 251, 254, 217],
 
     # 201: Dzwonienie/SMS
     # Algorytm: Telefony z najprostszą obsługą, dobrą baterią, solidnością i niską ceną na początku listy.
-    201: [251, 250, 209, 212, 259, 211, 216, 249, 244, 255, 217, 245, 246, 248,257,210, 218, 241, 247, 243, 242, 240, 238, 239, 202, 203, 201, 252, 253, 254 ],
+    201: [251, 250, 209, 212, 259, 211, 216, 249, 244, 255, 217, 245, 246, 248,257,210, 218, 241, 247, 243, 242,224, 240, 238, 239, 202, 203, 201, 252, 253, 254 ],
 
     # 202: Zdjęcia i filmy (aparat)
     # Algorytm: Najlepsze aparaty (najwyższa jakość zdjęć, zoom, tryby nocne, stabilizacja) na początku listy.
-    202: [239, 248, 257, 247, 218, 243, 253, 252, 202, 246, 211, 201, 203, 210, 241, 240, 238, 242, 212, 249, 255, 244, 216, 245, 209, 250, 251, 254, 217],
+    202: [258, 201, 211, 245, 244, 237, 215, 224, 240, 239, 248, 257, 247, 218, 243, 253, 252, 202, 246, 203, 210, 241, 238, 242, 212, 249, 255, 216, 209, 250, 251, 254, 217],
 
     # 203: Gry (wydajność)
     # Algorytm: Telefony z najmocniejszym procesorem, najlepszym GPU, dużą pamięcią RAM i szybkim ekranem na początku listy.
-    203: [239, 248, 238, 240, 246, 259, 202, 257, 241, 218, 211, 201, 203, 210, 242, 243, 247, 212, 249, 244, 216, 245, 253, 252, 209, 250, 251, 254, 217, 255],
+    203: [259, 257, 256, 249, 213, 241, 230, 228, 224, 239, 248, 238, 240, 246, 202, 218, 211, 201, 203, 210, 242, 243, 247, 212, 244, 216, 245, 253, 252, 209, 250, 251, 254, 217, 255],
 
     # 301: Bateria bardzo ważna
     # Algorytm: Telefony z największą pojemnością baterii i najlepszą optymalizacją na początku listy.
-    301: [259, 248, 239, 238, 218, 246, 241, 211, 240, 249,255, 244, 216, 245, 257, 212, 209, 250, 251, 202, 243, 242, 201,210, 203, 247, 252, 253, 254,217],
+    301: [220, 243, 211, 249, 241, 237, 248, 239, 238, 218, 259, 246, 240, 255, 244, 216, 245,224, 257, 212, 209, 250, 251, 202, 242, 201,210, 203, 247, 252, 253, 254,217],
 
     # 302: Bateria ważna, ale nie najważniejsza
     # Algorytm: Telefony z dobrą baterią, ale też dobrą ogólną specyfikacją.
-    302: [241, 246, 218, 243, 239, 238, 211, 258, 256, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 242, 247, 217, 210, 248, 252, 253, 254],
+    302: [220, 241, 246, 218, 243, 239, 238, 211, 258, 256, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 242, 247, 217, 210, 248, 252, 253, 254],
 
     # 303: Mało ważna bateria
-    # Algorytm: Priorytet dla innych cech, np. wydajność, aparat, design – bateria nie jest brana pod uwagę.
-    303: [239, 238, 240, 241, 203, 259, 246, 248, 218, 247, 243, 201, 256, 242, 211, 202, 217, 210, 212, 209, 250, 251, 244, 249, 216, 245, 252, 253, 254],
+    # Algorytm: nie uwględnia tej odpowiedzi gdyż jest nie istotna dla użytkownika
+    303: [0],
 
     # 401: Duży ekran , 6.7 cala i więcej
     # Algorytm: Telefony z największym ekranem na początku listy.
@@ -106,47 +106,47 @@ answers_x_products = {
     
     # 501: Selfie
     # Algorytm: Telefony z najlepszym przednim aparatem (wysoka rozdzielczość, autofocus) na początku listy.
-    501: [248, 239, 247, 257,258, 218, 202,259, 246, 201, 203, 211, 210, 241, 240, 238, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 252, 253, 254, 217],
+    501: [201, 243, 248, 237, 241, 245, 215, 240, 224, 239, 247, 257,258, 218, 202,259, 246, 203, 211, 210, 238, 242, 212, 249, 244, 216, 209, 250, 251, 252, 253, 254, 217],
 
     # 502: Zdjęcia nocne
     # Algorytm: Telefony z najlepszym trybem nocnym i jasnym obiektywem na początku listy.
-    502: [239, 248, 247, 253, 218, 256,257, 202, 246, 211, 217, 252, 201, 203, 210, 241, 240, 238, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 254],
+    502: [258, 243, 201, 245, 244, 237, 224, 215, 240, 239, 248, 247, 253, 218, 256,257, 202, 246, 211, 217, 252, 203, 210, 241, 238, 242, 212, 249, 216, 209, 250, 251, 254],
 
     # 503: Wszechstronny aparat
     # Algorytm: Telefony z kilkoma obiektywami, dobrym zoomem, szerokim kątem, makro itd.
-    503: [247, 246, 201,258,253, 248,259, 257, 203, 239, 256, 218, 211, 252, 217, 202, 210, 241, 240, 238, 255, 242, 243, 212, 249, 244, 216, 245, 209, 250, 251, 254],
+    503: [258, 201, 211, 245, 244, 237, 215, 224, 240, 247, 246,253, 248,259, 257, 203, 239, 256, 218, 252, 217, 202, 210, 241, 238, 255, 242, 243, 212, 249, 216, 209, 250, 251, 254],
 
     # 601: 128GB
     # Algorytm: Telefony z minimum 128GB pamięci, najtańsze na początku.
-    601: [251, 250, 209, 212, 211,257, 255, 216, 249, 253, 244, 217, 245, 246, 248, 218,210, 241, 247, 243, 242, 240, 238, 239, 202, 203, 201, 252, 254,],
+    601: [251, 250, 209, 212, 211,257, 255, 216, 249, 253, 244, 217, 245, 246, 248,224, 218,210, 241, 247, 243, 242, 240, 238, 239, 202, 203, 201, 252, 254,],
 
     # 602: 256GB
     # Algorytm: Telefony z minimum 256GB pamięci, najtańsze na początku.
-    602: [245, 246, 257, 248,258, 218,259, 256, 241, 253, 252,255, 247, 243, 242, 246, 240, 238, 239, 202, 203, 201, 254, 251, 250, 209, 212, 210, 211, 216, 249, 244, 217],
+    602: [245, 246, 257, 248,258, 218,259, 256, 241, 253, 252,255, 247, 243, 242,224, 246, 240, 238, 239, 202, 203, 201, 254, 251, 250, 209, 212, 210, 211, 216, 249, 244, 217],
 
     # 603: 512GB+
     # Algorytm: Telefony z minimum 512GB pamięci lub więcej, od najtańszego do najdroższego.
-    603: [257, 239,259,253, 238, 256, 240,258, 246, 201, 241, 247,255, 243, 242, 203, 218, 248, 245, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 254,217],
+    603: [257, 239,259,253, 238, 256, 240,258, 246, 201, 241, 247,255, 243, 242,224, 203, 218, 248, 245, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 254,217],
 
     # 701: Top wydajność
     # Algorytm: Telefony z najlepszym SoC, największą ilością RAM, najnowszymi technologiami.
-    701: [248, 201, 239, 238, 240,258, 246, 202, 241, 218, 211, 203, 210,256, 242, 243, 247, 212, 249, 244, 216, 245, 209, 250, 251, 252, 217],
+    701: [259, 257, 256, 249, 213, 214, 230, 228, 224, 248, 201, 239, 238, 240,258, 246, 202, 241, 218, 211, 203, 210, 242, 243, 247, 212, 244, 216, 245, 209, 250, 251, 252, 217],
 
     # 702: Wysoka wydajność do gier
     # Algorytm: Tak jak wyżej, z naciskiem na GPU i szybkie ekrany.
-    702: [239, 238, 240, 246, 259,257,258, 202, 241, 248, 218, 211, 217, 210, 256, 242, 201, 252, 253, 243, 247, 212, 249, 244, 203, 216,255, 245, 209, 250, 251, 254],
+    702: [239, 238, 240, 246, 259,257,258, 202, 241, 248, 218, 211, 217,224, 210, 256, 242, 201, 252, 253, 243, 247, 212, 249, 244, 203, 216,255, 245, 209, 250, 251, 254],
 
     # 703: Standardowa wydajność
     # Algorytm: Telefony z podstawowym, ale stabilnym SoC, niższa cena.
-    703: [251, 250, 209, 212, 211, 216, 249, 244, 217, 245, 246, 248, 218, 241, 247, 243, 242, 210, 255, 252, 253, 240, 238, 239, 202, 203, 201],
+    703: [251, 250, 209, 212, 211, 216, 249, 244, 217, 245, 246, 248, 218, 224, 241, 247, 243, 242, 210, 255, 252, 253, 240, 238, 239, 202, 203, 201],
 
     # 801: Android
     # Algorytm: Wszystkie telefony z Androidem na początku listy.
-    801: [239, 259, 248,258, 238, 257, 240, 241, 246,256, 255, 218, 247, 243, 242, 211, 217, 212, 254, 250, 251, 244, 249, 216, 245, 252, 253],
+    801: [239, 259, 248,258, 238, 257, 240, 241, 246,256, 255, 218, 247, 243, 224, 242, 211, 217, 212, 254, 250, 251, 244, 249, 216, 245, 252, 253],
 
     # 802: iOS
     # Algorytm: Wszystkie telefony Apple na początku listy.
-    802: [201, 202, 203, 239, 248, 238, 240, 241, 246, 218, 247, 243, 242, 211, 217, 210, 212, 209, 250, 251, 244, 249, 216],
+    802: [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 239, 248, 238, 240, 241, 246, 218, 247, 243, 242, 211, 217, 212, 250, 251, 244, 249, 216],
 
     # 803: Nie mam preferencji
     # Jeżeli nie ma preferencji nie naliczaj punktów za tą odpowiedź.
@@ -154,15 +154,15 @@ answers_x_products = {
     
     # 901: Zoom optyczny
     # Algorytm: Telefony z najlepszym zoomem optycznym na początku.
-    901: [201, 248, 259,203,258, 205, 207, 211, 243, 246, 252, 253],
+    901: [201, 248, 259, 203, 258, 205, 207, 211, 243, 246, 252, 253],
 
     # 902: Stabilizacja video
     # Algorytm: Telefony z najlepszą stabilizacją OIS/EIS na początku.
-    902: [243, 248, 253,258,259, 203, 257, 252, 202, 210, 242, 244, 255,256, 245, 201, 246, 249, 211, 212, 241, 240, 216, 209, 218, 217, 239, 247, 238, 250, 251],
+    902: [258, 201, 211, 245, 244, 237, 215, 224, 240, 243, 248, 253, 259, 203, 257, 252, 202, 210, 242, 255, 224, 256, 246, 249, 212, 241, 216, 209, 218, 217, 239, 247, 238, 250, 251],
 
     # 903: Jakość zdjęć nocnych
     # Algorytm: Telefony z najlepszym trybem nocnym i dużą matrycą na początku.
-    903: [201, 203, 239,259,253, 202, 252, 257, 246, 218, 248, 247,256, 243, 242, 211, 217, 210, 241, 240, 238, 212, 249, 244, 216, 245, 209, 250, 251, 254,],
+    903: [201, 203, 239, 259, 253, 202, 252, 257, 246, 218, 248, 247, 224, 256, 243, 242, 211, 217, 210, 241, 240, 238, 212, 249, 244, 216, 245, 209, 250, 251, 254,],
 
     # 1001: Samsung
     # Algorytm: Wszystkie telefony marki Samsung na początku.
@@ -174,15 +174,15 @@ answers_x_products = {
 
     # 1003: Inne marki
     # Algorytm: Preferuje i punktuje marki inne niż apple i samsung.
-    1003: [248, 259,253, 258, 245,256, 252, 246, 240, 238, 255, 239, 241, 254, 247, 243, 242, 253, 254,250, 251, 249, 244],
+    1003: [248, 259,253, 258, 245,256, 252, 246, 240,224, 238, 255, 239, 241, 254, 247, 243, 242, 253, 254,250, 251, 249, 244],
 
     # 1101: Bardzo ważne szybkie ładowanie
     # Algorytm: Telefony z najszybszym ładowaniem na początku listy.
-    1101: [239, 257, 259, 248, 258, 238, 243, 252 ,253, 246, 256, 218, 241, 247, 242, 211, 217, 210, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 254],
+    1101: [239, 257, 259, 248, 258, 238, 243, 252 ,253, 246, 256, 218, 241, 247,224, 242, 211, 217, 210, 240, 201, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 254],
 
     # 1102: Neutralne szybkie ładowanie
     # Algorytm: Telefony z szybkim (ale nie topowym) ładowaniem na początku.
-    1102: [241, 246,258, 252, 253, 218, 239, 238, 259, 248, 211, 217, 257,  210, 240, 201,256, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 243, 242, 247, 254],
+    1102: [241, 246,258, 252, 253, 218, 239, 238, 259, 248, 211, 217, 257,  210, 240,224, 201,256, 203, 249, 244, 216, 245, 212, 209, 250, 251, 202, 243, 242, 247, 254],
 
     # 1103: Nie ważne szybkie ładowanie
     # Algorytm: Szybkość ładowania nie ma znaczenia – dowolna kolejność.
@@ -235,13 +235,14 @@ products_db = {
     232: {'pl': 'Oppo Reno 11', 'en': 'Oppo Reno 11', 'es': 'Oppo Reno 11', 'image_path': 'graphic/oppo_reno_11.png', 'price_level': 2},
     233: {'pl': 'Realme 11', 'en': 'Realme 11', 'es': 'Realme 11', 'image_path': 'graphic/realme_11.png', 'price_level': 1},
     234: {'pl': 'Realme 10', 'en': 'Realme 10', 'es': 'Realme 10', 'image_path': 'graphic/realme_10.png', 'price_level': 1},
-    235: {'pl': 'Vivo Y36', 'en': 'Vivo Y36', 'es': 'Vivo Y36', 'image_path': 'graphic/vivo_y36.png', 'price_level': 1},
-    236: {'pl': 'Vivo Y16', 'en': 'Vivo Y16', 'es': 'Vivo Y16', 'image_path': 'graphic/vivo_y16.png', 'price_level': 1},
-    237: {'pl': 'Honor 90', 'en': 'Honor 90', 'es': 'Honor 90', 'image_path': 'graphic/honor_90.png', 'price_level': 2},
-    238: {'pl': 'Honor X7b', 'en': 'Honor X7b', 'es': 'Honor X7b', 'image_path': 'graphic/honor_x7b.png', 'price_level': 1},
-    239: {'pl': 'Motorola Moto G54 Power', 'en': 'Motorola Moto G54 Power', 'es': 'Motorola Moto G54 Power', 'image_path': 'graphic/motorola_moto_g54_power.png', 'price_level': 1},
-    240: {'pl': 'Motorola Moto G84', 'en': 'Motorola Moto G84', 'es': 'Motorola Moto G84', 'image_path': 'graphic/motorola_moto_g84.png', 'price_level': 1},
-    241: {'pl': 'Motorola Edge 40 Neo', 'en': 'Motorola Edge 40 Neo', 'es': 'Motorola Edge 40 Neo', 'image_path': 'graphic/motorola_edge_40_neo.png', 'price_level': 2},
+    235: {'pl': 'Vivo Y29 5G', 'en': 'Vivo Y29 5G', 'es': 'Vivo Y29 5G', 'image_path': 'graphic/vivo_y36.png', 'price_level': 1},
+    236: {'pl': 'Vivo V50', 'en': 'Vivo V50', 'es': 'Vivo V50', 'image_path': 'graphic/vivo_y16.png', 'price_level': 2},
+    237: {'pl': 'Honor 200', 'en': 'Honor 200', 'es': 'Honor 200', 'image_path': 'graphic/honor_90.png', 'price_level': 2},
+    238: {'pl': 'Honor X7d 5G', 'en': 'Honor X7d 5G', 'es': 'Honor X7d 5G', 'image_path': 'graphic/honor_x7b.png', 'price_level': 1},
+    
+    239: {'pl': 'Motorola Moto G55', 'en': 'Motorola Moto G55', 'es': 'Motorola Moto G55', 'image_path': 'graphic/motorola_moto_g54_power.png', 'price_level': 1},
+    240: {'pl': 'Moto G Stylus 5G', 'en': 'Moto G Stylus 5G', 'es': 'Moto G Stylus 5G', 'image_path': 'graphic/motorola_moto_g84.png', 'price_level': 2},
+    241: {'pl': 'Motorola Razr 60 Ultra', 'en': 'Motorola Razr 60 Ultra', 'es': 'Motorola Razr 60 Ultra', 'image_path': 'graphic/motorola_edge_40_neo.png', 'price_level': 3},
 
     # Google Pixels
     242: {'pl': 'Google Pixel 8', 'en': 'Google Pixel 8', 'es': 'Google Pixel 8', 'image_path': 'graphic/google_pixel_8.png', 'price_level': 3},
@@ -253,10 +254,10 @@ products_db = {
     258: {'pl': 'Google Pixel 10 Pro XL', 'en': 'Google Pixel 10 Pro XL', 'es': 'Google Pixel 10 Pro XL', 'image_path': 'graphic/pixel_10_pro_xl.png', 'price_level': 3},
     
     246: {'pl': 'Huawei P60 Pro', 'en': 'Huawei P60 Pro', 'es': 'Huawei P60 Pro', 'image_path': 'graphic/huawei_p60_pro.png', 'price_level': 3},
-    247: {'pl': 'Huawei Nova 12', 'en': 'Huawei Nova 12', 'es': 'Huawei Nova 12', 'image_path': 'graphic/huawei_nova_12.png', 'price_level': 2},
+    247: {'pl': 'Huawei Nova 13', 'en': 'Huawei Nova 13', 'es': 'Huawei Nova 13', 'image_path': 'graphic/huawei_nova_12.png', 'price_level': 2},
     
     248: {'pl': 'OnePlus 12', 'en': 'OnePlus 12', 'es': 'OnePlus 12', 'image_path': 'graphic/oneplus_12.png', 'price_level': 3},
-    249: {'pl': 'OnePlus Nord 3', 'en': 'OnePlus Nord 3', 'es': 'OnePlus Nord 3', 'image_path': 'graphic/oneplus_nord_3.png', 'price_level': 2},
+    249: {'pl': 'OnePlus Nord 4', 'en': 'OnePlus Nord 4', 'es': 'OnePlus Nord 4', 'image_path': 'graphic/oneplus_nord_3.png', 'price_level': 2},
     259: {'pl': 'OnePlus 13', 'en': 'OnePlus 13', 'es': 'OnePlus 13', 'image_path': 'graphic/oneplus_12.png', 'price_level': 3},
     
     250: {'pl': 'Tecno Spark 20', 'en': 'Tecno Spark 20', 'es': 'Tecno Spark 20', 'image_path': 'graphic/tecno_spark_20.png', 'price_level': 1},
@@ -375,14 +376,14 @@ product_links_db = {
     235: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Vivo Y36
     236: {'pl': [1,2,3], 'en': [4,5,6], 'es': [7,8,9]}, # Vivo Y16
 
-    # Honor 90 – możliwy brak na Amazon.com, ale szeroki dostęp w Europie
+    # Honor 
     237: {'pl': [1,2,3], 'en': [5,6], 'es': [7,8,9]},   # Honor 90
-    238: {'pl': [1,2,3], 'en': [], 'es': [7,8]},        # Honor X7b – głównie EU i Am. Łac.
+    238: {'pl': [1,2,3], 'en': [], 'es': [7,8]},        # Honor X7b
 
     # Motorola – najnowsze modele nie zawsze na Amazon USA/UK
-    239: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Moto G54 Power
-    240: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Moto G84
-    241: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Edge 40 Neo
+    239: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Moto G55'
+    240: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Moto G Stylus 5G
+    241: {'pl': [1,2,3], 'en': [6], 'es': [8,9]},      # Motorola Razr 60 Ultra
 
     # Google Pixel – szeroko w Amazon.com/co.uk, czasami mniej na Amazon.es/mx
     242: {'pl': [1,2,3], 'en': [4,5], 'es': [7]},      # Google Pixel 8
@@ -395,7 +396,7 @@ product_links_db = {
     
     # Huawei – ograniczona dostępność w USA/UK, lepsza w Europie i Am. Łac.
     246: {'pl': [1,2,3], 'en': [], 'es': [7,8]},       # Huawei P60 Pro
-    247: {'pl': [1,3], 'en': [], 'es': []},            # Huawei Nova 12
+    247: {'pl': [1,3], 'en': [], 'es': []},            # Huawei Nova 13
 
     # OnePlus – szeroko Amazon UK/EU, słabo w USA
     248: {'pl': [1,3], 'en': [5], 'es': [7,8]},        # OnePlus 12
