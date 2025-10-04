@@ -192,13 +192,13 @@ answers_x_products = {
 products_db = {
     # iPhone
     201: {'pl': 'iPhone 15 Pro Max', 'en': 'iPhone 15 Pro Max', 'es': 'iPhone 15 Pro Max', 'image_path': 'graphic/iphone_15_pro_max.png', 'price_level': 3},
-    202: {'pl': 'iPhone 15', 'en': 'iPhone 15', 'es': 'iPhone 15', 'image_path': 'graphic/iphone_15.png', 'price_level': 3},
+    202: {'pl': 'iPhone 15', 'en': 'iPhone 15', 'es': 'iPhone 15', 'image_path': 'graphic/iphone_15.png', 'price_level': 2},
     203: {'pl': 'iPhone 15 Pro', 'en': 'iPhone 15 Pro', 'es': 'iPhone 15 Pro', 'image_path': 'graphic/iphone_15_pro.png', 'price_level': 3},
     204: {'pl': 'iPhone 15 Plus', 'en': 'iPhone 15 Plus', 'es': 'iPhone 15 Plus', 'image_path': 'graphic/iphone_15_plus.png', 'price_level': 3},
     205: {'pl': 'iPhone 14 Pro Max', 'en': 'iPhone 14 Pro Max', 'es': 'iPhone 14 Pro Max', 'image_path': 'graphic/iphone_14_pro_max.png', 'price_level': 3},
-    206: {'pl': 'iPhone 14', 'en': 'iPhone 14', 'es': 'iPhone 14', 'image_path': 'graphic/iphone_14.png', 'price_level': 3},
-    207: {'pl': 'iPhone 14 Pro', 'en': 'iPhone 14 Pro', 'es': 'iPhone 14 Pro', 'image_path': 'graphic/iphone_14_pro.png', 'price_level': 3},
-    208: {'pl': 'iPhone 13 Pro', 'en': 'iPhone 13 Pro', 'es': 'iPhone 13 Pro', 'image_path': 'graphic/iphone_13.png', 'price_level': 3},
+    206: {'pl': 'iPhone 14', 'en': 'iPhone 14', 'es': 'iPhone 14', 'image_path': 'graphic/iphone_14.png', 'price_level': 2},
+    207: {'pl': 'iPhone 14 Pro', 'en': 'iPhone 14 Pro', 'es': 'iPhone 14 Pro', 'image_path': 'graphic/iphone_14_pro.png', 'price_level': 2},
+    208: {'pl': 'iPhone 13 Pro', 'en': 'iPhone 13 Pro', 'es': 'iPhone 13 Pro', 'image_path': 'graphic/iphone_13.png', 'price_level': 2},
     209: {'pl': 'iPhone SE 3rd Gen', 'en': 'iPhone SE 3rd Gen', 'es': 'iPhone SE 3rd Gen', 'image_path': 'graphic/iphone_se_3rd_gen.png', 'price_level': 1},
     210: {'pl': 'iPhone 13', 'en': 'iPhone 13', 'es': 'iPhone 13', 'image_path': 'graphic/iphone_12.png', 'price_level': 2},
 
