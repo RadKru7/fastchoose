@@ -106,7 +106,7 @@ answers_x_products = {
     
     # 501: Selfie
     # Algorytm: Telefony z najlepszym przednim aparatem (wysoka rozdzielczość, autofocus) na początku listy.
-    501: [201, 243, 248, 237, 241, 245, 215, 240, 224, 239, 247, 257,258, 218, 202,259, 246, 203, 211, 210, 238, 242, 212, 249, 244, 216, 209, 250, 251, 252, 253, 254, 217],
+    501: [201, 243, 248, 237, 241, 245, 215, 259, 240, 224, 239, 247, 257,258, 218, 202, 246, 203, 211, 210, 238, 242, 212, 249, 244, 216, 209, 250, 251, 252, 253, 254, 217],
 
     # 502: Zdjęcia nocne
     # Algorytm: Telefony z najlepszym trybem nocnym i jasnym obiektywem na początku listy.
@@ -114,7 +114,7 @@ answers_x_products = {
 
     # 503: Wszechstronny aparat
     # Algorytm: Telefony z kilkoma obiektywami, dobrym zoomem, szerokim kątem, makro itd.
-    503: [258, 201, 211, 245, 244, 237, 215, 224, 240, 247, 246,253, 248,259, 257, 203, 239, 256, 218, 252, 217, 202, 210, 241, 238, 255, 242, 243, 212, 249, 216, 209, 250, 251, 254],
+    503: [258, 201, 211, 245, 244, 237, 259, 215, 224, 240, 247, 246,253, 248, 257, 203, 239, 256, 218, 252, 217, 202, 210, 241, 238, 255, 242, 243, 212, 249, 216, 209, 250, 251, 254],
 
     # 601: 128GB
     # Algorytm: Telefony z minimum 128GB pamięci, najtańsze na początku.
@@ -158,7 +158,7 @@ answers_x_products = {
 
     # 902: Stabilizacja video
     # Algorytm: Telefony z najlepszą stabilizacją OIS/EIS na początku.
-    902: [258, 201, 211, 245, 244, 237, 215, 224, 240, 243, 248, 253, 259, 203, 257, 252, 202, 210, 242, 255, 224, 256, 246, 249, 212, 241, 216, 209, 218, 217, 239, 247, 238, 250, 251],
+    902: [258, 201, 211, 245, 244, 259, 237, 215, 224, 240, 243, 248, 253, 203, 257, 252, 202, 210, 242, 255, 224, 256, 246, 249, 212, 241, 216, 209, 218, 217, 239, 247, 238, 250, 251],
 
     # 903: Jakość zdjęć nocnych
     # Algorytm: Telefony z najlepszym trybem nocnym i dużą matrycą na początku.
