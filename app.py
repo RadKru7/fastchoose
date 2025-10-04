@@ -67,7 +67,7 @@ answers_x_products = {
 
     # 103: Najdroższe telefony
     # Algorytm: Telefony posortowane malejąco po cenie – najdroższy jako pierwszy, najtańszy jako ostatni.
-    103: [258, 259, 243, 257, 239, 248, 238, 253, 252, 240, 246, 242, 247, 241, 256, 218, 245, 201, 203,224, 202, 244, 249, 216, 211, 210, 212, 209, 250, 251, 254, 217],
+    103: [258, 259, 243, 257, 239, 241, 248, 238, 253, 252, 240, 246, 242, 247, 256, 218, 245, 201, 203,224, 202, 244, 249, 216, 211, 210, 212, 209, 250, 251, 254, 217],
 
     # 201: Dzwonienie/SMS
     # Algorytm: Telefony z najprostszą obsługą, dobrą baterią, solidnością i niską ceną na początku listy.
@@ -95,7 +95,7 @@ answers_x_products = {
 
     # 401: Duży ekran , 6.7 cala i więcej
     # Algorytm: Telefony z największym ekranem na początku listy.
-    401: [259, 258, 202, 204, 205, 211, 221, 226, 227, 232, 233, 237, 238, 243, 247, 248, 249, 251],
+    401: [241, 259, 258, 202, 204, 205, 211, 221, 226, 227, 232, 233, 237, 238, 243, 247, 248, 249, 251],
 
     # 402: Standardowy ekran 6.5-6.69 cala
     # Algorytm: Telefony o przekątnej ekranu w okolicach  cala, reszta dalej.
@@ -154,7 +154,7 @@ answers_x_products = {
     
     # 901: Zoom optyczny
     # Algorytm: Telefony z najlepszym zoomem optycznym na początku.
-    901: [201, 259, 203, 258, 248, 205, 207, 211, 243, 246, 252, 253],
+    901: [201, 259, 203, 258, 248, 205, 257, 207, 211, 243, 246, 252, 253],
 
     # 902: Stabilizacja video
     # Algorytm: Telefony z najlepszą stabilizacją OIS/EIS na początku.
@@ -166,7 +166,7 @@ answers_x_products = {
 
     # 1001: Samsung
     # Algorytm: Wszystkie telefony marki Samsung na początku.
-    1001: [257, 248, 245, 246, 240, 238, 239, 241, 247, 243, 242, 218, 252, 253, 254, 250, 251, 209, 212, 211, 216, 249, 244, 217],
+    1001: [257,212, 211, 214, 221, 245, 246, 240, 238, 239, 241, 247, 243, 242, 218, 252, 253, 254, 248, 250, 251, 209, , 216, 249, 244, 217],
 
     # 1002: Apple
     # Algorytm: Wszystkie telefony marki Apple na początku.
@@ -174,7 +174,7 @@ answers_x_products = {
 
     # 1003: Inne marki
     # Algorytm: Preferuje i punktuje marki inne niż apple i samsung.
-    1003: [ 259, 253, 258, 245, 256, 248, 252, 246, 240,224, 238, 255, 239, 241, 254, 247, 243, 242, 253, 254,250, 251, 249, 244],
+    1003: [ 259, 253, 258, 245, 241, 256, 248, 252, 246, 240,224, 238, 255, 239, 254, 247, 243, 242, 253, 254,250, 251, 249, 244,257],
 
     # 1101: Bardzo ważne szybkie ładowanie
     # Algorytm: Telefony z najszybszym ładowaniem na początku listy.
