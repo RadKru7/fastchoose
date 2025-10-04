@@ -166,7 +166,7 @@ answers_x_products = {
 
     # 1001: Samsung
     # Algorytm: Wszystkie telefony marki Samsung na początku.
-    1001: [257,212, 211, 214, 221, 245, 246, 240, 238, 239, 241, 247, 243, 242, 218, 252, 253, 254, 248, 250, 251, 209, , 216, 249, 244, 217],
+    1001: [257,212, 211, 214, 221, 245, 246, 240, 238, 239, 241, 247, 243, 242, 218, 252, 253, 254, 248, 250, 251, 209, 216, 249, 244, 217],
 
     # 1002: Apple
     # Algorytm: Wszystkie telefony marki Apple na początku.
