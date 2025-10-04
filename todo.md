@@ -4,19 +4,22 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
 
 ------------****************<<<<<<<<<<<<<<<<<<\\\|||>>>>>>>>>>>>***************---------------
 
-4. **Opracuj metodologię wdrożenia CI/CD z rozdzieleniem środowiska testowego i produkcyjnego**  
-   Przygotuj plan oraz wytyczne dla wdrożenia procesu CI/CD w projekcie, tak aby możliwe było automatyczne publikowanie zmian na osobne środowisko testowe oraz produkcyjne. Uwzględnij narzędzia (np. GitHub Actions), automatyzację buildów, testów oraz deploymentu. Opisz jak rozdzielić konfiguracje dla testów i produkcji.
 
-5. **Dodaj Google Analytics i rejestrację w Google Analytics**  
+
+5. **Zaktualizuj Google Analytics i rejestrację w Google Analytics**  
    Dodaj integrację Google Analytics do strony, w tym pełną rejestrację projektu w Google Analytics. Zapewnij poprawne umieszczenie kodu śledzącego w szablonach, zgodność z RODO (możliwość zgody użytkownika) oraz dokumentację dla administratora.
 
 11. ***wykupienie domeny najlepiej z mailem na pierwszy rok**
     Dobrą opcją wydaje się  Google Domains
 12 **Najważniejsza rzecz to do - core to jest sortowanie telefonów do danej odpowidzi jest bardzo błędnie trzeba przeglądać jeszcze raz poszczegółne odpowiedzi i jeszcze raz posotować prawidłowo bo jest tragicznie żle**
-    np w pytniu o zoom optyczny na trzecim miesjcu jest telefon który takiego zomo nie ma
-15 **dodaj ikone do zakładki na przeglądarce jakieś fajne logo fastchoose**    
-16. **dodaj jeszcze po jednym flagowcu od innych marek - do rozwarzenia**
+    np w pytniu o zoom optyczny na trzecim miesjcu jest telefon który takiego zooma nie ma
     
+16. **dodaj jeszcze po jednym flagowcu od innych marek - do rozwarzenia**
+    17. **Wygenruj nowe grafiki dla nowych modeli **
+    -  Motorola Razr Ultra
+    -  Moto G Stylus 5G
+    -  Vivo V50
+    -  Honor 200
 
     
 **------------<<<<<<<<<<<<<<<<<<\\\|||>>>>>>>>>>>>--------------**
@@ -45,3 +48,6 @@ Archiwum
 [x] - 2025-09-24  10. Dodanie SEO słów i fraz kluczowych pod wyszukiwarki 
 [x] - 2025-09-28 13 **przycvisk lern more w cookies jest nieaktywny tzn prwoadzi do nikąd do poprawki przed go to prod**
 [x] - 2025-09-28  14. **Przyciski na mobilnej wersji są prezentowane podówjnie do diagnozy i korekty**
+[x] - 2025-09-26 4. **Opracuj metodologię wdrożenia CI/CD z rozdzieleniem środowiska testowego i produkcyjnego**  
+   Przygotuj plan oraz wytyczne dla wdrożenia procesu CI/CD w projekcie, tak aby możliwe było automatyczne publikowanie zmian na osobne środowisko testowe oraz produkcyjne. Uwzględnij narzędzia (np. GitHub Actions), automatyzację buildów, testów oraz deploymentu. Opisz jak rozdzielić konfiguracje dla testów i produkcji.
+[x] - 2025-09-27  15 **dodaj ikone do zakładki na przeglądarce jakieś fajne logo fastchoose**
