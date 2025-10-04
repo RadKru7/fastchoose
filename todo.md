@@ -20,7 +20,7 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
     -  Moto G Stylus 5G
     -  Vivo V50
     -  Honor 200
-
+17. **Przegląd listy product_links_db =  po zmianach i aktualizacji niektóeych telefonów głównie pixeli huiwei honor i xiaomoi**
     
 **------------<<<<<<<<<<<<<<<<<<\\\|||>>>>>>>>>>>>--------------**
 
