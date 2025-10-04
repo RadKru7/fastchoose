@@ -232,33 +232,33 @@ products_db = {
     
     # Oppo, Realme, Vivo, Honor, Motorola, Google, Huawei, OnePlus, Tecno, Infinix
     231: {'pl': 'Oppo A78', 'en': 'Oppo A78', 'es': 'Oppo A78', 'image_path': 'graphic/oppo_a78.png', 'price_level': 1},
-    232: {'pl': 'Oppo Reno 14', 'en': 'Oppo Reno 14', 'es': 'Oppo Reno 14', 'image_path': 'graphic/oppo_reno_11.png', 'price_level': 2},
+    232: {'pl': 'Oppo Reno 14', 'en': 'Oppo Reno 14', 'es': 'Oppo Reno 14', 'image_path': 'graphic/oppo_reno_14.png', 'price_level': 2},
     233: {'pl': 'Realme 14 5G', 'en': 'Realme 11', 'es': 'Realme 11', 'image_path': 'graphic/realme_11.png', 'price_level': 1},
-    234: {'pl': 'Realme 14 Pro+', 'en': 'Realme 10', 'es': 'Realme 10', 'image_path': 'graphic/realme_10.png', 'price_level': 1},
-    235: {'pl': 'Vivo Y29 5G', 'en': 'Vivo Y29 5G', 'es': 'Vivo Y29 5G', 'image_path': 'graphic/vivo_y36.png', 'price_level': 1},
-    236: {'pl': 'Vivo V50', 'en': 'Vivo V50', 'es': 'Vivo V50', 'image_path': 'graphic/vivo_y16.png', 'price_level': 2},
-    237: {'pl': 'Honor 200', 'en': 'Honor 200', 'es': 'Honor 200', 'image_path': 'graphic/honor_90.png', 'price_level': 2},
-    238: {'pl': 'Honor X7d 5G', 'en': 'Honor X7d 5G', 'es': 'Honor X7d 5G', 'image_path': 'graphic/honor_x7b.png', 'price_level': 1},
+    234: {'pl': 'Realme 14 Pro+', 'en': 'Realme 10', 'es': 'Realme 10', 'image_path': 'graphic/realme_14_pro.png', 'price_level': 1},
+    235: {'pl': 'Vivo Y29 5G', 'en': 'Vivo Y29 5G', 'es': 'Vivo Y29 5G', 'image_path': 'graphic/vivo_y29_5g.png', 'price_level': 1},
+    236: {'pl': 'Vivo V50', 'en': 'Vivo V50', 'es': 'Vivo V50', 'image_path': 'graphic/vivo_v50.png', 'price_level': 2},
+    237: {'pl': 'Honor 200', 'en': 'Honor 200', 'es': 'Honor 200', 'image_path': 'graphic/honor_200.png', 'price_level': 2},
+    238: {'pl': 'Honor X7d 5G', 'en': 'Honor X7d 5G', 'es': 'Honor X7d 5G', 'image_path': 'graphic/honor_x7d_5g.png', 'price_level': 1},
     
     239: {'pl': 'Motorola Moto G55', 'en': 'Motorola Moto G55', 'es': 'Motorola Moto G55', 'image_path': 'graphic/motorola_moto_g54_power.png', 'price_level': 1},
-    240: {'pl': 'Moto G Stylus 5G', 'en': 'Moto G Stylus 5G', 'es': 'Moto G Stylus 5G', 'image_path': 'graphic/motorola_moto_g84.png', 'price_level': 2},
-    241: {'pl': 'Motorola Razr 60 Ultra', 'en': 'Motorola Razr 60 Ultra', 'es': 'Motorola Razr 60 Ultra', 'image_path': 'graphic/motorola_edge_40_neo.png', 'price_level': 3},
+    240: {'pl': 'Moto G Stylus 5G', 'en': 'Moto G Stylus 5G', 'es': 'Moto G Stylus 5G', 'image_path': 'graphic/motorola_g_stylus_5g.png', 'price_level': 2},
+    241: {'pl': 'Motorola Razr 60 Ultra', 'en': 'Motorola Razr 60 Ultra', 'es': 'Motorola Razr 60 Ultra', 'image_path': 'graphic/motorola_razr_60_ultra.png', 'price_level': 3},
 
     # Google Pixels
     242: {'pl': 'Google Pixel 8', 'en': 'Google Pixel 8', 'es': 'Google Pixel 8', 'image_path': 'graphic/google_pixel_8.png', 'price_level': 3},
     243: {'pl': 'Google Pixel 8 Pro', 'en': 'Google Pixel 8 Pro', 'es': 'Google Pixel 8 Pro', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 3},
     244: {'pl': 'Google Pixel 7a', 'en': 'Google Pixel 7a', 'es': 'Google Pixel 7a', 'image_path': 'graphic/google_pixel_7a.png', 'price_level': 2},
     245: {'pl': 'Google Pixel 7', 'en': 'Google Pixel 7', 'es': 'Google Pixel 7', 'image_path': 'graphic/google_pixel_7.png', 'price_level': 2},
-    252: {'pl': 'Google Pixel 9', 'en': 'Google Pixel 9', 'es': 'Google Pixel 9', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 3},
-    253: {'pl': 'Google Pixel 10', 'en': 'Google Pixel 10', 'es': 'Google Pixel 10', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 3},
+    252: {'pl': 'Google Pixel 9', 'en': 'Google Pixel 9', 'es': 'Google Pixel 9', 'image_path': 'graphic/google_pixel_9.png', 'price_level': 3},
+    253: {'pl': 'Google Pixel 10', 'en': 'Google Pixel 10', 'es': 'Google Pixel 10', 'image_path': 'graphic/google_pixel_10.png', 'price_level': 3},
     258: {'pl': 'Google Pixel 10 Pro XL', 'en': 'Google Pixel 10 Pro XL', 'es': 'Google Pixel 10 Pro XL', 'image_path': 'graphic/pixel_10_pro_xl.png', 'price_level': 3},
     
     246: {'pl': 'Huawei P60 Pro', 'en': 'Huawei P60 Pro', 'es': 'Huawei P60 Pro', 'image_path': 'graphic/huawei_p60_pro.png', 'price_level': 3},
-    247: {'pl': 'Huawei Nova 13', 'en': 'Huawei Nova 13', 'es': 'Huawei Nova 13', 'image_path': 'graphic/huawei_nova_12.png', 'price_level': 2},
+    247: {'pl': 'Huawei Nova 13', 'en': 'Huawei Nova 13', 'es': 'Huawei Nova 13', 'image_path': 'graphic/huawei_nova_13.png', 'price_level': 2},
     
     248: {'pl': 'OnePlus 12', 'en': 'OnePlus 12', 'es': 'OnePlus 12', 'image_path': 'graphic/oneplus_12.png', 'price_level': 3},
     249: {'pl': 'OnePlus Nord 4', 'en': 'OnePlus Nord 4', 'es': 'OnePlus Nord 4', 'image_path': 'graphic/oneplus_nord_3.png', 'price_level': 2},
-    259: {'pl': 'OnePlus 13', 'en': 'OnePlus 13', 'es': 'OnePlus 13', 'image_path': 'graphic/oneplus_12.png', 'price_level': 3},
+    259: {'pl': 'OnePlus 13', 'en': 'OnePlus 13', 'es': 'OnePlus 13', 'image_path': 'graphic/oneplus_13.png', 'price_level': 3},
     
     250: {'pl': 'Tecno Spark 20', 'en': 'Tecno Spark 20', 'es': 'Tecno Spark 20', 'image_path': 'graphic/tecno_spark_20.png', 'price_level': 1},
     251: {'pl': 'Infinix Hot 40', 'en': 'Infinix Hot 40', 'es': 'Infinix Hot 40', 'image_path': 'graphic/infinix_hot_40.png', 'price_level': 1},
