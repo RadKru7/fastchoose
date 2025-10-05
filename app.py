@@ -193,7 +193,7 @@ answers_x_products = {
 products_db = {
     # iPhone
     201: {'pl': 'iPhone 15 Pro Max', 'en': 'iPhone 15 Pro Max', 'es': 'iPhone 15 Pro Max', 'image_path': 'graphic/iphone_15_pro_max.png', 'price_level': 3},
-    202: {'pl': 'iPhone 15', 'en': 'iPhone 15', 'es': 'iPhone 15', 'image_path': 'graphic/iphone_15.png', 'price_level': 2},
+    202: {'pl': 'iPhone 15', 'en': 'iPhone 15', 'es': 'iPhone 15', 'image_path': 'graphic/iphone_15.png', 'price_level': 3},
     203: {'pl': 'iPhone 15 Pro', 'en': 'iPhone 15 Pro', 'es': 'iPhone 15 Pro', 'image_path': 'graphic/iphone_15_pro.png', 'price_level': 3},
     204: {'pl': 'iPhone 15 Plus', 'en': 'iPhone 15 Plus', 'es': 'iPhone 15 Plus', 'image_path': 'graphic/iphone_15_plus.png', 'price_level': 3},
     205: {'pl': 'iPhone 14 Pro Max', 'en': 'iPhone 14 Pro Max', 'es': 'iPhone 14 Pro Max', 'image_path': 'graphic/iphone_14_pro_max.png', 'price_level': 3},
