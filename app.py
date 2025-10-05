@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, render_template, url_for
 from flask_cors import CORS
 import json
 import os # <--- WAŻNY IMPORT
+import requests  # geolokalizacja IP
 
 app = Flask(__name__)
 CORS(app)
@@ -411,6 +412,59 @@ product_links_db = {
 }
 # --- Punkty końcowe API ---
 
+# --- USTAWIENIA JĘZYKA: detekcja i mapowanie regionów ---
+SUPPORTED_LANGS = ['en', 'pl', 'es']
+LATAM_ES = {
+    'MX','AR','CO','PE','CL','UY','PY','BO','EC','VE','GT','SV','HN','NI','CR','PA','DO','PR'
+}
+COUNTRY_TO_LANG = {
+    'PL': 'pl',
+    'ES': 'es',
+    # Hiszpański dla LatAm
+    **{cc: 'es' for cc in LATAM_ES},
+}
+
+def _client_ip():
+    xff = request.headers.get('X-Forwarded-For', '')
+    if xff:
+        return xff.split(',')[0].strip()
+    return request.remote_addr
+
+def _geo_country_by_ip(ip):
+    try:
+        r = requests.get(f'https://ipapi.co/{ip}/json/', timeout=0.8)
+        if r.ok:
+            data = r.json()
+            cc = (data.get('country_code') or '').upper()
+            return cc or None
+    except Exception:
+        pass
+    return None
+
+def detect_language():
+    # 1) Parametr od użytkownika
+    p = request.args.get('language') or request.args.get('lang')
+    if p in SUPPORTED_LANGS:
+        return p
+    # 2) Cookie z poprzedniej wizyty
+    c = request.cookies.get('fc_lang')
+    if c in SUPPORTED_LANGS:
+        return c
+    # 3) Accept-Language z przeglądarki
+    best = request.accept_languages.best_match(SUPPORTED_LANGS)
+    if best:
+        return best
+    # 4) Geolokalizacja IP
+    ip = _client_ip()
+    if ip and ip not in ('127.0.0.1', '::1'):
+        cc = _geo_country_by_ip(ip)
+        if cc and cc in COUNTRY_TO_LANG:
+            return COUNTRY_TO_LANG[cc]
+    # 5) Domyślnie en
+    return 'en'
+
+# --- Punkty końcowe API ---
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -423,7 +477,7 @@ def quiz():
 def get_question():
     try:
         current_question_id = int(request.args.get('current_question_id', 1))
-        language = request.args.get('language', 'en')
+        language = request.args.get('language') or detect_language()
 
         question_data = questions_db.get(current_question_id)
         if not question_data:
@@ -451,12 +505,15 @@ def get_question():
                     'icon_url': answer_icon_url
                 })
 
-        return jsonify({
+        resp = jsonify({
             'question_id': current_question_id,
             'question_text': question_text,
             'question_icon_url': question_icon_url,
             'answers': answers
         })
+        # zapisz wykryty/wybrany język w cookie
+        resp.set_cookie('fc_lang', language, max_age=60*60*24*365, samesite='Lax')
+        return resp
     except (ValueError, KeyError):
         return jsonify({'error': 'Invalid question ID or language.'}), 400
 
@@ -481,7 +538,7 @@ def get_result():
             return jsonify({'error': 'No JSON data received.'}), 400
 
         path_answers = data.get('pathAnswers')
-        language = data.get('language', 'en')
+        language = (data.get('language') or detect_language())
         if not path_answers or not isinstance(path_answers, list):
             return jsonify({'error': 'Invalid or missing "pathAnswers" parameter.'}), 400
 
@@ -495,7 +552,9 @@ def get_result():
                 if pdata.get('price_level') == user_price_level
             ]
             if not allowed_products:
-                return jsonify({'recommendations': [], 'message': 'No products for selected budget.'})
+                resp = jsonify({'recommendations': [], 'message': 'No products for selected budget.'})
+                resp.set_cookie('fc_lang', language, max_age=60*60*24*365, samesite='Lax')
+                return resp
 
         # Inicjalizacja punktów
         product_scores = {pid: 0 for pid in allowed_products}
@@ -536,10 +595,12 @@ def get_result():
             adjusted_scores[pid] = raw_score * factor
 
         if not adjusted_scores:
-            return jsonify({'recommendations': [], 'message': 'No available products for selected criteria.'})
+            resp = jsonify({'recommendations': [], 'message': 'No available products for selected criteria.'})
+            resp.set_cookie('fc_lang', language, max_age=60*60*24*365, samesite='Lax')
+            return resp
 
         # --- RÓŻNORODNOŚĆ MAREK ---
-        def get_brand(product_name: str):
+        def get_brand(product_name):
             name = product_name.lower()
             if 'iphone' in name:
                 return 'apple'
@@ -558,7 +619,9 @@ def get_result():
                     break
 
         if not product_ids:
-            return jsonify({'recommendations': [], 'message': 'No recommendations found.'})
+            resp = jsonify({'recommendations': [], 'message': 'No recommendations found.'})
+            resp.set_cookie('fc_lang', language, max_age=60*60*24*365, samesite='Lax')
+            return resp
 
         selected_stores = [s for s in stores_db.values() if s['language'] == language][:3]
 
@@ -582,19 +645,19 @@ def get_result():
         ]
 
         AMAZON_PRICE_FLOOR = {  # p_36 w „groszach/centach”
-            'com':   15000,   # $150
+            'com': 15000,   # $150
             'co.uk': 15000,   # £150
-            'es':    15000,   # €150
-            'com.mx':230000,  # MX$2300
+            'es': 15000,   # €150
+            'com.mx': 220000,  # MX$3000
         }
 
         def _neg_query(tokens):
             return ' '.join(f'-{t}' for t in tokens)
 
-        def _brand_from_name(name: str) -> str:
+        def _brand_from_name(name):
             return (name or '').split()[0] if name else ''
 
-        def _amazon_domain_from_url(url: str) -> str:
+        def _amazon_domain_from_url(url):
             if 'amazon.com.mx' in url:
                 return 'com.mx'
             if 'amazon.co.uk' in url:
@@ -603,7 +666,7 @@ def get_result():
                 return 'es'
             return 'com'
 
-        def build_amazon_url(store_aff_url: str, product_name: str) -> str:
+        def build_amazon_url(store_aff_url, product_name):
             domain = _amazon_domain_from_url(store_aff_url)
             brand = _brand_from_name(product_name)
 
@@ -633,12 +696,11 @@ def get_result():
             # store_aff_url ma postać .../s?i=mobile&k=
             base = store_aff_url
             if not base.endswith('k='):
-                # awaryjnie wymuś format
                 base = f'https://www.amazon.{domain}/s?i=mobile&k='
             url = f'{base}{k_param}&rh={rh_param}'
             return url
 
-        def build_default_url(store_aff_url: str, product_name: str, lang: str) -> str:
+        def build_default_url(store_aff_url, product_name, lang):
             if lang == 'pl':
                 q = f'"{product_name}" smartfon -' + ' -'.join(NEG_COMMON_PL)
             elif lang == 'es':
@@ -646,10 +708,8 @@ def get_result():
             else:
                 q = f'"{product_name}" smartphone -' + ' -'.join(NEG_COMMON_EN)
 
-            # MediaMarkt używa format(...), Allegro/Euro zwykła konkatenacja
             if '{}' in store_aff_url:
                 return store_aff_url.format(quote(q))
-            # Domyślnie dołączamy zakodowane +/%
             return store_aff_url + quote_plus(q)
 
         def generate_store_link(store, product_name):
@@ -689,7 +749,9 @@ def get_result():
                 'price_level': pdata.get('price_level')
             })
 
-        return jsonify({'recommendations': recommendations})
+        resp = jsonify({'recommendations': recommendations})
+        resp.set_cookie('fc_lang', language, max_age=60*60*24*365, samesite='Lax')
+        return resp
     except Exception as e:
         return jsonify({'error': 'An internal server error occurred', 'details': str(e)}), 500
 
