@@ -68,7 +68,7 @@ answers_x_products = {
 
     # 103: Najdroższe telefony
     # Algorytm: Telefony posortowane malejąco po cenie – najdroższy jako pierwszy, najtańszy jako ostatni.
-    103: [258, 259, 243, 257, 239, 241,260, 248, 238, 253, 252, 240, 246, 242, 247, 256,207, 218, 245, 201, 203,224, 206,202,208, 244, 249, 216, 211, 210, 212, 209, 250, 251, 254, 217],
+    103: [258, 259, 243, 257, 239, 241,260, 248, 238, 253, 252, 240, 246, 247, 256,207, 218, 245, 201, 203,224, 206,242,202,208, 244, 249, 216, 211, 210, 212, 209, 250, 251, 254, 217],
 
     # 201: Dzwonienie/SMS
     # Algorytm: Telefony z najprostszą obsługą, dobrą baterią, solidnością i niską ceną na początku listy.
@@ -76,7 +76,7 @@ answers_x_products = {
 
     # 202: Zdjęcia i filmy (aparat)
     # Algorytm: Najlepsze aparaty (najwyższa jakość zdjęć, zoom, tryby nocne, stabilizacja) na początku listy.
-    202: [258, 201, 211, 245, 244, 237,260, 215, 224, 240, 259, 239, 210,208, 248,207, 257, 247, 218, 243, 253, 252, 202, 246, 203, 241, 238, 242, 212, 249, 255, 216, 209, 250, 251, 254, 217],
+    202: [258, 201, 211, 245, 237,260, 215, 224, 240, 259, 239, 210,208,244, 248,207, 257, 247, 218, 243, 253, 252, 202, 246, 203, 241, 238, 242, 212, 249, 255, 216, 209, 250, 251, 254, 217],
 
     # 203: Gry (wydajność)
     # Algorytm: Telefony z najmocniejszym procesorem, najlepszym GPU, dużą pamięcią RAM i szybkim ekranem na początku listy.
@@ -111,11 +111,11 @@ answers_x_products = {
 
     # 502: Zdjęcia nocne
     # Algorytm: Telefony z najlepszym trybem nocnym i jasnym obiektywem na początku listy.
-    502: [258, 243, 201, 245, 244, 237,260, 224, 215, 210, 259, 240, 239, 248, 247, 253, 218,208, 256,257, 202, 246, 211, 217, 252, 203, 241, 238, 242, 212, 249, 216, 209, 250, 251, 254],
+    502: [258, 243, 201, 245, 237,260, 224, 215, 210, 259, 240, 239, 248, 247, 253, 218,208,244, 256,257, 202, 246, 211, 217, 252, 203, 241, 238, 242, 212, 249, 216, 209, 250, 251, 254],
 
     # 503: Wszechstronny aparat
     # Algorytm: Telefony z kilkoma obiektywami, dobrym zoomem, szerokim kątem, makro itd.
-    503: [258, 201, 211, 245, 244,260, 237,210, 259,208, 215, 224, 240, 247, 246,253,206, 248, 257, 203, 239, 256, 218, 252, 217, 202, 241, 238, 255, 242, 243, 212, 249, 216, 209, 250, 251, 254],
+    503: [258, 201, 211, 245,260, 237,210, 259,208, 215, 224, 240, 247, 246,253,206,244, 248, 257, 203, 239, 256, 218, 252, 217, 202, 241, 238, 255, 242, 243, 212, 249, 216, 209, 250, 251, 254],
 
     # 601: 128GB
     # Algorytm: Telefony z minimum 128GB pamięci, najtańsze na początku.
@@ -127,7 +127,7 @@ answers_x_products = {
 
     # 603: 512GB+
     # Algorytm: Telefony z minimum 512GB pamięci lub więcej, od najtańszego do najdroższego.
-    603: [257, 239,259,253, 238, 256, 240,258,260, 207, 246, 201, 241, 247,255, 243, 242,206,224,208, 203, 218, 248, 245, 244, 249, 216, 211, 210, 212, 209, 250, 251, 252, 254,217],
+    603: [257, 239,259,253, 238, 256, 240,258,260, 207, 246, 201, 241, 247,255, 243,206,224,208, 203, 218, 248, 249, 216, 211, 210, 212, 209, 250, 251, 252, 254,217],
 
     # 701: Top wydajność
     # Algorytm: Telefony z najlepszym SoC, największą ilością RAM, najnowszymi technologiami.
@@ -247,11 +247,11 @@ products_db = {
     241: {'pl': 'Motorola Razr 60 Ultra', 'en': 'Motorola Razr 60 Ultra', 'es': 'Motorola Razr 60 Ultra', 'image_path': 'graphic/motorola_razr_60_ultra.png', 'price_level': 3},
 
     # Google Pixels
-    242: {'pl': 'Google Pixel 8', 'en': 'Google Pixel 8', 'es': 'Google Pixel 8', 'image_path': 'graphic/google_pixel_8.png', 'price_level': 3},
-    243: {'pl': 'Google Pixel 8 Pro', 'en': 'Google Pixel 8 Pro', 'es': 'Google Pixel 8 Pro', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 3},
-    244: {'pl': 'Google Pixel 7a', 'en': 'Google Pixel 7a', 'es': 'Google Pixel 7a', 'image_path': 'graphic/google_pixel_7a.png', 'price_level': 2},
-    245: {'pl': 'Google Pixel 7', 'en': 'Google Pixel 7', 'es': 'Google Pixel 7', 'image_path': 'graphic/google_pixel_7.png', 'price_level': 2},
-    252: {'pl': 'Google Pixel 9', 'en': 'Google Pixel 9', 'es': 'Google Pixel 9', 'image_path': 'graphic/google_pixel_9.png', 'price_level': 3},
+    242: {'pl': 'Google Pixel 8', 'en': 'Google Pixel 8', 'es': 'Google Pixel 8', 'image_path': 'graphic/google_pixel_8.png', 'price_level': 2},
+    243: {'pl': 'Google Pixel 8 Pro', 'en': 'Google Pixel 8 Pro', 'es': 'Google Pixel 8 Pro', 'image_path': 'graphic/google_pixel_8_pro.png', 'price_level': 2},
+    244: {'pl': 'Google Pixel 7a', 'en': 'Google Pixel 7a', 'es': 'Google Pixel 7a', 'image_path': 'graphic/google_pixel_7a.png', 'price_level': 1},
+    245: {'pl': 'Google Pixel 7', 'en': 'Google Pixel 7', 'es': 'Google Pixel 7', 'image_path': 'graphic/google_pixel_7.png', 'price_level': 1},
+    252: {'pl': 'Google Pixel 9', 'en': 'Google Pixel 9', 'es': 'Google Pixel 9', 'image_path': 'graphic/google_pixel_9.png', 'price_level': 2},
     253: {'pl': 'Google Pixel 10', 'en': 'Google Pixel 10', 'es': 'Google Pixel 10', 'image_path': 'graphic/google_pixel_10.png', 'price_level': 3},
     258: {'pl': 'Google Pixel 10 Pro XL', 'en': 'Google Pixel 10 Pro XL', 'es': 'Google Pixel 10 Pro XL', 'image_path': 'graphic/pixel_10_pro_xl.png', 'price_level': 3},
     
