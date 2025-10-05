@@ -442,25 +442,33 @@ def _geo_country_by_ip(ip):
     return None
 
 def detect_language():
-    # 1) Parametr od użytkownika
+    # 1) jawny wybór użytkownika (parametry) – nadpisuje wszystko
     p = request.args.get('language') or request.args.get('lang')
     if p in SUPPORTED_LANGS:
         return p
-    # 2) Cookie z poprzedniej wizyty
+    # 2) zapisany wybór (cookie)
     c = request.cookies.get('fc_lang')
     if c in SUPPORTED_LANGS:
         return c
-    # 3) Accept-Language z przeglądarki
-    best = request.accept_languages.best_match(SUPPORTED_LANGS)
-    if best:
-        return best
-    # 4) Geolokalizacja IP
+    # 3) Accept-Language – szukamy TYLKO pl lub es w kolejności preferencji
+    try:
+        for lang, q in request.accept_languages:
+            l = (lang or '').lower()
+            if l.startswith('pl'):
+                return 'pl'
+            if l.startswith('es'):
+                return 'es'
+    except Exception:
+        pass
+    # 4) Geolokalizacja IP – mapujemy kraje na pl/es
     ip = _client_ip()
     if ip and ip not in ('127.0.0.1', '::1'):
         cc = _geo_country_by_ip(ip)
-        if cc and cc in COUNTRY_TO_LANG:
-            return COUNTRY_TO_LANG[cc]
-    # 5) Domyślnie en
+        if cc == 'PL':
+            return 'pl'
+        if cc == 'ES' or (cc in LATAM_ES):
+            return 'es'
+    # 5) Domyślnie angielski
     return 'en'
 
 # --- Punkty końcowe API ---
