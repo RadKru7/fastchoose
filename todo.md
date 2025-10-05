@@ -11,12 +11,12 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
 
 11. ***wykupienie domeny najlepiej z mailem na pierwszy rok**
     Dobrą opcją wydaje się  Google Domains
-12 **Najważniejsza rzecz to do - core to jest sortowanie telefonów do danej odpowidzi jest bardzo błędnie trzeba przeglądać jeszcze raz poszczegółne odpowiedzi i jeszcze raz posotować prawidłowo bo jest tragicznie żle**
-    np w pytniu o zoom optyczny na trzecim miesjcu jest telefon który takiego zooma nie ma
+
     
 
-18. Zweryikować i wdrożyć żeby system zminiał jeżyk w zależności od ip/regionu użytkownika
+
    19. Dodać stonę do rejestru googla żeby wyszukiwarki znajdowały stronę.
+   20. Najważniejsza obecnie rzecz , przywrócić linki do właściwej formy bo przestały działać
 **------------<<<<<<<<<<<<<<<<<<\\\|||>>>>>>>>>>>>--------------**
 
 Lista bieżących zadań do wykonania w projekcie **fastchoose** po osiągnięciu projektu MVP:
@@ -60,3 +60,6 @@ Archiwum
 [x] - 2025-09-26 4. **Opracuj metodologię wdrożenia CI/CD z rozdzieleniem środowiska testowego i produkcyjnego**  
    Przygotuj plan oraz wytyczne dla wdrożenia procesu CI/CD w projekcie, tak aby możliwe było automatyczne publikowanie zmian na osobne środowisko testowe oraz produkcyjne. Uwzględnij narzędzia (np. GitHub Actions), automatyzację buildów, testów oraz deploymentu. Opisz jak rozdzielić konfiguracje dla testów i produkcji.
 [x] - 2025-09-27  15 **dodaj ikone do zakładki na przeglądarce jakieś fajne logo fastchoose**
+[x] - 2025-10-05  18. Zweryikować i wdrożyć żeby system zminiał jeżyk w zależności od ip/regionu użytkownika
+[x] - 2025-10-05  12 **Najważniejsza rzecz to do - core to jest sortowanie telefonów do danej odpowidzi jest bardzo błędnie trzeba przeglądać jeszcze raz poszczegółne odpowiedzi i jeszcze raz posotować prawidłowo bo jest tragicznie żle**
+    np w pytniu o zoom optyczny na trzecim miesjcu jest telefon który takiego zooma nie ma
