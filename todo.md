@@ -14,14 +14,9 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
 12 **Najważniejsza rzecz to do - core to jest sortowanie telefonów do danej odpowidzi jest bardzo błędnie trzeba przeglądać jeszcze raz poszczegółne odpowiedzi i jeszcze raz posotować prawidłowo bo jest tragicznie żle**
     np w pytniu o zoom optyczny na trzecim miesjcu jest telefon który takiego zooma nie ma
     
-16. **dodaj jeszcze po jednym flagowcu od innych marek - do rozwarzenia**
-    17. **Wygenruj nowe grafiki dla nowych modeli **
-    -  Motorola Razr 60 Ultra
-    -  Moto G Stylus 5G
-    -  Vivo V50
-    -  Honor 200
-17. **Przegląd listy product_links_db =  po zmianach i aktualizacji niektóeych telefonów głównie pixeli huiwei honor i xiaomoi**
-    
+
+18. Zweryikować i wdrożyć żeby system zminiał jeżyk w zależności od ip/regionu użytkownika
+   
 **------------<<<<<<<<<<<<<<<<<<\\\|||>>>>>>>>>>>>--------------**
 
 Lista bieżących zadań do wykonania w projekcie **fastchoose** po osiągnięciu projektu MVP:
@@ -48,6 +43,20 @@ Archiwum
 [x] - 2025-09-24  10. Dodanie SEO słów i fraz kluczowych pod wyszukiwarki 
 [x] - 2025-09-28 13 **przycvisk lern more w cookies jest nieaktywny tzn prwoadzi do nikąd do poprawki przed go to prod**
 [x] - 2025-09-28  14. **Przyciski na mobilnej wersji są prezentowane podówjnie do diagnozy i korekty**
+[x] - 2025-10-04 16. **dodaj jeszcze po jednym flagowcu od innych marek - do rozwarzenia**
+ [x] - 2025-10-04   17. **Wygenruj nowe grafiki dla nowych modeli **
+    -  Motorola Razr 60 Ultra
+    -  Motorola Moto G Stylus 5G
+    -  Vivo V50
+    -  Honor 200
+    -  Realme 14 5G
+    -  Realme 14 Pro+
+    -  Oppo Reno 14
+    -  Vivo Y29 5G
+    -  Google Pixel 9
+    -Google Pixel 10
+    -Google Pixel 10 Pro XL
+   -- OnePlus13
 [x] - 2025-09-26 4. **Opracuj metodologię wdrożenia CI/CD z rozdzieleniem środowiska testowego i produkcyjnego**  
    Przygotuj plan oraz wytyczne dla wdrożenia procesu CI/CD w projekcie, tak aby możliwe było automatyczne publikowanie zmian na osobne środowisko testowe oraz produkcyjne. Uwzględnij narzędzia (np. GitHub Actions), automatyzację buildów, testów oraz deploymentu. Opisz jak rozdzielić konfiguracje dla testów i produkcji.
 [x] - 2025-09-27  15 **dodaj ikone do zakładki na przeglądarce jakieś fajne logo fastchoose**
