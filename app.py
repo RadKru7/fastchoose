@@ -467,12 +467,13 @@ def get_result():
     Algorytm po zmianie:
     1. Budżet (101/102/103) – jeśli występuje jako PIERWSZA odpowiedź (Twoja obecna logika),
        stosujemy FILTR produktów po price_level.
-       (Jeśli chcesz później brać ostatnią odpowiedź budżetową – mogę dodać.)
     2. Scoring: niezależnie od długości listy rankingowej:
          pozycja 0 -> 50 pkt, 1 -> 49 ... 49 -> 1, >=50 -> 0.
        Odpowiedź 803 (brak preferencji OS) – ignorowana (nie dodaje punktów).
     3. Sklepy: score *= (shops / max_shops), produkty z 0 sklepów odrzucane.
     4. Różnorodność marek (Apple/Samsung) – ostatnia pozycja może zostać podmieniona na inną markę.
+    5. Linki sklepów: Amazon z dodatkowymi filtrami (smartphone + unlocked/SIM Free/libre + -case/-cover/..., p_89:Brand, p_36:MIN-),
+       by ograniczyć akcesoria w wynikach.
     """
     try:
         data = request.get_json()
@@ -561,26 +562,109 @@ def get_result():
 
         selected_stores = [s for s in stores_db.values() if s['language'] == language][:3]
 
-        def generate_store_link(store, product_name):
-            if store['name'].startswith('Zamów na MediaMarkt'):
-                query = product_name.replace(' ', '%20')
-                return store['affiliate_url'].format(query)
-            elif 'allegro' in store['affiliate_url'] or 'euro' in store['affiliate_url']:
-                return store['affiliate_url'] + product_name.replace(' ', '%20')
-            elif 'amazon.com' in store['affiliate_url']:
-                from urllib.parse import quote_plus
-                return f"https://www.amazon.com/s?i=mobile&rh=n%3A2407749011&k={quote_plus(product_name)}"
-            elif 'amazon.co.uk' in store['affiliate_url']:
-                from urllib.parse import quote_plus
-                return f"https://www.amazon.co.uk/s?i=mobile&rh=n%3A2407749011&k={quote_plus(product_name)}"
-            elif 'amazon.es' in store['affiliate_url']:
-                from urllib.parse import quote_plus
-                return f"https://www.amazon.es/s?i=mobile&rh=n%3A2407749011&k={quote_plus(product_name)}"
-            elif 'amazon.mx' in store['affiliate_url']:
-                from urllib.parse import quote_plus
-                return f"https://www.amazon.mx/s?i=mobile&rh=n%3A2407749011&k={quote_plus(product_name)}"
+        # --- Link buildery (Amazon z filtrami; inne sklepy "odszumione" frazami) ---
+
+        from urllib.parse import quote_plus, quote
+
+        NEG_COMMON_EN = [
+            'case','cover','screen','protector','tempered','glass','film',
+            'charger','cable','adapter','power','bank','watch','band','strap',
+            'holder','stand','mount','car','wireless','dock','renewed','refurbished','used'
+        ]
+        NEG_COMMON_ES = [
+            'funda','carcasa','protector','vidrio','templado','lámina',
+            'cargador','cable','adaptador','batería','reloj','correa','soporte',
+            'montaje','coche','reacondicionado','usado','renovado'
+        ]
+        NEG_COMMON_PL = [
+            'etui','pokrowiec','szkło','folia','ochronna','ładowarka','zasilacz',
+            'uchwyt','samochodowy','zegarek','pasek','opaska','szybka','osłona'
+        ]
+
+        AMAZON_PRICE_FLOOR = {  # p_36 w „groszach/centach”
+            'com':   15000,   # $150
+            'co.uk': 15000,   # £150
+            'es':    15000,   # €150
+            'com.mx':230000,  # MX$2300
+        }
+
+        def _neg_query(tokens):
+            return ' '.join(f'-{t}' for t in tokens)
+
+        def _brand_from_name(name: str) -> str:
+            return (name or '').split()[0] if name else ''
+
+        def _amazon_domain_from_url(url: str) -> str:
+            if 'amazon.com.mx' in url:
+                return 'com.mx'
+            if 'amazon.co.uk' in url:
+                return 'co.uk'
+            if 'amazon.es' in url:
+                return 'es'
+            return 'com'
+
+        def build_amazon_url(store_aff_url: str, product_name: str) -> str:
+            domain = _amazon_domain_from_url(store_aff_url)
+            brand = _brand_from_name(product_name)
+
+            if domain == 'com':
+                pos = f'"{product_name}" {brand} smartphone unlocked'
+                neg = _neg_query(NEG_COMMON_EN)
+            elif domain == 'co.uk':
+                pos = f'"{product_name}" {brand} smartphone "SIM Free"'
+                neg = _neg_query(NEG_COMMON_EN)
+            elif domain == 'es':
+                pos = f'"{product_name}" {brand} smartphone libre'
+                neg = _neg_query(NEG_COMMON_ES)
+            elif domain == 'com.mx':
+                pos = f'"{product_name}" {brand} smartphone desbloqueado'
+                neg = _neg_query(NEG_COMMON_ES)
             else:
-                return store['affiliate_url'] + product_name.replace(' ', '+')
+                pos = f'"{product_name}" {brand} smartphone unlocked'
+                neg = _neg_query(NEG_COMMON_EN)
+
+            k_terms = f'{pos} {neg}'
+            k_param = quote_plus(k_terms)
+
+            price_min = AMAZON_PRICE_FLOOR.get(domain, 15000)
+            rh = f'p_89:{brand},p_36:{price_min}-'
+            rh_param = quote_plus(rh)
+
+            # store_aff_url ma postać .../s?i=mobile&k=
+            base = store_aff_url
+            if not base.endswith('k='):
+                # awaryjnie wymuś format
+                base = f'https://www.amazon.{domain}/s?i=mobile&k='
+            url = f'{base}{k_param}&rh={rh_param}'
+            return url
+
+        def build_default_url(store_aff_url: str, product_name: str, lang: str) -> str:
+            if lang == 'pl':
+                q = f'"{product_name}" smartfon -' + ' -'.join(NEG_COMMON_PL)
+            elif lang == 'es':
+                q = f'"{product_name}" smartphone -' + ' -'.join(NEG_COMMON_ES)
+            else:
+                q = f'"{product_name}" smartphone -' + ' -'.join(NEG_COMMON_EN)
+
+            # MediaMarkt używa format(...), Allegro/Euro zwykła konkatenacja
+            if '{}' in store_aff_url:
+                return store_aff_url.format(quote(q))
+            # Domyślnie dołączamy zakodowane +/%
+            return store_aff_url + quote_plus(q)
+
+        def generate_store_link(store, product_name):
+            aff = store['affiliate_url']
+            # Amazon
+            if 'amazon.' in aff:
+                return build_amazon_url(aff, product_name)
+            # Flipkart – prosta fraza
+            if 'flipkart.com' in aff:
+                return aff + quote_plus(f'"{product_name}" smartphone')
+            # MercadoLibre – prosta fraza
+            if 'mercadolibre' in aff:
+                return aff + quote_plus(f'"{product_name}" smartphone')
+            # Allegro/Euro/MediaMarkt i inne – „odszumiona” fraza
+            return build_default_url(aff, product_name, language)
 
         recommendations = []
         for pid in product_ids:
