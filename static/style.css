@@ -603,6 +603,8 @@ footer {
   .headline-multicolor .headline-accent,
   .headline-accent {
     color: var(--text) !important;
+    background: none !important;
+    background-image: none !important;
     -webkit-background-clip: initial !important;
     -webkit-text-fill-color: initial !important;
     }
