@@ -637,101 +637,32 @@ def get_result():
 
         from urllib.parse import quote_plus, quote
 
-        NEG_COMMON_EN = [
-            'case','cover','screen','protector','tempered','glass','film',
-            'charger','cable','adapter','power','bank','watch','band','strap',
-            'holder','stand','mount','car','wireless','dock','renewed','refurbished','used'
-        ]
-        NEG_COMMON_ES = [
-            'funda','carcasa','protector','vidrio','templado','lámina',
-            'cargador','cable','adaptador','batería','reloj','correa','soporte',
-            'montaje','coche','reacondicionado','usado','renovado'
-        ]
-        NEG_COMMON_PL = [
-            'etui','pokrowiec','szkło','folia','ochronna','ładowarka','zasilacz',
-            'uchwyt','samochodowy','zegarek','pasek','opaska','szybka','osłona'
-        ]
-
-        AMAZON_PRICE_FLOOR = {  # p_36 w „groszach/centach”
-            'com': 15000,   # $150
-            'co.uk': 15000,   # £150
-            'es': 15000,   # €150
-            'com.mx': 220000,  # MX$3000
-        }
-
-        def _neg_query(tokens):
-            return ' '.join(f'-{t}' for t in tokens)
-
-        def _brand_from_name(name):
-            return (name or '').split()[0] if name else ''
-
-        def _amazon_domain_from_url(url):
-            if 'amazon.com.mx' in url:
-                return 'com.mx'
-            if 'amazon.co.uk' in url:
-                return 'co.uk'
-            if 'amazon.es' in url:
-                return 'es'
-            return 'com'
-
+      
         def build_amazon_url(store_aff_url, product_name):
-            domain = _amazon_domain_from_url(store_aff_url)
-            brand = _brand_from_name(product_name)
-
-            if domain == 'com':
-                pos = f'"{product_name}" {brand} smartphone unlocked'
-                neg = _neg_query(NEG_COMMON_EN)
-            elif domain == 'co.uk':
-                pos = f'"{product_name}" {brand} smartphone "SIM Free"'
-                neg = _neg_query(NEG_COMMON_EN)
-            elif domain == 'es':
-                pos = f'"{product_name}" {brand} smartphone libre'
-                neg = _neg_query(NEG_COMMON_ES)
-            elif domain == 'com.mx':
-                pos = f'"{product_name}" {brand} smartphone desbloqueado'
-                neg = _neg_query(NEG_COMMON_ES)
-            else:
-                pos = f'"{product_name}" {brand} smartphone unlocked'
-                neg = _neg_query(NEG_COMMON_EN)
-
-            k_terms = f'{pos} {neg}'
-            k_param = quote_plus(k_terms)
-
-            price_min = AMAZON_PRICE_FLOOR.get(domain, 15000)
-            rh = f'p_89:{brand},p_36:{price_min}-'
-            rh_param = quote_plus(rh)
-
-            # store_aff_url ma postać .../s?i=mobile&k=
-            base = store_aff_url
-            if not base.endswith('k='):
-                base = f'https://www.amazon.{domain}/s?i=mobile&k='
-            url = f'{base}{k_param}&rh={rh_param}'
-            return url
-
+            return store_aff_url + quote_plus(product_name)
+            
         def build_default_url(store_aff_url, product_name, lang):
-            if lang == 'pl':
-                q = f'"{product_name}" smartfon -' + ' -'.join(NEG_COMMON_PL)
-            elif lang == 'es':
-                q = f'"{product_name}" smartphone -' + ' -'.join(NEG_COMMON_ES)
-            else:
-                q = f'"{product_name}" smartphone -' + ' -'.join(NEG_COMMON_EN)
-
+            """
+            Proste wyszukiwanie nazwą produktu — bez dopisków typu 'smartfon' i bez minusów.
+            Obsłuż MediaMarkt (ma {} w URL) i pozostałe sklepy.
+            """
             if '{}' in store_aff_url:
-                return store_aff_url.format(quote(q))
-            return store_aff_url + quote_plus(q)
-
+                # MediaMarkt używa formatowania: {query}
+                return store_aff_url.format(quote(product_name))
+            return store_aff_url + quote_plus(product_name)
+        
         def generate_store_link(store, product_name):
             aff = store['affiliate_url']
-            # Amazon
+            # Amazon (com, co.uk, es, com.mx) – prosto
             if 'amazon.' in aff:
                 return build_amazon_url(aff, product_name)
-            # Flipkart – prosta fraza
+            # Flipkart – prosto
             if 'flipkart.com' in aff:
-                return aff + quote_plus(f'"{product_name}" smartphone')
-            # MercadoLibre – prosta fraza
+                return aff + quote_plus(product_name)
+            # MercadoLibre – prosto
             if 'mercadolibre' in aff:
-                return aff + quote_plus(f'"{product_name}" smartphone')
-            # Allegro/Euro/MediaMarkt i inne – „odszumiona” fraza
+                return aff + quote_plus(product_name)
+            # Allegro / Euro / MediaMarkt – prosto
             return build_default_url(aff, product_name, language)
 
         recommendations = []
