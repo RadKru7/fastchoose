@@ -16,7 +16,7 @@ Lista bieżących zadań do wykonania w projekcie **fastchoose** do osiągnięci
     
 
 18. Zweryikować i wdrożyć żeby system zminiał jeżyk w zależności od ip/regionu użytkownika
-   
+   19. Dodać stonę do rejestru googla żeby wyszukiwarki znajdowały stronę.
 **------------<<<<<<<<<<<<<<<<<<\\\|||>>>>>>>>>>>>--------------**
 
 Lista bieżących zadań do wykonania w projekcie **fastchoose** po osiągnięciu projektu MVP:
