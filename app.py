@@ -708,8 +708,8 @@ def get_result():
             if 'mercadolibre' in aff:
                 return aff + quote_plus(product_name)
 
-    # Allegro / Euro / MediaMarkt i inne – prosto (bez afiliacji pośredników)
-    return build_default_url(aff, product_name, language)
+            # Allegro / Euro / MediaMarkt i inne – prosto (bez afiliacji pośredników)
+            return build_default_url(aff, product_name, language)
 
         recommendations = []
         for pid in product_ids:
