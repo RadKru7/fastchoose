@@ -636,34 +636,80 @@ def get_result():
         # --- Link buildery (Amazon z filtrami; inne sklepy "odszumione" frazami) ---
 
         from urllib.parse import quote_plus, quote
-
-      
-        def build_amazon_url(store_aff_url, product_name):
-            return store_aff_url + quote_plus(product_name)
-            
-        def build_default_url(store_aff_url, product_name, lang):
+        
+        def _amazon_domain_from_url(url: str) -> str:
+            if 'amazon.com.mx' in url:
+                return 'com.mx'
+            if 'amazon.co.uk' in url:
+                return 'co.uk'
+            if 'amazon.es' in url:
+                return 'es'
+            return 'com'
+        
+        def build_amazon_url(store_aff_url: str, product_name: str) -> str:
             """
-            Proste wyszukiwanie nazwą produktu — bez dopisków typu 'smartfon' i bez minusów.
-            Obsłuż MediaMarkt (ma {} w URL) i pozostałe sklepy.
+            Buduje prosty link wyszukiwania Amazon. Jeśli w ENV są podane tagi, dopina &tag=...
+            ENV (opcjonalne, możesz dodać później):
+              - AMZ_TAG_COM
+              - AMZ_TAG_CO_UK
+              - AMZ_TAG_ES
+              - AMZ_TAG_COM_MX
+            """
+            url = store_aff_url + quote_plus(product_name)
+            domain = _amazon_domain_from_url(store_aff_url)
+            tag_by_domain = {
+                'com':    os.getenv('AMZ_TAG_COM'),
+                'co.uk':  os.getenv('AMZ_TAG_CO_UK'),
+                'es':     os.getenv('AMZ_TAG_ES'),
+                'com.mx': os.getenv('AMZ_TAG_COM_MX'),
+            }
+            tag = tag_by_domain.get(domain)
+            if tag and 'tag=' not in url:
+                sep = '&' if '?' in url else '?'
+                url = f'{url}{sep}tag={quote_plus(tag)}'
+            return url
+        
+        def build_flipkart_url(store_aff_url: str, product_name: str) -> str:
+            """
+            Buduje link Flipkart. Jeśli w ENV są podane parametry, dopina:
+              &affid=<FLIPKART_AFF_ID> i opcjonalnie &affExtParam=<FLIPKART_AFF_EXT>
+            ENV (opcjonalne):
+              - FLIPKART_AFF_ID
+              - FLIPKART_AFF_EXT
+            """
+            url = store_aff_url + quote_plus(product_name)
+            affid = os.getenv('FLIPKART_AFF_ID')
+            affext = os.getenv('FLIPKART_AFF_EXT')
+            if affid and 'affid=' not in url:
+                sep = '&' if '?' in url else '?'
+                url = f"{url}{sep}affid={quote_plus(affid)}"
+            if affext and 'affExtParam=' not in url:
+                url = f"{url}&affExtParam={quote_plus(affext)}"
+            return url
+        
+        def build_default_url(store_aff_url: str, product_name: str, lang: str) -> str:
+            """
+            Proste wyszukiwanie nazwą produktu — bez cudzysłowów i bez minusów.
+            Obsługuje MediaMarkt (szablon z {}).
             """
             if '{}' in store_aff_url:
-                # MediaMarkt używa formatowania: {query}
                 return store_aff_url.format(quote(product_name))
             return store_aff_url + quote_plus(product_name)
         
-        def generate_store_link(store, product_name):
+        def generate_store_link(store: dict, product_name: str) -> str:
             aff = store['affiliate_url']
-            # Amazon (com, co.uk, es, com.mx) – prosto
+            # Amazon (com, co.uk, es, com.mx) – prosto + opcjonalny &tag z ENV
             if 'amazon.' in aff:
                 return build_amazon_url(aff, product_name)
-            # Flipkart – prosto
+            # Flipkart – prosto + opcjonalne affid/affExtParam z ENV
             if 'flipkart.com' in aff:
-                return aff + quote_plus(product_name)
+                return build_flipkart_url(aff, product_name)
             # MercadoLibre – prosto
             if 'mercadolibre' in aff:
                 return aff + quote_plus(product_name)
-            # Allegro / Euro / MediaMarkt – prosto
-            return build_default_url(aff, product_name, language)
+
+    # Allegro / Euro / MediaMarkt i inne – prosto (bez afiliacji pośredników)
+    return build_default_url(aff, product_name, language)
 
         recommendations = []
         for pid in product_ids:
